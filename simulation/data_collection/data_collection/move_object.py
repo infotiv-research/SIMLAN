@@ -28,8 +28,9 @@ class MoveObject(Node):
         self.grid_min = [-10, -10]
         self.grid_count = 500
 
-        self.objects = ['eur_pallet', 'box_group_pickup']
-        self.poses = [[0.0, 1.0, 0.0], [2.5, 1.0, 0.0], [5.0, 1.0, 0.0], [20.0, 20.0, 20.0]] # end with "out of camera view [20, 20, 20]"
+        self.start_pose = [20.0, 0.0, 0.0]
+        self.objects = ['jackal', 'infotiv', 'eur_pallet', 'box_group_pickup']
+        self.poses = [[0.0, 1.0, 0.0], [2.5, 1.0, 0.0], [5.0, 1.0, 0.0], [20.0, 20.0, 1.0]] # end with "out of camera view [20, 20, 1.0]"
         self.yaws = [iter * 2*3.1415/self.orientations for iter in range(self.orientations)]
 
         self.object_iter = 0
@@ -42,9 +43,9 @@ class MoveObject(Node):
     def send_request(self):
         
         # add new position and orientation to the request
-        self.req.state.pose.position.x = self.pose[0]
-        self.req.state.pose.position.y = self.pose[1]
-        self.req.state.pose.position.z = self.pose[2]
+        self.req.state.pose.position.x = self.pose[0] + self.start_pose[0]
+        self.req.state.pose.position.y = self.pose[1] + self.start_pose[1]
+        self.req.state.pose.position.z = self.pose[2] + self.start_pose[2]
         self.req.state.pose.orientation.x = self.orientation[0]
         self.req.state.pose.orientation.y = self.orientation[1]
         self.req.state.pose.orientation.z = self.orientation[2]
@@ -76,13 +77,16 @@ class MoveObject(Node):
         if(self.pose_iter == len(self.poses)):
             self.pose_iter = 0
             self.object_iter += 1
+        if (self.pose_iter == len(self.poses)-1 and self.yaw_iter != 0): # no need to rotate the last pose
+            self.yaw_iter = 0
+            self.pose_iter = 0
+            self.object_iter += 1
         if(self.object_iter == len(self.objects)):
             self.object_iter = 0
             ## end all iterations
             self.get_logger().info("Finished all iterations")
             self.destroy_node()
         
-    
     def update_pose(self):
         self.req.state.name = self.objects[self.object_iter]
         self.pose = self.poses[self.pose_iter]

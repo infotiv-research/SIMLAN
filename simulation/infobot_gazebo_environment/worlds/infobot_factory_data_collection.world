@@ -638,6 +638,9 @@
             <time>10.5</time>
             <pose>25 0 0 0 0 1.57</pose>
           </waypoint>
+
+
+
         </trajectory>
       </script>
     </actor>
@@ -653,6 +656,28 @@
       <uri>model://box_1185x785x1010</uri>
       <name>box_obsticle</name>
       <pose>23  5 0.4 0 0 0</pose>
+    </include>
+
+  <!-- Objects for data collection-->
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>eur_pallet</name>
+      <pose>25 25 0.1 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>smaller_pallet</name>
+      <!-- Rescale the model-->
+      <mesh scale="0.5 0.5 0.5">model://eur_pallet</mesh>
+      <pose>25  26 0.4 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://traffic_cone</uri>
+      <name>traffic_cone</name>
+      <pose>25 28 0.4 0 0 0</pose>
     </include>
 
     <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
