@@ -2,7 +2,11 @@
   <world name='default'>
 
     <include>
-      <uri>model://factory_floor</uri>
+      <uri>model://ground_collision</uri>
+    </include>
+    
+    <include>
+      <uri>model://ground_visual</uri>
     </include>
 
     <physics name='default_physics' default='0' type='ode'>
