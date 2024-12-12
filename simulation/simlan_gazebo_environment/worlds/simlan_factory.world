@@ -15,6 +15,11 @@
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
 
+  <scene>
+    <ambient>1.0 1.0 1.0 1.0</ambient>
+    <background>0.8 0.8 0.8 1.0</background>
+  </scene>
+
   <light type="directional" name="sun">
     <cast_shadows>false</cast_shadows>
     <pose>0 0 10 0 0 0</pose>
@@ -653,6 +658,162 @@
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n10</name>
       <pose>25 26 1.45 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck1</name>
+      <pose>9 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck2</name>
+      <pose>6 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck3</name>
+      <pose>3 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck4</name>
+      <pose>0 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck5</name>
+      <pose>-3 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck6</name>
+      <pose>-6 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck7</name>
+      <pose>-9 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck8</name>
+      <pose>-12 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck9</name>
+      <pose>-15 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck10</name>
+      <pose>-18 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck11</name>
+      <pose>-21 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck12</name>
+      <pose>-24 21 0.01 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck13</name>
+      <pose>-27 21 0.01 0 0 0</pose>
+    </include>
+
+        <include>
+      <uri>model://truck</uri>
+      <name>truck14</name>
+      <pose>9 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck15</name>
+      <pose>6 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck16</name>
+      <pose>3 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck17</name>
+      <pose>0 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck18</name>
+      <pose>-3 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck19</name>
+      <pose>-6 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck20</name>
+      <pose>-9 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck21</name>
+      <pose>-12 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck22</name>
+      <pose>-15 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck23</name>
+      <pose>-18 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck24</name>
+      <pose>-21 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck25</name>
+      <pose>-24 36 0.01 0 0 3.1415926535</pose>
+    </include>
+
+    <include>
+      <uri>model://truck</uri>
+      <name>truck26</name>
+      <pose>-27 36 0.01 0 0 3.1415926535</pose>
     </include>
 
     <include>

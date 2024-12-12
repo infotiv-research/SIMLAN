@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <model name="truck">
+    <static>false</static>
+
+    <!-- Link Definition -->
+    <link name="truck_link">
+      <!-- Visual Element -->
+      <visual name="truck_visual">
+        <geometry>
+          <mesh>
+            <uri>model://truck/meshes/truck.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <!-- Collision Element -->
+      <collision name="truck_collision">
+        <geometry>
+          <mesh>
+            <uri>model://truck/meshes/truck.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <bounce/>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Inertial Properties -->
+      <inertial>
+        <mass>10.0</mass>
+        <inertia>
+          <ixx>1.0</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>1.0</iyy>
+          <iyz>0.0</iyz>
+          <izz>1.0</izz>
+        </inertia>
+      </inertial>
+
+    </link>
+  </model>
+</sdf>
