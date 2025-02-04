@@ -1,0 +1,11 @@
+import osc.example
+import osc.helpers
+import osc.ros
+
+scenario example_library:
+    do serial:
+	custom_action(data: "Hello World")
+	log("Tjena tjena")
+	action_call("/teleport_robot", "simlan_custom_msg.action.TeleportRobot","{\"robot_name\": \"jackal\", \"target_pose\": {\"position\": {\"x\": 2, \"y\": 0.1, \"z\": 3}, \"orientation\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.0, \"w\": 1.0}}}")
+	log("Tjena tjena")
+        emit end
