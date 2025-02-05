@@ -21,12 +21,10 @@ setup(
     entry_points={
         'scenario_execution.actions': [
             'teleport_action = scenario_manager.teleport_action_server:TeleportActionServer',
-            'custom_action_3 = scenario_manager.custom_action:CustomAction',
-            'custom_action_2 = scenario_manager.custom_action2:CustomAction2',
         ],
         'console_scripts': [
-            'scenario_executor = scenario_manager.scenario_executor:main',
             'teleport_action_server = scenario_manager.teleport_action_server:main',
+            'set_speen_action_server = scenario_manager.set_speed_action_server:main',
         ],
     },
 )

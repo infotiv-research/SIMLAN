@@ -1,10 +1,11 @@
-import rclpy
-from rclpy.node import Node
-from rclpy.action import ActionServer
-from simlan_custom_msg.action import TeleportRobot
-from gazebo_msgs.srv import SetEntityState
-from geometry_msgs.msg import Pose, PoseStamped
 from gazebo_msgs.msg import EntityState
+from gazebo_msgs.srv import SetEntityState
+
+import rclpy
+from rclpy.action import ActionServer
+from rclpy.node import Node
+
+from simlan_custom_msg.action import TeleportRobot
 
 
 class TeleportActionServer(Node):
@@ -48,12 +49,14 @@ class TeleportActionServer(Node):
             goal_handle.abort()
             return TeleportRobot.Result(success=False, message='Teleportation failed')
 
+
 def main(args=None):
     rclpy.init(args=args)
     teleport_action_server = TeleportActionServer()
     rclpy.spin(teleport_action_server)
     teleport_action_server.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()

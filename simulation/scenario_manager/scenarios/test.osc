@@ -4,8 +4,13 @@ import osc.ros
 
 scenario example_library:
     do serial:
-	custom_action(data: "Hello World")
-	log("Tjena tjena")
-	action_call("/teleport_robot", "simlan_custom_msg.action.TeleportRobot","{\"robot_name\": \"jackal\", \"target_pose\": {\"position\": {\"x\": 2, \"y\": 0.1, \"z\": 3}, \"orientation\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.0, \"w\": 1.0}}}")
-	log("Tjena tjena")
+        custom_action(data: "Hello World")
+        log("Starting teleportation")
+        action_call("/teleport_robot", "simlan_custom_msg.action.TeleportRobot", "{\"robot_name\": \"jackal\", \"target_pose\": {\"position\": {\"x\": 2, \"y\": 0.1, \"z\": 3}, \"orientation\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.0, \"w\": 1.0}}}")
+        log("Teleportation completed")
+
+        log("Setting robot speed")
+        action_call("/set_robot_speed", "simlan_custom_msg.action.SetSpeed", "{\"robot_name\": \"jackal\", \"duration\": 10.0, \"twist\": {\"linear\": {\"x\": 1.0, \"y\": 0.0, \"z\": 0.0}, \"angular\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.5}}}")
+        log("Speed setting completed")
+
         emit end
