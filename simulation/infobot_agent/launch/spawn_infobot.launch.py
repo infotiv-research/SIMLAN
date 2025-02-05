@@ -38,6 +38,7 @@ def generate_launch_description():
     x_pose = LaunchConfiguration("x_pose", default="0.0")
     y_pose = LaunchConfiguration("y_pose", default="0.0")
     z_pose = LaunchConfiguration("z_pose", default="0.0")
+    yaw = LaunchConfiguration("yaw", default="0.0")
 
     declare_x_position_cmd = DeclareLaunchArgument(
         "x_pose", default_value="0.0", description="x_pose"
@@ -49,6 +50,10 @@ def generate_launch_description():
 
     declare_z_position_cmd = DeclareLaunchArgument(
         "z_pose", default_value="0.0", description="z_pose"
+    )
+
+    declare_yaw_cmd = DeclareLaunchArgument(
+        "yaw", default_value="0.0", description="yaw"
     )
 
     start_gazebo_ros_spawner_cmd = Node(
@@ -65,6 +70,8 @@ def generate_launch_description():
             y_pose,
             "-z",
             z_pose,
+            "-Y",
+            yaw,
         ],
         output="screen",
     )
@@ -73,6 +80,8 @@ def generate_launch_description():
 
     ld.add_action(declare_x_position_cmd)
     ld.add_action(declare_y_position_cmd)
+    ld.add_action(declare_z_position_cmd)
+    ld.add_action(declare_yaw_cmd)
 
     ld.add_action(start_gazebo_ros_spawner_cmd)
 

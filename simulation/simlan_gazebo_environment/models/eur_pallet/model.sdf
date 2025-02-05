@@ -2,7 +2,7 @@
 <model name="eur_pallet" canonical_link="node0_link">
   <link name="node0_link">
     <visual name="node0">
-      <pose relative_to="node0_link">0.00000 0.00000 0.00000 0.00000 0.00000 0.00000</pose>
+      <pose>0.00000 0.00000 0.00000 0.00000 0.00000 0.00000</pose>
       <geometry>
         <mesh>
           <uri>meshes/textured_pallet.dae</uri>
@@ -10,38 +10,26 @@
         </mesh>
       </geometry>
     </visual>
-    <inertial>
-      <inertia>
-        <ixx>0.064194</ixx>
-        <ixy>0</ixy>
-        <ixz>0</ixz>
-        <iyy>0.144307</iyy>
-        <iyz>0</iyz>
-        <izz>0.203495</izz>
-      </inertia>
-      <pose relative_to="node0_link">0.6 0.4 0.1 0 0 0</pose>
-      <mass>2.00000</mass>
-    </inertial>
   </link>
 
   <link name="collision_holder_1">
     <inertial>
       <inertia>
-        <ixx>0.064194</ixx>
+        <ixx>0.006</ixx>
         <ixy>0</ixy>
         <ixz>0</ixz>
-        <iyy>0.144307</iyy>
+        <iyy>0.435</iyy>
         <iyz>0</iyz>
-        <izz>0.203495</izz>
+        <izz>0.435</izz>
       </inertia>
-      <pose relative_to="node0_link">0.6 0.4 0.1 0 0 0</pose>
-      <mass>1.00000</mass>
+      <pose relative_to="node0_link">0.6 0.05 0.05 0 0 0</pose>
+      <mass>3.6</mass>
     </inertial>
     <collision name="collision_holder_1">
-      <pose>0.6 0.05 0.075 0.0 0.0 0.0</pose>
+      <pose relative_to="node0_link">0.6 0.05 0.05 0.0 0.0 0.0</pose>
       <geometry>
         <box>
-          <size>1.2 0.1 0.15</size>
+          <size>1.2 0.1 0.1</size>
         </box>
       </geometry>
       <surface>
@@ -55,7 +43,7 @@
       </friction>
       <contact>
         <ode>
-          <soft_cfm>0</soft_cfm>
+          <soft_cfm>1e-5</soft_cfm>
           <soft_erp>0.2</soft_erp>
           <kp>1e+13</kp>
           <kd>1</kd>
@@ -71,21 +59,21 @@
   <link name="collision_holder_2">
     <inertial>
       <inertia>
-        <ixx>0.064194</ixx>
+        <ixx>0.013496</ixx>
         <ixy>0</ixy>
         <ixz>0</ixz>
-        <iyy>0.144307</iyy>
+        <iyy>0.6308</iyy>
         <iyz>0</iyz>
-        <izz>0.203495</izz>
+        <izz>0.6355</izz>
       </inertia>
-      <pose relative_to="node0_link">0.6 0.4 0.1 0 0 0</pose>
-      <mass>1.00000</mass>
+      <pose relative_to="node0_link">0.6 0.4 0.05 0 0 0</pose>
+      <mass>5.22</mass>
     </inertial>
     <collision name="collision_holder_2">
-      <pose>0.6 0.4 0.075 0.00000 0.00000 0.00000</pose>
+      <pose>0.6 0.4 0.05 0.00000 0.00000 0.00000</pose>
       <geometry>
         <box>
-          <size>1.2 0.1 0.15</size>
+          <size>1.2 0.145 0.1</size>
         </box>
       </geometry>
       <surface>
@@ -99,7 +87,7 @@
       </friction>
       <contact>
         <ode>
-          <soft_cfm>0</soft_cfm>
+          <soft_cfm>1e-5</soft_cfm>
           <soft_erp>0.2</soft_erp>
           <kp>1e+13</kp>
           <kd>1</kd>
@@ -115,21 +103,21 @@
   <link name="collision_holder_3">
     <inertial>
       <inertia>
-        <ixx>0.064194</ixx>
+        <ixx>0.006</ixx>
         <ixy>0</ixy>
         <ixz>0</ixz>
-        <iyy>0.144307</iyy>
+        <iyy>0.435</iyy>
         <iyz>0</iyz>
-        <izz>0.203495</izz>
+        <izz>0.435</izz>
       </inertia>
-      <pose relative_to="node0_link">0.6 0.4 0.1 0 0 0</pose>
-      <mass>1.00000</mass>
+      <pose relative_to="node0_link">0.6 0.75 0.05 0 0 0</pose>
+      <mass>3.6</mass>
     </inertial>
     <collision name="collision_holder_3">
-      <pose>0.6 0.75 0.075 0.00000 0.00000 0.00000</pose>
+      <pose>0.6 0.75 0.05 0.00000 0.00000 0.00000</pose>
       <geometry>
         <box>
-          <size>1.2 0.1 0.15</size>
+          <size>1.2 0.1 0.1</size>
         </box>
       </geometry>
       <surface>
@@ -143,7 +131,7 @@
       </friction>
       <contact>
         <ode>
-          <soft_cfm>0</soft_cfm>
+          <soft_cfm>1e-5</soft_cfm>
           <soft_erp>0.2</soft_erp>
           <kp>1e+13</kp>
           <kd>1</kd>
@@ -161,21 +149,21 @@
   <link name="collision_holder_surface">
     <inertial>
       <inertia>
-        <ixx>0.064194</ixx>
+        <ixx>0.6779</ixx>
         <ixy>0</ixy>
         <ixz>0</ixz>
-        <iyy>0.144307</iyy>
+        <iyy>1.5227</iyy>
         <iyz>0</iyz>
-        <izz>0.203495</izz>
+        <izz>2.1965</izz>
       </inertia>
-      <pose relative_to="node0_link">0.6 0.4 0.1 0 0 0</pose>
-      <mass>1.00000</mass>
+      <pose relative_to="node0_link">0.6 0.4 0.122 0 0 0</pose>
+      <mass>12.672</mass>
     </inertial>
-    <collision name="collision_holder_3">
-      <pose>0.6 0.4 0.144 0.00000 0.00000 0.00000</pose>
+    <collision name="collision_holder_surface">
+      <pose>0.6 0.4 0.122 0.00000 0.00000 0.00000</pose>
       <geometry>
         <box>
-          <size>1.2 0.8 0.01</size>
+          <size>1.2 0.8 0.044</size>
         </box>
       </geometry>
       <surface>
@@ -189,7 +177,7 @@
       </friction>
       <contact>
         <ode>
-          <soft_cfm>0</soft_cfm>
+          <soft_cfm>1e-5</soft_cfm>
           <soft_erp>0.2</soft_erp>
           <kp>1e+13</kp>
           <kd>1</kd>

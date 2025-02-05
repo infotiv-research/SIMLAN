@@ -6,14 +6,14 @@
       <visual name="visual">
         <geometry>
             <mesh>
-                <uri>meshes/factory.dae</uri>
+                <uri>meshes/factory_with_entrence.dae</uri>
             </mesh>
         </geometry>
       </visual>
       <collision name="collision">
         <geometry>
             <mesh>
-                <uri>meshes/factory.dae</uri>
+                <uri>meshes/factory_with_entrence.dae</uri>
             </mesh>
         </geometry>
       </collision>
