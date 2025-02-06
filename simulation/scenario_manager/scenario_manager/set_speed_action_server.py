@@ -4,6 +4,7 @@ from geometry_msgs.msg import Twist
 
 import rclpy
 from rclpy.action import ActionServer
+from rclpy.executors import MultiThreadedExecutor
 from rclpy.node import Node
 
 from simlan_custom_msg.action import SetSpeed
@@ -63,9 +64,10 @@ class SetSpeedActionServer(Node):
 def main(args=None):
     rclpy.init(args=args)
     action_server = SetSpeedActionServer()
-    rclpy.spin(action_server)
+    executor = MultiThreadedExecutor()
+    executor.add_node(action_server)
+    executor.spin()
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
