@@ -31,6 +31,7 @@ def generate_launch_description():
     pkg_static_agent_launcher = get_package_share_directory("static_agent_launcher")
     pkg_infobot_agent = get_package_share_directory("infobot_agent")
     pkg_dyno_jackal_bringup = get_package_share_directory("dyno_jackal_bringup")
+    pkg_scenario_manager = get_package_share_directory("scenario_manager")
 
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare("simlan_bringup"), "rviz", "wip.rviz"]
@@ -80,6 +81,12 @@ def generate_launch_description():
         }.items(),
     )
 
+    scenario_manager = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_scenario_manager, "launch", "scenario_manager.launch.py")
+        )
+    )
+
     rviz2 = Node(
         package="rviz2",
         executable="rviz2",
@@ -98,6 +105,8 @@ def generate_launch_description():
     ld.add_action(static_agents)
     ld.add_action(infobot_agent)
     ld.add_action(jackal)
+
+    ld.add_action(scenario_manager)
     ld.add_action(rviz2)
 
     return ld

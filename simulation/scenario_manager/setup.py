@@ -1,3 +1,6 @@
+import os
+from glob import glob
+
 from setuptools import find_packages, setup
 
 package_name = 'scenario_manager'
@@ -10,6 +13,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*')),
     ],
     install_requires=['setuptools', 'py_trees', 'scenario_execution'],
     zip_safe=True,
@@ -24,7 +28,7 @@ setup(
         ],
         'console_scripts': [
             'teleport_action_server = scenario_manager.teleport_action_server:main',
-            'set_speen_action_server = scenario_manager.set_speed_action_server:main',
+            'set_speed_action_server = scenario_manager.set_speed_action_server:main',
         ],
     },
 )
