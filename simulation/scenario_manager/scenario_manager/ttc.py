@@ -4,6 +4,8 @@ from gazebo_msgs.msg import ModelStates
 
 from geometry_msgs.msg import TransformStamped
 
+import numpy as np
+
 import rclpy
 from rclpy.node import Node
 
@@ -19,28 +21,37 @@ class GazeboTFBroadcaster(Node):
             self.model_states_callback,
             10
         )
-        self.robot_name = 'jackal'
+        self.robot1_name = 'jackal'
+        self.robot2_name = 'infobot'
 
     def model_states_callback(self, msg):
-        if self.robot_name in msg.name:
-            idx = msg.name.index(self.robot_name)
-            pose = msg.pose[idx]
+        if self.robot1_name in msg.name:
+            idx1 = msg.name.index(self.robot1_name)
+            pose1 = msg.pose[idx1]
+            twist1 = msg.twist[idx1]  # Get the velocity data
 
-            t = TransformStamped()
-            t.header.stamp = self.get_clock().now().to_msg()
-            t.header.frame_id = 'world'
-            t.child_frame_id = 'base_link'
+            pose2 = msg.pose[msg.name.index(self.robot2_name)]
+            twist2 = msg.twist[msg.name.index(self.robot2_name)]
+            # calculate np arrays for the position and velocity of size [3]
+            position1 = np.array([pose1.position.x, pose1.position.y, pose1.position.z])
+            velocity1 = np.array([twist1.linear.x, twist1.linear.y, twist1.linear.z])
+            position2 = np.array([pose2.position.x, pose2.position.y, pose2.position.z])
+            velocity2 = np.array([twist2.linear.x, twist2.linear.y, twist2.linear.z])
 
-            t.transform.translation.x = pose.position.x
-            t.transform.translation.y = pose.position.y
-            t.transform.translation.z = pose.position.z
-            t.transform.rotation = pose.orientation
+            # calculate the relative position and velocity
+            relative_position = position2 - position1
+            relative_velocity = velocity2 - velocity1
 
-            # log all the information
+            # calculate the time to collision
+            ttc = - np.dot(relative_position, relative_velocity) / np.dot(relative_velocity, relative_velocity)
 
-            self.get_logger().info(f'Publishing transform from {t.header.frame_id} to {t.child_frame_id}')
-            self.get_logger().info(f'Translation: {t.transform.translation}')
-            self.get_logger().info(f'Rotation: {t.transform.rotation}')
+            # calculate closest point of approach
+            cpa = relative_position + ttc * relative_velocity
+            cpa = np.linalg.norm(cpa)
+
+            # log the ttc and cpa
+            self.get_logger().info('Time to collision: {}'.format(ttc))
+            self.get_logger().info('Closest point of approach: {}'.format(cpa))
 
 
 def main(args=None):
