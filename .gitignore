@@ -4,9 +4,24 @@
 install/
 log/
 build/
+
 # python
 *.pcd
 *.pyc
+
+# external repos
+simulation/jackal/
+
+#environments
+venv/
+env/
+.venv/
+.env/
+myenv/
+
+# lint config files
+.flake8
+
 # local
 experiments/
 *.iml

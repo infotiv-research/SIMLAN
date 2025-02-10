@@ -46,6 +46,7 @@ RUN apt-get update && apt-get install -y \
   wget \
   gdbserver \
   htop \
+  tmux \
   xterm \
   # Install ros distro testing packages
   ros-humble-ament-lint \
