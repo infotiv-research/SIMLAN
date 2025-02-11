@@ -3,42 +3,44 @@
 
     <link name="base_footprint" />
 
-
     <link name="base_link">
         <visual>
-<xacro:if value="${robot_type == 'GOPAL400'}">
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find infobot_agent)/models/infobot_common/meshes/AMR_GP400.dae" scale="1 1 1"/>
-                <!-- <box size="${base_length} ${base_width} ${base_height}" /> -->
-            </geometry>
-</xacro:if>
+            <xacro:if value="${robot_type == 'GOPAL400'}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="file://$(find infobot_agent)/models/infobot_common/meshes/AMR_GP400.dae" scale="1 1 1"/>
+                    <!-- <box size="${base_length} ${base_width} ${base_height}" /> -->
+                </geometry>
+            </xacro:if>
 
-<xacro:if value="${robot_type == 'FORKLIFT'}">
-            <origin xyz="-1.5 -0.5 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae"/>
-            </geometry>
-</xacro:if>
+            <xacro:if value="${robot_type == 'FORKLIFT'}">
+                <origin xyz="-1.5 -0.535 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae"/>
+                </geometry>
+            </xacro:if>
         </visual>
 
         <collision>
-<xacro:if value="${robot_type == 'GOPAL400'}">
-            <geometry>
-                <mesh filename="file://$(find infobot_agent)/models/infobot_common/meshes/AMR_GP400.dae" scale="1 1 1"/>
-                <!-- <box size="${base_length} ${base_width} ${base_height}" />  -->
-            </geometry>
-</xacro:if>
+            <xacro:if value="${robot_type == 'GOPAL400'}">
+                <geometry>
+                    <mesh filename="file://$(find infobot_agent)/models/infobot_common/meshes/AMR_GP400.dae" scale="1 1 1"/>
+                    <!-- <box size="${base_length} ${base_width} ${base_height}" />  -->
+                </geometry>
+            </xacro:if>
 
-<xacro:if value="${robot_type == 'FORKLIFT'}">
-            <origin xyz="-1.5 -0.5 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae"/>
-            </geometry>
-</xacro:if>
+            <xacro:if value="${robot_type == 'FORKLIFT'}">
+                <origin xyz="-1.5 -0.535 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae"/>
+                </geometry>
+            </xacro:if>
         </collision>
+
         <xacro:inertial_box m="${base_mass}"  d="${base_length}" w="${base_width}" h="${base_height}"/>
+
     </link>
+
 
     <xacro:macro name="wheel" params="prefix wheel_radius_multiple">
         <link name="wheel_${prefix}_link">
@@ -51,7 +53,7 @@
             </visual>
             <collision>
                 <geometry>
-                    <cylinder length="${wheel_width}" radius="${wheel_radius*wheel_radius_multiple}" />
+                    <sphere radius="${wheel_radius*wheel_radius_multiple}" />
                 </geometry>
             </collision>
             <xacro:inertial_cylinder m="${wheel_mass}" r="${wheel_radius*wheel_radius_multiple}" h="${wheel_width}"/>
