@@ -4,16 +4,4 @@ import osc.ros
 
 scenario collision:
     do serial:
-        custom_action(data: "Hello World")
-        log("Starting teleportation")
-        action_call("/scenario_manager/teleport_robot", "simlan_custom_msg.action.TeleportRobot", "{\"robot_name\": \"jackal\", \"target_pose\": {\"position\": {\"x\": 28, \"y\": 23, \"z\": 0.1}, \"orientation\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.70710678, \"w\": 0.70710678}}}")
-        action_call("/scenario_manager/teleport_robot", "simlan_custom_msg.action.TeleportRobot", "{\"robot_name\": \"infobot\", \"target_pose\": {\"position\": {\"x\": 36, \"y\": 30, \"z\": 0.1}, \"orientation\": {\"x\": 0.0, \"y\": 0.0, \"z\": 1.0, \"w\": 0.0}}}")
-        log("Teleportation completed")
-
-        log("Setting robot speed")
-	parallel:
-            action_call("/scenario_manager/set_robot_speed", "simlan_custom_msg.action.SetSpeed", "{\"robot_name\": \"jackal\", \"duration\": 30.0, \"twist\": {\"linear\": {\"x\": 1.0, \"y\": 0.0, \"z\": 0.0}, \"angular\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.0}}}")
-            action_call("/scenario_manager/set_robot_speed", "simlan_custom_msg.action.SetSpeed", "{\"robot_name\": \"infobot\", \"duration\": 30.0, \"twist\": {\"linear\": {\"x\": 1.0, \"y\": 0.0, \"z\": 0.0}, \"angular\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.0}}}")
-        log("Speed setting completed")
-
-        emit end
+	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 0.0}")

@@ -20,4 +20,11 @@ def generate_launch_description():
             name='set_speed_action_server',
             output='screen'
         ),
+        launch_ros.actions.Node(
+            package='scenario_manager',
+            executable='collision_action_server',
+            namespace=namespace,
+            name='collision_action_server',
+            output='screen'
+        ),
     ])
