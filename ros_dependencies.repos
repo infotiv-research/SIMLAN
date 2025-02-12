@@ -20,3 +20,34 @@ repositories:
     type: git
     url: https://github.com/DynoRobotics/jackal
     version: dyno_humble
+
+  scenario_execution:
+    type: git
+    url: https://github.com/IntelLabs/scenario_execution
+    version: humble
+
+  # pytrees
+  py_trees:
+    type: git
+    url: https://github.com/splintered-reality/py_trees.git 
+    version: release/2.2.x
+
+  py_trees_ros:
+    type: git
+    url: https://github.com/splintered-reality/py_trees_ros.git 
+    version: release/2.2.x
+
+  py_trees_ros_interfaces:
+    type: git
+    url: https://github.com/splintered-reality/py_trees_ros_interfaces.git
+    version: release/2.1.x
+
+  py_trees_js:
+    type: git
+    url: https://github.com/splintered-reality/py_trees_js.git
+    version: release/0.6.x
+    
+  py_trees_ros_viewer:
+    type: git
+    url: https://github.com/splintered-reality/py_trees_ros_viewer.git
+    version: release/0.2.x

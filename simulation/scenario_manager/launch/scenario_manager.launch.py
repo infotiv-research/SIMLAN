@@ -1,0 +1,20 @@
+import launch
+
+import launch_ros.actions
+
+
+def generate_launch_description():
+    return launch.LaunchDescription([
+        launch_ros.actions.Node(
+            package='scenario_manager',
+            executable='teleport_action_server',
+            name='teleport_action_server',
+            output='screen'
+        ),
+        launch_ros.actions.Node(
+            package='scenario_manager',
+            executable='set_speed_action_server',
+            name='set_speed_action_server',
+            output='screen'
+        )
+    ])

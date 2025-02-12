@@ -39,10 +39,12 @@ def generate_launch_description():
         get_package_share_directory("infobot_agent"), "launch"
     )
     use_sim_time = LaunchConfiguration("use_sim_time", default="true")
+
     # INITIAL_POSITION
-    x_pose = LaunchConfiguration("x_pose", default="20.0")
-    y_pose = LaunchConfiguration("y_pose", default="25.0")
+    x_pose = LaunchConfiguration("x_pose", default="36.0")
+    y_pose = LaunchConfiguration("y_pose", default="31.0")
     z_pose = LaunchConfiguration("z_pose", default="0.1")
+    yaw = LaunchConfiguration("yaw", default="3.14159265")
 
     robot_state_publisher_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -55,7 +57,12 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(launch_file_dir, "spawn_infobot.launch.py")
         ),
-        launch_arguments={"x_pose": x_pose, "y_pose": y_pose, "z_pose": z_pose}.items(),
+        launch_arguments={
+            "x_pose": x_pose,
+            "y_pose": y_pose,
+            "z_pose": z_pose,
+            "yaw": yaw,
+        }.items(),
     )
 
     load_joint_state_broadcaster = ExecuteProcess(
