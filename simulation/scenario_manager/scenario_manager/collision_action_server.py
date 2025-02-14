@@ -1,4 +1,5 @@
 import math
+import time
 
 import rclpy
 from rclpy.action import ActionClient, ActionServer
@@ -16,13 +17,15 @@ class CollisionActionServer(Node):
             'collision_action',
             self.execute_callback)
         self.collision_point = (25.0, 34.0)
-        self.jackal_speed = 1.5
-        self.infobot_speed = 0.5
+        self.jackal_speed = 1.0
+        self.infobot_speed = 1.0
         self.experiment_time = 5.0
 
     async def execute_callback(self, goal_handle):
         self.get_logger().info('Received action goal')
         angle = goal_handle.request.angle  # Extract the angle parameter
+        angle = math.radians(angle)  # Convert the angle to radians
+        angle += math.pi / 2  # Rotate the angle by 90 degrees
 
         # Compute the starting position of the robots
         infobot_x = self.collision_point[0]
@@ -41,12 +44,21 @@ class CollisionActionServer(Node):
         goal_handle.publish_feedback(Collision.Feedback(feedback='Successfully teleported infobot'))
 
         # Set speed in parallel
-        await self.set_robot_speed('jackal', self.jackal_speed, 0.0, 0.0, 4 * self.experiment_time)
-        await self.set_robot_speed('infobot', self.infobot_speed, 0.0, 0.0, 4 * self.experiment_time)
+        self.moved_jackal = False
+        self.moved_infobot = False
+
+        await self.set_robot_speed('jackal', self.jackal_speed, 0.0, 0.0, 3 * self.experiment_time)
+        await self.set_robot_speed('infobot', self.infobot_speed, 0.0, 0.0, 3 * self.experiment_time)
+
+        # Temporary solution to wait for both robots to move
+
+        time.sleep(self.experiment_time * 5)
 
         goal_handle.succeed()
         result = Collision.Result()
         result.success = True
+        result.message = 'Successfully executed collision scenario'
+
         return result
 
     async def teleport_robot(self, robot_name: str, x: float, y: float, z: float, qx: float, qy: float, qz: float, qw: float):
@@ -79,7 +91,34 @@ class CollisionActionServer(Node):
         goal_msg.twist.angular.x = 0.0
         goal_msg.twist.angular.y = 0.0
         goal_msg.twist.angular.z = 0.0
-        await action_client.send_goal_async(goal_msg)
+        # Send the goal and print the result
+        action_client.send_goal_async(goal_msg).add_done_callback(self.goal_response_callback)
+
+    async def goal_response_callback(self, future):
+        goal_handle = future.result()
+        self.get_logger().info('Goal accepted' if goal_handle.accepted else 'Goal rejected')
+        if goal_handle.accepted:
+            goal_handle.get_result_async().add_done_callback(self.get_result_callback)
+        else:
+            self.get_logger().info('Goal rejected')
+
+    async def get_result_callback(self, future):
+        result = future.result().result
+        success = result.success
+        message = result.message
+        robot_name = result.robot_name
+        self.get_logger().info(f'Goal for {robot_name} completed with success: {success}')
+
+        if success:
+            if robot_name == 'jackal':
+                self.moved_jackal = True
+                self.get_logger().info('Jackal moved, shabang, bangity bang')
+                # print message:
+                self.get_logger().info(message)
+            if robot_name == 'infobot':
+                self.moved_infobot = True
+        else:
+            self.get_logger().info(f'Failed to move {robot_name}')
 
 
 def main(args=None):

@@ -3,6 +3,8 @@ float32 angle
 ---
 # Result
 bool success
+string message
 ---
 # Feedback
+string robot
 string feedback

@@ -4,4 +4,10 @@ import osc.ros
 
 scenario collision:
     do serial:
-	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 0.0}")
+	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 45}")
+
+	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 90}")
+
+	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 135}")
+
+	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 180}")

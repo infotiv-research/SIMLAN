@@ -72,6 +72,7 @@ class SetSpeedActionServer(Node):
 
         goal_handle.succeed()
         result = SetSpeed.Result()
+        result.robot_name = robot_name
         result.success = True
         result.message = f'Movement complete for {robot_name}'
 
