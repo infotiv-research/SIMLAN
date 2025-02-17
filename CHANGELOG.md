@@ -1,3 +1,10 @@
+### 1.0.6: Collision (Feb 2025)
+
+- Add scenario execution library for ros2
+- Add action servers for set_speed, teleport_robot and collision
+- Add Node for TTC calculation
+- Add package for custom messages
+
 ### 1.0.5: Delivery 4 (Dec 2024)
 
 - D3.5 Disentanglement: One-parameter Object Movements.
