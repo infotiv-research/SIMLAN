@@ -28,8 +28,8 @@ class CollisionActionServer(Node):
         self.jackal_front_distance = 0.255
 
         # Width of the robot, it is assumed the robot is symmetrical
-        self.jackal_width = 0.1
-        self.infobot_width = 0.1
+        self.jackal_width = 0.44
+        self.infobot_width = 1.07
 
     async def execute_callback(self, goal_handle):
         self.get_logger().info('Received action goal')
@@ -39,6 +39,11 @@ class CollisionActionServer(Node):
         angle = math.radians(angle)  # Convert the angle to radians
         angle += math.pi / 2  # Rotate the angle by 90 degrees
 
+        # calculate what corner is colliding:
+
+        infobot_right = True
+        jackal_right = True
+
         # calculate travel distance
         infobot_travel_distance = infobot_speed * self.experiment_time
         jackal_travel_distance = self.jackal_speed * self.experiment_time
@@ -46,27 +51,37 @@ class CollisionActionServer(Node):
         if collision_type.collision_type == CollisionType.HEAD_ON:
             infobot_travel_distance += self.infobot_front_distance
             jackal_travel_distance += self.jackal_front_distance
+            infobot_right = True if 0 <= angle <= 180 else False
+            jackal_right = not infobot_right
         elif collision_type.collision_type == CollisionType.INFOBOT_SIDE:
             jackal_travel_distance += self.jackal_front_distance
+            infobot_right = True if 0 <= angle <= 180 else False
+            jackal_right = True if 0 <= angle <= 90 or 180 <= angle <= 270 else False
         elif collision_type.collision_type == CollisionType.JACKAL_SIDE:
             infobot_travel_distance += self.infobot_front_distance
+            jackal_right = True if 0 <= angle <= 180 else False
+            infobot_right = False if 0 <= angle <= 90 or 180 <= angle <= 270 else True
+
+        jackal_sideways = self.jackal_width / 2 if jackal_right else - self.jackal_width / 2
+        infobot_sideways = self.infobot_width / 2 if infobot_right else - self.infobot_width / 2
+
+        if angle == 180:
+            jackal_sideways, infobot_sideways = (0, 0)
 
         # Compute the starting position of the robots
-        infobot_x = self.collision_point[0]
+        infobot_x = self.collision_point[0] - infobot_sideways
         infobot_y = self.collision_point[1] - infobot_travel_distance
 
-        jackal_x = self.collision_point[0] - jackal_travel_distance * math.cos(angle)
-        jackal_y = self.collision_point[1] - jackal_travel_distance * math.sin(angle)
+        jackal_x = self.collision_point[0] - jackal_travel_distance * math.cos(angle) - jackal_sideways * math.sin(angle)
+        jackal_y = self.collision_point[1] - jackal_travel_distance * math.sin(angle) - jackal_sideways * math.cos(angle)
 
         # Compute orientation quaternion
         qx, qy, qz, qw = 0.0, 0.0, math.sin(angle / 2), math.cos(angle / 2)
 
         # Teleport both robots
         await self.teleport_robot('jackal', jackal_x, jackal_y, 0.1, qx, qy, qz, qw)
-        goal_handle.publish_feedback(Collision.Feedback(feedback='Successfully teleported jackal'))
 
         await self.teleport_robot('infobot', infobot_x, infobot_y, 0.1, 0.0, 0.0, math.sqrt(2) / 2, math.sqrt(2) / 2)
-        goal_handle.publish_feedback(Collision.Feedback(feedback='Successfully teleported infobot'))
 
         # Set speed in parallel
         self.moved_jackal = False
