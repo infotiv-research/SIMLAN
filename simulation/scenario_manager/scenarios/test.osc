@@ -4,10 +4,14 @@ import osc.ros
 
 scenario collision:
     do serial:
-	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 45}")
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", 
+                    "{\"angle\": 45, \"infobot_speed\": 0.2, \"collision_type\": {\"collision_type\": 0}}")
 
-	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 90}")
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", 
+                    "{\"angle\": 90, \"infobot_speed\": 0.4, \"collision_type\": {\"collision_type\": 1}}")
 
-	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 135}")
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", 
+                    "{\"angle\": 135, \"infobot_speed\": 0.6, \"collision_type\": {\"collision_type\": 2}}")
 
-	action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", "{\"angle\": 180}")
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", 
+                    "{\"angle\": 180, \"infobot_speed\": 0.8, \"collision_type\": {\"collision_type\": 0}}")

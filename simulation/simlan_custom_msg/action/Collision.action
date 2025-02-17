@@ -1,5 +1,7 @@
 # Goal
 float32 angle
+float32 infobot_speed
+simlan_custom_msg/CollisionType collision_type
 ---
 # Result
 bool success

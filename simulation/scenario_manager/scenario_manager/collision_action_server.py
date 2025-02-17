@@ -6,6 +6,7 @@ from rclpy.action import ActionClient, ActionServer
 from rclpy.node import Node
 
 from simlan_custom_msg.action import Collision, SetSpeed, TeleportRobot
+from simlan_custom_msg.msg import CollisionType
 
 
 class CollisionActionServer(Node):
@@ -21,18 +22,41 @@ class CollisionActionServer(Node):
         self.infobot_speed = 1.0
         self.experiment_time = 5.0
 
+        # Distance from the base-link to the front of the robot
+        # Should be half of the robot's length if the base-link is centered
+        self.infobot_front_distance = 1.9
+        self.jackal_front_distance = 0.255
+
+        # Width of the robot, it is assumed the robot is symmetrical
+        self.jackal_width = 0.1
+        self.infobot_width = 0.1
+
     async def execute_callback(self, goal_handle):
         self.get_logger().info('Received action goal')
         angle = goal_handle.request.angle  # Extract the angle parameter
+        infobot_speed = goal_handle.request.infobot_speed  # Extract the infobot_speed parameter
+        collision_type = goal_handle.request.collision_type  # Extract the collision_type parameter
         angle = math.radians(angle)  # Convert the angle to radians
         angle += math.pi / 2  # Rotate the angle by 90 degrees
 
+        # calculate travel distance
+        infobot_travel_distance = infobot_speed * self.experiment_time
+        jackal_travel_distance = self.jackal_speed * self.experiment_time
+
+        if collision_type.collision_type == CollisionType.HEAD_ON:
+            infobot_travel_distance += self.infobot_front_distance
+            jackal_travel_distance += self.jackal_front_distance
+        elif collision_type.collision_type == CollisionType.INFOBOT_SIDE:
+            jackal_travel_distance += self.jackal_front_distance
+        elif collision_type.collision_type == CollisionType.JACKAL_SIDE:
+            infobot_travel_distance += self.infobot_front_distance
+
         # Compute the starting position of the robots
         infobot_x = self.collision_point[0]
-        infobot_y = self.collision_point[1] - self.infobot_speed * self.experiment_time
+        infobot_y = self.collision_point[1] - infobot_travel_distance
 
-        jackal_x = self.collision_point[0] - self.jackal_speed * self.experiment_time * math.cos(angle)
-        jackal_y = self.collision_point[1] - self.jackal_speed * self.experiment_time * math.sin(angle)
+        jackal_x = self.collision_point[0] - jackal_travel_distance * math.cos(angle)
+        jackal_y = self.collision_point[1] - jackal_travel_distance * math.sin(angle)
 
         # Compute orientation quaternion
         qx, qy, qz, qw = 0.0, 0.0, math.sin(angle / 2), math.cos(angle / 2)
@@ -40,6 +64,7 @@ class CollisionActionServer(Node):
         # Teleport both robots
         await self.teleport_robot('jackal', jackal_x, jackal_y, 0.1, qx, qy, qz, qw)
         goal_handle.publish_feedback(Collision.Feedback(feedback='Successfully teleported jackal'))
+
         await self.teleport_robot('infobot', infobot_x, infobot_y, 0.1, 0.0, 0.0, math.sqrt(2) / 2, math.sqrt(2) / 2)
         goal_handle.publish_feedback(Collision.Feedback(feedback='Successfully teleported infobot'))
 
@@ -47,8 +72,8 @@ class CollisionActionServer(Node):
         self.moved_jackal = False
         self.moved_infobot = False
 
-        await self.set_robot_speed('jackal', self.jackal_speed, 0.0, 0.0, 3 * self.experiment_time)
-        await self.set_robot_speed('infobot', self.infobot_speed, 0.0, 0.0, 3 * self.experiment_time)
+        await self.set_robot_speed('jackal', self.jackal_speed, 0.0, 0.0, 4 * self.experiment_time)
+        await self.set_robot_speed('infobot', infobot_speed, 0.0, 0.0, 4 * self.experiment_time)
 
         # Temporary solution to wait for both robots to move
 
@@ -62,9 +87,6 @@ class CollisionActionServer(Node):
         return result
 
     async def teleport_robot(self, robot_name: str, x: float, y: float, z: float, qx: float, qy: float, qz: float, qw: float):
-        self.get_logger().info(f'Teleporting {robot_name}')
-        # log inputs:
-
         action_client = ActionClient(self, TeleportRobot, '/scenario_manager/teleport_robot')
         action_client.wait_for_server()
         goal_msg = TeleportRobot.Goal()
@@ -79,7 +101,6 @@ class CollisionActionServer(Node):
         await action_client.send_goal_async(goal_msg)
 
     async def set_robot_speed(self, robot_name, vx, vy, vz, duration):
-        self.get_logger().info(f'Setting speed for {robot_name}')
         action_client = ActionClient(self, SetSpeed, '/scenario_manager/set_robot_speed')
         action_client.wait_for_server()
         goal_msg = SetSpeed.Goal()
@@ -96,7 +117,6 @@ class CollisionActionServer(Node):
 
     async def goal_response_callback(self, future):
         goal_handle = future.result()
-        self.get_logger().info('Goal accepted' if goal_handle.accepted else 'Goal rejected')
         if goal_handle.accepted:
             goal_handle.get_result_async().add_done_callback(self.get_result_callback)
         else:
@@ -107,12 +127,9 @@ class CollisionActionServer(Node):
         success = result.success
         message = result.message
         robot_name = result.robot_name
-        self.get_logger().info(f'Goal for {robot_name} completed with success: {success}')
-
         if success:
             if robot_name == 'jackal':
                 self.moved_jackal = True
-                self.get_logger().info('Jackal moved, shabang, bangity bang')
                 # print message:
                 self.get_logger().info(message)
             if robot_name == 'infobot':

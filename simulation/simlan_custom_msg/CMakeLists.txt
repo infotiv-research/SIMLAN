@@ -14,6 +14,7 @@ find_package(geometry_msgs REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/CollisionType.msg"
   "action/TeleportRobot.action"
   "action/SetSpeed.action"
   "action/Collision.action"
