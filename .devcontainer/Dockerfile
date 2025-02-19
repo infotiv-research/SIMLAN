@@ -46,6 +46,7 @@ RUN apt-get update && apt-get install -y \
   wget \
   gdbserver \
   htop \
+  tmux \
   xterm \
   # Install ros distro testing packages
   ros-humble-ament-lint \
@@ -104,6 +105,11 @@ RUN echo "export RCUTILS_COLORIZED_OUTPUT=1" >> /home/ros/.bashrc
 RUN echo "pre-commit install --hook-type commit-msg" >>  /home/ros/.bashrc
 RUN echo "pre-commit install" >> /home/ros/.bashrc
 RUN echo "export GAZEBO_MASTER_URI=http://0.0.0.0:12345" >> /home/ros/.bashrc
+
+RUN echo "export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-11" >> /home/ros/.bashrc
+RUN echo "export GAZEBO_MODEL_PATH=/usr/share/gazebo-11/models:/usr/share/gazebo-11/models" >> /home/ros/.bashrc
+RUN echo "source home/ros/src/install/setup.bash" >> /home/ros/.bashrc
+RUN echo "source /opt/dependencies_ws/install/setup.bash" >> /home/ros/.bashrc
 
 COPY . /home/ros/src/
 RUN chown -R ros:ros  /home/ros/src/

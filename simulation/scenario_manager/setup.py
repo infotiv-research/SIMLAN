@@ -29,6 +29,8 @@ setup(
         'console_scripts': [
             'teleport_action_server = scenario_manager.teleport_action_server:main',
             'set_speed_action_server = scenario_manager.set_speed_action_server:main',
+            'collision_action_server = scenario_manager.collision_action_server:main',
+            'ttc = scenario_manager.ttc:main',
         ],
     },
 )
