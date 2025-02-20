@@ -116,7 +116,7 @@ Additionally you are requested to rebuild in the container that you should also 
 
 ### GPU support
 
-To improve speed you can enable the support for nvidia GPU. To use nvidia GPU make sure `nvidia-cuda-toolkit`  is installed. Otherwise try to install [`nvidia-container-runtime`](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-with-apt) and `nvidia-docker2` packages.
+To improve speed you can enable the support for nvidia GPU. To use nvidia GPU make sure [`nvidia-cuda-toolkit`](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/) and [`nvidia-container-runtime`](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-with-apt) are installed.
 
 `docker info|grep -i runtime` like below:
 
@@ -128,7 +128,23 @@ $ docker info|grep -i runtime
 
 Otherwise you get the following error message: `Error response from daemon: unknown or invalid runtime name: nvidia`
 
-Then update `docker-compose.yaml` and `.devcontainer/devcontainer.json`
+In `docker-compose.yaml`, uncomment the `factory_simulation_nvidia` section:
+
+```
+  factory_simulation_nvidia:
+    <<: *research-base
+    container_name: factory_simulation_nvidia
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: "all"
+              capabilities: [compute,utility,graphics,display]
+```
+
+and update `.devcontainer/devcontainer.json`:
 
 ```
 {
@@ -181,7 +197,7 @@ The jackal can then be controlled with the computer keyboard by running:
 To control the infobot using keyboard:
 
 ```bash
-./start.sh teleop_infobot
+./start.sh infobot_teleop
 ```
 
 To record one screenshot after use:

@@ -38,31 +38,15 @@ then
 elif [[ "$*" == *"build"* ]]
 then
     build
-elif [[ "$*" == *"sim"* ]]
-then
-    # environment
-    # SIM_ENV=CICD or DEV
-    # agents
-    (sleep 12 && ros2 launch infobot_agent infobot.launch.py)&
-    #echo "> Infobot is queed to be spawned"
-    (sleep 10 && ros2 launch dyno_jackal_bringup sim.launch.py)&
-    #echo "> Jackal is queed to be spawned"
-    (sleep 7 && ros2 launch static_agent_launcher static-agent.launch.py)&
-    echo "> Static agents are queed to be spawned"
-    echo "> starting Gazebo"
-    # This has to be blocking so that k8s can restart when it crashes
-    ros2 launch simlan_gazebo_environment simlan_factory.launch.py
-
-
 elif [[ "$*" == *"rviz"* ]]
 then
     rviz2 -d ./processing/rviz_config.rviz
 elif [[ "$*" == *"jackal_teleop"* ]]
 then
     ros2 launch dyno_jackal_bringup keyboard_steering.launch.py
-elif [[ "$*" == *"infobot_teleop"* ]]
+elif [[ "$*" == *"pallet_truck_teleop"* ]]
 then
-    ros2 run infobot_teleop teleop_keyboard
+    ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/pallet_truck -r cmd_vel:=key_vel
 elif [[ "$*" == *"ros_record"* ]]
 then
     ros2 bag record /cmd_vel
@@ -90,6 +74,14 @@ then
     # algo: MOG2, KNN
     cd ./processing ;
     python3 camera_subscriber.py --action screenshot --camera $2 --shottime 4
+
+elif [[ "$*" == *"sim"* ]]
+then
+    ros2 launch simlan_bringup full_sim.launch.py
+
+elif [[ "$*" == *"scenario"* ]]
+then
+    ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/test.osc
 
 
 elif [[ "$*" == *"camera_dump"* ]]

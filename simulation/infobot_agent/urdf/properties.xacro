@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-<!-- GOPAL400 and FORKLIFT -->
+<!-- VOLVO_GPSS_ARHO and FORKLIFT -->
 <xacro:property name="robot_type" value="FORKLIFT"/>
 
 
