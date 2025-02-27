@@ -27,6 +27,9 @@ class CollisionActionServer(Node):
         self.infobot_front_distance = 1.9
         self.jackal_front_distance = 0.255
 
+        self.infobot_back_distance = 1.5
+        self.jackal_back_distance = 0.255
+
         # Width of the robot, it is assumed the robot is symmetrical
         self.jackal_width = 0.44
         self.infobot_width = 1.07
@@ -36,8 +39,6 @@ class CollisionActionServer(Node):
         angle = goal_handle.request.angle  # Extract the angle parameter
         infobot_speed = goal_handle.request.infobot_speed  # Extract the infobot_speed parameter
         collision_type = goal_handle.request.collision_type  # Extract the collision_type parameter
-        angle = math.radians(angle)  # Convert the angle to radians
-        angle += math.pi / 2  # Rotate the angle by 90 degrees
 
         # calculate what corner is colliding:
 
@@ -48,7 +49,18 @@ class CollisionActionServer(Node):
         infobot_travel_distance = infobot_speed * self.experiment_time
         jackal_travel_distance = self.jackal_speed * self.experiment_time
 
-        if collision_type.collision_type == CollisionType.HEAD_ON:
+        if angle == 0:
+            if infobot_speed >= self.jackal_speed:
+                infobot_travel_distance += self.infobot_front_distance
+                jackal_travel_distance -= self.jackal_back_distance
+            else:
+                jackal_travel_distance += self.jackal_front_distance
+                infobot_travel_distance -= self.infobot_back_distance
+        elif angle == 180:
+            infobot_travel_distance += self.infobot_front_distance
+            jackal_travel_distance += self.jackal_front_distance
+
+        elif collision_type.collision_type == CollisionType.HEAD_ON:
             infobot_travel_distance += self.infobot_front_distance
             jackal_travel_distance += self.jackal_front_distance
             infobot_right = True if 0 <= angle <= 180 else False
@@ -67,6 +79,9 @@ class CollisionActionServer(Node):
 
         if angle == 180:
             jackal_sideways, infobot_sideways = (0, 0)
+
+        angle = math.radians(angle)  # Convert the angle to radians
+        angle += math.pi / 2  # Rotate the angle by 90 degrees
 
         # Compute the starting position of the robots
         infobot_x = self.collision_point[0] - infobot_sideways
