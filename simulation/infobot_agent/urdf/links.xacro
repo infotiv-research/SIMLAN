@@ -53,7 +53,7 @@
             </visual>
             <collision>
                 <geometry>
-                    <sphere radius="${wheel_radius*wheel_radius_multiple}" />
+                    <cylinder length="${wheel_width}" radius="${wheel_radius*wheel_radius_multiple}" />
                 </geometry>
             </collision>
             <xacro:inertial_cylinder m="${wheel_mass}" r="${wheel_radius*wheel_radius_multiple}" h="${wheel_width}"/>

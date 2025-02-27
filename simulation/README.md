@@ -58,6 +58,9 @@ Script structure:
 ```
 
 - Gazebo supports two different skeleton animation file formats: COLLADA (.dae) and Biovision Hierarchy (.bvh).
+  - .bvh: Text-based format with section 'HIERARCHY' and section 'MOTION'.
+  - .dae: XML-based format, structured into multiple sections.
+- .bvh works for Ignition, while .dae works for both Gazebo classic and Ignition
 - Skin is similar, simply import a collada file
 - \<interpolate_x>true\</interpolate_x> makes the animation match the movement. The animation is done briefly along the x-axis and then it can be interpolated into any direction by gazebo.
 - In a top down positive x,y frame of reference:  0 = right, 1.57 = up, -1.57 = down, 3.14 = left

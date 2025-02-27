@@ -1,0 +1,16 @@
+
+material aruco_35
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture 35.png
+        filtering anisotropic
+        max_anisotropy 16
+      }
+    }
+  }
+}

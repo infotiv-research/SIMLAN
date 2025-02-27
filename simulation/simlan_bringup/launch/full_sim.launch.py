@@ -31,6 +31,7 @@ def generate_launch_description():
     pkg_static_agent_launcher = get_package_share_directory("static_agent_launcher")
     pkg_infobot_agent = get_package_share_directory("infobot_agent")
     pkg_dyno_jackal_bringup = get_package_share_directory("dyno_jackal_bringup")
+    pkg_pallet_truck_bringup = get_package_share_directory("pallet_truck_bringup")
     pkg_scenario_manager = get_package_share_directory("scenario_manager")
 
     rviz_config_file = PathJoinSubstitution(
@@ -41,6 +42,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time", default=True)
     launch_rviz = LaunchConfiguration("rviz")
     jackal_manual_control = LaunchConfiguration("jackal_manual_control")
+    pallet_truck_manual_control = LaunchConfiguration("pallet_truck_manual_control")
 
     launch_rviz_launch_argument = DeclareLaunchArgument(
         "rviz", default_value="False", description="To launch rviz"
@@ -50,6 +52,11 @@ def generate_launch_description():
         "jackal_manual_control",
         default_value="False",
         description="To launch jackal keyboard steering dashboard",
+    )
+    pallet_truck_manual_control_launch_argument = DeclareLaunchArgument(
+        "pallet_truck_manual_control",
+        default_value="False",
+        description="To launch pallet_truck keyboard steering dashboard",
     )
 
     simlan_gazebo = IncludeLaunchDescription(
@@ -80,6 +87,14 @@ def generate_launch_description():
             "jackal_manual_control": jackal_manual_control,
         }.items(),
     )
+    pallet_truck = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_pallet_truck_bringup, "launch", "sim.launch.py")
+        ),
+        launch_arguments={
+            "pallet_truck_manual_control": pallet_truck_manual_control,
+        }.items(),
+    )
 
     scenario_manager = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -100,11 +115,13 @@ def generate_launch_description():
 
     ld.add_action(launch_rviz_launch_argument)
     ld.add_action(jackal_manual_control_launch_argument)
+    ld.add_action(pallet_truck_manual_control_launch_argument)
 
     ld.add_action(simlan_gazebo)
     ld.add_action(static_agents)
     ld.add_action(infobot_agent)
     ld.add_action(jackal)
+    ld.add_action(pallet_truck)
 
     ld.add_action(scenario_manager)
     ld.add_action(rviz2)
