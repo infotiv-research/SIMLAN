@@ -43,6 +43,8 @@ class SetSpeedActionServer(Node):
         if robot_name not in self._robot_pos_publishers:
             if robot_name == 'jackal':
                 topic_name = '/jackal/velocity_controller/cmd_vel_unstamped'
+            elif robot_name == 'pallet_truck':
+                topic_name = '/pallet_truck/velocity_controller/cmd_vel_unstamped'
             elif robot_name == 'infobot':
                 topic_name = '/cmd_vel'
             else:
