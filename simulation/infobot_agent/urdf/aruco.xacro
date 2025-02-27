@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<robot name="infobot_infobot"
+    xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:macro name="aruco_link" params="number">
+
+        <link name="aruco_${number}_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.5 0.5 .001"/>
+                </geometry>
+            </visual>
+        </link>
+
+
+        <joint name="aruco_${number}_joint" type="fixed">
+            <origin xyz="0 0 3" rpy="0 0 0"/>
+            <parent link="base_link"/>
+            <child link="aruco_${number}_link"/>
+        </joint>
+
+        <gazebo reference="aruco_${number}_link">
+            <static>true</static>
+            <visual name="aruco_front_face">
+                <pose>0.00005 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.0001 0.5 0.5</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>
+                        <uri>model://aruco/materials/scripts</uri>
+                        <uri>model://aruco/materials/textures</uri>
+                        <name>aruco_${number}</name>
+                    </script>
+                </material>
+            </visual>
+            <visual name="aruco_back_face">
+                <pose>-0.00005 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.0001 0.5 0.5</size>
+                    </box>
+                </geometry>
+            </visual>
+        </gazebo>
+
+    </xacro:macro>
+
+    <xacro:aruco_link number="12" />
+
+</robot>

@@ -1,0 +1,16 @@
+
+material aruco_71
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture 71.png
+        filtering anisotropic
+        max_anisotropy 16
+      }
+    }
+  }
+}

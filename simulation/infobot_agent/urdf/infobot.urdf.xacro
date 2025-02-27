@@ -8,4 +8,6 @@
     <xacro:include filename="joints.xacro" />
     <xacro:include filename="sensors.xacro" />
     <xacro:include filename="infobot.gazebo.xacro"/>
+    <xacro:include filename="aruco.xacro"/>
+
 </robot>

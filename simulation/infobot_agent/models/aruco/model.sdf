@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="aruco_0">
+    <link name="aruco_link">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>4.0e-06</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>2.0e-06</iyy>
+          <iyz>0.0</iyz>
+          <izz>2.0e-06</izz>
+        </inertia>
+      </inertial>
+      <visual name="aruco_front_face">
+        <pose>0.00005 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.0001 0.5 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://aruco/materials/scripts</uri>
+            <uri>model://aruco/materials/textures</uri>
+            <name>aruco_0</name>
+          </script>
+        </material>
+      </visual>
+      <visual name="aruco_back_face">
+        <pose>-0.00005 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.0001 0.5 0.5</size>
+          </box>
+        </geometry>
+      </visual>
+      <collision name="collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.0001 0.5 0.5</size>
+          </box>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>

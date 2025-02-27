@@ -1,0 +1,16 @@
+
+material aruco_11
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture 11.png
+        filtering anisotropic
+        max_anisotropy 16
+      }
+    }
+  }
+}
