@@ -12,7 +12,7 @@ from simlan_custom_msg.action import SetSpeed
 
 class SetSpeedActionServer(Node):
     def __init__(self):
-        super().__init__('move_robot_action_server')
+        super().__init__('set_speed_action_server')
         self._action_server = ActionServer(
             self,
             SetSpeed,
