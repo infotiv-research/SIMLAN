@@ -1,0 +1,12 @@
+# Goal
+float32 angle
+float32 pallet_truck_speed
+simlan_custom_msg/CollisionType collision_type
+---
+# Result
+bool success
+string message
+---
+# Feedback
+string robot
+string feedback

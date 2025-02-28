@@ -19,73 +19,73 @@ class CollisionActionServer(Node):
             self.execute_callback)
         self.collision_point = (25.0, 34.0)
         self.jackal_speed = 1.0
-        self.infobot_speed = 1.0
+        self.pallet_truck_speed = 1.0
         self.experiment_time = 5.0
 
         # Distance from the base-link to the front of the robot
         # Should be half of the robot's length if the base-link is centered
-        self.infobot_front_distance = 1.9
+        self.pallet_truck_front_distance = 0.875
         self.jackal_front_distance = 0.255
 
-        self.infobot_back_distance = 1.5
+        self.pallet_truck_back_distance = 1.0
         self.jackal_back_distance = 0.255
 
         # Width of the robot, it is assumed the robot is symmetrical
         self.jackal_width = 0.44
-        self.infobot_width = 1.07
+        self.pallet_truck_width = 1.51
 
     async def execute_callback(self, goal_handle):
         self.get_logger().info('Received action goal')
         angle = goal_handle.request.angle  # Extract the angle parameter
-        infobot_speed = goal_handle.request.infobot_speed  # Extract the infobot_speed parameter
+        pallet_truck_speed = goal_handle.request.pallet_truck_speed  # Extract the pallet_truck_speed parameter
         collision_type = goal_handle.request.collision_type  # Extract the collision_type parameter
 
         # calculate what corner is colliding:
 
-        infobot_right = True
+        pallet_truck_right = True
         jackal_right = True
 
         # calculate travel distance
-        infobot_travel_distance = infobot_speed * self.experiment_time
+        pallet_truck_travel_distance = pallet_truck_speed * self.experiment_time
         jackal_travel_distance = self.jackal_speed * self.experiment_time
 
         if angle == 0:
-            if infobot_speed >= self.jackal_speed:
-                infobot_travel_distance += self.infobot_front_distance
+            if pallet_truck_speed >= self.jackal_speed:
+                pallet_truck_travel_distance += self.pallet_truck_front_distance
                 jackal_travel_distance -= self.jackal_back_distance
             else:
                 jackal_travel_distance += self.jackal_front_distance
-                infobot_travel_distance -= self.infobot_back_distance
+                pallet_truck_travel_distance -= self.pallet_truck_back_distance
         elif angle == 180:
-            infobot_travel_distance += self.infobot_front_distance
+            pallet_truck_travel_distance += self.pallet_truck_front_distance
             jackal_travel_distance += self.jackal_front_distance
 
         elif collision_type.collision_type == CollisionType.HEAD_ON:
-            infobot_travel_distance += self.infobot_front_distance
+            pallet_truck_travel_distance += self.pallet_truck_front_distance
             jackal_travel_distance += self.jackal_front_distance
-            infobot_right = True if 0 <= angle <= 180 else False
-            jackal_right = not infobot_right
-        elif collision_type.collision_type == CollisionType.INFOBOT_SIDE:
+            pallet_truck_right = True if 0 <= angle <= 180 else False
+            jackal_right = not pallet_truck_right
+        elif collision_type.collision_type == CollisionType.PALLET_TRUCK_SIDE:
             jackal_travel_distance += self.jackal_front_distance
-            infobot_right = True if 0 <= angle <= 180 else False
+            pallet_truck_right = True if 0 <= angle <= 180 else False
             jackal_right = True if 0 <= angle <= 90 or 180 <= angle <= 270 else False
         elif collision_type.collision_type == CollisionType.JACKAL_SIDE:
-            infobot_travel_distance += self.infobot_front_distance
+            pallet_truck_travel_distance += self.pallet_truck_front_distance
             jackal_right = True if 0 <= angle <= 180 else False
-            infobot_right = False if 0 <= angle <= 90 or 180 <= angle <= 270 else True
+            pallet_truck_right = False if 0 <= angle <= 90 or 180 <= angle <= 270 else True
 
         jackal_sideways = self.jackal_width / 2 if jackal_right else - self.jackal_width / 2
-        infobot_sideways = self.infobot_width / 2 if infobot_right else - self.infobot_width / 2
+        pallet_truck_sideways = self.pallet_truck_width / 2 if pallet_truck_right else - self.pallet_truck_width / 2
 
         if angle == 180:
-            jackal_sideways, infobot_sideways = (0, 0)
+            jackal_sideways, pallet_truck_sideways = (0, 0)
 
         angle = math.radians(angle)  # Convert the angle to radians
         angle += math.pi / 2  # Rotate the angle by 90 degrees
 
         # Compute the starting position of the robots
-        infobot_x = self.collision_point[0] - infobot_sideways
-        infobot_y = self.collision_point[1] - infobot_travel_distance
+        pallet_truck_x = self.collision_point[0] - pallet_truck_sideways
+        pallet_truck_y = self.collision_point[1] - pallet_truck_travel_distance
 
         jackal_x = self.collision_point[0] - jackal_travel_distance * math.cos(angle) - jackal_sideways * math.sin(angle)
         jackal_y = self.collision_point[1] - jackal_travel_distance * math.sin(angle) - jackal_sideways * math.cos(angle)
@@ -96,14 +96,14 @@ class CollisionActionServer(Node):
         # Teleport both robots
         await self.teleport_robot('jackal', jackal_x, jackal_y, 0.1, qx, qy, qz, qw)
 
-        await self.teleport_robot('infobot', infobot_x, infobot_y, 0.1, 0.0, 0.0, math.sqrt(2) / 2, math.sqrt(2) / 2)
+        await self.teleport_robot('pallet_truck', pallet_truck_x, pallet_truck_y, 0.1, 0.0, 0.0, math.sqrt(2) / 2, math.sqrt(2) / 2)
 
         # Set speed in parallel
         self.moved_jackal = False
-        self.moved_infobot = False
+        self.moved_pallet_truck = False
 
         await self.set_robot_speed('jackal', self.jackal_speed, 0.0, 0.0, 4 * self.experiment_time)
-        await self.set_robot_speed('infobot', infobot_speed, 0.0, 0.0, 4 * self.experiment_time)
+        await self.set_robot_speed('pallet_truck', pallet_truck_speed, 0.0, 0.0, 4 * self.experiment_time)
 
         # Temporary solution to wait for both robots to move
 
@@ -162,8 +162,8 @@ class CollisionActionServer(Node):
                 self.moved_jackal = True
                 # print message:
                 self.get_logger().info(message)
-            if robot_name == 'infobot':
-                self.moved_infobot = True
+            if robot_name == 'pallet_truck':
+                self.moved_pallet_truck = True
         else:
             self.get_logger().info(f'Failed to move {robot_name}')
 
