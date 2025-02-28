@@ -22,7 +22,7 @@ class GazeboTFBroadcaster(Node):
             10
         )
         self.robot1_name = 'jackal'
-        self.robot2_name = 'infobot'
+        self.robot2_name = 'pallet_truck'
 
     def model_states_callback(self, msg):
         if self.robot1_name in msg.name:
