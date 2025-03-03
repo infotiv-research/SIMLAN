@@ -17,11 +17,11 @@
 
     <xacro:property name="scan_px" value="0.0"/>
     <xacro:property name="scan_py" value="0.0"/>
-    <xacro:property name="scan_pz" value="${base_height+0.5}"/>
+    <xacro:property name="scan_pz" value="${base_height+2.5}"/>
 
     <xacro:property name="camera_px" value="${base_length/2}"/>
     <xacro:property name="camera_py" value="0.0"/>
-    <xacro:property name="camera_pz" value="${base_height}"/>
+    <xacro:property name="camera_pz" value="${base_height+1.6}"/>
 
     <xacro:property name="infobot_friction" value="0.1"/>
     <xacro:property name="infobot_slip" value="0.0"/>

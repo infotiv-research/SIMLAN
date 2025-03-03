@@ -41,10 +41,10 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time", default="true")
 
     # INITIAL_POSITION
-    x_pose = LaunchConfiguration("x_pose", default="36.0")
-    y_pose = LaunchConfiguration("y_pose", default="31.0")
+    x_pose = LaunchConfiguration("x_pose", default="0.0")
+    y_pose = LaunchConfiguration("y_pose", default="0.0")
     z_pose = LaunchConfiguration("z_pose", default="0.1")
-    yaw = LaunchConfiguration("yaw", default="3.14159265")
+    yaw = LaunchConfiguration("yaw", default="0")
 
     robot_state_publisher_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(

@@ -47,6 +47,9 @@ then
 elif [[ "$*" == *"pallet_truck_teleop"* ]]
 then
     ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/pallet_truck -r cmd_vel:=key_vel
+elif [[ "$*" == *"infobot_teleop"* ]]
+then
+    ros2 run teleop_twist_keyboard teleop_twist_keyboard
 elif [[ "$*" == *"ros_record"* ]]
 then
     ros2 bag record /cmd_vel
@@ -58,7 +61,7 @@ then
     ros2 bag play $LAST_ROSBAG_DIR
 elif [[ "$*" == *"slam"* ]]
 then
-    ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True
+    ros2 launch slam_toolbox online_sync_launch.py use_sim_time:=True
     # ros2 run nav2_map_server map_saver_cli -f maps/mapname
 elif [[ "$*" == *"commander"* ]]
 then
