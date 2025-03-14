@@ -63,25 +63,30 @@ class CollisionActionServer(Node):
             else:
                 jackal_travel_distance += self.jackal_front_distance
                 pallet_truck_travel_distance -= self.pallet_truck_back_distance
+            # self.get_logger().info("0 degree collision")
         elif angle == 180:
             pallet_truck_travel_distance += self.pallet_truck_front_distance
             jackal_travel_distance += self.jackal_front_distance
+            # self.get_logger().info("180 degree collision")
 
         elif collision_type.collision_type == CollisionType.HEAD_ON:
             pallet_truck_travel_distance += self.pallet_truck_front_distance
             jackal_travel_distance += self.jackal_front_distance
             pallet_truck_right = True if 0 <= angle <= 180 else False
             jackal_right = not pallet_truck_right
+            # self.get_logger().wa("Head on collision")
         elif collision_type.collision_type == CollisionType.PALLET_TRUCK_SIDE:
             jackal_travel_distance += self.jackal_front_distance
             pallet_truck_right = True if 0 <= angle <= 180 else False
             jackal_right = True if 0 <= angle <= 90 or 180 <= angle <= 270 else False
+            # self.get_logger().info("Pallet truck side collision")
         elif collision_type.collision_type == CollisionType.JACKAL_SIDE:
             pallet_truck_travel_distance += self.pallet_truck_front_distance
             jackal_right = True if 0 <= angle <= 180 else False
             pallet_truck_right = (
                 False if 0 <= angle <= 90 or 180 <= angle <= 270 else True
             )
+            # self.get_logger().info("Jackal side collision")
 
         jackal_sideways = (
             self.jackal_width / 2 if jackal_right else -self.jackal_width / 2
@@ -92,7 +97,7 @@ class CollisionActionServer(Node):
             else -self.pallet_truck_width / 2
         )
 
-        if angle == 180:
+        if angle == 0 or angle == 180:
             jackal_sideways, pallet_truck_sideways = (0, 0)
 
         angle = math.radians(angle)  # Convert the angle to radians

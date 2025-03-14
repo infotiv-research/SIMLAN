@@ -4,14 +4,41 @@ import osc.ros
 
 scenario collision:
     do serial:
-        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", 
-                    "{\"angle\": 0, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 0}}")
-
-        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", 
-                    "{\"angle\": 0, \"pallet_truck_speed\": 2.0, \"collision_type\": {\"collision_type\": 0}}")
-
-        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", 
+        # Frontal Collision
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
                     "{\"angle\": 180, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 0}}")
 
-        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision", 
-                    "{\"angle\": 180, \"pallet_truck_speed\": 2.0, \"collision_type\": {\"collision_type\": 0}}")
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 180, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 0}}")
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 180, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 0}}")
+
+        # Jackal catches up with forklift
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 0.25, \"collision_type\": {\"collision_type\": 0}}")
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 0}}")
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 0.75, \"collision_type\": {\"collision_type\": 0}}")
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 0.9, \"collision_type\": {\"collision_type\": 0}}")
+
+        # Forklift catches up with Jackal
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 1.1, \"collision_type\": {\"collision_type\": 0}}")
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 1.25, \"collision_type\": {\"collision_type\": 0}}")
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 0}}")
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 1.75, \"collision_type\": {\"collision_type\": 0}}")
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 0, \"pallet_truck_speed\": 2.0, \"collision_type\": {\"collision_type\": 0}}")
