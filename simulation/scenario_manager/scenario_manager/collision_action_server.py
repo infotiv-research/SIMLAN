@@ -21,8 +21,8 @@ class CollisionActionServer(Node):
         self.collision_point = (25.0, 34.0)
         self.jackal_speed = 1.0
         self.pallet_truck_speed = 1.0
-        self.experiment_time = 3.0
-        self.drive_time_multiplier = 2.0
+        self.experiment_time = 6.0
+        self.drive_time_multiplier = 3.0
         self.sleep_multiplier = self.drive_time_multiplier
 
         # Distance from the base-link to the front of the robot
