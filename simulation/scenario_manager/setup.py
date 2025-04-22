@@ -29,6 +29,7 @@ setup(
             "teleport_action_server = scenario_manager.teleport_action_server:main",
             "set_speed_action_server = scenario_manager.set_speed_action_server:main",
             "collision_action_server = scenario_manager.collision_action_server:main",
+            "ttc_service_server = scenario_manager.ttc_service_server:main",
             "ttc = scenario_manager.ttc:main",
             "safty_stop = scenario_manager.safty_stop:main",
         ],

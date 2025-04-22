@@ -16,6 +16,7 @@ find_package(geometry_msgs REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/CollisionType.msg"
   "msg/TTC.msg"
+  "srv/CalculateTTC.srv"
   "action/TeleportRobot.action"
   "action/SetSpeed.action"
   "action/Collision.action"
