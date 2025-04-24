@@ -11,9 +11,10 @@
         <link name="box_link">
           <visual name="visual">
             <geometry>
-              <box>
-                <size>.2 .2 .2</size>
-              </box>
+              <mesh>
+                <uri>../models/cube_actor/meshes/VOLVO_AVG.dae</uri>
+                <scale>1.00000 1.00000 1.00000</scale>
+              </mesh>
             </geometry>
           </visual>
         </link>
@@ -26,19 +27,19 @@
                 <pose>-1 -1 1 0 0 0</pose>
              </waypoint>
              <waypoint>
-                <time>1.0</time>
+                <time>0.1</time>
                 <pose>-1 1 1 0 0 0</pose>
              </waypoint>
              <waypoint>
                 <time>2.0</time>
-                <pose>1 1 1 0 0 0</pose>
+                <pose>1 1 1 0 0 1</pose>
              </waypoint>
              <waypoint>
                 <time>3.0</time>
                 <pose>1 -1 1 0 0 0</pose>
              </waypoint>
              <waypoint>
-                <time>4.0</time>
+                <time>10.0</time>
                 <pose>-1 -1 1 0 0 0</pose>
              </waypoint>
           </trajectory>
