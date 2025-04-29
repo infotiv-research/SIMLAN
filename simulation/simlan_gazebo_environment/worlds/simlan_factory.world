@@ -34,6 +34,10 @@
     <direction>0.1 0.1 -0.9</direction>
   </light>
 
+  <include>
+    <uri>model://volvo_AVG</uri>
+    <pose>-4 -4 0 0 0 0</pose>
+  </include>
 
     <include>
       <uri>model://factory</uri>
