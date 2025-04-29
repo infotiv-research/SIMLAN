@@ -3,6 +3,7 @@
 from gazebo_msgs.msg import ModelStates
 
 from geometry_msgs.msg import TransformStamped
+from simlan_custom_msg.msg import TTC
 
 import numpy as np
 
@@ -14,18 +15,17 @@ from tf2_ros import TransformBroadcaster
 
 class GazeboTFBroadcaster(Node):
     def __init__(self):
-        super().__init__('gazebo_tf_broadcaster')
+        super().__init__("gazebo_tf_broadcaster")
         self.subscription = self.create_subscription(
-            ModelStates,
-            '/gazebo/model_states',
-            self.model_states_callback,
-            10
+            ModelStates, "/gazebo/model_states", self.model_states_callback, 10
         )
-        self.robot1_name = 'jackal'
-        self.robot2_name = 'pallet_truck'
+        # create a publisher for the ttc topic
+        self.publisher = self.create_publisher(TTC, "/scenario_manager/ttc", 10)
+        self.robot1_name = "jackal"
+        self.robot2_name = "pallet_truck"
 
     def model_states_callback(self, msg):
-        if self.robot1_name in msg.name:
+        if self.robot1_name in msg.name and self.robot2_name in msg.name:
             idx1 = msg.name.index(self.robot1_name)
             pose1 = msg.pose[idx1]
             twist1 = msg.twist[idx1]  # Get the velocity data
@@ -43,15 +43,23 @@ class GazeboTFBroadcaster(Node):
             relative_velocity = velocity2 - velocity1
 
             # calculate the time to collision
-            ttc = - np.dot(relative_position, relative_velocity) / np.dot(relative_velocity, relative_velocity)
+            ttc = -np.dot(relative_position, relative_velocity) / np.dot(
+                relative_velocity, relative_velocity
+            )
 
             # calculate closest point of approach
             cpa = relative_position + ttc * relative_velocity
             cpa = np.linalg.norm(cpa)
 
             # log the ttc and cpa
-            self.get_logger().info('Time to collision: {}'.format(ttc))
-            self.get_logger().info('Closest point of approach: {}'.format(cpa))
+            self.get_logger().info("Time to collision: {}".format(ttc))
+            self.get_logger().info("Closest point of approach: {}".format(cpa))
+
+            # publish the ttc and cpa
+            ttc_msg = TTC()
+            ttc_msg.ttc = ttc
+            ttc_msg.cpa = cpa
+            self.publisher.publish(ttc_msg)
 
 
 def main(args=None):
@@ -61,5 +69,5 @@ def main(args=None):
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
