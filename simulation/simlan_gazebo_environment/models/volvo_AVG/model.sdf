@@ -36,16 +36,92 @@
         <script>
           <loop>true</loop>
           <auto_start>true</auto_start>
-           <trajectory id="0" type="walking">
-        <waypoint>
-          <time>0.000000</time>
-          <pose>-4.000000 -4.000000 0.100000 0.000000 0.000000 0.000000</pose>
-        </waypoint>
-        <waypoint>
-          <time>1.000000</time>
-          <pose>-8.000000 -8.000000 0.100000 0.000000 0.000000 0.000000</pose>
-        </waypoint>
-      </trajectory>
+<trajectory id="21" type="square">
+<waypoint>
+<time>1</time>
+<pose>
+41.075 7.175000000000002 0.0 0.0 0.0 -0.6230424439220764
+</pose>
+</waypoint>
+<waypoint>
+<time>2</time>
+<pose>
+41.07514004672257 7.174825240697602 0.0 0.0 0.0 -1.693514002544641
+</pose>
+</waypoint>
+<waypoint>
+<time>3</time>
+<pose>
+41.07807148089418 7.1701294310503325 0.0 0.0 0.0 -2.4679746648964134
+</pose>
+</waypoint>
+<waypoint>
+<time>4</time>
+<pose>
+41.0457807699712 7.167308439780814 0.0 0.0 0.0 -3.1715388830545588
+</pose>
+</waypoint>
+<waypoint>
+<time>5</time>
+<pose>
+40.9172606070901 7.158242442742318 0.0 0.0 0.0 -3.0146353046581726
+</pose>
+</waypoint>
+<waypoint>
+<time>6</time>
+<pose>
+40.72948537525686 7.121471360058957 0.0 0.0 0.0 -2.9305491337477485
+</pose>
+</waypoint>
+<waypoint>
+<time>7</time>
+<pose>
+40.54833263903376 7.078719604940097 0.0 0.0 0.0 -3.4542949170006576
+</pose>
+</waypoint>
+<waypoint>
+<time>8</time>
+<pose>
+40.38255331855238 7.040947091939428 0.0 0.0 0.0 -1.3879614019790365
+</pose>
+</waypoint>
+<waypoint>
+<time>9</time>
+<pose>
+40.19142117521032 7.022943850209677 0.0 0.0 0.0 2.0550126666526043
+</pose>
+</waypoint>
+<waypoint>
+<time>10</time>
+<pose>
+39.946112939118294 7.048475289124784 0.0 0.0 0.0 1.9774531206079153
+</pose>
+</waypoint>
+<waypoint>
+<time>11</time>
+<pose>
+39.701504472364846 7.072129731672381 0.0 0.0 0.0 -1.4904829950181384
+</pose>
+</waypoint>
+<waypoint>
+<time>12</time>
+<pose>
+39.46401633813623 7.046340149897603 0.0 0.0 0.0 -3.494021992317664
+</pose>
+</waypoint>
+<waypoint>
+<time>13</time>
+<pose>
+39.23475937212514 6.956944045737854 0.0 0.0 0.0 -2.939931879622229
+</pose>
+</waypoint>
+<waypoint>
+<time>14</time>
+<pose>
+38.98211002517485 6.950401908851983 0.0 0.0 0.0 -3.5293321658395547
+</pose>
+</waypoint>
+</trajectory>
         </script>
       </actor>
 </sdf>
