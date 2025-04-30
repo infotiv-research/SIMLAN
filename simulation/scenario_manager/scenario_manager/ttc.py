@@ -3,7 +3,6 @@
 from gazebo_msgs.msg import ModelStates
 
 from geometry_msgs.msg import TransformStamped
-from simlan_custom_msg.msg import TTC
 
 import numpy as np
 
@@ -19,13 +18,11 @@ class GazeboTFBroadcaster(Node):
         self.subscription = self.create_subscription(
             ModelStates, "/gazebo/model_states", self.model_states_callback, 10
         )
-        # create a publisher for the ttc topic
-        self.publisher = self.create_publisher(TTC, "/scenario_manager/ttc", 10)
         self.robot1_name = "jackal"
-        self.robot2_name = "pallet_truck"
+        self.robot2_name = "infobot"
 
     def model_states_callback(self, msg):
-        if self.robot1_name in msg.name and self.robot2_name in msg.name:
+        if self.robot1_name in msg.name:
             idx1 = msg.name.index(self.robot1_name)
             pose1 = msg.pose[idx1]
             twist1 = msg.twist[idx1]  # Get the velocity data
@@ -54,12 +51,6 @@ class GazeboTFBroadcaster(Node):
             # log the ttc and cpa
             self.get_logger().info("Time to collision: {}".format(ttc))
             self.get_logger().info("Closest point of approach: {}".format(cpa))
-
-            # publish the ttc and cpa
-            ttc_msg = TTC()
-            ttc_msg.ttc = ttc
-            ttc_msg.cpa = cpa
-            self.publisher.publish(ttc_msg)
 
 
 def main(args=None):

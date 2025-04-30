@@ -83,6 +83,7 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN rosdep init || echo "rosdep already initialized"
 
 RUN mkdir -p /opt/dependencies_ws/src
+RUN mkdir -p /opt/gazebo_plugins
 # Build ROS 2 source dependencies
 
 # cd /opt/dependencies_ws
@@ -95,6 +96,11 @@ RUN apt-get update && \
     rm -rf /var/likb/apt/lists/*
 #  building depoendencies
 RUN . /opt/ros/humble/setup.sh && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release
+
+WORKDIR /opt/gazebo_plugins
+COPY collect_gazebo_plugins.sh /opt/gazebo_plugins/collect_gazebo_plugins.sh
+
+RUN ./collect_gazebo_plugins.sh
 
 WORKDIR /home/ros/src/
 
@@ -112,7 +118,7 @@ RUN echo "source home/ros/src/install/setup.bash" >> /home/ros/.bashrc
 RUN echo "source /opt/dependencies_ws/install/setup.bash" >> /home/ros/.bashrc
 
 COPY . /home/ros/src/
+
 RUN chown -R ros:ros  /home/ros/src/
 
 USER ros
-
