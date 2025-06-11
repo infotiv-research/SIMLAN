@@ -1,0 +1,1395 @@
+<?xml version='1.0' encoding='ASCII'?>
+<sdf version="1.8">
+    <world name="default">
+    <gravity>0 0 -9.8</gravity>
+    <physics type='ode'>
+  <max_step_size>0.01</max_step_size>           <!-- 10 ms per step -->
+  <real_time_update_rate>100</real_time_update_rate> <!-- 100 steps/sec -->
+  <real_time_factor>1</real_time_factor>        <!-- real-time sim -->
+  <max_contacts>10</max_contacts>
+</physics>
+
+    <plugin
+        filename="gz-sim-physics-system"
+        name="gz::sim::systems::Physics">
+    </plugin>
+
+    <plugin
+        filename="gz-sim-user-commands-system"
+        name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <plugin
+        filename="gz-sim-scene-broadcaster-system"
+        name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <plugin
+        filename="gz-sim-sensors-system"
+        name="gz::sim::systems::Sensors">
+    <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <plugin
+        filename="gz-sim-imu-system"
+        name="gz::sim::systems::Imu">
+    </plugin>
+
+
+<!-- ******************** Scene & Sun ******************** -->
+    <scene>
+      <ambient>1 1 1 1</ambient>
+      <background>0.3 0.7 0.9 1</background>
+      <shadows>0</shadows>
+      <grid>false</grid>
+    </scene>
+
+    <light type="directional" name="sun">
+        <cast_shadows>false</cast_shadows>
+        <pose>0 0 10 0 0 0</pose>
+        <diffuse>0.8 0.8 0.8 1</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+        <attenuation>
+            <range>1000</range>
+            <constant>0.9</constant>
+            <linear>0.01</linear>
+            <quadratic>0.001</quadratic>
+        </attenuation>
+        <direction>0.1 0.1 -0.9</direction>
+    </light>
+
+
+<!-- ******************** Ground ******************** -->
+    <include>
+        <uri>model://ground_collision</uri>
+    </include>
+
+    <include>
+        <uri>model://ground_visual</uri>
+    </include>
+
+
+<!-- ******************** Factory ******************** -->
+    <include>
+        <uri>model://factory</uri>
+        <pose>0 0 0 0 0 0</pose>
+    </include>
+
+
+<!-- ******************** Shelves 1 ******************** -->
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_2</name>
+      <pose>-27 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_3</name>
+      <pose>-24 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_4</name>
+      <pose>-21 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_5</name>
+      <pose>-18 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_6</name>
+      <pose>-15 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_7</name>
+      <pose>-12 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_8</name>
+      <pose>-9 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_9</name>
+      <pose>-6 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_10</name>
+      <pose>-3 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_11</name>
+      <pose>0 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_12</name>
+      <pose>3 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_13</name>
+      <pose>6 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_14</name>
+      <pose>9 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_15</name>
+      <pose>12 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_16</name>
+      <pose>15 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_17</name>
+      <pose>18 -2  0.001 0 0 0</pose>
+    </include>
+
+    <!-- FORKLIFT ALLEY
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_18</name>
+      <pose>21 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_19</name>
+      <pose>24 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_20</name>
+      <pose>27 -2  0.001 0 0 0</pose>
+    </include> -->
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_21</name>
+      <pose>30 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_22</name>
+      <pose>33 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_23</name>
+      <pose>36 -2  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_24</name>
+      <pose>39 -2  0.001 0 0 0</pose>
+    </include>
+
+
+<!-- ******************** Shelves 2 ******************** -->
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_2</name>
+      <pose>-27 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_3</name>
+      <pose>-24 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_4</name>
+      <pose>-21 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_5</name>
+      <pose>-18 4  0.001 0 0 0</pose>
+    </include>
+
+    <!-- PICKUP POINT
+    <include>
+        <static>1</static>
+        <uri>model://shelf</uri>
+        <name>shelf_wall_2_6</name>
+        <pose>-15 4  0.001 0 0 0</pose>
+    </include> -->
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_7</name>
+      <pose>-12 4  0.001 0 0 0</pose>
+    </include>
+
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_8</name>
+      <pose>-9 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_9</name>
+      <pose>-6 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_10</name>
+      <pose>-3 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_11</name>
+      <pose>0 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_12</name>
+      <pose>3 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_13</name>
+      <pose>6 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_14</name>
+      <pose>9 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_15</name>
+      <pose>12 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_16</name>
+      <pose>15 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_17</name>
+      <pose>18 4  0.001 0 0 0</pose>
+    </include>
+
+    <!-- FORKLIFT ALLEY
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_18</name>
+      <pose>21 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_19</name>
+      <pose>24 4  0.001 0 0 0</pose>
+    </include> -->
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_20</name>
+      <pose>27 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_21</name>
+      <pose>30 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_22</name>
+      <pose>33 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_23</name>
+      <pose>36 4  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_24</name>
+      <pose>39 4  0.001 0 0 0</pose>
+    </include>
+
+
+<!-- ******************** Shelves 3 ******************** -->
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_2</name>
+      <pose>-27 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_3</name>
+      <pose>-24 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_4</name>
+      <pose>-21 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_5</name>
+      <pose>-18 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_6</name>
+      <pose>-15 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_7</name>
+      <pose>-12 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_8</name>
+      <pose>-9 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_9</name>
+      <pose>-6 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_10</name>
+      <pose>-3 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_11</name>
+      <pose>0 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_12</name>
+      <pose>3 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_13</name>
+      <pose>6 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_14</name>
+      <pose>9 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_15</name>
+      <pose>12 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_16</name>
+      <pose>15 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_17</name>
+      <pose>18 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <!-- FORKLIFT ALLEY
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_18</name>
+      <pose>21 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_19</name>
+      <pose>24 7.5  0.001 0 0 0</pose>
+    </include> -->
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_20</name>
+      <pose>27 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <!-- DROP OFF POINT
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_21</name>
+      <pose>30 7.5  0.001 0 0 0</pose>
+    </include> -->
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_22</name>
+      <pose>33 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_23</name>
+      <pose>36 7.5  0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_24</name>
+      <pose>39 7.5  0.001 0 0 0</pose>
+    </include>
+
+
+<!-- ******************** eur_pallet ******************** -->
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_group_pickup</name>
+      <pose>-15 4 0.001 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_group_dropoff</name>
+      <pose>31 8 0.001 0 -0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n1</name>
+      <pose>35 26 0.1 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n2</name>
+      <pose>35 26 0.25 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n3</name>
+      <pose>35 26 0.4 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n4</name>
+      <pose>35 26 0.55 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n5</name>
+      <pose>35 26 0.7 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n6</name>
+      <pose>35 26 0.85 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n7</name>
+      <pose>35 26 1.0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n8</name>
+      <pose>35 26 1.15 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n9</name>
+      <pose>35 26 1.3 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n10</name>
+      <pose>35 26 1.45 0 0 0</pose>
+    </include>
+
+
+<!-- ******************** Objects for data collection ******************** -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>box_move</name>
+      <pose>35 20 0.4 0 0 0</pose>
+    </include>
+
+    <include>
+      <static>1</static>
+      <uri>model://support_pole</uri>
+      <name>support_pole_move</name>
+      <pose>35 3 0.001 0 0 0</pose>
+    </include>
+
+<!--
+
+<!-- ******************** BOXES 1 ROW ******************** -->
+
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n1_br</name>
+      <pose>0.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n1_tr</name>
+      <pose>0.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n1_bl</name>
+      <pose>1.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n1_tl</name>
+      <pose>1.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n2_br</name>
+      <pose>3.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n2_tr</name>
+      <pose>3.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n2_bl</name>
+      <pose>4.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n2_tl</name>
+      <pose>4.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n3_br</name>
+      <pose>6.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n3_tr</name>
+      <pose>6.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n3_bl</name>
+      <pose>7.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n3_tl</name>
+      <pose>7.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n4_br</name>
+      <pose>9.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n4_tr</name>
+      <pose>9.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n4_bl</name>
+      <pose>10.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n4_tl</name>
+      <pose>10.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n5_br</name>
+      <pose>12.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n5_tr</name>
+      <pose>12.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n5_bl</name>
+      <pose>13.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n5_tl</name>
+      <pose>13.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n6_br</name>
+      <pose>15.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n6_tr</name>
+      <pose>15.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n6_bl</name>
+      <pose>16.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n6_tl</name>
+      <pose>16.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n7_br</name>
+      <pose>18.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n7_tr</name>
+      <pose>18.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n7_bl</name>
+      <pose>19.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r1_n7_tl</name>
+      <pose>19.5 -1.1 1.4 0 0 0</pose>
+    </include>
+    <!-- NEWBOX -->
+
+
+<!-- ******************** BOXES 2 ROW ******************** -->
+
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n1_br</name>
+      <pose>0.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n1_tr</name>
+      <pose>0.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n1_bl</name>
+      <pose>1.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n1_tl</name>
+      <pose>1.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n2_br</name>
+      <pose>3.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n2_tr</name>
+      <pose>3.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n2_bl</name>
+      <pose>4.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n2_tl</name>
+      <pose>4.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n3_br</name>
+      <pose>6.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n3_tr</name>
+      <pose>6.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n3_bl</name>
+      <pose>7.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n3_tl</name>
+      <pose>7.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n4_br</name>
+      <pose>9.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n4_tr</name>
+      <pose>9.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n4_bl</name>
+      <pose>10.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n4_tl</name>
+      <pose>10.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n5_br</name>
+      <pose>12.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n5_tr</name>
+      <pose>12.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n5_bl</name>
+      <pose>13.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n5_tl</name>
+      <pose>13.5 4.8 1.4 0 0 0</pose>
+      </include>
+    <!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n6_br</name>
+      <pose>15.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n6_tr</name>
+      <pose>15.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n6_bl</name>
+      <pose>16.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n6_tl</name>
+      <pose>16.5 4.8 1.4 0 0 0</pose>
+    </include>
+    <!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n7_br</name>
+      <pose>18.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n7_tr</name>
+      <pose>18.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n7_bl</name>
+      <pose>19.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r2_n7_tl</name>
+      <pose>19.5 4.8 1.4 0 0 0</pose>
+    </include>
+    <!-- NEWBOX -->
+
+    <!-- ******************** BOXES 3 ROW ******************** -->
+
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n1_br</name>
+      <pose>0.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n1_tr</name>
+      <pose>0.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n1_bl</name>
+      <pose>1.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n1_tl</name>
+      <pose>1.5 8.3 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n2_br</name>
+      <pose>3.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n2_tr</name>
+      <pose>3.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n2_bl</name>
+      <pose>4.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n2_tl</name>
+      <pose>4.5 8.3 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n3_br</name>
+      <pose>6.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n3_tr</name>
+      <pose>6.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n3_bl</name>
+      <pose>7.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n3_tl</name>
+      <pose>7.5 8.3 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n4_br</name>
+      <pose>9.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n4_tr</name>
+      <pose>9.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n4_bl</name>
+      <pose>10.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n4_tl</name>
+      <pose>10.5 8.3 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n5_br</name>
+      <pose>12.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n5_tr</name>
+      <pose>12.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n5_bl</name>
+      <pose>13.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n5_tl</name>
+      <pose>13.5 8.3 1.4 0 0 0</pose>
+      </include>
+    <!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n6_br</name>
+      <pose>15.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n6_tr</name>
+      <pose>15.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n6_bl</name>
+      <pose>16.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n6_tl</name>
+      <pose>16.5 8.3 1.4 0 0 0</pose>
+    </include>
+    <!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n7_br</name>
+      <pose>18.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n7_tr</name>
+      <pose>18.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n7_bl</name>
+      <pose>19.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r3_n7_tl</name>
+      <pose>19.5 8.3 1.4 0 0 0</pose>
+    </include>
+    <!-- NEWBOX -->
+
+    <!-- ******************** BOXES 4 ROW ******************** -->
+
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n1_br</name>
+      <pose>30.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n1_tr</name>
+      <pose>30.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n1_bl</name>
+      <pose>31.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n1_tl</name>
+      <pose>31.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n2_br</name>
+      <pose>33.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n2_tr</name>
+      <pose>33.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n2_bl</name>
+      <pose>34.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n2_tl</name>
+      <pose>34.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n3_br</name>
+      <pose>36.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n3_tr</name>
+      <pose>36.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n3_bl</name>
+      <pose>37.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n3_tl</name>
+      <pose>37.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n4_br</name>
+      <pose>39.2 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n4_tr</name>
+      <pose>39.2 -1.1 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n4_bl</name>
+      <pose>40.5 -1.1 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r4_n4_tl</name>
+      <pose>40.5 -1.1 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+        <!-- ******************** BOXES 5 ROW ******************** -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n1_br</name>
+      <pose>27.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n1_tr</name>
+      <pose>27.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n1_bl</name>
+      <pose>28.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n1_tl</name>
+      <pose>28.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n2_br</name>
+      <pose>30.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n2_tr</name>
+      <pose>30.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n2_bl</name>
+      <pose>31.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n2_tl</name>
+      <pose>31.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n3_br</name>
+      <pose>33.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n3_tr</name>
+      <pose>33.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n3_bl</name>
+      <pose>34.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n3_tl</name>
+      <pose>34.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n4_br</name>
+      <pose>36.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n4_tr</name>
+      <pose>36.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n4_bl</name>
+      <pose>37.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n4_tl</name>
+      <pose>37.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n5_br</name>
+      <pose>39.2 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n5_tr</name>
+      <pose>39.2 4.8 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n5_bl</name>
+      <pose>40.5 4.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r5_n5_tl</name>
+      <pose>40.5 4.8 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+       <!-- ******************** BOXES 6 ROW ******************** -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n1_br</name>
+      <pose>27.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n1_tr</name>
+      <pose>27.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n1_bl</name>
+      <pose>28.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n1_tl</name>
+      <pose>28.5 8.3 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n3_br</name>
+      <pose>33.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n3_tr</name>
+      <pose>33.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n3_bl</name>
+      <pose>34.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n3_tl</name>
+      <pose>34.5 8.3 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n4_br</name>
+      <pose>36.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n4_tr</name>
+      <pose>36.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n4_bl</name>
+      <pose>37.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n4_tl</name>
+      <pose>37.5 8.3 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n5_br</name>
+      <pose>39.2 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n5_tr</name>
+      <pose>39.2 8.3 1.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n5_bl</name>
+      <pose>40.5 8.3 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://box_1185x785x1010</uri>
+      <name>shelf_box_r6_n5_tl</name>
+      <pose>40.5 8.3 1.4 0 0 0</pose>
+    </include>
+<!-- NEWBOX -->
+-->
+
+  </world>
+</sdf>

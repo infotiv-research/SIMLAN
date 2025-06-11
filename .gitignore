@@ -47,3 +47,6 @@ gazebo_ros2_control/
 rcl/
 wireless/
 rosbag*
+ROS_DOMAIN_ID.txt
+*.pdf
+*.gv

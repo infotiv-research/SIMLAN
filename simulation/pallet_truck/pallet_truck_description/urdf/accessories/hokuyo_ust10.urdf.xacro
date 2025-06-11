@@ -16,11 +16,11 @@
 
       <gazebo reference="${frame}">
         <turnGravityOff>true</turnGravityOff>
-        <sensor type="ray" name="${frame}">
+        <sensor type="gpu_lidar" name="${frame}">
           <pose>0 0 0 0 0 0</pose>
           <visualize>false</visualize>
           <update_rate>${update_rate}</update_rate>
-          <ray>
+          <lidar>
             <scan>
               <horizontal>
                 <samples>${sample_size}</samples>
@@ -39,15 +39,9 @@
               <mean>0.0</mean>
               <stddev>0.001</stddev>
             </noise>
-          </ray>
-          <plugin name="gazebo_ros_laser" filename="libgazebo_ros_ray_sensor.so">
-            <ros>
-              <namespace>${robot_namespace}</namespace>
-              <remapping>~/out:=${topic}</remapping>
-            </ros>
-            <output_type>sensor_msgs/LaserScan</output_type>
-            <frame_name>${frame}</frame_name>
-          </plugin>
+          </lidar>
+          <topic>scan</topic>
+          <gz_frame_id>${frame}</gz_frame_id>
         </sensor>
       </gazebo>
     </xacro:macro>

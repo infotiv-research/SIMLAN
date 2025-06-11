@@ -29,6 +29,8 @@ def generate_launch_description():
     # Set the path to the SDF model files.
     gazebo_models_path = os.path.join(pkg_pallet_truck_description, "meshes")
     os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
+    os.environ["GZ_SIM_RESOURCE_PATH"] = gazebo_models_path
+    os.environ["IGN_GAZEBO_RESOURCE_PATH"] = gazebo_models_path
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -84,11 +86,11 @@ def generate_launch_description():
 
     # Spawn robot
     spawn_robot = Node(
-        package="gazebo_ros",
-        executable="spawn_entity.py",
+        package="ros_gz_sim",
+        executable="create",
         name="spawn_pallet_truck",
         arguments=[
-            "-entity",
+            "-name",
             "pallet_truck",
             "-x",
             "10.0",

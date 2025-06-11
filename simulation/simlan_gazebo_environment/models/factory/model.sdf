@@ -1,22 +1,25 @@
-<?xml version='1.0'?>
-<sdf version='1.7'>
-  <model name='factory'>
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <model name="factory">
     <static>true</static>
     <link name="building">
       <visual name="visual">
         <geometry>
-            <mesh>
-                <uri>meshes/factory_with_entrence.dae</uri>
-            </mesh>
+          <mesh>
+            <uri>model://factory/meshes/factory_with_entrence.dae</uri>
+          </mesh>
         </geometry>
       </visual>
       <collision name="collision">
         <geometry>
-            <mesh>
-                <uri>meshes/factory_with_entrence.dae</uri>
-            </mesh>
+          <mesh>
+            <uri>model://factory/meshes/factory_with_entrence.dae</uri>
+          </mesh>
         </geometry>
       </collision>
+      <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+        <label>2</label>
+      </plugin>
     </link>
   </model>
 </sdf>

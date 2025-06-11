@@ -27,18 +27,19 @@ def generate_launch_description():
     )
 
     spawn_entity = Node(
-        package="gazebo_ros",
-        executable="spawn_entity.py",
+        package="ros_gz_sim",
+        executable="create",
         namespace="static_agents",
         arguments=[
             "-topic",
             "robot_description",
             "-robot_namespace",
             "static_agents",
-            "-entity",
+            "-name",
             "cameras",
         ],
         output="screen",
     )
+    # /static_agents/camera_164/image_raw
 
     return LaunchDescription([node_robot_state_publisher, spawn_entity])

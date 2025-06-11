@@ -9,7 +9,7 @@ The Turtlebot3 robot project belongs to [robotis.com](http://turtlebot3.robotis.
 - [Will Son](willson@robotis.com)
 - Ryan Shim
 
-In October 2023, [Hamid Ebadi](hamid.ebadi@gmail.com) renamed the [package owner information and name](package.xml) for turtlebot3 projects to avoid dependency issues any nam ing confusion with the original packages and created independent packages for activities within the research project.
+In October 2023, [Hamid Ebadi](hamid.ebadi@gmail.com) renamed the [package owner information and name](package.xml) for turtlebot3 projects to avoid dependency issues any naming confusion with the original packages and created independent packages for activities within the research project.
 
 We also got inspired and used the skeleton code from these open source project and courses:
 
@@ -25,23 +25,44 @@ We also got inspired and used the skeleton code from these open source project a
 ## Resources
 
 - [Gazebo official video playlist](https://www.youtube.com/watch?v=48TX-XJ14Gs&list=PL6FI-gIL5jiEd4Hv-NIAuO2Cbbs27UpAM&index=1)
+
 - [Getting Ready to Build Robots with ROS](https://www.youtube.com/watch?v=2lIV3dRvHmQ&list=PLunhqkrRNRhYYCaSTVP-qJnyUPkTxJnBt)
+
 - [Udemy course on ROS2 and Gazebo](https://www.udemy.com/course/ros2-tf-urdf-rviz-gazebo)
+
 - [classcentral course](https://www.classcentral.com/course/youtube-simulating-robots-with-gazebo-and-ros-getting-ready-to-build-robots-with-ros-8-153333)
+
 - [theconstructsim course](https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/mastering-gazebo-simulator-online-course/)
+
 - [Articulated Robotics](https://articulatedrobotics.xyz/)
+
 - [ROS URDF](http://wiki.ros.org/urdf/XML)
+
 - [FoxGlove studio (rviz alternative)](https://studio.foxglove.dev)
+
 - [ROS2 Tutorials](https://docs.ros.org/en/humble/Tutorials.html)
+
 - [aws-robomaker](https://github.com/aws-robotics/aws-robomaker-small-warehouse-world)
+
 - [model for factory](https://app.gazebosim.org/OpenRobotics/fuel/models/Mecanum%20lift)
+
 - [Tugbot in Warehouse](https://app.gazebosim.org/Kavya/fuel/worlds/Tugbot%20in%20Warehouse)
+
 - [logistics in warehouse](https://github.com/belal-ibrahim/dynamic_logistics_warehouse)
+
 - [aws-robomaker](https://aws.amazon.com/blogs/robotics/fleet-and-multi-robot-simulations-in-aws-robomaker)
+
 - [gazebo_worlds](https://dev.px4.io/v1.11_noredirect/en/simulation/gazebo_worlds.html#warehouse)
+
 - [warehouse](https://app.gazebosim.org/MovAi)
+
 - [forklift](https://github.com/renan028/forklift_robot)
+
 - [Docker install guide](https://docs.docker.com/engine/install/)
+
+- [Hazard stripes taken from Tugbot warehouse](https://app.gazebosim.org/MovAi/fuel/worlds/tugbot_warehouse)
+
+- [Deadlock image](https://www.cs.fsu.edu/~liux/courses/cop5611/notes/deadlock.html)
 
 Other solutions:
 

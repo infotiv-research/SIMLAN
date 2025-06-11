@@ -7,9 +7,9 @@ To reproduce
 ```
 git checkout ....
 # In three separate terminals:
-./start.sh clean ; ./start.sh build ; ./start.sh sim
-./start.sh move_object
-./start.sh camera_dump
+./control.sh clean ; ./control.sh build ; ./control.sh sim
+./control.sh move_object
+./control.sh camera_dump
 ```
 
 ## Random, In Distribution Objects Movement (normal mode)
@@ -40,6 +40,6 @@ Data collection from cameras according to [requirements](resources/20240610-req.
 - Annotation: Position and rotation of the forklift. Annotation in filename.
 - 256x256 RGB non compression
 
-./start.sh sim
-./start.sh move_object
-./start.sh camera_dump
+./control.sh sim
+./control.sh move_object
+./control.sh camera_dump

@@ -14,15 +14,12 @@ from tf2_ros import TransformBroadcaster
 
 class GazeboTFBroadcaster(Node):
     def __init__(self):
-        super().__init__('gazebo_tf_broadcaster')
+        super().__init__("gazebo_tf_broadcaster")
         self.subscription = self.create_subscription(
-            ModelStates,
-            '/gazebo/model_states',
-            self.model_states_callback,
-            10
+            ModelStates, "/gazebo/model_states", self.model_states_callback, 10
         )
-        self.robot1_name = 'jackal'
-        self.robot2_name = 'pallet_truck'
+        self.robot1_name = "jackal"
+        self.robot2_name = "pallet_truck"
 
     def model_states_callback(self, msg):
         if self.robot1_name in msg.name:
@@ -43,15 +40,17 @@ class GazeboTFBroadcaster(Node):
             relative_velocity = velocity2 - velocity1
 
             # calculate the time to collision
-            ttc = - np.dot(relative_position, relative_velocity) / np.dot(relative_velocity, relative_velocity)
+            ttc = -np.dot(relative_position, relative_velocity) / np.dot(
+                relative_velocity, relative_velocity
+            )
 
             # calculate closest point of approach
             cpa = relative_position + ttc * relative_velocity
             cpa = np.linalg.norm(cpa)
 
             # log the ttc and cpa
-            self.get_logger().info('Time to collision: {}'.format(ttc))
-            self.get_logger().info('Closest point of approach: {}'.format(cpa))
+            self.get_logger().info("Time to collision: {}".format(ttc))
+            self.get_logger().info("Closest point of approach: {}".format(cpa))
 
 
 def main(args=None):
@@ -61,5 +60,5 @@ def main(args=None):
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

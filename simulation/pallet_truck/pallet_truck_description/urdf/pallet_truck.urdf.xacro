@@ -27,6 +27,10 @@
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
 
+  <xacro:include filename="$(find pallet_truck_description)/urdf/aruco.xacro"/>
+
+  <xacro:include filename="$(find pallet_truck_description)/urdf/pallet_truck.gazebo" />
+
   <xacro:macro name="wheel" params="wheel_prefix *joint_pose">
 
     <link name="${wheel_prefix}_wheel_link">
@@ -96,7 +100,25 @@
     <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
 
+  <joint name="scan_joint" type="fixed">
+    <origin xyz="0 0 1.5" rpy="0 0 0"/>
+    <parent link="$(arg prefix)_base_link"/>
+    <child link="$(arg prefix)_scan_link"/>
+  </joint>
+
+
+  <!-- LIDAR -->
+  <link name="$(arg prefix)_scan_link">
+      <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
   <link name="$(arg prefix)_base_link"></link>
+
 
   <joint name="$(arg prefix)_base_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
@@ -108,14 +130,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="1 1 1" />
+        <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="0.6 0.6 0.6" />
       </geometry>
-      <material name="dark_grey" />
+        <material name="black" />
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="1 1 1" />
+        <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="0.6 0.6 0.6" />
       </geometry>
     </collision>
     <!--
@@ -197,7 +219,7 @@
   <ros2_control name="pallet_truck_hardware" type="system">
     <hardware>
       <xacro:if value="$(arg is_sim)">
-        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </xacro:if>
       <xacro:unless value="$(arg is_sim)">
         <plugin>pallet_truck_hardware/pallet_truckHardware</plugin>
@@ -228,7 +250,6 @@
 
   <!-- Bring in simulation data for Gazebo. -->
   <!-- <xacro:if value="$(arg is_sim)"> -->
-  <xacro:include filename="$(find pallet_truck_description)/urdf/pallet_truck.gazebo" />
   <!-- </xacro:if> -->
 
   <!-- Optional standard accessories, including their simulation data. The rendering
@@ -239,6 +260,7 @@
   <!-- Optional custom includes. -->
   <!--<xacro:include filename="$(optenv pallet_truck_URDF_EXTRAS empty.urdf)" />-->
 
-<xacro:include filename="$(find pallet_truck_description)/urdf/aruco.xacro"/>
+
+
 
 </robot>

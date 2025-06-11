@@ -7,45 +7,41 @@
 
         <link name="aruco_${number}_link">
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
                 <geometry>
-                    <box size="0.5 0.5 .001"/>
+                    <box size="0.5 0.5 .001" comment="THE ACTUAL SIZE OF ARUCO"/>
                 </geometry>
             </visual>
         </link>
 
 
         <joint name="aruco_${number}_joint" type="fixed">
-            <origin xyz="-1.35 0 2.15" rpy="0 0 0"/>
+            <origin xyz="-0.8 0 1.30" rpy="0 0 0"/>
             <parent link="pallet_truck_base_link"/>
             <child link="aruco_${number}_link"/>
+
+
         </joint>
 
         <gazebo reference="aruco_${number}_link">
             <static>true</static>
             <visual name="aruco_front_face">
                 <pose>0.00005 0 0 0 0 0</pose>
-                <geometry>
-                    <box>
-                        <size>0.0001 0.5 0.5</size>
-                    </box>
-                </geometry>
+
                 <material>
-                    <script>
-                        <uri>model://aruco/materials/scripts</uri>
-                        <uri>model://aruco/materials/textures</uri>
-                        <name>aruco_${number}</name>
-                    </script>
+                    <ambient>1 1 1 1</ambient>
+                    <diffuse>1 1 1 1</diffuse>
+                    <specular>0 0 0 0</specular>
+                    <emissive>0 0 0 0</emissive>
+                    <pbr>
+                        <metal>
+                            <albedo_map>model://aruco/materials/textures/12.png</albedo_map>
+                            <name>aruco_0</name>
+                        </metal>
+                    </pbr>
                 </material>
             </visual>
-            <visual name="aruco_back_face">
-                <pose>-0.00005 0 0 0 0 0</pose>
-                <geometry>
-                    <box>
-                        <size>0.0001 0.5 0.5</size>
-                    </box>
-                </geometry>
-            </visual>
+
         </gazebo>
 
     </xacro:macro>

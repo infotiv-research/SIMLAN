@@ -2,15 +2,15 @@
 
 
     <xacro:macro name="aruco_link" params="number">
+        <static>true</static>
         <link name="aruco_${number}_link">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.5 0.5 .001"/>
+                    <box size="0.5 0.5 .001" comment="THE ACTUAL SIZE OF ARUCO"/>
                 </geometry>
             </visual>
         </link>
-        <xacro:inertial_box mass="0.1" x="0.12" y="0.15" z="0.15"/>
     </xacro:macro>
 
     <xacro:macro name="aruco_joint" params="attach_to number x y z r p w">
@@ -24,26 +24,26 @@
    <xacro:macro name="aruco_gazebo" params="number">
         <gazebo reference="aruco_${number}_link">
             <static>true</static>
-            <visual name="aruco_front_face">
+                <visual name="aruco_front_face">
                 <pose>0.00005 0 0 0 0 0</pose>
-                <geometry>
-                    <box>
-                        <size>0.0001 0.5 0.5</size>
-                    </box>
-                </geometry>
                 <material>
-                    <script>
-                        <uri>model://aruco/materials/scripts</uri>
-                        <uri>model://aruco/materials/textures</uri>
-                        <name>aruco_${number}</name>
-                    </script>
+                    <ambient>1 1 1 1</ambient>
+                    <diffuse>1 1 1 1</diffuse>
+                    <specular>0 0 0 0</specular>
+                    <emissive>0 0 0 0</emissive>
+                    <pbr>
+                        <metal>
+                            <albedo_map>model://aruco/materials/textures/${number}.png</albedo_map>
+                            <name>aruco_${number}</name>
+                        </metal>
+                    </pbr>
                 </material>
             </visual>
             <visual name="aruco_back_face">
                 <pose>-0.00005 0 0 0 0 0</pose>
                 <geometry>
                     <box>
-                        <size>0.0001 0.5 0.5</size>
+                        <size>0.0001 1  1</size>
                     </box>
                 </geometry>
             </visual>

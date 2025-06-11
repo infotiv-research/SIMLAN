@@ -1,3 +1,5 @@
+exclude: '^(simulation/pallet_truck/|simulation/scenario_manager/|internal/|camera_utility/extrinsic/|camera_utility/intrinsic|build/|install/|log/|.*\.pgm|.*\.xacro|.*\.ipynb|.*\.rst)'
+
 repos:
 - repo: https://github.com/compilerla/conventional-pre-commit
   rev: v3.2.0
@@ -10,19 +12,27 @@ repos:
   hooks:
     - id: black
 
-
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.5.0
   hooks:
     - id: trailing-whitespace
+    - id: check-symlinks
+    - id: destroyed-symlinks
+    - id: check-ast
     - id: check-json
     - id: check-xml
+    - id: check-yaml
+    - id: detect-private-key
+    - id: requirements-txt-fixer
     - id: check-merge-conflict
+    - id: check-added-large-files
+      args: ['--maxkb=5120']
 
-#- repo: https://github.com/codespell-project/codespell
-#  rev: v2.2.4
-#  hooks:
-#  - id: codespell
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.2.4
+  hooks:
+  - id: codespell
+    args: ["--ignore-words=resources/.codespell.ignore"]
 
 - repo: https://github.com/executablebooks/mdformat
   rev: 0.7.17
@@ -31,3 +41,4 @@ repos:
       additional_dependencies:
       - mdformat-gfm
       - mdformat-black
+      exclude: '(^|/)PRESENTATION\.md$'

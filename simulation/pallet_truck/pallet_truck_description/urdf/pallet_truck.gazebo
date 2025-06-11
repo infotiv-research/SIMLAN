@@ -2,10 +2,11 @@
 <robot>
 
   <gazebo>
-    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+    <!-- <plugin name="gz_ros2_control" filename="libgz_ros2_control.so"> -->
+     <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
       <ros>
         <namespace>$(arg prefix)</namespace>
-        <remapping>~/tf:=/pallet_truck/tf</remapping>
+        <remapping>~/tf:=/tf</remapping>
         <remapping>~/tf_static:=tf_static</remapping>
       </ros>
       <parameters>$(find pallet_truck_control)/config/control.yaml</parameters>
@@ -14,9 +15,10 @@
   </gazebo>
 
   <gazebo reference="$(arg prefix)_imu_link">
-    <sensor name="$(arg prefix)_imu_sensor" type="imu">
+  <sensor name="$(arg prefix)_imu_sensor" type="imu">
     <always_on>true</always_on>
-    <update_rate>50</update_rate>
+    <update_rate>100</update_rate>
+
     <imu>
       <angular_velocity>
         <x>
@@ -38,6 +40,7 @@
           </noise>
         </z>
       </angular_velocity>
+
       <linear_acceleration>
         <x>
           <noise type="gaussian">
@@ -60,20 +63,44 @@
       </linear_acceleration>
     </imu>
 
-    <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-        <ros>
-          <namespace>$(arg prefix)</namespace>
-          <remapping>~/out:=/$(arg prefix)/imu/data</remapping>
-        </ros>
-        <body_name>pallet_truck_imu_link</body_name>
-        <frame_name>pallet_truck_imu_link</frame_name>
-        <initial_orientation_as_reference>false</initial_orientation_as_reference>
-      </plugin>
-      <always_on>true</always_on>
-      <update_rate>100</update_rate>
-      <visualize>true</visualize>
-    </sensor>
+    <visualize>true</visualize>
+    <pose>0 0 0 0 0 0</pose>
+    <topic>$(arg prefix)/imu/data</topic>
+    <gz_frame_id>$(arg prefix)_imu_link</gz_frame_id>
+  </sensor>
+</gazebo>
+
+
+ <gazebo reference="$(arg prefix)_scan_link">
+    <material>Gazebo/Orange</material>
+      <!--
+      <sensor name="laser" type="gpu_lidar">
+          <pose> 0 0 0 0 0 0 </pose>
+          <visualize>false</visualize>
+          <update_rate>120</update_rate>
+          <lidar>
+              <scan>
+                  <horizontal>
+                      <samples>360</samples>
+                      <min_angle>-3.14</min_angle>
+                      <max_angle>3.14</max_angle>
+                  </horizontal>
+              </scan>
+              <range>
+                  <min>0.3</min>
+                  <max>100</max>
+              </range>
+          </lidar>
+          <ros>
+            <namespace>$(arg prefix)</namespace>
+            <remapping>~/scan:=/$(arg prefix)/scan</remapping>
+          </ros>
+          <topic>$(arg prefix)/scan</topic>
+          <gz_frame_id>$(arg prefix)_scan_link</gz_frame_id>
+      </sensor>
+      -->
   </gazebo>
+
 
   <gazebo reference="$(arg prefix)_gps_link">
     <sensor name="$(arg prefix)_gps_sensor" type="gps">
@@ -104,5 +131,6 @@
     <material>Gazebo/DarkGrey</material>
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
+
 
 </robot>

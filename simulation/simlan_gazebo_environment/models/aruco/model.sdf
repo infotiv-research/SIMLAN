@@ -1,20 +1,9 @@
 <?xml version="1.0"?>
-<sdf version="1.6">
+<sdf version="1.8">
   <model name="aruco_0">
+    <static>true</static>
     <link name="aruco_link">
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>0.001</mass>
-        <inertia>
-          <ixx>4.0e-06</ixx>
-          <ixy>0.0</ixy>
-          <ixz>0.0</ixz>
-          <iyy>2.0e-06</iyy>
-          <iyz>0.0</iyz>
-          <izz>2.0e-06</izz>
-        </inertia>
-      </inertial>
-      <visual name="aruco_front_face">
+     <visual name="aruco_front_face">
         <pose>0.00005 0 0 0 0 0</pose>
         <geometry>
           <box>
@@ -22,11 +11,16 @@
           </box>
         </geometry>
         <material>
-          <script>
-            <uri>model://aruco/materials/scripts</uri>
-            <uri>model://aruco/materials/textures</uri>
-            <name>aruco_0</name>
-          </script>
+                    <ambient>1 1 1 1</ambient>
+                    <diffuse>1 1 1 1</diffuse>
+                    <specular>0 0 0 0</specular>
+                    <emissive>0 0 0 0</emissive>
+                    <pbr>
+                        <metal>
+                            <albedo_map>model://aruco/materials/textures/${number}.png</albedo_map>
+                            <name>aruco_${number}</name>
+                        </metal>
+                    </pbr>
         </material>
       </visual>
       <visual name="aruco_back_face">

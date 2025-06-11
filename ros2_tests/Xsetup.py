@@ -1,1 +1,0 @@
-tests_require = (["pytest"],)

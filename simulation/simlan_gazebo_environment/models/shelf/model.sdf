@@ -1,4 +1,4 @@
-<sdf version="1.7">
+<sdf version="1.9">
 <model name="shelf" canonical_link="node0_link">
   <link name="node0_link">
     <inertial>
@@ -10,25 +10,29 @@
         <iyz>0</iyz>
         <izz>42.61899</izz>
       </inertia>
-      <pose relative_to="node0_link">1.44044 0.43986 1.49318 0.00000 0.00000 0.00000</pose>
+      <pose>1.44044 0.43986 1.49318 0 0 0</pose>
       <mass>40.00000</mass>
     </inertial>
 
     <visual name="node0">
-      <pose relative_to="node0_link">0.00000 0.00000 0.00000 0.00000 0.00000 0.00000</pose>
+      <pose>0 0 0 0 0 0</pose>
       <geometry>
         <mesh>
-          <uri>meshes/textured_shelf.dae</uri>
+          <uri>model://shelf/meshes/textured_shelf.dae</uri>
           <scale>1.00000 1.00000 1.00000</scale>
         </mesh>
       </geometry>
     </visual>
   </link>
 
+  <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+    <label>10</label>
+  </plugin>
+
   <link name="collision_shelf_1">
     <mass>0.0001</mass>
     <collision name="collision_shelf_1">
-      <pose>1.45 0.45 0 0.00000 0.00000 0.00000</pose>
+      <pose>1.45 0.45 0 0 0 0</pose>
       <geometry>
         <box>
           <size>2.7 1.2 0.13</size>
@@ -60,7 +64,7 @@
   <link name="collision_shelf_2">
     <mass>0.0001</mass>
     <collision name="collision_shelf_2">
-      <pose>1.45 0.45 1 0.00000 0.00000 0.00000</pose>
+      <pose>1.45 0.45 1 0 0 0</pose>
       <geometry>
         <box>
           <size>2.7 1.2 0.13</size>
@@ -92,7 +96,7 @@
   <link name="collision_shelf_3">
     <mass>0.0001</mass>
     <collision name="collision_shelf_3">
-      <pose>1.45 0.45 2 0.00000 0.00000 0.00000</pose>
+      <pose>1.45 0.45 2 0 0 0</pose>
       <geometry>
         <box>
           <size>2.7 1.2 0.13</size>

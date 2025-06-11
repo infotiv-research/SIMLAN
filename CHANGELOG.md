@@ -1,3 +1,11 @@
+### 2.0.0: GPSS (May 2025) - Supervisor: Hamid Ebadi
+
+- Upgrade Gazebo from classic to ignition, adapting new sensors: Nazeeh Alhosary
+- Aruco_localization, added localization and nav2 to new robot: Pär Aronsson
+- Navigation: Pär Aronsson
+- Bird's Eye View ros package: Converting projection.ipynb to camera_bird_eye_view: Hamid Ebadi, Pär Aronsson
+- Deprecated: Infobot, replaced with Pallet_truck (based on Jackal by Clearpath Robotics)
+
 ### 1.0.6: Collision (Feb 2025)
 
 - Add scenario execution library for ros2
@@ -51,8 +59,8 @@
 
 - Basic warehouse model 1.0.0: Anders Bäckelie
 - CAD modelling (eur-pallet, boxes, shelf, support_pole, traffic-cone, steel_drum) 1.0.0 : Jacob Rohdin
-- Physics (collision, inertia), visuals and gazebo compatible mesh creation 1.0.0: Anders Bäckelie
+- Physics (collision, inertia), visuals and Gazebo compatible mesh creation 1.0.0: Anders Bäckelie
 - Walking actor using scripted trajectories 1.0.0 : Anders Bäckelie
-- Infobot_gazebo_environment 1.0.0: ROS2 launcher to start Gazebo world : Hamid Ebadi
+- Infobot_Gazebo_environment 1.0.0: ROS2 launcher to start Gazebo world : Hamid Ebadi
 - static_agent_launcher 1.0.0: Camera and Aruco tags : Hamid Ebadi
 - camera-viewer 1.0.0: Python code to get Gazebo camera feed : Hamid Ebadi

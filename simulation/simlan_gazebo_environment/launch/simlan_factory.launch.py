@@ -23,45 +23,202 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch.actions import AppendEnvironmentVariable
+from launch_ros.actions import Node
+
+# from static_agent_launcher.scripts.camera_config_manager import load_cameras
+import yaml
 
 
 def generate_launch_description():
 
+    # Get the path to the config file
+    # config_file = os.environ["CAMERA_CONFIG_FILE"]
+    # # Load the cameras
+    # with open(config_file, "r") as f:
+    #     cameras = yaml.safe_load(f)["cameras"]
+    # # Get just the camera IDs
+    # camera_ids_list = [camera["id"] for camera in cameras]
+    camera_ids_list = os.environ["CAMERA_ENABLED_IDS"].split()
+    print(f"------------------------------> camera_ids_list: {camera_ids_list}")
+    # camera_ids_list = [163, 164, 165, 166]
     launch_file_dir = os.path.join(
         get_package_share_directory("simlan_gazebo_environment"), "launch"
     )
-    os.environ["GAZEBO_MODEL_PATH"] = (
-        os.environ["GAZEBO_MODEL_PATH"]
+    # os.environ["GAZEBO_MODEL_PATH"] = (
+    #     os.environ["GAZEBO_MODEL_PATH"]
+    #     + ":" + os.path.join(
+    #         get_package_share_directory("simlan_gazebo_environment"), "models"
+    #     )
+    # )
+    # If you want to run the simulator in headless mode, uncomment the line bew
+    # os.environ["GZ_SIM_HEADLESS"]="true"
+    os.environ["GZ_SIM_RESOURCE_PATH"] = (
+        os.environ["GZ_SIM_RESOURCE_PATH"]
+        + ":"
         + os.path.join(
             get_package_share_directory("simlan_gazebo_environment"), "models"
         )
-        + ":"
-        + os.path.join(get_package_share_directory("infobot_agent"), "models")
     )
-    print(os.environ["GAZEBO_MODEL_PATH"])
-    pkg_gazebo_ros = get_package_share_directory("gazebo_ros")
+
+    os.environ["IGN_GAZEBO_RESOURCE_PATH"] = (
+        os.environ["IGN_GAZEBO_RESOURCE_PATH"]
+        + ":"
+        + os.path.join(
+            get_package_share_directory("simlan_gazebo_environment"), "models"
+        )
+    )
+    print(
+        "-----------------------> GZ_SIM_RESOURCE_PATH: ",
+        os.environ["GZ_SIM_RESOURCE_PATH"],
+    )
+    pkg_ros_gz_sim = get_package_share_directory("ros_gz_sim")
 
     use_sim_time = LaunchConfiguration("use_sim_time", default="true")
 
     world = os.path.join(
         get_package_share_directory("simlan_gazebo_environment"),
         "worlds",
-        "simlan_factory.world",
+        "ign_simlan_factory.world",
     )
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_gazebo_ros, "launch", "gzserver.launch.py")
+            os.path.join(pkg_ros_gz_sim, "launch", "gz_sim.launch.py")
         ),
         launch_arguments={
-            "world": world,
+            "gz_args": ["-r -v4 ", world],
+            "on_exit_shutdown": "true",
             "use_sim_time": use_sim_time,
             "verbose": "true",
             "pause": "false",
         }.items(),
     )
 
+    bridge_params = os.path.join(
+        get_package_share_directory("simlan_gazebo_environment"),
+        "config",
+        "gz_bridge.yaml",
+    )
+
+    ros_gz_bridge = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=[
+            "--ros-args",
+            "-p",
+            f"config_file:={bridge_params}",
+        ],
+    )
+
     ld = LaunchDescription()
+    ros_gz_image_bridge = Node(
+        package="ros_gz_image",
+        executable="image_bridge",
+        arguments=["/camera/camera_info"],
+    )
+
+    for camera_id in camera_ids_list:
+        ros_gz_image = Node(
+            package="ros_gz_bridge",
+            executable="parameter_bridge",
+            name=f"camera_{camera_id}_bridge",
+            output="screen",
+            arguments=[
+                f"/camera_{camera_id}/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
+                f"/camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
+            ],
+            remappings=[
+                (
+                    f"/camera_{camera_id}/image_raw",
+                    f"/static_agents/camera_{camera_id}/image_raw",
+                ),
+                (
+                    f"/camera_{camera_id}/camera_info",
+                    f"/static_agents/camera_{camera_id}/camera_info",
+                ),
+            ],
+        )
+        ld.add_action(ros_gz_image)
+
+        ros_gz_depth_image = Node(
+            package="ros_gz_bridge",
+            executable="parameter_bridge",
+            name=f"depth_camera_{camera_id}_bridge",
+            output="screen",
+            arguments=[
+                f"/depth_camera_{camera_id}/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
+                f"/depth_camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
+                # f"/depth_camera_{camera_id}/points@sensor_msgs/msg/PointCloud2@gz.msgs.PointCloudPacked",
+            ],
+            remappings=[
+                (
+                    f"/depth_camera_{camera_id}/image_raw",
+                    f"/static_agents/depth_camera_{camera_id}/image_raw",
+                ),
+                (
+                    f"/depth_camera_{camera_id}/camera_info",
+                    f"/static_agents/depth_camera_{camera_id}/camera_info",
+                ),
+                # (
+                #     f"/depth_camera_{camera_id}/points",
+                #     f"/static_agents/depth_camera_{camera_id}/points",
+                # ),
+            ],
+        )
+        ld.add_action(ros_gz_depth_image)
+
+        ros_gz_semantic_image = Node(
+            package="ros_gz_bridge",
+            executable="parameter_bridge",
+            name=f"semantic_camera_{camera_id}_bridge",
+            output="screen",
+            arguments=[
+                f"/semantic_camera_{camera_id}/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
+                f"/semantic_camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
+                f"/semantic_camera_{camera_id}/labels_map@sensor_msgs/msg/Image@gz.msgs.Image",
+                f"/semantic_camera_{camera_id}/colored_map@sensor_msgs/msg/Image@gz.msgs.Image",
+            ],
+            remappings=[
+                (
+                    f"/semantic_camera_{camera_id}/image_raw",
+                    f"/static_agents/semantic_camera_{camera_id}/image_raw",
+                ),
+                (
+                    f"/semantic_camera_{camera_id}/camera_info",
+                    f"/static_agents/semantic_camera_{camera_id}/camera_info",
+                ),
+                (
+                    f"/semantic_camera_{camera_id}/labels_map",
+                    f"/static_agents/semantic_camera_{camera_id}/labels_map",
+                ),
+                (
+                    f"/semantic_camera_{camera_id}/colored_map",
+                    f"/static_agents/semantic_camera_{camera_id}/colored_map",
+                ),
+            ],
+        )
+        ld.add_action(ros_gz_semantic_image)
+    # segmentation_bridge = Node(
+    #     package="ros_gz_bridge",
+    #     executable="parameter_bridge",
+    #     name="segmentation_bridge",
+    #     output="screen",
+    #     arguments=[
+    #         "/semantic/labels_map@sensor_msgs/msg/Image@gz.msgs.Image",
+    #         "/semantic/colored_map@sensor_msgs/msg/Image@gz.msgs.Image"
+    #     ],
+    #     remappings=[
+    #         ("/semantic/labels_map", "/segmentation/labels_map"),
+    #         ("/semantic/colored_map", "/segmentation/colored_map")
+    #     ]
+    # )
+    # ld.add_action(segmentation_bridge)
+
     ld.add_action(gzserver_cmd)
+    # ld.add_action(set_env_vars_resources)
+    ld.add_action(ros_gz_bridge)
+
+    # ld.add_action(world)
 
     try:
         value = os.environ["SIM_ENV"]  # "DEV" , "CICD" or empty
@@ -69,14 +226,5 @@ def generate_launch_description():
     except KeyError:
         print("SIM_ENV not found, set to DEV")
         os.environ["SIM_ENV"] = "DEV"
-
-    if os.environ["SIM_ENV"] != "CICD":
-        gzclient_cmd = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(pkg_gazebo_ros, "launch", "gzclient.launch.py")
-            ),
-            launch_arguments={"use_sim_time": use_sim_time, "verbose": "true"}.items(),
-        )
-        ld.add_action(gzclient_cmd)
 
     return ld
