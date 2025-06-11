@@ -1,6 +1,6 @@
 # SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation (2.0.0)
 
-This simulation environment, based on the Gazebo simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing indoor multi-camera localization, positioning, and navigation algorithms. While this environment can be utilized for Multi-Sensor SLAM (Simultaneous Localization and Mapping) using cameras, IMUs, GPS, LiDAR, and radar *mounted on the robot*, the focus of this project is *not* on mapping but operating within a *fixed building layout* and using fixed cameras *mounted on the ceiling*. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.youtube.com/watch?v=DA7lKiCdkCc) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
+This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing indoor multi-camera localization, positioning, and navigation algorithms. While this environment can be utilized for Multi-Sensor SLAM (Simultaneous Localization and Mapping) using cameras, IMUs, GPS, LiDAR, and radar *mounted on the robot*, the focus of this project is *not* on mapping but operating within a *fixed building layout* and using fixed cameras *mounted on the ceiling*. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.youtube.com/watch?v=DA7lKiCdkCc) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 
 Please click the YouTube link below to view the demo video:
 
@@ -68,6 +68,10 @@ Finally, to view the bird's-eye perspective from each camera, run the following 
 ```
 
 See [ISSUES.md](ISSUES.md) to learn about additional advanced options, including how to utilize an NVIDIA GPU to speed up the simulation.
+
+## Gazebo Classic
+
+Gazebo Classic (Gazebo11) has reached end-of-life (EOL). An earlier version of this repository, which uses Gazebo Classic, can be found in the [gz_classic_humble branch](https://github.com/infotiv-research/SIMLAN/tree/gz_classic_humble).
 
 ### Research Funding
 
