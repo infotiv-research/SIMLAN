@@ -172,7 +172,6 @@ To test the unit tests before pushing new codes:
 - [`simulation/`](simulation/) : models, urdf and launch script for objects and agents in the gazebo simulator
 
   - [`README.md`](simulation/README.md) : simulation and warehouse specification
-  - `infobot_agent/`
   - `object_mover/`
   - `raw_models/`
     - [`README.md`](simulation/raw_models/README.md) : building Gazebo models (Blender/Phobos)
@@ -203,16 +202,7 @@ To test the unit tests before pushing new codes:
 
   - `rviz_config.rviz`
 
-- [`control/`](control/): to control the agents
-
-  - `infobot_navigation2/`
-  - `infobot_teleop/`
-  - `maps/`
-  - `nav2_commander/`
-
 - [`resources/`](resources) : images , videos and documents are placed here (no code should be stored here)
-
-- [`deployment/`](deployment) : CI/CD scripts for jenkins and k8s
 
 - [`docker-compose.yaml`](docker-compose.yaml) : disable and enable nvidia gpu
 
@@ -225,5 +215,3 @@ To test the unit tests before pushing new codes:
 - [`CREDITS.md`](CREDITS.md)
 
 - `LICENSE`
-
-- [`BUILD.md`](BUILD.md) : to build the project outside vscode

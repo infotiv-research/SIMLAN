@@ -4,7 +4,7 @@ This simulation environment, based on the Gazebo Ignition simulator and ROS2, re
 
 Please click the YouTube link below to view the demo video:
 
-[![SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation](https://img.youtube.com/vi/vwKXwItBHYw/0.jpg)](https://www.youtube.com/watch?v=vwKXwItBHYw)
+[![SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation](https://img.youtube.com/vi/mhA51PPdABc/0.jpg)](https://www.youtube.com/watch?v=mhA51PPdABc)
 
 ## Installation
 
@@ -67,13 +67,31 @@ Finally, to view the bird's-eye perspective from each camera, run the following 
 ./control.sh birdeye
 ```
 
-See [ISSUES.md](ISSUES.md) to learn about additional advanced options, including how to utilize an NVIDIA GPU to speed up the simulation.
+## Advanced options
 
-## Gazebo Classic
+See [ISSUES.md](ISSUES.md) to learn about additional advanced options. To start the project **without NVIDIA GPU** please comment out these lines in `docker-compose.yaml` as shown below:
+
+```bash
+  #   runtime: nvidia
+
+  # factory_simulation_nvidia:
+  #  <<: *research-base
+  #  container_name: factory_simulation_nvidia
+  #  runtime: nvidia
+  #  deploy:
+  #    resources:
+  #      reservations:
+  #        devices:
+  #          - driver: nvidia
+  #            count: "all"
+  #            capabilities: [compute,utility,graphics,display]
+```
+
+### Gazebo Classic
 
 Gazebo Classic (Gazebo11) has reached end-of-life (EOL). An earlier version of this repository, which uses Gazebo Classic, can be found in the [gz_classic_humble branch](https://github.com/infotiv-research/SIMLAN/tree/gz_classic_humble).
 
-### Research Funding
+## Research Funding
 
 This work was carried out within these research projects:
 
