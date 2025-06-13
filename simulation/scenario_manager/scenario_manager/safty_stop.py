@@ -89,7 +89,7 @@ class SaftyStop(Node):
             self.confidence = 0
             if ttc <= self.hard_stop_time or ttc_ <= self.hard_stop_time:
                 self.get_logger().info("Hard stop")
-                self.satus = "hard stop"
+                self.status = "hard stop"
 
             elif ttc > self.hard_stop_time or ttc_ > self.hard_stop_time:
                 self.get_logger().info("Soft stop")
@@ -99,7 +99,7 @@ class SaftyStop(Node):
             self.confidence = 0
             if ttc <= self.hard_stop_time or ttc_ <= self.hard_stop_time:
                 self.get_logger().info("Hard stop*")
-                self.satus = "hard stop"
+                self.status = "hard stop"
 
             elif ttc > self.hard_stop_time or ttc_ > self.hard_stop_time:
                 self.get_logger().info("Soft stop*")

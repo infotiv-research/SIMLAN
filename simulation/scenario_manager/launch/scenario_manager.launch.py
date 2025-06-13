@@ -35,5 +35,19 @@ def generate_launch_description():
                 name="ttc",
                 output="screen",
             ),
+            launch_ros.actions.Node(
+                package="scenario_manager",
+                executable="ttc_service_server",
+                namespace=namespace,
+                name="ttc_service_server",
+                output="screen",
+            ),
+            launch_ros.actions.Node(
+                package="scenario_manager",
+                executable="safty_stop",
+                namespace=namespace,
+                name="safty_stop",
+                output="screen",
+            ),
         ]
     )

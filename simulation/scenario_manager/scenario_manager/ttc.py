@@ -49,8 +49,8 @@ class GazeboTFBroadcaster(Node):
             cpa = np.linalg.norm(cpa)
 
             # log the ttc and cpa
-            self.get_logger().info("Time to collision: {}".format(ttc))
-            self.get_logger().info("Closest point of approach: {}".format(cpa))
+            self.get_logger().debug("Time to collision: {}".format(ttc))
+            self.get_logger().debug("Closest point of approach: {}".format(cpa))
 
 
 def main(args=None):
