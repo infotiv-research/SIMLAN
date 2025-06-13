@@ -920,7 +920,9 @@
       </camera>
     </gui>
   </world>
-  
+
   <plugin name="gazebo_ros_api_plugin" filename="libgazebo_ros_api_plugin.so"/>
+
+  <plugin filename="libgazebo_ros_api_plugin.so" name="gazebo_ros_api"/>
 
 </sdf>

@@ -1,44 +1,6 @@
-<?xml version="1.0"?>
-<sdf version="1.10">
-  <actor name="robot">
-        <link name="link">
-      <inertial>
-        <mass>1.0</mass>
-        <inertia> <!-- inertias are tricky to compute -->
-          <!-- http://gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
-          <ixx>0.083</ixx>       <!-- for a box: ixx = 0.083 * mass * (y*y + z*z) -->
-          <ixy>0.0</ixy>         <!-- for a box: ixy = 0 -->
-          <ixz>0.0</ixz>         <!-- for a box: ixz = 0 -->
-          <iyy>0.083</iyy>       <!-- for a box: iyy = 0.083 * mass * (x*x + z*z) -->
-          <iyz>0.0</iyz>         <!-- for a box: iyz = 0 -->
-          <izz>0.083</izz>       <!-- for a box: izz = 0.083 * mass * (x*x + y*y) -->
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>1.88 1.5 0.44</size>
-          </box>
-        </geometry>
-      </collision>
-      <visual name="visual">
-        <pose>0.06 0.0 -0.220 0 0 </pose>
-        <geometry>
-          <mesh>
-            <uri>meshes/VOLVO_AVG.dae</uri>
-            <scale>1.00000 1.00000 1.00000</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-        <plugin name="actor_collisions_box_plugin" filename="libActorCollisionsPlugin.so">
-        </plugin>
-        <script>
-          <loop>true</loop>
-          <auto_start>true</auto_start>
 <trajectory id="21" type="square">
 <waypoint>
-<time>0.0</time>
+    <time>0.0</time>
 <pose>
 22.950000000000003 -9.774999999999999 0.0 0.0 0.0 -0.4648594269359637
 </pose>
@@ -614,6 +576,3 @@
 </pose>
 </waypoint>
 </trajectory>
-        </script>
-      </actor>
-</sdf>
