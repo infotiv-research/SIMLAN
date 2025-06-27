@@ -25,11 +25,13 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
 
-    pkg_simlan_gazebo_environment = get_package_share_directory(
-        "simlan_gazebo_environment"
-    )
+    # Get package locations
+    pkg_simlan_gazebo_environment = get_package_share_directory("simlan_gazebo_environment")
     pkg_static_agent_launcher = get_package_share_directory("static_agent_launcher")
     pkg_pallet_truck_bringup = get_package_share_directory("pallet_truck_bringup")
+    pkg_dyno_jackal_bringup = get_package_share_directory("dyno_jackal_bringup")
+    pkg_aruco_localization = get_package_share_directory("aruco_localization")
+    pkg_pallet_truck_navigation = get_package_share_directory("pallet_truck_navigation") # contains both localization and nav2
     pkg_scenario_manager = get_package_share_directory("scenario_manager")
 
     rviz_config_file = PathJoinSubstitution(
@@ -37,7 +39,8 @@ def generate_launch_description():
     )
 
     # Launch args
-    use_sim_time = LaunchConfiguration("use_sim_time", default=True)
+    # use_sim_time = LaunchConfiguration("use_sim_time", default=True)
+
     launch_rviz = LaunchConfiguration("rviz")
     pallet_truck_manual_control = LaunchConfiguration("pallet_truck_manual_control")
 
@@ -74,6 +77,12 @@ def generate_launch_description():
         }.items(),
     )
 
+    jackal = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_dyno_jackal_bringup, "launch", "sim.launch.py")
+        )
+    )
+
     rviz2 = Node(
         package="rviz2",
         executable="rviz2",
@@ -83,14 +92,43 @@ def generate_launch_description():
         condition=IfCondition(launch_rviz),
     )
 
+    aruco_localization = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_aruco_localization, "launch", "multi_detection.launch.py")
+        ),
+        launch_arguments={
+            "use_sim_time": "true",
+            "publish_to_odom": "true"
+        }.items()
+    )
+
+    pallet_truck_localization = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_pallet_truck_navigation, "launch", "localization.launch.py")
+        )
+    )
+
+    pallet_truck_nav2 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_pallet_truck_navigation, "launch", "nav2.launch.py")
+        )
+    )
+
     ld = LaunchDescription()
 
     ld.add_action(launch_rviz_launch_argument)
     ld.add_action(pallet_truck_manual_control_launch_argument)
 
     ld.add_action(simlan_gazebo)
+
     ld.add_action(static_agents)
     ld.add_action(pallet_truck)
+    ld.add_action(jackal)
+
+    ld.add_action(aruco_localization)
+    ld.add_action(pallet_truck_localization)
+    ld.add_action(pallet_truck_nav2)
+
     ld.add_action(rviz2)
 
     return ld
