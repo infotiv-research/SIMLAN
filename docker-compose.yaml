@@ -17,10 +17,15 @@ services:
       DISPLAY: ${DISPLAY}
       XAUTHORITY: /tmp/.docker.xauth
       ROS_DOMAIN_ID: 39
+      # CAMERA_ENABLED_IDS: "163 164 165 166"
+      CAMERA_ENABLED_IDS: "163"
       SDL_VIDEODRIVER: x11
       ROS_AUTOMATIC_DISCOVERY_RANGE: LOCALHOST
     devices:
       - /dev/tty*:/dev/tty*
+      - /dev:/dev
+    device_cgroup_rules:
+      - 'c *:* rmw'
     network_mode: host
     command: tail -f /dev/null
     restart: always

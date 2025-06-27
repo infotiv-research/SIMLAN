@@ -1,5 +1,10 @@
 repositories:
 
+  joy2twist:
+    type: git
+    url: https://github.com/husarion/joy2twist
+    version: ros2
+    
   wireless:
     type: git
     url: https://github.com/clearpathrobotics/wireless.git
