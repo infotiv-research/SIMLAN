@@ -7,7 +7,8 @@ from scipy.spatial.transform import Rotation as R
 from tf2_ros import Buffer, TransformListener
 from nav_msgs.msg import Odometry
 from rclpy.time import Time, Duration
-
+from typing import Dict, List
+from collections import defaultdict
 
 """_summary_
     This node listens to the TF and tries to find any link from origin (base_link for now) to an aruco marker. As of now we only care about the aruco marker on the pallet truck that has id 12.
@@ -64,15 +65,23 @@ class ArucoPosePubNode(Node):
     def __init__(self):
         super().__init__("aruco_pose_publisher")
 
-        self.declare_parameter("camera_ids", [163, 164, 165, 166, 167])
+        self.declare_parameter(
+            "camera_ids",
+            [
+                163,
+                164,
+                165,
+            ],
+        )
         self.declare_parameter("publish_to_odom", True)
+        self.declare_parameter("update_rate", 100)  # Updates N times per second
 
         self.publish_to_odom = self.get_parameter("publish_to_odom").value
         self.camera_ids = self.get_parameter("camera_ids").value
+        self.update_rate = self.get_parameter("update_rate").value
         self.last_stamp = self.get_clock().now()
         self.max_frame_age = Duration(seconds=1)
-        self.latest_transform_received: Transform = None
-
+        self.latest_transform_received: Dict[int, Transform] = defaultdict(list)
         # node attributes
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
@@ -80,134 +89,158 @@ class ArucoPosePubNode(Node):
 
         # Publishers
         self.timer = self.create_timer(
-            0.01, self.camera_aruco_pose_callback
+            1 / self.update_rate, self.camera_aruco_pose_callback
         )  # Every 0.1 is 10Hz
         self.odom_pub = self.create_publisher(Odometry, "/odom", 10)
         self.create_timer(
-            0.01, self.publish_poses
+            1 / self.update_rate, self.publish_poses
         )  # every 0.05s is 20Hz. 20 runs per sec
 
     def publish_poses(self):
-        if self.latest_transform_received == None:
+
+        if self.latest_transform_received == {}:
             return
-        now = self.get_clock().now()
-        if now <= self.last_stamp:
-            now = self.last_stamp + Duration(nanoseconds=10)
 
-        # Publish new TF based on our computed average translation and rotation to ODOM and TF
-        odom_pallet_truck = Odometry()
-        odom_pallet_truck.header.stamp = now.to_msg()
-        odom_pallet_truck.header.frame_id = "odom"  # Is actually base_link
-        odom_pallet_truck.child_frame_id = "pallet_truck_base_link"
-        odom_pallet_truck.pose.pose.position.x = (
-            self.latest_transform_received.translation.x
-        )
-        odom_pallet_truck.pose.pose.position.y = (
-            self.latest_transform_received.translation.y
-        )
-        odom_pallet_truck.pose.pose.position.z = (
-            self.latest_transform_received.translation.z
-        )
-        odom_pallet_truck.pose.pose.orientation = (
-            self.latest_transform_received.rotation
-        )
+        for (
+            marker_id,
+            markers_latest_transform,
+        ) in self.latest_transform_received.items():
 
-        # odom to pallet truck base link.
-        t_base_link_to_pallet_truck = TransformStamped()
-        t_base_link_to_pallet_truck.header.stamp = self.get_clock().now().to_msg()
-        t_base_link_to_pallet_truck.header.frame_id = "base_link"
-        t_base_link_to_pallet_truck.child_frame_id = "pallet_truck_base_link"
-        t_base_link_to_pallet_truck.transform = self.latest_transform_received
+            now = self.get_clock().now()
+            if now <= self.last_stamp:
+                now = self.last_stamp + Duration(nanoseconds=10)
 
-        # We send the transforms to odom or base_link depending on the publish_to_odom flag.
-        if self.publish_to_odom:
-            self.odom_pub.publish(odom_pallet_truck)
-        else:
-            self.tf_broadcaster.sendTransform(t_base_link_to_pallet_truck)
-        # we set new timestamp for next iteration
-        self.last_stamp = now
+            # Publish new TF based on our computed average translation and rotation to ODOM and TF
+            odom_pallet_truck = Odometry()
+            odom_pallet_truck.header.stamp = now.to_msg()
+            odom_pallet_truck.header.frame_id = (
+                f"robot_agent_{marker_id}_odom"  # Is actually base_link
+            )
+            odom_pallet_truck.child_frame_id = (
+                f"robot_agent_{marker_id}_base_link"  # namespace = robot_agent_1
+            )
+            odom_pallet_truck.pose.pose.position.x = (
+                markers_latest_transform.translation.x
+            )
+            odom_pallet_truck.pose.pose.position.y = (
+                markers_latest_transform.translation.y
+            )
+            odom_pallet_truck.pose.pose.position.z = (
+                markers_latest_transform.translation.z
+            )
+            odom_pallet_truck.pose.pose.orientation = markers_latest_transform.rotation
+
+            # odom to pallet truck base link.
+            t_base_link_to_pallet_truck = TransformStamped()
+            t_base_link_to_pallet_truck.header.stamp = self.get_clock().now().to_msg()
+            t_base_link_to_pallet_truck.header.frame_id = (
+                f"robot_agent_{marker_id}_odom"
+            )
+            t_base_link_to_pallet_truck.child_frame_id = (
+                f"robot_agent_{marker_id}_base_link"
+            )
+            t_base_link_to_pallet_truck.transform = markers_latest_transform
+
+            # We send the transforms to odom or base_link depending on the publish_to_odom flag.
+            if self.publish_to_odom:
+                self.odom_pub.publish(odom_pallet_truck)
+            else:
+                self.tf_broadcaster.sendTransform(t_base_link_to_pallet_truck)
+            # we set new timestamp for next iteration
+            self.last_stamp = now
 
     # Callbacks
     def camera_aruco_pose_callback(self):
         now = self.get_clock().now()
+        markers_of_interest = [1, 2, 3, 4]
 
-        visible_transforms = []
+        visible_transforms = defaultdict(
+            list
+        )  # visible transform is a dict with key: marker id of interest and value an array of the transforms.
         now = self.get_clock().now()
+        # We check every camera
         for camera_id in self.camera_ids:
-            target_frame = f"camera_{camera_id}_marker_12"
+            # We go over every marker of interest and see if they are noticed in camera
+            for marker_id in markers_of_interest:
 
-            if self.tf_buffer.can_transform(
-                "base_link", target_frame, rclpy.time.Time()
-            ):
-                t = self.tf_buffer.lookup_transform(
+                target_frame = f"camera_{camera_id}_marker_{marker_id}"
+                if self.tf_buffer.can_transform(
                     "base_link", target_frame, rclpy.time.Time()
+                ):
+                    t = self.tf_buffer.lookup_transform(
+                        "base_link", target_frame, rclpy.time.Time()
+                    )
+                    # We only take recent frames into account based on max_frame_age
+                    if (now - Time.from_msg(t.header.stamp)) < self.max_frame_age:
+                        visible_transforms[marker_id].append(t)
+
+        # For every marker ID we go over the transforms we got from the cameras and average them.
+        for marker_id, current_marker_transforms in visible_transforms.items():
+            # If marker had no transform then go for the next one. NOTE: Since this is a dict now this will never happen as the item won't exist
+            if not current_marker_transforms:
+                print(
+                    f"marker {marker_id} had no transforms, continuing to the next marker."
                 )
-                # We only take recent frames into account based on max_frame_age
-                if (now - Time.from_msg(t.header.stamp)) < self.max_frame_age:
-                    visible_transforms.append(t)
+                continue
+            #### AVERAGING THE TRANSFORMS. ####
 
-        if not visible_transforms:
-            return
-
-        #### AVERAGING THE TRANSFORMS. ####
-
-        # 1. Translation averaging. We create a list of the poses from the translations and do an averaging on them
-        translations = np.array(
-            [
+            # 1. Translation averaging. We create a list of the poses from the translations and do an averaging on them
+            translations = np.array(
                 [
-                    t.transform.translation.x,
-                    t.transform.translation.y,
-                    t.transform.translation.z,
+                    [
+                        t.transform.translation.x,
+                        t.transform.translation.y,
+                        t.transform.translation.z,
+                    ]
+                    for t in current_marker_transforms
                 ]
-                for t in visible_transforms
-            ]
-        )
-        # average translation result
-        avg_translation = np.mean(translations, axis=0)
+            )
+            # average translation result
+            avg_translation = np.mean(translations, axis=0)
 
-        # 2. Rotation averaging. We create a list of the poses from the translations and do an averaging on them
-        quaternions = np.array(
-            [
+            # 2. Rotation averaging. We create a list of the poses from the translations and do an averaging on them
+            quaternions = np.array(
                 [
-                    t.transform.rotation.x,
-                    t.transform.rotation.y,
-                    t.transform.rotation.z,
-                    t.transform.rotation.w,
+                    [
+                        t.transform.rotation.x,
+                        t.transform.rotation.y,
+                        t.transform.rotation.z,
+                        t.transform.rotation.w,
+                    ]
+                    for t in current_marker_transforms
                 ]
-                for t in visible_transforms
-            ]
-        )
+            )
 
-        # average rotation result
-        avg_quaternion = np.mean(quaternions, axis=0)
-        avg_quaternion /= np.linalg.norm(avg_quaternion)
+            # average rotation result
+            avg_quaternion = np.mean(quaternions, axis=0)
+            avg_quaternion /= np.linalg.norm(avg_quaternion)
 
-        #### PUBLISHING THE TRANSFORM ####
+            #### PUBLISHING THE TRANSFORM ####
 
-        # Since we want to set the base_link as the root we take the distance from the aruco marker and pallet_truck_base_link into account
-        avg_transform = Transform()
-        avg_transform.translation.x = float(avg_translation[0])
-        avg_transform.translation.y = float(avg_translation[1])
-        avg_transform.translation.z = float(avg_translation[2])
-        avg_transform.rotation.x = float(avg_quaternion[0])
-        avg_transform.rotation.y = float(avg_quaternion[1])
-        avg_transform.rotation.z = float(avg_quaternion[2])
-        avg_transform.rotation.w = float(avg_quaternion[3])
+            # Since we want to set the base_link as the root we take the distance from the aruco marker and pallet_truck_base_link into account
+            avg_transform = Transform()
+            avg_transform.translation.x = float(avg_translation[0])
+            avg_transform.translation.y = float(avg_translation[1])
+            avg_transform.translation.z = float(avg_translation[2])
+            avg_transform.rotation.x = float(avg_quaternion[0])
+            avg_transform.rotation.y = float(avg_quaternion[1])
+            avg_transform.rotation.z = float(avg_quaternion[2])
+            avg_transform.rotation.w = float(avg_quaternion[3])
 
-        # The transform between aruco_12_link and pallet_truck_base_link
-        aruco_offset_transform = Transform()
-        aruco_offset_transform.translation.x = float(0)
-        aruco_offset_transform.translation.y = float(-0.8)  # -0.8 0 1.30
-        aruco_offset_transform.translation.z = float(-1.3)
-        aruco_offset_transform.rotation.x = float(0)
-        aruco_offset_transform.rotation.y = float(0)
-        aruco_offset_transform.rotation.z = float(-0.7071)  # 1.57 radians
-        aruco_offset_transform.rotation.w = float(0.7071)
+            # The transform between aruco_12_link and pallet_truck_base_link
+            aruco_offset_transform = Transform()
+            aruco_offset_transform.translation.x = float(0)
+            aruco_offset_transform.translation.y = float(-0.8)  # -0.8 0 1.30
+            aruco_offset_transform.translation.z = float(-1.3)
+            aruco_offset_transform.rotation.x = float(0)
+            aruco_offset_transform.rotation.y = float(0)
+            aruco_offset_transform.rotation.z = float(-0.7071)  # 1.57 radians
+            aruco_offset_transform.rotation.w = float(0.7071)
 
-        # Combine the two transforms
-        self.latest_transform_received = compose_transforms(
-            avg_transform, aruco_offset_transform
-        )
+            # Combine the two transforms
+            self.latest_transform_received[marker_id] = compose_transforms(
+                avg_transform, aruco_offset_transform
+            )
 
 
 def main():

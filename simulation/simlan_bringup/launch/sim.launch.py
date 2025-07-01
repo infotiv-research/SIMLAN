@@ -3,24 +3,20 @@ import os.path
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
-    GroupAction,
     IncludeLaunchDescription,
-    RegisterEventHandler,
 )
-from launch.conditions import IfCondition, UnlessCondition
-from launch.event_handlers import OnProcessExit
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
-    Command,
-    FindExecutable,
     LaunchConfiguration,
     PathJoinSubstitution,
 )
-from launch_ros.actions import Node, PushRosNamespace, SetRemap
-from launch_ros.descriptions import ParameterValue
+from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-
+import launch
 from ament_index_python.packages import get_package_share_directory
+
+from launch.actions import LogInfo
 
 
 def generate_launch_description():
@@ -45,12 +41,6 @@ def generate_launch_description():
         "rviz", default_value="True", description="To launch rviz"
     )
 
-    pallet_truck_manual_control_launch_argument = DeclareLaunchArgument(
-        "pallet_truck_manual_control",
-        default_value="False",
-        description="To launch pallet_truck keyboard steering dashboard",
-    )
-
     simlan_gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
@@ -65,14 +55,13 @@ def generate_launch_description():
         )
     )
 
-    pallet_truck = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_pallet_truck_bringup, "launch", "sim.launch.py")
-        ),
-        launch_arguments={
-            "pallet_truck_manual_control": pallet_truck_manual_control,
-        }.items(),
-    )
+    # spawn_multiple_robots = IncludeLaunchDescription(
+    #    PythonLaunchDescriptionSource(
+    #        os.path.join(
+    #            pkg_pallet_truck_bringup, "launch", "multiple_robot_spawn.launch.py"
+    #        )
+    #    )
+    # )
 
     rviz2 = Node(
         package="rviz2",
@@ -86,11 +75,9 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(launch_rviz_launch_argument)
-    ld.add_action(pallet_truck_manual_control_launch_argument)
-
     ld.add_action(simlan_gazebo)
     ld.add_action(static_agents)
-    ld.add_action(pallet_truck)
+    # ld.add_action(spawn_multiple_robots)
     ld.add_action(rviz2)
 
     return ld

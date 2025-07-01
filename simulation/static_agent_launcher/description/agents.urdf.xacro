@@ -24,6 +24,6 @@
     <xacro:include filename="camera_config.xacro" />
 
 
-    <xacro:aruco number="1" x="7" y="3" z="0.001" r="0" p="0" w="0"/>
-    <xacro:aruco number="2" x="6" y="0" z="0.001" r="0" p="0" w="0"/>
+   <!-- <xacro:aruco number="20" x="7" y="3" z="0.001" r="0" p="0" w="0"/> -->
+   <!-- <xacro:aruco number="30" x="6" y="0" z="0.001" r="0" p="0" w="0"/> -->
 </robot>

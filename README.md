@@ -1,8 +1,8 @@
 # SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation (2.0.0)
 
-This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing indoor multi-camera localization, positioning, and navigation algorithms. While this environment can be utilized for Multi-Sensor SLAM (Simultaneous Localization and Mapping) using cameras, IMUs, GPS, LiDAR, and radar *mounted on the robot*, the focus of this project is *not* on mapping but operating within a *fixed building layout* and using fixed cameras *mounted on the ceiling*. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.youtube.com/watch?v=DA7lKiCdkCc) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
+This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing indoor multi-camera localization, positioning, and navigation algorithms. While this environment can be utilized for Multi-Sensor SLAM (Simultaneous Localization and Mapping) using cameras, IMUs, GPS, LiDAR, and radar *mounted on the robot*, the focus of this project is *not* on mapping but operating within a *fixed building layout* and using fixed cameras *mounted on the ceiling*. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots. \[[GPSS video demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)\]
 
-Please click the YouTube link below to view the demo video:
+Please click the YouTube link below to view the SIMLAN demo video:
 
 [![SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation](https://img.youtube.com/vi/mhA51PPdABc/0.jpg)](https://www.youtube.com/watch?v=mhA51PPdABc)
 

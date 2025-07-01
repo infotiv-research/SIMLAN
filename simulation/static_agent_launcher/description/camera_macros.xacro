@@ -60,6 +60,7 @@
             </sensor>
 
             <!-- Depth camera sensor -->
+            <!-- 
             <sensor name="depth_${number}" type="depth_camera">
                 <pose>0 0.0175 0.0125 0 0 0</pose>
                 <update_rate>6</update_rate>
@@ -89,6 +90,7 @@
                 <topic>depth_camera_${number}/image_raw</topic>
                 <gz_frame_id>depth_camera_link_optical</gz_frame_id>
             </sensor>
+            -->
 
             <!-- <sensor name="semantic_segmentation_camera" type="segmentation">
                 <topic>semantic</topic>
@@ -113,6 +115,7 @@
             </sensor> -->
 
             <!-- Segmentation camera sensor -->
+            <!--
             <sensor name="semantic_camera_${number}" type="segmentation">
                 <always_on>1</always_on>
                 <update_rate>10</update_rate>
@@ -131,6 +134,7 @@
                 <gz_frame_id>semantic_camera_link_optical</gz_frame_id>
                 <visualize>true</visualize>
             </sensor>
+            -->
 
         </gazebo>
     </xacro:macro>

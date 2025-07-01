@@ -58,6 +58,7 @@ build () {
 sim () {
     ros2 launch simlan_bringup sim.launch.py
 }
+
 # basic operation
 if [[ "$*" == *"clean"* ]]
 then
@@ -83,7 +84,7 @@ then
     ros2 launch dyno_jackal_bringup keyboard_steering.launch.py
 elif [[ "$*" == *"pallet_truck_teleop"* ]]
 then
-    ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/pallet_truck -r cmd_vel:=key_vel
+    ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/robot_agent_3 -r cmd_vel:=key_vel
 
 ## cartography, localization, navigation
 
@@ -106,23 +107,24 @@ then
 elif [[ "$*" == *"gpss"* ]]
 then
     sim &
+    clear
     sleep 5
-    ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true publish_to_odom:=true &
+
+    ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true publish_to_odom:=false &
     sleep 5
-    ros2 launch pallet_truck_navigation localization.launch.py &
+    ros2 launch pallet_truck_navigation map_server.launch.py &
     sleep 5
-    ros2 launch pallet_truck_navigation nav2.launch.py
+    ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py &
+    sleep 15
+    clear
+    ros2 launch pallet_truck_navigation nav2.launch.py namespace:=robot_agent_1
+
+
 
 ## Scenario
 elif [[ "$*" == *"scenario"* ]]
 then
     ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/test.osc
-
-
-
-
-
-
 
 
 ## Store and replay
