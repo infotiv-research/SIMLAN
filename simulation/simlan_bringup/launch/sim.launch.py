@@ -117,13 +117,13 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(launch_rviz_launch_argument)
-    ld.add_action(pallet_truck_manual_control_launch_argument)
+    # ld.add_action(pallet_truck_manual_control_launch_argument)
 
-    ld.add_action(simlan_gazebo)
+    # ld.add_action(simlan_gazebo)
 
-    ld.add_action(static_agents)
-    ld.add_action(pallet_truck)
-    ld.add_action(jackal)
+    # ld.add_action(static_agents)
+    # ld.add_action(pallet_truck)
+    # ld.add_action(jackal)
 
     ld.add_action(aruco_localization)
     ld.add_action(pallet_truck_localization)

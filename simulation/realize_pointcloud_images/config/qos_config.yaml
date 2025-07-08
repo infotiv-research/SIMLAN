@@ -1,0 +1,9 @@
+/realize_pointcloud_images/_internal_rpi_topic:
+  reliability: reliable
+  durability: volatile
+  depth: 10
+
+/realize_pointcloud_images/pointcloud_image:
+  reliability: reliable
+  durability: volatile
+  depth: 10
