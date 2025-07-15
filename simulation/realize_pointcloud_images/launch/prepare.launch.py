@@ -10,42 +10,33 @@ def generate_launch_description():
     # VARIABLES: Doesn't have to be changed, but can if you want.
     namespace = "realize_pointcloud_images"
     topic_name= "_internal_rpi_topic"
+
+    # TODO: Maybe automate the setting to match in rviz?
+    image_scale = 0.04
     # -----------------------------------------------------------
+
 
     output_directory = Path(
         get_package_share_directory(namespace),
         "cached_images"
     )
-
     output_folder_path = _prepare_data_folder(output_directory)
-    prepare_node, rosbag2_recorder = _declare_nodes(namespace, topic_name,
-                                                    output_folder_path)
+
+    qos_config_path = Path('simulation', namespace,
+                           'config', 'qos_config.yaml')
+
 
     return LaunchDescription([
-        prepare_node,
-        rosbag2_recorder,
-    ])
-
-# ===========================================================================
-
-def _declare_nodes(namespace, topic_name, output_folder_path):
-
-    prepare_node = Node(
+        Node( # Prepare the data, i.e. convert images to PointCloud2
             name="prepare",
             namespace=namespace,
             package="realize_pointcloud_images",
             executable="prepare_data",
-            parameters=[{'topic_name': topic_name}],
+            parameters=[{'topic_name': topic_name,
+                         'image_scale': image_scale}],
             output="screen"
-            )
-    
-    # TODO: Possibly using rosbag2_transport instead for greater control
-    #       over start and stop of recording and process in order to avoid
-    #       having to rely on the cache when stopping.
-    qos_config_path = Path('simulation', namespace,
-                           'config', 'qos_config.yaml')
-
-    rosbag2_recorder = ExecuteProcess(
+        ),
+        ExecuteProcess( # Record the PointCloud2 data
             name='rosbag2_recorder',
             cmd=['ros2', 'bag', 'record', f"{namespace}/{topic_name}",
                  '--output', output_folder_path,
@@ -53,10 +44,10 @@ def _declare_nodes(namespace, topic_name, output_folder_path):
                  '--qos-profile-overrides-path', str(qos_config_path),
                 ],
             output='screen',
-            )
+        )
+    ])
 
-    return prepare_node, rosbag2_recorder
-
+# ===========================================================================
 
 def _prepare_data_folder(output_directory):
     """__Explanation__:

@@ -23,7 +23,11 @@ class PreparePointCloud2Data(Node):
 
         self.publisher_ = self.create_publisher(PointCloud2, topic_name, qos_profile)
 
-        self.image_scale = 0.04
+
+        self.declare_parameter('image_scale', 0.04)
+        self.image_scale = self.get_parameter('image_scale').get_parameter_value().double_value
+
+
         self.images_folder_path = Path(
             get_package_share_directory('realize_pointcloud_images'),
             'bev_img'
@@ -88,8 +92,8 @@ class PreparePointCloud2Data(Node):
         ]
 
         header = Header()
+        header.frame_id = 'real_images'
         header.stamp = self.get_clock().now().to_msg()
-        header.frame_id = 'map'  # RViz2 frame
 
         cloud_msg = point_cloud2.create_cloud(header, fields, points)
         return cloud_msg
