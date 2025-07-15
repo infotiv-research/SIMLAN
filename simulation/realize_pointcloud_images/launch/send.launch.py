@@ -1,5 +1,6 @@
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess
+from launch_ros.actions import Node
 from datetime import datetime
 from ament_index_python.packages import get_package_share_directory
 from pathlib import Path
@@ -7,18 +8,34 @@ from pathlib import Path
 
 def generate_launch_description():
 
+    # VARIABLES: Doesn't have to be changed, but can if you want.
     namespace = "realize_pointcloud_images"
     playback_topic_name = "pointcloud_image"
-    playback_rate = "8"
+    playback_rate = "7.5"
+
+    # image position in the map frame
+    x = 15.35
+    y = 5.8
+    z = -0.2
+    # -----------------------------------------------------------
+
 
     saved_bags_path = Path(
         get_package_share_directory(namespace),
         "cached_images"
     )
+    latest_bag_path = _retrieve_latest_recording(saved_bags_path)
 
-    latest_bag_path = _retrieve_latest(saved_bags_path)
 
     return LaunchDescription([
+
+        Node( # Transform map->real_images
+            package="tf2_ros",
+            executable="static_transform_publisher",
+            name="static_map_to_real_images",
+            arguments=[str(x), str(y), str(z),"0", "0", "0",
+                       "map", "real_images"],
+        ),
 
         # TODO: Maybe add a check so rosbag2 don't start sending the
         #       images until someone is actually listening.
@@ -31,12 +48,12 @@ def generate_launch_description():
                  f'{namespace}/_internal_rpi_topic:={namespace}/{playback_topic_name}'
                 ],
             output='screen'
-            )
+        )
     ])
 
 # ===================================================================
 
-def _retrieve_latest(saved_bags_path):
+def _retrieve_latest_recording(saved_bags_path):
 
     keyword = "rosbag2_"
     keyword_size = len(keyword)
@@ -61,6 +78,3 @@ def _retrieve_latest(saved_bags_path):
             current = compare
 
     return latest_bag_path
-
-
-
