@@ -4,32 +4,18 @@ from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
     GroupAction,
-    IncludeLaunchDescription,
-    RegisterEventHandler,
-    OpaqueFunction
+    IncludeLaunchDescription
+    
 )
-from launch.actions import TimerAction
-from launch.conditions import IfCondition, UnlessCondition
-from launch.event_handlers import OnProcessExit
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
-    Command,
-    FindExecutable,
     LaunchConfiguration,
-    PathJoinSubstitution,
 )
-from launch_ros.actions import Node, PushRosNamespace, SetRemap
-from launch_ros.descriptions import ParameterValue
-from launch_ros.substitutions import FindPackageShare
+from launch_ros.actions import Node, PushRosNamespace
 
 from ament_index_python.packages import get_package_share_directory
 
-from dyno_utils.launch_utils import DynoWaitFor
-import rclpy.qos
-
-import std_msgs.msg
-import sensor_msgs.msg
-import rosgraph_msgs.msg
 
 def generate_launch_description():
 
@@ -56,8 +42,6 @@ def generate_launch_description():
         default_value="False",
         description="To launch pallet_truck keyboard steering or not",
     )
-    
-
 
     gazebo_spawn = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -96,13 +80,7 @@ def generate_launch_description():
         parameters=[twist_mux_params],
     )
 
-    localization = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_pallet_truck_navigation, "launch", "localization.launch.py")),
-        launch_arguments={
-            "namespace": namespace
-        }.items()
-    )
+   
     navigation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_pallet_truck_navigation, "launch", "nav2.launch.py")),
@@ -114,14 +92,13 @@ def generate_launch_description():
 
     ld = LaunchDescription()
     ld.add_action(gazebo_spawn)
-        
     ld.add_action(GroupAction(
         actions=[
             PushRosNamespace(namespace),
             control,
             keyboard_steering,
-            twist_mux,
-            localization
+            twist_mux
+            
         ]
     ))
     return ld

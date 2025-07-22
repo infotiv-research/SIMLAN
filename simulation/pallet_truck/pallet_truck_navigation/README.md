@@ -1,19 +1,50 @@
+
+
+## Map server
+
+Mapping (otherwise known as cartography), you're able to run from the `cartography.launch.py` package. It requires a lidar to be mounted on the robot_agent and odometry to exist, which can be activated from the [camera_utility/aruco_localization package](camera_utility/aruco_localization). 
+
+To start mapping, run this package, run gazebo, and rviz, and aruco_localization, and start moving around the simulation with the robot_agent. When your finished you need to save it using this command: `ros2 run nav2_map_server map_saver_cli -f simulation/pallet_truck/pallet_truck_navigation/maps/YOUR_MAP_NAME`. We already have the map for warehouse in the repository. Keep in mind that this step needs to be done only once and the map assumed to be static.
+
+We only have one map for all navigation stack. This simplify making obstacle and other robot agent to all other robot agents.
+
+```
+Node(  # Manually setting the joint between map and odom to 0 0 0, i.e. identical to each other. map -> odom
+  package="tf2_ros",
+  executable="static_transform_publisher",
+  name="static_world_to_map",
+  arguments=["0", "0", "0", "0", "0", "0", "world", "map"],
+  ...
+```
+# Pallet Truck Launch
+
+
+For each robot you need to define its initial position, its assigned aruco code and more importantly its unique **namespace** in `multiple_robot_spawn.launch.py`:
+```
+{
+  "namespace": "robot_agent_1", 
+  "initial_pose_x":"10.0", 
+  "initial_pose_y":"1.0", 
+  "robot_type":"pallet_truck", 
+  "aruco_id":"1"
+},
+```
+
 # Pallet Truck navigation
 
-- This package covers the functionality of mapping, localizing, and navigation for the pallet truck.
+This package covers the functionality of mapping, localizing, and navigation for the robot_agent. Each package is built using code from the nav2 packages, thus you are able to modify the launch files but to change the node's behaviour you need to modify the config files. The code is tailored for the robot_agent and using the `aruco_detection` package that supplies `/TF` chain for the truck.
 
-- Each package is built using code from the nav2 packages, thus you are able to modify the launch files but to change the node's behaviour you need to modify the config files
+- The `aruco_localization` package runs the aruco localisation.
+- The `nav2.launch.py` uses the localisation (from the previous step) for the  navigation of the robot_agent.
 
-- The code is tailored for the pallet truck and using the `aruco_detection` package that supplies odometry for the truck.
+Keep in mind that the same namespace has to be used when launching the navigation stack:  `ros2 launch pallet_truck_navigation nav2.launch.py namespace:=robot_agent_1`
 
-- Mapping (otherwise known as cartography), you're able to run from the `cartography.launch.py` package. It requires a lidar to be mounted on the pallet truck and odometry to exist, which can be activated from the [camera_utility/aruco_localization package](camera_utility/aruco_localization).
+For navigation to be able to automatically find the robot agent, we have to set a namespace that specified when launching the robot_agent. (see above)
 
-  - To start mapping, run this package, run gazebo, and rviz, and aruco_localization, and start moving around the simulation with the pallet truck. When your finished you need to save it using this command: `ros2 run nav2_map_server map_saver_cli -f simulation/pallet_truck/pallet_truck_navigation/maps/YOUR_MAP_NAME`.
+Each robot has it own navigation configuration in `robot_agent_X_nav2_params.yaml`. We use following `/TF` structure:
+**Note** that `world`, `map` and `robot_agent_X_odom` are static at the same position and the actual position is determined by `robot_agent_base_link`.
 
-- Localization, you're able to localize the pallet truck in rviz using the `localization.launch.py` package. It require you to have a map file and odometry running use the aruco_localization package.
 
-- Navigation, you're able to set a goal pose for the pallet truck and it will starting moving towards that goal by it self, using the `navigation.launch.py`. Running this package requires you to also run `localization.launch.py` in a parallel terminal and `aruco_localization`.
+![view_frames.png](view_frames.png)
 
-- There exists three config files where you can modify the setup for each of the three packages, they are found in the `config` folder.
-
-- Maps are stored in the `maps` folder
+Good video to watch for multi agent navigation: https://www.youtube.com/watch?v=cGUueuIAFgw

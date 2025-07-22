@@ -14,51 +14,6 @@ No solution
 
 Related to support for audio inside docker container. It will not be resolved
 
-## Dark simulation
-
-Make sure that nvidia driver is installed correctly
-
-### Nvidia GPU support
-
-To improve speed you can enable the support for nvidia GPU. To use nvidia GPU make sure [`nvidia-cuda-toolkit`](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/) is installed. Here is a summary of how to install it on Ubuntu 24.04:
-
-```
-
-$ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-
-$ sudo sed -i -e '/experimental/ s/^#//g' /etc/apt/sources.list.d/nvidia-container-toolkit.list
-
-$ sudo apt-get update
-
-$ sudo apt-get install -y nvidia-container-toolkit
-
-$ sudo nvidia-ctk runtime configure --runtime=docker
-INFO[0000] Config file does not exist; using empty config
-INFO[0000] Wrote updated config to /etc/docker/daemon.json
-INFO[0000] It is recommended that docker daemon be restarted.
-
-$ sudo systemctl restart docker
-$ sudo nvidia-ctk runtime configure --runtime=containerd
-INFO[0000] Using config version 1
-INFO[0000] Using CRI runtime plugin name "cri"
-WARN[0000] could not infer options from runtimes [runc crun]; using defaults
-INFO[0000] Wrote updated config to /etc/containerd/config.toml
-INFO[0000] It is recommended that containerd daemon be restarted.
-```
-
-To check for correct installation docker's nvidia runtime:
-
-```
-$ docker info|grep -i runtime
- Runtimes: nvidia runc
- Default Runtime: runc
-```
-
-Otherwise you get the following error message in vscode: `Error response from daemon: unknown or invalid runtime name: nvidia`
-
 ## Command failed: docker compose
 
 If you have any issue with docker incompatibility (e.g. `Error: Command failed: docker compose ...`), make sure that `docker compose` or `docker-compose` is set correctly in the setting.
@@ -162,56 +117,3 @@ To test the unit tests before pushing new codes:
 ```bash
 ./control.sh test
 ```
-
-## Overview of Project Structure
-
-- `README.md` : you are reading this file
-
-- [`control.sh`](control.sh) : control script as a shortcut to run different scripts
-
-- [`simulation/`](simulation/) : models, urdf and launch script for objects and agents in the gazebo simulator
-
-  - [`README.md`](simulation/README.md) : simulation and warehouse specification
-  - `object_mover/`
-  - `raw_models/`
-    - [`README.md`](simulation/raw_models/README.md) : building Gazebo models (Blender/Phobos)
-    - [`objects/README.md`](simulation/raw_models/objects/README.md) : objects specifications
-    - [`warehouse/README.md`](simulation/raw_models/warehouse/README.md) : warehouse specification
-  - `simlan_gazebo_environment/`
-  - `static_agent_launcher/`
-
-- [`camera_utility/`](camera_utility/): to positions cameras in simulator and camera_utility images from simulation
-
-  - [`aruco_localization/`](camera_utility/aruco_localization/) : ros2 package allowing camera to detect aruco code.
-
-  - [`camera_data/`](camera_utility/camera_data/) : camera data are stored here
-
-  - [`extrinsic/`](camera_utility/extrinsic/) : extrinsic camera calibration
-
-  - [`intrinsic/`](camera_utility/intrinsic/) : intrinsic camera calibration
-
-  - [`projection.ipynb`](camera_utility/projection.ipynb) : how to use camera calibration to project images to the ground plane
-
-  - [`camconf2xacro.sh`](camera_utility/camconf2xacro.sh): to update camera calibration in simulator
-
-  - [`calibration.py`](camera_utility/calibration.py) : to load and convert OpenCV calibration file
-
-  - [`camera_subscriber.py`](camera_utility/camera_subscriber.py) : script to read images from ROS2 topics
-
-  - [`README.md`](camera_utility/README.md) : to learn what camera_utility is done on images
-
-  - `rviz_config.rviz`
-
-- [`resources/`](resources) : images , videos and documents are placed here (no code should be stored here)
-
-- [`docker-compose.yaml`](docker-compose.yaml) : disable and enable nvidia gpu
-
-- [`ISSUES.md`](ISSUES.md) : please check known issues before reporting any issue
-
-- [`requirements.txt`](requirements.txt) : python (pip) dependencies
-
-- [`CHANGELOG.md`](CHANGELOG.md)
-
-- [`CREDITS.md`](CREDITS.md)
-
-- `LICENSE`

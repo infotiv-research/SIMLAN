@@ -60,7 +60,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /pallet_truck/robot_description
+        Value: /robot_agent_1/robot_description
       Enabled: true
       Links:
         All Links Enabled: true
@@ -68,6 +68,49 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        robot_agent_1_aruco_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_agent_1_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        robot_agent_1_chassis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_agent_1_front_left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_agent_1_front_right_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_agent_1_imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        robot_agent_1_rear_left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_agent_1_rear_right_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_agent_1_scan_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
@@ -215,13 +258,39 @@ Visualization Manager:
               {}
           map:
             robot_agent_1_odom:
-              {}
+              robot_agent_1_base_link:
+                robot_agent_1_aruco_1_link:
+                  {}
+                robot_agent_1_chassis_link:
+                  robot_agent_1_front_left_wheel_link:
+                    {}
+                  robot_agent_1_front_right_wheel_link:
+                    {}
+                  robot_agent_1_imu_link:
+                    {}
+                  robot_agent_1_rear_left_wheel_link:
+                    {}
+                  robot_agent_1_rear_right_wheel_link:
+                    {}
+                robot_agent_1_scan_link:
+                  {}
             robot_agent_2_odom:
-              {}
-            robot_agent_3_odom:
-              {}
-            robot_agent_4_odom:
-              {}
+              robot_agent_2_base_link:
+                robot_agent_2_aruco_2_link:
+                  {}
+                robot_agent_2_chassis_link:
+                  robot_agent_2_front_left_wheel_link:
+                    {}
+                  robot_agent_2_front_right_wheel_link:
+                    {}
+                  robot_agent_2_imu_link:
+                    {}
+                  robot_agent_2_rear_left_wheel_link:
+                    {}
+                  robot_agent_2_rear_right_wheel_link:
+                    {}
+                robot_agent_2_scan_link:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -630,7 +699,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.670354843139648
+      Distance: 9.458087921142578
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -645,10 +714,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6892263293266296
+      Pitch: 0.7542262673377991
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 1.457847237586975
+      Yaw: 1.6028470993041992
     Saved: ~
 Window Geometry:
   Camera:

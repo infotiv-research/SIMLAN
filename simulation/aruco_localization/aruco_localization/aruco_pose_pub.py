@@ -5,17 +5,9 @@ import tf2_ros
 from geometry_msgs.msg import TransformStamped, Transform
 from scipy.spatial.transform import Rotation as R
 from tf2_ros import Buffer, TransformListener
-from nav_msgs.msg import Odometry
 from rclpy.time import Time, Duration
-from typing import Dict, List
+from typing import Dict
 from collections import defaultdict
-
-"""_summary_
-    This node listens to the TF and tries to find any link from origin (base_link for now) to an aruco marker. As of now we only care about the aruco marker on the pallet truck that has id 12.
-    We iterate through every camera to see if any have noticed a marker and if we for a small timeframe find multiple, we average their pose and rotation from origin to the marker, together using a simple averaging algorithm.
-    lastly we publish this single transform into either odom or TF. You should not do both since a child link can only have one parent.
-
-"""
 
 
 # Helper function that extracts the rotation matrix from a Transform
@@ -66,18 +58,16 @@ class ArucoPosePubNode(Node):
         super().__init__("aruco_pose_publisher")
 
         self.declare_parameter(
-            "camera_ids",
+            "camera_enabled_ids",
             [
                 163,
                 164,
                 165,
             ],
         )
-        self.declare_parameter("publish_to_odom", True)
         self.declare_parameter("update_rate", 100)  # Updates N times per second
 
-        self.publish_to_odom = self.get_parameter("publish_to_odom").value
-        self.camera_ids = self.get_parameter("camera_ids").value
+        self.camera_enabled_ids = self.get_parameter("camera_enabled_ids").value
         self.update_rate = self.get_parameter("update_rate").value
         self.last_stamp = self.get_clock().now()
         self.max_frame_age = Duration(seconds=1)
@@ -91,7 +81,6 @@ class ArucoPosePubNode(Node):
         self.timer = self.create_timer(
             1 / self.update_rate, self.camera_aruco_pose_callback
         )  # Every 0.1 is 10Hz
-        self.odom_pub = self.create_publisher(Odometry, "/odom", 10)
         self.create_timer(
             1 / self.update_rate, self.publish_poses
         )  # every 0.05s is 20Hz. 20 runs per sec
@@ -110,27 +99,7 @@ class ArucoPosePubNode(Node):
             if now <= self.last_stamp:
                 now = self.last_stamp + Duration(nanoseconds=10)
 
-            # Publish new TF based on our computed average translation and rotation to ODOM and TF
-            odom_pallet_truck = Odometry()
-            odom_pallet_truck.header.stamp = now.to_msg()
-            odom_pallet_truck.header.frame_id = (
-                f"robot_agent_{marker_id}_odom"  # Is actually base_link
-            )
-            odom_pallet_truck.child_frame_id = (
-                f"robot_agent_{marker_id}_base_link"  # namespace = robot_agent_1
-            )
-            odom_pallet_truck.pose.pose.position.x = (
-                markers_latest_transform.translation.x
-            )
-            odom_pallet_truck.pose.pose.position.y = (
-                markers_latest_transform.translation.y
-            )
-            odom_pallet_truck.pose.pose.position.z = (
-                markers_latest_transform.translation.z
-            )
-            odom_pallet_truck.pose.pose.orientation = markers_latest_transform.rotation
-
-            # odom to pallet truck base link.
+            # Creating frame with parent: robot_agent_X_odom and child: robot_agent_X_base_link.
             t_base_link_to_pallet_truck = TransformStamped()
             t_base_link_to_pallet_truck.header.stamp = self.get_clock().now().to_msg()
             t_base_link_to_pallet_truck.header.frame_id = (
@@ -141,11 +110,7 @@ class ArucoPosePubNode(Node):
             )
             t_base_link_to_pallet_truck.transform = markers_latest_transform
 
-            # We send the transforms to odom or base_link depending on the publish_to_odom flag.
-            if self.publish_to_odom:
-                self.odom_pub.publish(odom_pallet_truck)
-            else:
-                self.tf_broadcaster.sendTransform(t_base_link_to_pallet_truck)
+            self.tf_broadcaster.sendTransform(t_base_link_to_pallet_truck)
             # we set new timestamp for next iteration
             self.last_stamp = now
 
@@ -159,7 +124,7 @@ class ArucoPosePubNode(Node):
         )  # visible transform is a dict with key: marker id of interest and value an array of the transforms.
         now = self.get_clock().now()
         # We check every camera
-        for camera_id in self.camera_ids:
+        for camera_id in self.camera_enabled_ids:
             # We go over every marker of interest and see if they are noticed in camera
             for marker_id in markers_of_interest:
 

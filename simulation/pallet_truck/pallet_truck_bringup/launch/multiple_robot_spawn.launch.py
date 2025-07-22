@@ -1,30 +1,9 @@
 import os.path
-import launch
 from launch import LaunchDescription
-from launch.actions import (
-    DeclareLaunchArgument,
-    GroupAction,
-    IncludeLaunchDescription,
-    RegisterEventHandler,
-)
-from launch.conditions import IfCondition, UnlessCondition
-from launch.event_handlers import OnProcessExit
+from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import (
-    Command,
-    FindExecutable,
-    LaunchConfiguration,
-    PathJoinSubstitution,
-)
-from launch_ros.actions import Node, PushRosNamespace, SetRemap
-from launch_ros.descriptions import ParameterValue
-from launch_ros.substitutions import FindPackageShare
-
+from launch.substitutions import LaunchConfiguration
 from ament_index_python.packages import get_package_share_directory
-import rclpy.qos
-import std_msgs.msg
-import sensor_msgs.msg
-import rosgraph_msgs.msg
 
 
 def generate_launch_description():
@@ -39,11 +18,11 @@ def generate_launch_description():
             "aruco_id":"1"
         },
         {
-            "namespace": "robot_agent_2", 
-            "initial_pose_x":"15.0", 
-            "initial_pose_y":"1.0", 
-            "robot_type":"pallet_truck", 
-            "aruco_id":"2" 
+             "namespace": "robot_agent_2", 
+             "initial_pose_x":"15.0", 
+             "initial_pose_y":"1.0", 
+             "robot_type":"pallet_truck", 
+             "aruco_id":"2" 
         },
         {
             "namespace": "robot_agent_3", 

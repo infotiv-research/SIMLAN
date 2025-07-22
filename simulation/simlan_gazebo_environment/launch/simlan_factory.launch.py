@@ -17,7 +17,7 @@
 # Authors: Joep Tool
 
 import os
-
+from launch.actions import OpaqueFunction, DeclareLaunchArgument
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
@@ -30,17 +30,13 @@ from launch_ros.actions import Node
 import yaml
 
 
-def generate_launch_description():
+def launch_setup(context, *args, **kwargs):
 
-    # Get the path to the config file
-    # config_file = os.environ["CAMERA_CONFIG_FILE"]
-    # # Load the cameras
-    # with open(config_file, "r") as f:
-    #     cameras = yaml.safe_load(f)["cameras"]
-    # # Get just the camera IDs
-    # camera_ids_list = [camera["id"] for camera in cameras]
-    camera_ids_list = os.environ["CAMERA_ENABLED_IDS"].split()
-    print(f"------------------------------> camera_ids_list: {camera_ids_list}")
+    actions = []
+
+    camera_enabled_ids = LaunchConfiguration("camera_enabled_ids").perform(context)
+    camera_enabled_ids = camera_enabled_ids.split(" ")
+    print(f"------------------------------> camera_enabled_ids: {camera_enabled_ids}")
     # camera_ids_list = [163, 164, 165, 166]
     launch_file_dir = os.path.join(
         get_package_share_directory("simlan_gazebo_environment"), "launch"
@@ -117,7 +113,7 @@ def generate_launch_description():
         arguments=["/camera/camera_info"],
     )
 
-    for camera_id in camera_ids_list:
+    for camera_id in camera_enabled_ids:
         ros_gz_image = Node(
             package="ros_gz_bridge",
             executable="parameter_bridge",
@@ -138,7 +134,7 @@ def generate_launch_description():
                 ),
             ],
         )
-        ld.add_action(ros_gz_image)
+        actions.append(ros_gz_image)
 
         ros_gz_depth_image = Node(
             package="ros_gz_bridge",
@@ -165,7 +161,7 @@ def generate_launch_description():
                 # ),
             ],
         )
-        ld.add_action(ros_gz_depth_image)
+        actions.append(ros_gz_depth_image)
 
         ros_gz_semantic_image = Node(
             package="ros_gz_bridge",
@@ -197,7 +193,7 @@ def generate_launch_description():
                 ),
             ],
         )
-        ld.add_action(ros_gz_semantic_image)
+        actions.append(ros_gz_semantic_image)
     # segmentation_bridge = Node(
     #     package="ros_gz_bridge",
     #     executable="parameter_bridge",
@@ -214,9 +210,9 @@ def generate_launch_description():
     # )
     # ld.add_action(segmentation_bridge)
 
-    ld.add_action(gzserver_cmd)
+    actions.append(gzserver_cmd)
     # ld.add_action(set_env_vars_resources)
-    ld.add_action(ros_gz_bridge)
+    actions.append(ros_gz_bridge)
 
     # ld.add_action(world)
 
@@ -227,4 +223,14 @@ def generate_launch_description():
         print("SIM_ENV not found, set to DEV")
         os.environ["SIM_ENV"] = "DEV"
 
-    return ld
+    return actions
+
+
+def generate_launch_description():
+    return LaunchDescription(
+        [
+            # Declare the launch argument (optional if passed from parent)
+            DeclareLaunchArgument("camera_enabled_ids", default_value="163 164 165"),
+            OpaqueFunction(function=launch_setup),
+        ]
+    )
