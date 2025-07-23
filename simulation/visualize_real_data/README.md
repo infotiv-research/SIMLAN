@@ -9,7 +9,7 @@ After that, you can add the required data into the `share/` folder that is creat
 
 ### Step 1: **Build the Package**
 
-Before working with any data, ensure that the package has been built at least once with:
+Before working with any data, ensure that the package has been built at least once, *for example* with:
 
 ```bash
 colcon build --merge-install --symlink-install --packages-select visualize_real_data
