@@ -182,6 +182,7 @@ class PrepareRealData(Node):
             # Calculate fps, assuming dt in ms
             dt_fps = 1/expected_dt/0.001
             
+        if len(dt_array) == 0: dt_fps = 1
 
         # Write to file:
         # TODO: Don't force this if the user don't want to?
@@ -198,7 +199,7 @@ class PrepareRealData(Node):
             self.get_logger().info(
                 f"'extracted_fps' overridden to {dt_fps} in config and " \
                 + "will be used when bagged messages are published. " \
-                + "To decide fps yourself, please change this value in" \
+                + "To decide fps yourself, please change this value in " \
                 + "the config file manually."
                 )
     
