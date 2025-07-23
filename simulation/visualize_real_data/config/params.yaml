@@ -1,0 +1,32 @@
+prepare_data:
+  # Topics
+  entity_topic: entity_topic
+  pointcloud_topic: pointcloud_topic
+
+  # Data folder
+  images_folder: images
+  json_file_name: trajectories.json
+
+  # Runtime variables
+  image_scale: 0.04
+  set_frames: false
+  frames_to_process: 1
+
+send_data:
+  # Calculated during preparation
+  extracted_fps: 10.0
+
+  # Can be changed to move the frame
+  frame_position:
+    x: 15.35
+    y: 5.8
+    z: -0.2
+
+  playback_rate: 1
+
+shared:
+  frame_id: real_data
+  
+  # Could be increased for greater overhead,
+  # or reduced for greater processing speed (risky)
+  processing_time_limit: 0.9
