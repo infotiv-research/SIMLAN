@@ -3,7 +3,9 @@ from datetime import datetime
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess
+from launch.actions import ExecuteProcess, RegisterEventHandler, EmitEvent
+from launch.event_handlers import OnProcessExit
+from launch.events import Shutdown
 import yaml
 
 def generate_launch_description():
@@ -47,10 +49,22 @@ def generate_launch_description():
             parameters=[parameters],
             output="screen"
         )
+    
+    kill_rosbag = RegisterEventHandler(
+        OnProcessExit(
+            target_action=prepare_data,
+            on_exit=[
+                EmitEvent(
+                    event=Shutdown()
+                )
+            ]
+        )
+    )
 
     ld = LaunchDescription()
     ld.add_action(rosbag)
     ld.add_action(prepare_data)
+    ld.add_action(kill_rosbag)
     return ld
 
 
