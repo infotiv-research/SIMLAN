@@ -43,6 +43,7 @@ def generate_launch_description():
     is_sim = LaunchConfiguration("is_sim", default=True)
 
     is_sim_arg = DeclareLaunchArgument("is_sim", default_value=is_sim)
+    namespace = LaunchConfiguration("namespace")
 
     # Localization
     localization_group_action = GroupAction(
@@ -71,7 +72,6 @@ def generate_launch_description():
                     "stderr": "screen",
                 },
                 remappings=[("/tf", "tf")],
-                # namespace='pallet_truck',
                 condition=UnlessCondition(is_sim),
             ),
             # Joint State Broadcaster
@@ -81,7 +81,7 @@ def generate_launch_description():
                 arguments=[
                     "joint_state_broadcaster",
                     "-c",
-                    "/pallet_truck/controller_manager",
+                    "controller_manager",
                 ],
                 output="screen",
             ),
@@ -92,7 +92,7 @@ def generate_launch_description():
                 arguments=[
                     "velocity_controller",
                     "-c",
-                    "/pallet_truck/controller_manager",
+                    "controller_manager",
                 ],
                 output="screen",
             ),

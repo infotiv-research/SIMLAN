@@ -26,7 +26,7 @@ header: '[▣](#1 " ")    SIMLAN Project'
 
 ## Volvo GPSS Technology
 
-In the factory of the future, humans and Autonomous Transport Robots (ATRs) will collaborate. \[...\] There are dynamic obstacles, such as **people** and traditional **forklifts**, which the system cannot control. \[...\] This is where GPSS technology plays a critical role. The concept is that **ceiling-mounted cameras** detect and classify all static and dynamic obstacles on the factory floor, guiding transport robots to their destinations without collisions or accidents. These cameras act as the **shared "eyes"** of the robot fleet.
+In the factory of the future, humans and Autonomous Transport Robots (ATRs) will collaborate. \[...\] There are dynamic obstacles, such as **people** and traditional **forklifts**, which the system cannot control. \[...\] This is where GPSS (Generic Photogrammetry based Sensor System) technology plays a critical role. The concept is that **ceiling-mounted cameras** detect and classify all static and dynamic obstacles on the factory floor, guiding transport robots to their destinations without collisions or accidents. These cameras act as the **shared "eyes"** of the robot fleet.
 ([Source: Chalmers website](https://www.chalmers.se/en/current/news/e2-in-the-factory-of-the-future-humans-and-robots-work-together-on-equal-terms/))
 
 [Watch on YouTube](https://www.youtube.com/watch?v=DA7lKiCdkCc)
@@ -37,7 +37,7 @@ In the factory of the future, humans and Autonomous Transport Robots (ATRs) will
 [**SLAM**](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping): constructing (or updating) a map of an unknown environment while simultaneously keeping track of an agent's location within it usually using  [Lidar](https://www.youtube.com/watch?v=ZAESH7bu3IY) or [Camera](https://youtu.be/9cPqbtiGWKM?feature=shared&t=16).
 
 
-**GPSS**: No mapping but only localization using fixed cameras, simpler and cheaper robots, less autonomy but more centrally controlled and orchestrated, with no need for robot to robot communication. Effective in warehouses with uniform shelves and corridors.
+**GPSS**: No mapping but only localization using fixed cameras, simpler and cheaper robots, less autonomy but more centrally controlled and orchestrated, with no need for robot to robot communication. Effective in warehouses with uniform shelves and corridors or open space areas with no landmarks.
 
 ---
 

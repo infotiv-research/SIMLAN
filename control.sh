@@ -5,16 +5,15 @@ echo "ROS_DOMAIN_ID.txt:" $ROS_DOMAIN_ID
 export GZ_SIM_RESOURCE_PATH=/usr/share/ignition/
 export IGN_GAZEBO_RESOURCE_PATH=usr/share/ignition/
 
-# Export camera IDs as a space-separated string
-export CAMERA_ENABLED_IDS="163 164 165 166"
-
+# Camera Ids listed here are enabled in the simulation.
+camera_enabled_ids='163 164 165 166'
 source install/setup.bash
 source /opt/dependencies_ws/install/setup.bash
 
 
 export PYTHONPATH="/home/ros/src/camera_utility/:$PYTHONPATH"
 export CALIB_PATH="/home/ros/src/camera_utility/"
-echo "Available camera IDs: $CAMERA_ENABLED_IDS"
+echo "Available camera IDs: ${camera_enabled_ids[@]}"
 
 if [ $# -eq 0 ]
   then
@@ -48,7 +47,7 @@ build () {
     export ROS_DOMAIN_ID=$ROS_DOMAIN_ID
     mkdir camera_utility/camera_data/
     # Generate camera_config.xacro from camera_config.yaml
-    (cd camera_utility/; ./camconf2xacro.sh > ../simulation/static_agent_launcher/description/camera_config.xacro )
+    (cd camera_utility/; ./camconf2xacro.sh ${camera_enabled_ids} > ../simulation/static_agent_launcher/description/camera_config.xacro )
     colcon build --merge-install --symlink-install --cmake-args " -Wno-dev "
     git checkout camera_utility/camera_data/ # undo changes
     #git checkout simulation/static_agent_launcher/description/camera_config.xacro # undo changes
@@ -56,8 +55,10 @@ build () {
 }
 
 sim () {
-    ros2 launch simlan_bringup sim.launch.py
+    ros2 launch simlan_bringup sim.launch.py "camera_enabled_ids:=${camera_enabled_ids}"
+
 }
+
 # basic operation
 if [[ "$*" == *"clean"* ]]
 then
@@ -83,8 +84,7 @@ then
     ros2 launch dyno_jackal_bringup keyboard_steering.launch.py
 elif [[ "$*" == *"pallet_truck_teleop"* ]]
 then
-    ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/pallet_truck -r cmd_vel:=key_vel
-
+    ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/robot_agent_1 -r cmd_vel:=key_vel
 ## cartography, localization, navigation
 
 elif [[ "$*" == *"cartographer"* ]]
@@ -94,7 +94,7 @@ then
 
 elif [[ "$*" == *"birdeye"* ]]
 then
-    for camera_id in $CAMERA_ENABLED_IDS; do
+    for camera_id in $camera_enabled_ids; do
         ros2 run camera_bird_eye_view camera_bird_eye_view_publisher \
             --ros-args -p camera_id:=$camera_id \
             --ros-args -p point_start:="[4, -4]" \
@@ -106,23 +106,33 @@ then
 elif [[ "$*" == *"gpss"* ]]
 then
     sim &
-    sleep 5
-    ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true publish_to_odom:=true &
-    sleep 5
-    ros2 launch pallet_truck_navigation localization.launch.py &
-    sleep 5
-    ros2 launch pallet_truck_navigation nav2.launch.py
+    sleep 10
+    ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true "camera_enabled_ids:=${camera_enabled_ids}" &
+    sleep 10
+    ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py
+
+elif [[ "$*" == *"nav"* ]]
+then
+    ros2 launch pallet_truck_navigation map_server.launch.py &
+    sleep 10
+    ros2 launch pallet_truck_navigation nav2.launch.py namespace:=robot_agent_1 &
+    ros2 launch pallet_truck_navigation nav2.launch.py namespace:=robot_agent_2
+
+elif [[ "$*" == *"send_goals"* ]]
+then
+    ros2 action send_goal /robot_agent_1/navigate_to_pose nav2_msgs/action/NavigateToPose '{pose: {header: {frame_id: "map"}, pose: {position: {x: 18.0, y: 2.0, z: 0.0}, orientation: {w: 1.0}}}}' &
+    pid1=$!
+
+    ros2 action send_goal /robot_agent_2/navigate_to_pose nav2_msgs/action/NavigateToPose '{pose: {header: {frame_id: "map"}, pose: {position: {x: 18.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}}' &
+    pid2=$!
+
+    wait $pid1
+    wait $pid2
 
 ## Scenario
 elif [[ "$*" == *"scenario"* ]]
 then
     ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/test.osc
-
-
-
-
-
-
 
 
 ## Store and replay
@@ -149,13 +159,13 @@ then
 elif [[ "$*" == *"aruco_detection"* ]]
 then
     # assigns an aruco detection node to each camera listed in the argument
-    ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true
+    ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true "camera_enabled_ids:=${camera_enabled_ids}"
 
 elif [[ "$*" == *"camera_dump"* ]]
 then
     cd ./camera_utility ;
-    echo "Starting camera dump for cameras: $CAMERA_ENABLED_IDS"
-    for camera_id in $CAMERA_ENABLED_IDS; do
+    echo "Starting camera dump for cameras: ${camera_enabled_ids}"
+    for camera_id in $camera_enabled_ids; do
         echo "Starting camera $camera_id"
         python3 camera_subscriber.py --action save --camera $camera_id &
     done

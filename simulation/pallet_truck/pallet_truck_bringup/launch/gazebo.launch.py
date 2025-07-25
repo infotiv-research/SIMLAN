@@ -1,6 +1,6 @@
 import os.path
 import os
-
+from launch.actions import OpaqueFunction
 from launch import LaunchDescription
 from launch.actions import RegisterEventHandler, GroupAction
 from launch.event_handlers import OnProcessExit
@@ -18,20 +18,22 @@ import launch
 
 
 def generate_launch_description():
+    namespace = LaunchConfiguration("namespace")
+    initial_pose_x = LaunchConfiguration("initial_pose_x")
+    initial_pose_y = LaunchConfiguration("initial_pose_y")
+    aruco_id = LaunchConfiguration("aruco_id")
+    robot_type = LaunchConfiguration("robot_type")
 
     pkg_pallet_truck_description = get_package_share_directory(
         "pallet_truck_description"
     )
-
-    # Launch args
-    use_sim_time = LaunchConfiguration("use_sim_time", default=True)
-
     # Set the path to the SDF model files.
     gazebo_models_path = os.path.join(pkg_pallet_truck_description, "meshes")
     os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
     os.environ["GZ_SIM_RESOURCE_PATH"] = gazebo_models_path
     os.environ["IGN_GAZEBO_RESOURCE_PATH"] = gazebo_models_path
 
+    
     # Get URDF via xacro
     robot_description_content = Command(
         [
@@ -45,74 +47,55 @@ def generate_launch_description():
                 ]
             ),
             " ",
-            "name:=pallet_truck",
+            "name:=", namespace,
             " ",
-            "prefix:=pallet_truck",
+            "prefix:=", namespace,
             " ",
             "is_sim:=true",
+            " ",
+            "namespace:=", namespace,
+            " ",
+            "aruco_id:=", aruco_id,
+            " ",
+            "robot_type:=", robot_type
         ]
     )
 
     robot_description = {"robot_description": ParameterValue(robot_description_content)}
 
-    # spawn_velocity_controller = Node(
-    #     package='controller_manager',
-    #     executable='spawner',
-    #     arguments=['velocity_controller', '-c', 'controller_manager'],
-    #     output='screen',
-    # )
-
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="screen",
-        parameters=[{"use_sim_time": True}, robot_description],
+        namespace=namespace,
+        parameters=[
+            {"use_sim_time": True},
+            robot_description
+        ]
     )
 
-    # spawn_joint_state_broadcaster = Node(
-    #     package='controller_manager',
-    #     executable='spawner',
-    #     arguments=['joint_state_broadcaster', '-c', 'controller_manager'],
-    #     output='screen',
-    # )
-
-    # Make sure spawn_velocity_controller starts after spawn_joint_state_broadcaster
-    # diffdrive_controller_spawn_callback = RegisterEventHandler(
-    #     event_handler=OnProcessExit(
-    #         target_action=spawn_joint_state_broadcaster,
-    #         on_exit=[spawn_velocity_controller],
-    #     )
-    # )
-
-    # Spawn robot
+    
     spawn_robot = Node(
         package="ros_gz_sim",
         executable="create",
         name="spawn_pallet_truck",
         arguments=[
-            "-name",
-            "pallet_truck",
-            "-x",
-            "10.0",
-            "-y",
-            "1.0",
-            "-z",
-            "0.2",
-            "-topic",
-            "robot_description",
-            "-robot_namespace",
-            "pallet_truck",
+            "-name", namespace,
+            "-x", initial_pose_x,
+            "-y", initial_pose_y,
+            "-z", "0.2",
+            "-topic",  PathJoinSubstitution([namespace, "robot_description"]),
+            "-robot_namespace", namespace
         ],
         output="screen",
-    )
+        )
+    
+    
 
     ld = LaunchDescription()
-    # ld.add_action(world_launch_configuration)
-    # ld.add_action(spawn_joint_state_broadcaster)
-    # ld.add_action(diffdrive_controller_spawn_callback)
     ld.add_action(robot_state_publisher)
     ld.add_action(spawn_robot)
-
+   
     return ld
 
 

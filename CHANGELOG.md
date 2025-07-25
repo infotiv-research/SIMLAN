@@ -1,3 +1,9 @@
+### 2.0.1: Namespace cleanup and multi-agent navigation (Aug 2025) - Supervisor: Hamid Ebadi
+
+- Generic robot-agent with different mesh(pallet_truck/forklift) and aruco id
+- Robot-agent and nav2 namespace
+- Multi-agent navigation using GPSS
+
 ### 2.0.0: GPSS (May 2025) - Supervisor: Hamid Ebadi
 
 - Upgrade Gazebo from classic to ignition, adapting new sensors: Nazeeh Alhosary

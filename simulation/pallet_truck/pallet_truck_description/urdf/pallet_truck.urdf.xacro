@@ -2,8 +2,13 @@
 <robot name="pallet_truck" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:arg name="is_sim" default="true" />
   <xacro:arg name="prefix" default="pallet_truck" />
+  <xacro:arg name="namespace" default="pallet_truck" />
+
+  <xacro:property name="robot_type" value="$(arg robot_type)" />
+
   <!-- <xacro:property name="prefix" default="$(arg prefix)" /> -->
   <xacro:arg name="gazebo_controllers" default="$(find pallet_truck_control)/config/control.yaml" />
+
   <xacro:property name="PI" value="3.1415926535897931" />
 
   <xacro:property name="wheelbase" value="0.262" />
@@ -127,6 +132,9 @@
   </joint>
 
   <link name="$(arg prefix)_chassis_link">
+
+
+  <xacro:if value="${robot_type == 'pallet_truck'}">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -138,6 +146,35 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="0.6 0.6 0.6" />
+      </geometry>
+    </collision>
+
+    <inertial>
+      <!-- Center of mass -->
+      <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
+      <mass value="16.523"/>
+      <inertia
+        ixx="0.3136" ixy="-0.0008" ixz="0.0164"
+        iyy="0.3922" iyz="-0.0009"
+        izz="0.4485"/>
+    </inertial>
+  </xacro:if>
+
+
+
+
+  <xacro:if value="${robot_type == 'forklift'}">
+    <visual>
+      <origin xyz="-0.5 -0.25 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae" scale="0.6 0.6 0.6" />
+      </geometry>
+        <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="-0.5 -0.25 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae" scale="0.6 0.6 0.6" />
       </geometry>
     </collision>
     <!--
@@ -158,6 +195,8 @@
         iyy="0.3922" iyz="-0.0009"
         izz="0.4485"/>
     </inertial>
+  </xacro:if>
+
   </link>
 
 
