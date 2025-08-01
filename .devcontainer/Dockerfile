@@ -125,6 +125,12 @@ RUN echo "export GAZEBO_MODEL_PATH=/usr/share/gazebo-11/models:/usr/share/gazebo
 RUN echo "source /home/ros/src/install/setup.bash" >> /home/ros/.bashrc
 RUN echo "source /opt/dependencies_ws/install/setup.bash" >> /home/ros/.bashrc
 RUN echo 'source /opt/ros/${ROS_DISTRO}/setup.bash' >> /home/ros/.bashrc
+RUN echo "alias rosbuild='colcon build --merge-install --symlink-install --cmake-args -Wno-dev'" >> /home/ros/.bashrc
+
+RUN sudo apt update && \
+    sudo apt install ros-${ROS_DISTRO}-foxglove-bridge ros-${ROS_DISTRO}-rqt-tf-tree silversearcher-ag -y && \
+    sudo apt autoremove -y && \
+    sudo rm -rf /var/lib/apt/lists/*
 
 COPY . /home/ros/src/
 RUN chown -R ros:ros  /home/ros/src/

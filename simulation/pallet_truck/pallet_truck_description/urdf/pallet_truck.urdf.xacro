@@ -73,7 +73,7 @@
     </gazebo>
 
     <joint name="${wheel_prefix}_wheel_joint" type="continuous">
-      <parent link="$(arg prefix)_chassis_link"/>
+      <parent link="$(arg prefix)/chassis_link"/>
       <child link="${wheel_prefix}_wheel_link" />
       <xacro:insert_block name="joint_pose" />
       <axis xyz="0 1 0" />
@@ -92,28 +92,28 @@
     </transmission>
   </xacro:macro>
 
-  <xacro:wheel wheel_prefix="$(arg prefix)_front_left">
+  <xacro:wheel wheel_prefix="$(arg prefix)/front_left">
     <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="$(arg prefix)_front_right">
+  <xacro:wheel wheel_prefix="$(arg prefix)/front_right">
     <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="$(arg prefix)_rear_left">
+  <xacro:wheel wheel_prefix="$(arg prefix)/rear_left">
     <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="$(arg prefix)_rear_right">
+  <xacro:wheel wheel_prefix="$(arg prefix)/rear_right">
     <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
 
   <joint name="scan_joint" type="fixed">
     <origin xyz="0 0 1.5" rpy="0 0 0"/>
-    <parent link="$(arg prefix)_base_link"/>
-    <child link="$(arg prefix)_scan_link"/>
+    <parent link="$(arg prefix)/base_link"/>
+    <child link="$(arg prefix)/scan_link"/>
   </joint>
 
 
   <!-- LIDAR -->
-  <link name="$(arg prefix)_scan_link">
+  <link name="$(arg prefix)/scan_link">
       <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -122,16 +122,16 @@
     </visual>
   </link>
 
-  <link name="$(arg prefix)_base_link"></link>
+  <link name="$(arg prefix)/base_link"></link>
 
 
-  <joint name="$(arg prefix)_base_link_joint" type="fixed">
+  <joint name="$(arg prefix)/base_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="$(arg prefix)_base_link"/>
-    <child link="$(arg prefix)_chassis_link" />
+    <parent link="$(arg prefix)/base_link"/>
+    <child link="$(arg prefix)/chassis_link" />
   </joint>
 
-  <link name="$(arg prefix)_chassis_link">
+  <link name="$(arg prefix)/chassis_link">
 
 
   <xacro:if value="${robot_type == 'pallet_truck'}">
@@ -204,21 +204,21 @@
        to supply the joint between it and imu_link. This is important so that imu_link
        always points to the "active" IMU. When an upgrade IMU is connected, the
        internal_imu_link should remain, but imu_link should point to the upgrade one. -->
-  <link name="$(arg prefix)_imu_link">
+  <link name="$(arg prefix)/imu_link">
     <inertial>
       <mass value="0.001"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
     </inertial>
   </link>
-  <joint name="$(arg prefix)_imu_joint" type="fixed">
-    <parent link="$(arg prefix)_chassis_link" />
-    <child link="$(arg prefix)_imu_link" />
+  <joint name="$(arg prefix)/imu_joint" type="fixed">
+    <parent link="$(arg prefix)/chassis_link" />
+    <child link="$(arg prefix)/imu_link" />
   </joint>
 
   <!-- TODO Same note as applies to imu_link -->
   <!--
-  <link name="$(arg prefix)_navsat_link">
+  <link name="$(arg prefix)/navsat_link">
     <visual>
       <geometry>
         <cylinder radius="0.026" length="0.016" />
@@ -227,30 +227,30 @@
       <material name="black" />
     </visual>
   </link>
-  <joint name="$(arg prefix)_navsat_joint" type="fixed">
-    <parent link="$(arg prefix)_chassis_link" />
-    <child link="$(arg prefix)_navsat_link" />
+  <joint name="$(arg prefix)/navsat_joint" type="fixed">
+    <parent link="$(arg prefix)/chassis_link" />
+    <child link="$(arg prefix)/navsat_link" />
     <origin xyz="-0.180 0.126 0.1815" />
   </joint>
 
-  <link name="$(arg prefix)_mid_mount"></link>
-  <joint name="$(arg prefix)_mid_mount_joint" type="fixed">
-    <parent link="$(arg prefix)_chassis_link" />
-    <child link="$(arg prefix)_mid_mount" />
+  <link name="$(arg prefix)/mid_mount"></link>
+  <joint name="$(arg prefix)/mid_mount_joint" type="fixed">
+    <parent link="$(arg prefix)/chassis_link" />
+    <child link="$(arg prefix)/mid_mount" />
     <origin xyz="0 0 ${chassis_height}" />
   </joint>
 
-  <link name="$(arg prefix)_rear_mount"></link>
-  <joint name="$(arg prefix)_rear_mount_joint" type="fixed">
-    <parent link="$(arg prefix)_mid_mount" />
-    <child link="$(arg prefix)_rear_mount" />
+  <link name="$(arg prefix)/rear_mount"></link>
+  <joint name="$(arg prefix)/rear_mount_joint" type="fixed">
+    <parent link="$(arg prefix)/mid_mount" />
+    <child link="$(arg prefix)/rear_mount" />
     <origin xyz="${-mount_spacing} 0 0" />
   </joint>
 
-  <link name="$(arg prefix)_front_mount"></link>
-  <joint name="$(arg prefix)_front_mount_joint" type="fixed">
-    <parent link="$(arg prefix)_mid_mount" />
-    <child link="$(arg prefix)_front_mount" />
+  <link name="$(arg prefix)/front_mount"></link>
+  <joint name="$(arg prefix)/front_mount_joint" type="fixed">
+    <parent link="$(arg prefix)/mid_mount" />
+    <child link="$(arg prefix)/front_mount" />
     <origin xyz="${mount_spacing} 0 0" />
   </joint>
   -->
@@ -265,22 +265,22 @@
         <plugin>fake_components/GenericSystem</plugin>
       </xacro:unless>
     </hardware>
-    <joint name="$(arg prefix)_front_left_wheel_joint">
+    <joint name="$(arg prefix)/front_left_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)_rear_left_wheel_joint">
+    <joint name="$(arg prefix)/rear_left_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)_front_right_wheel_joint">
+    <joint name="$(arg prefix)/front_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)_rear_right_wheel_joint">
+    <joint name="$(arg prefix)/rear_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>

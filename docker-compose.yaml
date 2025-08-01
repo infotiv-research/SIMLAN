@@ -29,7 +29,6 @@ services:
     network_mode: host
     command: tail -f /dev/null
     restart: always
-    runtime: nvidia
 
   factory_simulation_nvidia:
    <<: *research-base
