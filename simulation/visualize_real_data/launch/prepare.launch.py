@@ -11,29 +11,26 @@ import yaml
 def generate_launch_description():
 
     # VARIABLES: Doesn't have to be changed, but can be.
-    #   -- namespace: changed bellow. Wraps the node
+    #   -- namespace: Wraps the node
     #   -- parameters: changed through params.yaml config 
     namespace = "visualize_real_data"
     parameters = _read_config_file()
     # -----------------------------------------------------------  
 
-
     # Define parameters for the recorder
-    pointcloud_topic = f"{namespace}/{parameters['pointcloud_topic']}"
-    entity_topic = f"{namespace}/{parameters['entity_topic']}"
-
     output_folder_path = _prepare_data_folder(namespace)
 
     qos_override_path = Path(
-            get_package_share_directory('visualize_real_data'),
-            "config",
-            "recorder_qos.yaml"
-        )
+        get_package_share_directory('visualize_real_data'),
+        "config",
+        "recorder_qos.yaml"
+    )
 
     rosbag = ExecuteProcess( # Record the PointCloud2 data
             name='rosbag2_recorder',
             cmd=['ros2', 'bag', 'record',
-                 f"{pointcloud_topic}",  f"{entity_topic}",
+                 f"{namespace}/{parameters['pointcloud_topic']}",
+                 f"{namespace}/{parameters['entity_topic']}",
                  '--include-hidden-topics',
                  '--output', output_folder_path,
                  '--qos-profile-overrides-path', str(qos_override_path),

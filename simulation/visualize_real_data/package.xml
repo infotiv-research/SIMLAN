@@ -24,6 +24,7 @@
   <exec_depend>time</exec_depend>
   <exec_depend>datetime</exec_depend>
   <exec_depend>yaml</exec_depend>
+  <exec_depend>ruamel.yaml</exec_depend>
 
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>

@@ -9,7 +9,9 @@ from sensor_msgs.msg import PointCloud2, PointField
 from std_msgs.msg import Header
 from pathlib import Path
 import cv2
-import yaml
+# import yaml
+
+from ruamel.yaml import YAML # If module error - this is probably the cause.
 
 class PrepareRealData(Node):
     def __init__(self):
@@ -71,7 +73,7 @@ class PrepareRealData(Node):
         # TODO: Handle File/Path not found error
         sorted_images = sorted(
             [f for f in Path(self.images_folder_path).iterdir() if f.suffix==".jpg"]
-            )
+        )
 
         self._check_timestamps(sorted_images, data_dict)
 
@@ -92,7 +94,6 @@ class PrepareRealData(Node):
 
             start = time.time()
 
-            # TODO: match time stamp
             image_path = sorted_images[frame]
             cloud_msg = self._convert_to_pc2(image_path)
 
@@ -111,7 +112,17 @@ class PrepareRealData(Node):
             if (dt <= max_limit):
                 time.sleep( max_limit - dt )
             else:
-                self.get_logger().warn(f'dt larger than {max_limit}, dt: {round(dt,3)}')
+                self.get_logger().warn(
+                    f'dt larger than max_limit {max_limit}, dt: {round(dt,3)}'
+                )
+
+                max_limit = round(dt,3)
+
+                self.get_logger().info((
+                    'max_limit has been changed according to latest limit breach, '
+                    'but consider tweaking the processing_time_limit parameter in the '
+                    'params.yaml file and re-run this process to avoid inconsistencies at playback.'               
+                ))
 
             # Publish messages
             self.pc_publisher_.publish(cloud_msg)
@@ -120,9 +131,13 @@ class PrepareRealData(Node):
 
         # Make sure all images have been published before shutting down
         self.get_logger().info('awaiting publication verification')
+
         self.pc_publisher_.wait_for_all_acked()
         self.ent_publisher_.wait_for_all_acked()
-        self.get_logger().info('All frames published. Shutting down...')
+
+        self.get_logger().info(
+            'All frames published. Rosbag will complete the recording, then shut down.'
+        )
 
 
     # USED BY BOTH OR ALL ================================================
@@ -156,7 +171,7 @@ class PrepareRealData(Node):
                 continue
 
             if img_ts != dict_ts:
-                self.get_logger().error(
+                self.get_logger().warn(
                     f"Mismatch in timestamps at frame {frame}, please check data"
                 )    
                 continue
@@ -166,7 +181,7 @@ class PrepareRealData(Node):
 
         dt_array = [
             saved_stamps[idx+1]-saved_stamps[idx] for idx in range( len(saved_stamps) - 1 )
-            ]
+        ]
         
 
         for idx in range( len(dt_array) - 1 ):
@@ -176,7 +191,7 @@ class PrepareRealData(Node):
             if dt_array[idx+1] != expected_dt:
                 self.get_logger().warn(
                     f"Inconsistent dt between frames {idx} and {idx+1}"
-                    )
+                )
                 continue
 
             # Calculate fps, assuming dt in ms
@@ -186,22 +201,25 @@ class PrepareRealData(Node):
 
         # Write to file:
         # TODO: Don't force this if the user don't want to?
+        yaml = YAML()
+        yaml.preserve_quotes = True
+
         with open(self.config_path, 'r') as file:
-            doc = yaml.safe_load(file)
+            doc = yaml.load(file)
         
         if doc['send_data']['extracted_fps'] != dt_fps:
 
             doc['send_data']['extracted_fps'] = dt_fps
 
             with open(self.config_path, 'w') as file:
-                yaml.safe_dump(doc, file)
+                yaml.dump(doc, file)
         
-            self.get_logger().info(
-                f"'extracted_fps' overridden to {dt_fps} in config and " \
-                + "will be used when bagged messages are published. " \
-                + "To decide fps yourself, please change this value in " \
-                + "the config file manually."
-                )
+            self.get_logger().info((
+                f'extracted_fps overridden to {dt_fps} in config and '
+                 'will be used when bagged messages are published. '
+                 'To decide fps yourself, please change this value in '
+                 'the config file manually.'
+            ))
     
     # USED BY ONE ========================================================
 
