@@ -50,17 +50,17 @@ def launch_setup(context, *args, **kwargs):
     # If you want to run the simulator in headless mode, uncomment the line bew
     # os.environ["GZ_SIM_HEADLESS"]="true"
     os.environ["GZ_SIM_RESOURCE_PATH"] = (
-        os.environ["GZ_SIM_RESOURCE_PATH"]
-        + ":"
-        + os.path.join(
+        # os.environ["GZ_SIM_RESOURCE_PATH"]
+        # + ":" +
+        os.path.join(
             get_package_share_directory("simlan_gazebo_environment"), "models"
         )
     )
 
     os.environ["IGN_GAZEBO_RESOURCE_PATH"] = (
-        os.environ["IGN_GAZEBO_RESOURCE_PATH"]
-        + ":"
-        + os.path.join(
+        # os.environ["IGN_GAZEBO_RESOURCE_PATH"]
+        # + ":" +
+        os.path.join(
             get_package_share_directory("simlan_gazebo_environment"), "models"
         )
     )

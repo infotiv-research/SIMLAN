@@ -24,13 +24,13 @@ from launch.actions import OpaqueFunction
 
 def launch_setup(context, *args, **kwargs):
 
-    camera_enabled_ids = LaunchConfiguration("camera_enabled_ids").perform(context)
+    # camera_enabled_ids = LaunchConfiguration("camera_enabled_ids").perform(context)
     pkg_simlan_gazebo_environment = get_package_share_directory(
         "simlan_gazebo_environment"
     )
     pkg_static_agent_launcher = get_package_share_directory("static_agent_launcher")
     pkg_pallet_truck_bringup = get_package_share_directory("pallet_truck_bringup")
-    pkg_dyno_jackal_bringup = get_package_share_directory("dyno_jackal_bringup")
+    
     pkg_aruco_localization = get_package_share_directory("aruco_localization")
     pkg_pallet_truck_navigation = get_package_share_directory("pallet_truck_navigation") # contains both localization and nav2
     pkg_scenario_manager = get_package_share_directory("scenario_manager")
@@ -55,18 +55,12 @@ def launch_setup(context, *args, **kwargs):
                 pkg_simlan_gazebo_environment, "launch", "simlan_factory.launch.py"
             )
         ),
-        launch_arguments={"camera_enabled_ids": camera_enabled_ids}.items(),
+        # launch_arguments={"camera_enabled_ids": camera_enabled_ids}.items(),
     )
 
     static_agents = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_static_agent_launcher, "launch", "static-agent.launch.py")
-        )
-    )
-
-    jackal = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_dyno_jackal_bringup, "launch", "sim.launch.py")
         )
     )
 
@@ -79,28 +73,24 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(launch_rviz),
     )
 
-    return [launch_rviz_launch_argument, simlan_gazebo, static_agents, rviz2]
+    return [launch_rviz_launch_argument,
+            simlan_gazebo,
+            static_agents,
+            rviz2]
 
 
 def generate_launch_description():
 
-    return LaunchDescription([OpaqueFunction(function=launch_setup)])
+    pkg_dyno_jackal_bringup = get_package_share_directory("dyno_jackal_bringup")
+    # pkg_pallet_truck_bringup = get_package_share_directory("pallet_truck_bringup")
 
-    # ld = LaunchDescription()
+    jackal = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_dyno_jackal_bringup, "launch", "sim.launch.py")
+        )
+    )
 
-    # ld.add_action(launch_rviz_launch_argument)
-    # # ld.add_action(pallet_truck_manual_control_launch_argument)
-
-    # # ld.add_action(simlan_gazebo)
-
-    # # ld.add_action(static_agents)
-    # # ld.add_action(pallet_truck)
-    # # ld.add_action(jackal)
-
-    # ld.add_action(aruco_localization)
-    # ld.add_action(pallet_truck_localization)
-    # ld.add_action(pallet_truck_nav2)
-
-    # ld.add_action(rviz2)
-
-    # return ld
+    return LaunchDescription([
+        OpaqueFunction(function=launch_setup),
+        jackal
+    ])
