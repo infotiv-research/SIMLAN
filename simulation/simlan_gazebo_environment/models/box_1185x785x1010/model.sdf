@@ -47,7 +47,7 @@
       <pose>0 0 0 0 0 0</pose>
       <geometry>
         <mesh>
-          <uri>model://box_1185x785x1010/meshes/textured_1185x785x1010.dae</uri>
+          <uri>model://box_1185x785x1010/meshes/textured_1185x785x1010_low_poly.dae</uri>
           <scale>1.00000 1.00000 1.00000</scale>
         </mesh>
       </geometry>

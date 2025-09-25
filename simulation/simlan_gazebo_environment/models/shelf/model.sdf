@@ -18,7 +18,7 @@
       <pose>0 0 0 0 0 0</pose>
       <geometry>
         <mesh>
-          <uri>model://shelf/meshes/textured_shelf.dae</uri>
+          <uri>model://shelf/meshes/textured_shelf_low_poly.dae</uri>
           <scale>1.00000 1.00000 1.00000</scale>
         </mesh>
       </geometry>
