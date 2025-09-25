@@ -42,7 +42,7 @@ Keep in mind that the same namespace has to be used when launching the navigatio
 For navigation to be able to automatically find the robot agent, we have to set a namespace that specified when launching the robot_agent. (see above)
 
 Each robot has it own navigation configuration in `robot_agent_X_nav2_params.yaml`. We use following `/TF` structure:
-**Note** that `world`, `map` and `robot_agent_X_odom` are static at the same position and the actual position is determined by `robot_agent_base_link`.
+**Note** that `world`, `map` and `robot_agent_X/odom` are static at the same position and the actual position is determined by `robot_agent_X/base_link`.
 
 
 ![view_frames.png](view_frames.png)
