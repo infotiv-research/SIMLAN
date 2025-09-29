@@ -22,6 +22,9 @@ class CollisionActionServer(Node):
         self.pallet_truck_speed = 1.0
         self.experiment_time = 5.0
 
+        self.pallet_truck_name = 'robot_agent_1'
+        self.jackal_name = 'jackal'
+
         # Distance from the base-link to the front of the robot
         # Should be half of the robot's length if the base-link is centered
         self.pallet_truck_front_distance = 0.875
@@ -94,16 +97,16 @@ class CollisionActionServer(Node):
         qx, qy, qz, qw = 0.0, 0.0, math.sin(angle / 2), math.cos(angle / 2)
 
         # Teleport both robots
-        await self.teleport_robot('jackal', jackal_x, jackal_y, 0.1, qx, qy, qz, qw)
+        await self.teleport_robot(self.jackal_name, jackal_x, jackal_y, 0.1, qx, qy, qz, qw)
 
-        await self.teleport_robot('pallet_truck', pallet_truck_x, pallet_truck_y, 0.1, 0.0, 0.0, math.sqrt(2) / 2, math.sqrt(2) / 2)
+        await self.teleport_robot(self.pallet_truck_name, pallet_truck_x, pallet_truck_y, 0.1, 0.0, 0.0, math.sqrt(2) / 2, math.sqrt(2) / 2)
 
         # Set speed in parallel
         self.moved_jackal = False
         self.moved_pallet_truck = False
 
-        await self.set_robot_speed('jackal', self.jackal_speed, 0.0, 0.0, 4 * self.experiment_time)
-        await self.set_robot_speed('pallet_truck', pallet_truck_speed, 0.0, 0.0, 4 * self.experiment_time)
+        await self.set_robot_speed(self.jackal_name, self.jackal_speed, 0.0, 0.0, 4 * self.experiment_time)
+        await self.set_robot_speed(self.pallet_truck_name, pallet_truck_speed, 0.0, 0.0, 4 * self.experiment_time)
 
         # Temporary solution to wait for both robots to move
 
@@ -158,11 +161,11 @@ class CollisionActionServer(Node):
         message = result.message
         robot_name = result.robot_name
         if success:
-            if robot_name == 'jackal':
+            if robot_name == self.jackal_name:
                 self.moved_jackal = True
                 # print message:
                 self.get_logger().info(message)
-            if robot_name == 'pallet_truck':
+            if robot_name == self.pallet_truck_name:
                 self.moved_pallet_truck = True
         else:
             self.get_logger().info(f'Failed to move {robot_name}')

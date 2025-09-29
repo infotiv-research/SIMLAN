@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
-from gazebo_msgs.msg import ModelStates
-
-from geometry_msgs.msg import TransformStamped
-
+from nav_msgs.msg import Odometry
 import numpy as np
 
 import rclpy
@@ -14,21 +11,29 @@ from tf2_ros import TransformBroadcaster
 
 class GazeboTFBroadcaster(Node):
     def __init__(self):
-        super().__init__("gazebo_tf_broadcaster")
-        self.subscription = self.create_subscription(
-            ModelStates, "/gazebo/model_states", self.model_states_callback, 10
-        )
+        super().__init__("ttc_node")
         self.robot1_name = "jackal"
-        self.robot2_name = "pallet_truck"
+        self.robot2_name = "robot_agent_1"
 
-    def model_states_callback(self, msg):
-        if self.robot1_name in msg.name:
-            idx1 = msg.name.index(self.robot1_name)
-            pose1 = msg.pose[idx1]
-            twist1 = msg.twist[idx1]  # Get the velocity data
+        self.robot1_pose = self.create_subscription(
+            Odometry, f"/{self.robot1_name}/pose_data", self.robot1_state_callback, 10
+        )
+        self.robot2_pose_twist = self.create_subscription(
+            Odometry, f"/{self.robot2_name}/pose_data", self.robot2_state_callback, 10
+        )
 
-            pose2 = msg.pose[msg.name.index(self.robot2_name)]
-            twist2 = msg.twist[msg.name.index(self.robot2_name)]
+        # Since the poses have to be listened on separate topics due to new gazebo, save the pose
+        self.robot2_pose_twist: Odometry = None
+
+        self.get_logger().info("TTC node has been started.")
+
+    def robot1_state_callback(self, msg):
+        if self.robot2_pose_twist is not None:
+            pose1 = msg.pose.pose
+            twist1 = msg.twist.twist  # Get the velocity data
+
+            pose2 = self.robot2_pose_twist.pose.pose
+            twist2 = self.robot2_pose_twist.twist.twist
             # calculate np arrays for the position and velocity of size [3]
             position1 = np.array([pose1.position.x, pose1.position.y, pose1.position.z])
             velocity1 = np.array([twist1.linear.x, twist1.linear.y, twist1.linear.z])
@@ -52,6 +57,8 @@ class GazeboTFBroadcaster(Node):
             self.get_logger().info("Time to collision: {}".format(ttc))
             self.get_logger().info("Closest point of approach: {}".format(cpa))
 
+    def robot2_state_callback(self, msg):
+        self.robot2_pose_twist = msg
 
 def main(args=None):
     rclpy.init(args=args)
