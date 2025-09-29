@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 from nav_msgs.msg import Odometry
+from simlan_custom_msg.msg import TTC
+
 import numpy as np
 
 import rclpy
@@ -21,6 +23,8 @@ class GazeboTFBroadcaster(Node):
         self.robot2_pose_twist = self.create_subscription(
             Odometry, f"/{self.robot2_name}/pose_data", self.robot2_state_callback, 10
         )
+
+        self.publisher = self.create_publisher(TTC, "/scenario_manager/ttc", 10)
 
         # Since the poses have to be listened on separate topics due to new gazebo, save the pose
         self.robot2_pose_twist: Odometry = None
@@ -56,6 +60,12 @@ class GazeboTFBroadcaster(Node):
             # log the ttc and cpa
             self.get_logger().info("Time to collision: {}".format(ttc))
             self.get_logger().info("Closest point of approach: {}".format(cpa))
+
+            # publish the ttc and cpa
+            ttc_msg = TTC()
+            ttc_msg.ttc = ttc
+            ttc_msg.cpa = cpa
+            self.publisher.publish(ttc_msg)
 
     def robot2_state_callback(self, msg):
         self.robot2_pose_twist = msg
