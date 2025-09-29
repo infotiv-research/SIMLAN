@@ -10,3 +10,7 @@
           topic   : key_vel
           timeout : 0.5
           priority: 100
+        replay:
+          topic   : replay_vel
+          timeout : 0.5
+          priority: 50

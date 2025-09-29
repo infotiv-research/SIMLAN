@@ -7,18 +7,22 @@ from launch.actions import ExecuteProcess, RegisterEventHandler, EmitEvent
 from launch.event_handlers import OnProcessExit
 from launch.events import Shutdown
 import yaml
+from dyno_utils.launch_utils import DynoWaitFor
+import std_msgs.msg
+import rclpy.qos
+from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition
 
 def generate_launch_description():
 
     # VARIABLES: Doesn't have to be changed, but can be.
     #   -- namespace: Wraps the node
-    #   -- parameters: changed through params.yaml config 
-    namespace = "visualize_real_data"
+    #   -- parameters: changed through params.yaml config
     parameters = _read_config_file()
     # -----------------------------------------------------------  
 
     # Define parameters for the recorder
-    output_folder_path = _prepare_data_folder(namespace)
+    output_folder_path = _prepare_data_folder(parameters['namespace'])
 
     qos_override_path = Path(
         get_package_share_directory('visualize_real_data'),
@@ -26,13 +30,15 @@ def generate_launch_description():
         "recorder_qos.yaml"
     )
 
+    fake_orientation = LaunchConfiguration('fake_orientation', default=parameters['fake_orientation'])
+
     rosbag = ExecuteProcess( # Record the PointCloud2 data
             name='rosbag2_recorder',
             cmd=['ros2', 'bag', 'record',
-                 f"{namespace}/{parameters['pointcloud_topic']}",
-                 f"{namespace}/{parameters['entity_topic']}",
+                 f"{parameters['namespace']}/{parameters['pointcloud_topic']}",
+                 f"{parameters['namespace']}/{parameters['entity_topic']}",
                  '--include-hidden-topics',
-                 '--output', output_folder_path,
+                 '--output', output_folder_path + '/' + parameters['json_file_name'].split('/')[-1].replace('.json','') + '__' + datetime.now().strftime("%Y%m%d_%H%M%S"),
                  '--qos-profile-overrides-path', str(qos_override_path),
                 ],
             output='screen',
@@ -40,11 +46,21 @@ def generate_launch_description():
 
     prepare_data = Node(
             name="prepare_data",
-            namespace=namespace,
+            namespace=parameters['namespace'],
             package="visualize_real_data",
             executable="prepare",
             parameters=[parameters],
             output="screen"
+        )
+
+    orientation_fixer = Node(
+            name="orientation_fixer",
+            namespace=parameters['namespace'],
+            package="visualize_real_data",
+            executable="orientation_fixer",
+            parameters=[parameters],
+            output="screen",
+            condition=IfCondition(fake_orientation)
         )
     
     kill_rosbag = RegisterEventHandler(
@@ -57,11 +73,22 @@ def generate_launch_description():
             ]
         )
     )
-
+    
     ld = LaunchDescription()
-    ld.add_action(rosbag)
-    ld.add_action(prepare_data)
-    ld.add_action(kill_rosbag)
+    ld.add_action(orientation_fixer)
+    ld.add_action(
+        DynoWaitFor(
+            name="wait_for_json_orientation",
+            message_on_topics=[
+                (parameters['namespace'] + '/orientation_done', std_msgs.msg.Empty, rclpy.qos.QoSProfile(depth=10, durability=rclpy.qos.DurabilityPolicy.TRANSIENT_LOCAL)),
+            ],
+            actions=[
+                rosbag,
+                prepare_data,
+                kill_rosbag
+            ],
+        )
+    )
     return ld
 
 
@@ -89,15 +116,18 @@ def _read_config_file():
         'data',
         prepare_params['images_folder']
     ))
-    prepare_params['json_file_name'] = str(Path(
+
+    shared_params = data.get('shared', {})
+
+    shared_params['json_file_name'] = str(Path(
         get_package_share_directory('visualize_real_data'),
         'data',
-        prepare_params['json_file_name']
+        shared_params['json_file_name']
     ))
 
     prepare_params['config_file_path'] = str(yaml_file_path)
 
-    return prepare_params | data.get('shared', {})
+    return prepare_params | shared_params
 
 
 def _prepare_data_folder(namespace):
@@ -113,7 +143,5 @@ def _prepare_data_folder(namespace):
     )
     output_directory.mkdir(exist_ok=True)
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_folder_name = f"rosbag2_{timestamp}"
 
-    return f"{output_directory}/{output_folder_name}"
+    return f"{output_directory}"

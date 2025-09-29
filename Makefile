@@ -1,4 +1,4 @@
-camera_enabled_ids=163 164 165 166
+camera_enabled_ids=164
 
 gpss:
 	ros2 launch simlan_bringup full_sim.launch.py camera_enabled_ids:="${camera_enabled_ids}"
@@ -16,3 +16,9 @@ send_goals:
 	pid2=$$!
 	wait $$pid1
 	wait $$pid2
+
+teleop_pallet:
+	ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/robot_agent_4 -r cmd_vel:=key_vel
+
+scenario_replay:
+	ros2 launch visualize_real_data scenario_replayer.launch.py

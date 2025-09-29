@@ -3,6 +3,7 @@ from rclpy.node import Node
 import rclpy
 import json
 import time
+import math
 from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 from sensor_msgs_py import point_cloud2
 from sensor_msgs.msg import PointCloud2, PointField
@@ -30,7 +31,7 @@ class PrepareRealData(Node):
         self.declare_parameter('processing_time_limit', 0.8)
         self.declare_parameter('frame_id', 'real_images')
         self.declare_parameter('config_file_path', 'params.yaml')
-
+        self.declare_parameter('preprocess_all_data', False)  # New parameter
 
         # Get and assign parameters
         # - First 3 are needed for PointCloud2 creation
@@ -48,22 +49,19 @@ class PrepareRealData(Node):
         self.processing_time = self.get_parameter('processing_time_limit').get_parameter_value().double_value
         self.frame_id = self.get_parameter('frame_id').get_parameter_value().string_value
         self.config_path = self.get_parameter('config_file_path').get_parameter_value().string_value
-
+        self.preprocess_all_data = self.get_parameter('preprocess_all_data').get_parameter_value().bool_value
 
         # Create publishers
         qos_profile = QoSProfile(depth=10, reliability=ReliabilityPolicy.RELIABLE, durability=DurabilityPolicy.VOLATILE)
         self.pc_publisher_ = self.create_publisher(PointCloud2, pointcloud_topic, qos_profile)
         self.ent_publisher_ = self.create_publisher(MarkerArray, entity_topic, qos_profile)
 
-
         self._wait_for_subscriber()
 
         self.get_logger().info('Executing callback...')
         self.execute_callbacks()
 
-
     def execute_callbacks(self):
-
         # Extract trajectory data
         # TODO: Handle File/Path not found error
         with open(self.json_file_path, 'r') as file:
@@ -71,15 +69,15 @@ class PrepareRealData(Node):
 
         # Sort and collect image-paths
         # TODO: Handle File/Path not found error
-        sorted_images = sorted(
-            [f for f in Path(self.images_folder_path).iterdir() if f.suffix==".jpg"]
-        )
+        # # sorted_images = sorted(
+        # #     [f for f in Path(self.images_folder_path).iterdir() if f.suffix==".jpg"]
+        # # )
 
-        self._check_timestamps(sorted_images, data_dict)
+        self._check_timestamps(data_dict)
 
-        num_frames = len(sorted_images)
+        num_frames = len(data_dict) # num_frames = len(sorted_images)
+
         if self.set_frames:
-
             self.get_logger().warn(f"set_frames = 'true',")
 
             if self.frames_to_process <= num_frames:
@@ -87,48 +85,88 @@ class PrepareRealData(Node):
             else:
                 self.get_logger().warn(f"frames_to_process assigned value larger than available data,")
 
-            self.get_logger().warn(f"{num_frames}/{len(sorted_images)} available frames will be processed")
-
+            self.get_logger().warn(f"{num_frames}/{len(data_dict)} available frames will be processed")
+        
         max_limit = self.processing_time
-        for frame in range(num_frames):
 
+        if self.preprocess_all_data:
+            self.get_logger().warn(
+                'Preprocessing all data before publishing, '
+                'this may take a while depending on data size...'
+            )
+            preprocessed_clouds = []
+            preprocessed_markers = []
+
+        for frame in range(num_frames):
             start = time.time()
 
-            image_path = sorted_images[frame]
+            image_path = Path(self.images_folder_path, str(data_dict[frame]['time_stamp']) + '.jpg') #sorted_images[frame]
             cloud_msg = self._convert_to_pc2(image_path)
 
             marker_array = MarkerArray()
             frame_info = data_dict[frame]
             for object_info in frame_info['object_list']:
-
                 # Create and save marker message
                 entity_msg, text_msg = self._create_marker_message(object_info[0], object_info[1:])
 
                 marker_array.markers.append(entity_msg)
                 marker_array.markers.append(text_msg)
 
-            # Check if publishing interval is consistent
-            dt = time.time() - start
-            if (dt <= max_limit):
-                time.sleep( max_limit - dt )
+            # Only have a wait if publishing is being done in real-time while processing
+            if not self.preprocess_all_data:
+                dt = time.time() - start
+                if (dt <= 1/self.dt_fps):
+                    time.sleep(1/self.dt_fps - dt)
+                else:
+                    self.get_logger().warn(
+                        f'dt larger than frame interval {1/self.dt_fps}, dt: {round(dt,3)}'
+                    )
+
+            if self.preprocess_all_data:
+                preprocessed_clouds.append(cloud_msg)
+                preprocessed_markers.append(marker_array)
             else:
-                self.get_logger().warn(
-                    f'dt larger than max_limit {max_limit}, dt: {round(dt,3)}'
-                )
+                # Publish messages
+                self.pc_publisher_.publish(cloud_msg)
+                self.ent_publisher_.publish(marker_array)
 
-                max_limit = round(dt,3)
+            self.get_logger().info(f'Processed {frame+1}/{num_frames} messages')
 
-                self.get_logger().info((
-                    'max_limit has been changed according to latest limit breach, '
-                    'but consider tweaking the processing_time_limit parameter in the '
-                    'params.yaml file and re-run this process to avoid inconsistencies at playback.'               
-                ))
+        if self.preprocess_all_data:
+            self.get_logger().info('Preprocessing complete, publishing all preprocessed data using original timing...')
 
-            # Publish messages
-            self.pc_publisher_.publish(cloud_msg)
-            self.ent_publisher_.publish(marker_array)
-            self.get_logger().info(f'published {frame+1}/{num_frames} messages')
+            # Publish remaining frames using original intervals
+            for frame in range(num_frames-1):
+                start = time.time()
+                
+                # Update timestamps to current time for published messages
+                current_ros_time = self.get_clock().now().to_msg()
+                preprocessed_clouds[frame].header.stamp = current_ros_time
+                for marker in preprocessed_markers[frame].markers:
+                    marker.header.stamp = current_ros_time
 
+                # Publish messages
+                self.pc_publisher_.publish(preprocessed_clouds[frame])
+                self.ent_publisher_.publish(preprocessed_markers[frame])
+                
+
+                # Use the actual time interval from the original data
+                frame_interval = self.dt_intervals[frame]  # dt_intervals[0] is the interval between frame 0 and 1
+                self.get_logger().info(f'published {frame+1}/{num_frames} messages (interval: {frame_interval:.3f}s)')
+                dt = time.time() - start
+                if (dt <= frame_interval):
+                    time.sleep(frame_interval - dt)
+                else:
+                    self.get_logger().warn(
+                        f'dt larger than frame interval {frame_interval}, dt: {round(dt,3)}'
+                    )
+            
+            # Publish the last frame (needs to be done outside of loop due to indexing the intervals)
+            self.pc_publisher_.publish(preprocessed_clouds[-1])
+            self.ent_publisher_.publish(preprocessed_markers[-1])
+            self.get_logger().info(f'published {num_frames}/{num_frames} messages (interval: {frame_interval:.3f}s)')
+            
+                
         # Make sure all images have been published before shutting down
         self.get_logger().info('awaiting publication verification')
 
@@ -139,92 +177,99 @@ class PrepareRealData(Node):
             'All frames published. Rosbag will complete the recording, then shut down.'
         )
 
-
     # USED BY BOTH OR ALL ================================================
 
     def _wait_for_subscriber(self):
-
         while self.pc_publisher_.get_subscription_count() + \
                                     self.ent_publisher_.get_subscription_count() < 2:
 
             self.get_logger().info(f'Waiting for recorder to subscribe')
             time.sleep(1)
 
-
-    def _check_timestamps(self, sorted_images, data_dict):
-        
+    def _check_timestamps(self, data_dict):
         saved_stamps = []
-        for frame, frame_data in enumerate(data_dict):
-
-            if frame >= len(sorted_images):
-                break
+        for frame_data in data_dict:
 
             # Retrieve current timestamps according to data
             try:
-                img_ts = int(Path(sorted_images[frame]).stem)
                 dict_ts = int(frame_data['time_stamp'])
+
+                img_path = Path(self.images_folder_path, str(dict_ts) + '.jpg')
+                if not img_path.exists():
+                    self.get_logger().error(
+                        f"Image file not found for timestamp {dict_ts}"
+                    )
+                    continue
 
             except ValueError as e_msg:
                 self.get_logger().error(
-                    f"{e_msg}, at frame {frame}: Timestamp not convertable to int"
+                    f"{e_msg}, at frame {frame_data['time_stamp']}: Timestamp not convertable to int"
                 )
                 continue
-
-            if img_ts != dict_ts:
-                self.get_logger().warn(
-                    f"Mismatch in timestamps at frame {frame}, please check data"
-                )    
-                continue
             
-            saved_stamps.append(img_ts)
-
+            saved_stamps.append(dict_ts)
 
         dt_array = [
             saved_stamps[idx+1]-saved_stamps[idx] for idx in range( len(saved_stamps) - 1 )
         ]
         
-
-        for idx in range( len(dt_array) - 1 ):
-
-            expected_dt = dt_array[idx]
-
-            if dt_array[idx+1] != expected_dt:
-                self.get_logger().warn(
-                    f"Inconsistent dt between frames {idx} and {idx+1}"
-                )
-                continue
-
-            # Calculate fps, assuming dt in ms
-            dt_fps = 1/expected_dt/0.001
+        # Convert dt_array from milliseconds to seconds and store for later use
+        self.dt_intervals = [dt / 1000.0 for dt in dt_array]
+        
+        # Calculate average dt and fps from all intervals
+        if len(dt_array) > 0:
+            # Calculate statistics
+            avg_dt = sum(dt_array) / len(dt_array)
+            min_dt = min(dt_array)
+            max_dt = max(dt_array)
             
-        if len(dt_array) == 0: dt_fps = 1
+            # Calculate fps using average dt, assuming dt in ms
+            self.dt_fps = 1 / (avg_dt * 0.001)
+            
+            # Log timing statistics
+            self.get_logger().info(f"Timestamp analysis:")
+            self.get_logger().info(f"  Average dt: {avg_dt:.1f} ms")
+            self.get_logger().info(f"  Min dt: {min_dt} ms, Max dt: {max_dt} ms")
+            self.get_logger().info(f"  Calculated average fps: {self.dt_fps:.2f} Hz")
+            self.get_logger().info(f"  Individual intervals (s): {[f'{dt:.3f}' for dt in self.dt_intervals[:5]]}{'...' if len(self.dt_intervals) > 5 else ''}")
+            
+            # Warn about significant variations
+            dt_variation = max_dt - min_dt
+            if dt_variation > avg_dt * 0.1:  # More than 10% variation
+                self.get_logger().warn(
+                    f"Significant timing variation detected: {dt_variation} ms "
+                    f"({dt_variation/avg_dt*100:.1f}% of average)"
+                )
+        else:
+            self.dt_fps = 1
+            self.dt_intervals = [1.0]  # Default 1 second interval
+            self.get_logger().warn("No valid timestamp intervals found, defaulting to 1 fps")
 
-        # Write to file:
-        # TODO: Don't force this if the user don't want to?
+        # Write average fps to file
         yaml = YAML()
         yaml.preserve_quotes = True
 
         with open(self.config_path, 'r') as file:
             doc = yaml.load(file)
         
-        if doc['send_data']['extracted_fps'] != dt_fps:
-
-            doc['send_data']['extracted_fps'] = dt_fps
+        if doc['shared']['extracted_fps'] != self.dt_fps:
+            doc['shared']['extracted_fps'] = self.dt_fps
 
             with open(self.config_path, 'w') as file:
                 yaml.dump(doc, file)
         
             self.get_logger().info((
-                f'extracted_fps overridden to {dt_fps} in config and '
+                f'extracted_fps set to {self.dt_fps:.2f} (average) in config and '
                  'will be used when bagged messages are published. '
                  'To decide fps yourself, please change this value in '
                  'the config file manually.'
             ))
+        else:
+            self.get_logger().info(f'Config already contains correct average fps: {self.dt_fps:.2f}')
     
     # USED BY ONE ========================================================
 
     def _extract_jpg_data(self, image_path):
-
         # Extract image data from file
         image = cv2.imread(str(image_path))
         height, width, _ = image.shape
@@ -247,7 +292,6 @@ class PrepareRealData(Node):
         return data_package
 
     def _convert_to_pc2(self, image_path):
-
         points = self._extract_jpg_data(image_path)
 
         fields = [
@@ -263,15 +307,20 @@ class PrepareRealData(Node):
 
         return point_cloud2.create_cloud(header, fields, points)
 
-# --
+    def _yaw_to_quaternion(self, yaw):
+        """Convert yaw angle (radians) to quaternion"""
+        return {
+            'x': 0.0,
+            'y': 0.0,
+            'z': math.sin(yaw / 2.0),
+            'w': math.cos(yaw / 2.0)
+        }
 
     def _create_marker_message(self, object_id, object_pos):
         """_Explanation_:
         Creates a marker message for one entity and its id-badge as
         a separate marker message
         """
-        if object_id > 999:
-            self.get_logger().error(f"Too many objects created, object_id will be overridden")
 
         # Used to align coord. system with image's.
         x_coef = -8
@@ -292,6 +341,8 @@ class PrepareRealData(Node):
         entity_msg.scale.y = 0.2  # Width
         entity_msg.scale.z = 0.2  # Height
 
+        entity_msg.text = "id:" + str(object_id) # Used to teleport the robots in gazebo
+
         text_msg = Marker()
         text_msg.type = Marker.TEXT_VIEW_FACING
         text_msg.action = Marker.ADD
@@ -311,15 +362,24 @@ class PrepareRealData(Node):
         # The rest of their respective set-up is exactly the same,
         # so loop to preserve space
         for marker in [entity_msg, text_msg]:
-
             marker.header.frame_id = self.frame_id
             marker.header.stamp = self.get_clock().now().to_msg()
 
-            # Set orientation
-            marker.pose.orientation.x = 0.0
-            marker.pose.orientation.y = 0.0
-            marker.pose.orientation.z = 0.0
-            marker.pose.orientation.w = 1.0
+            # Set orientation - use yaw if available, otherwise default
+            if len(object_pos) >= 4:
+                # Convert yaw angle to quaternion
+                yaw = object_pos[3]  # Orientation in radians
+                quat = self._yaw_to_quaternion(yaw)
+                marker.pose.orientation.x = quat['x']
+                marker.pose.orientation.y = quat['y']
+                marker.pose.orientation.z = quat['z']
+                marker.pose.orientation.w = quat['w']
+            else:
+                # Default orientation (no rotation)
+                marker.pose.orientation.x = 0.0
+                marker.pose.orientation.y = 0.0
+                marker.pose.orientation.z = 0.0
+                marker.pose.orientation.w = 1.0
 
             # Set color (yellow)
             marker.color.r = 1.0
