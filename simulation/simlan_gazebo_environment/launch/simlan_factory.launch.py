@@ -100,6 +100,10 @@ def launch_setup(context, *args, **kwargs):
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[
+            # For some reason bridges cannot be started from the config file, so it has to be done here
+            "/world/default/set_pose@ros_gz_interfaces/srv/SetEntityPose",
+            "/world/default/create@ros_gz_interfaces/srv/SpawnEntity",
+            "/world/default/remove@ros_gz_interfaces/srv/DeleteEntity",
             "--ros-args",
             "-p",
             f"config_file:={bridge_params}",

@@ -21,7 +21,7 @@ def launch_setup(context, *args, **kwargs):
                 executable="static_transform_publisher",
                 name="static_map_to_odom",
                 namespace=namespace,
-                arguments=["0", "0", "0", "0", "0", "0", "map", f"{namespace}_odom"],
+                arguments=["0", "0", "0", "0", "0", "0", "map", f"{namespace}/odom"],
             ),
             Node(  # controller
                 package="nav2_controller",

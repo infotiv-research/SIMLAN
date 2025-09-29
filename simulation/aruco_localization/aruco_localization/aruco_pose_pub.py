@@ -103,10 +103,10 @@ class ArucoPosePubNode(Node):
             t_base_link_to_pallet_truck = TransformStamped()
             t_base_link_to_pallet_truck.header.stamp = self.get_clock().now().to_msg()
             t_base_link_to_pallet_truck.header.frame_id = (
-                f"robot_agent_{marker_id}_odom"
+                f"robot_agent_{marker_id}/odom"
             )
             t_base_link_to_pallet_truck.child_frame_id = (
-                f"robot_agent_{marker_id}_base_link"
+                f"robot_agent_{marker_id}/base_link"
             )
             t_base_link_to_pallet_truck.transform = markers_latest_transform
 

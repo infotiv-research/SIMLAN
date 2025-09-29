@@ -5,13 +5,13 @@
             "label": "build",
             "detail": "Build workspace (default)",
             "type": "shell",
-            "command": "./build.sh",
+            "command": "colcon build --merge-install --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "options": {
-                "cwd": "${workspaceFolder}/"
+                "cwd": "${workspaceFolder}/.."
             },
             "problemMatcher": "$gcc"
         },

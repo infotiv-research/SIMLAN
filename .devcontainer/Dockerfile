@@ -1,6 +1,6 @@
 
 
-FROM althack/ros2:humble-cuda-gazebo-nvidia
+FROM althack/ros2:humble-cuda-full
 
 # future work: ROS_DISTRO -> iron
 
@@ -20,14 +20,14 @@ ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
 ENV QT_X11_NO_MITSHM=1
 
-# To fix the expired key issue
-RUN apt-get update && \
-    apt-get install -y curl gnupg2 lsb-release && \
-    curl -fsSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /tmp/ros.key && \
-    gpg --batch --yes --dearmor -o /usr/share/keyrings/ros-archive-keyring.gpg /tmp/ros.key && \
-    echo "deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2.list && \
-    rm /tmp/ros.key
-
+# # To fix the expired key issue
+# RUN apt-get update && \
+#     apt-get install -y curl gnupg2 lsb-release && \
+#     curl -fsSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /tmp/ros.key && \
+#     gpg --batch --yes --dearmor -o /usr/share/keyrings/ros-archive-keyring.gpg /tmp/ros.key && \
+#     echo "deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2.list && \
+#     rm /tmp/ros.key
+RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 
 RUN apt-get update && apt-get install -y \
   # opengl stuff
@@ -69,7 +69,7 @@ RUN apt install -y \
   ros-${ROS_DISTRO}-launch-testing \
   ros-${ROS_DISTRO}-launch-testing-ament-cmake \
   ros-${ROS_DISTRO}-launch-testing-ros \
-  ros-${ROS_DISTRO}-gazebo-ros-pkgs \
+  ros-${ROS_DISTRO}-ros-gz \
   ros-${ROS_DISTRO}-cartographer-ros \
   ros-${ROS_DISTRO}-nav2-bringup  ros-${ROS_DISTRO}-navigation2
 

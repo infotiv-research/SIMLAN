@@ -573,72 +573,84 @@
 
 <!-- ******************** eur_pallet ******************** -->
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_group_pickup</name>
       <pose>-15 4 0.001 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_group_dropoff</name>
       <pose>31 8 0.001 0 -0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n1</name>
       <pose>35 26 0.1 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n2</name>
       <pose>35 26 0.25 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n3</name>
       <pose>35 26 0.4 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n4</name>
       <pose>35 26 0.55 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n5</name>
       <pose>35 26 0.7 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n6</name>
       <pose>35 26 0.85 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n7</name>
       <pose>35 26 1.0 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n8</name>
       <pose>35 26 1.15 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n9</name>
       <pose>35 26 1.3 0 0 0</pose>
     </include>
 
     <include>
+      <static>1</static>
       <uri>model://eur_pallet</uri>
       <name>pallet_stack2_n10</name>
       <pose>35 26 1.45 0 0 0</pose>
@@ -647,6 +659,7 @@
 
 <!-- ******************** Objects for data collection ******************** -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>box_move</name>
       <pose>35 20 0.4 0 0 0</pose>
@@ -663,147 +676,175 @@
 <!-- ******************** BOXES 1 ROW ******************** -->
 
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n1_br</name>
       <pose>0.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n1_tr</name>
       <pose>0.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n1_bl</name>
       <pose>1.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n1_tl</name>
       <pose>1.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n2_br</name>
       <pose>3.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n2_tr</name>
       <pose>3.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n2_bl</name>
       <pose>4.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n2_tl</name>
       <pose>4.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n3_br</name>
       <pose>6.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n3_tr</name>
       <pose>6.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n3_bl</name>
       <pose>7.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n3_tl</name>
       <pose>7.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n4_br</name>
       <pose>9.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n4_tr</name>
       <pose>9.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n4_bl</name>
       <pose>10.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n4_tl</name>
       <pose>10.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n5_br</name>
       <pose>12.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n5_tr</name>
       <pose>12.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n5_bl</name>
       <pose>13.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n5_tl</name>
       <pose>13.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n6_br</name>
       <pose>15.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n6_tr</name>
       <pose>15.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n6_bl</name>
       <pose>16.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n6_tl</name>
       <pose>16.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n7_br</name>
       <pose>18.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n7_tr</name>
       <pose>18.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n7_bl</name>
       <pose>19.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r1_n7_tl</name>
       <pose>19.5 -1.1 1.4 0 0 0</pose>
@@ -814,147 +855,175 @@
 <!-- ******************** BOXES 2 ROW ******************** -->
 
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n1_br</name>
       <pose>0.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n1_tr</name>
       <pose>0.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n1_bl</name>
       <pose>1.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n1_tl</name>
       <pose>1.5 4.8 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n2_br</name>
       <pose>3.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n2_tr</name>
       <pose>3.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n2_bl</name>
       <pose>4.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n2_tl</name>
       <pose>4.5 4.8 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n3_br</name>
       <pose>6.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n3_tr</name>
       <pose>6.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n3_bl</name>
       <pose>7.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n3_tl</name>
       <pose>7.5 4.8 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n4_br</name>
       <pose>9.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n4_tr</name>
       <pose>9.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n4_bl</name>
       <pose>10.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n4_tl</name>
       <pose>10.5 4.8 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n5_br</name>
       <pose>12.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n5_tr</name>
       <pose>12.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n5_bl</name>
       <pose>13.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n5_tl</name>
       <pose>13.5 4.8 1.4 0 0 0</pose>
       </include>
     <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n6_br</name>
       <pose>15.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n6_tr</name>
       <pose>15.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n6_bl</name>
       <pose>16.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n6_tl</name>
       <pose>16.5 4.8 1.4 0 0 0</pose>
     </include>
     <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n7_br</name>
       <pose>18.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n7_tr</name>
       <pose>18.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n7_bl</name>
       <pose>19.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r2_n7_tl</name>
       <pose>19.5 4.8 1.4 0 0 0</pose>
@@ -964,147 +1033,175 @@
     <!-- ******************** BOXES 3 ROW ******************** -->
 
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n1_br</name>
       <pose>0.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n1_tr</name>
       <pose>0.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n1_bl</name>
       <pose>1.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n1_tl</name>
       <pose>1.5 8.3 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n2_br</name>
       <pose>3.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n2_tr</name>
       <pose>3.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n2_bl</name>
       <pose>4.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n2_tl</name>
       <pose>4.5 8.3 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n3_br</name>
       <pose>6.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n3_tr</name>
       <pose>6.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n3_bl</name>
       <pose>7.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n3_tl</name>
       <pose>7.5 8.3 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n4_br</name>
       <pose>9.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n4_tr</name>
       <pose>9.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n4_bl</name>
       <pose>10.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n4_tl</name>
       <pose>10.5 8.3 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n5_br</name>
       <pose>12.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n5_tr</name>
       <pose>12.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n5_bl</name>
       <pose>13.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n5_tl</name>
       <pose>13.5 8.3 1.4 0 0 0</pose>
       </include>
     <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n6_br</name>
       <pose>15.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n6_tr</name>
       <pose>15.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n6_bl</name>
       <pose>16.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n6_tl</name>
       <pose>16.5 8.3 1.4 0 0 0</pose>
     </include>
     <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n7_br</name>
       <pose>18.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n7_tr</name>
       <pose>18.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n7_bl</name>
       <pose>19.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r3_n7_tl</name>
       <pose>19.5 8.3 1.4 0 0 0</pose>
@@ -1114,84 +1211,100 @@
     <!-- ******************** BOXES 4 ROW ******************** -->
 
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n1_br</name>
       <pose>30.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n1_tr</name>
       <pose>30.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n1_bl</name>
       <pose>31.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n1_tl</name>
       <pose>31.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n2_br</name>
       <pose>33.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n2_tr</name>
       <pose>33.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n2_bl</name>
       <pose>34.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n2_tl</name>
       <pose>34.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n3_br</name>
       <pose>36.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n3_tr</name>
       <pose>36.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n3_bl</name>
       <pose>37.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n3_tl</name>
       <pose>37.5 -1.1 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n4_br</name>
       <pose>39.2 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n4_tr</name>
       <pose>39.2 -1.1 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n4_bl</name>
       <pose>40.5 -1.1 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r4_n4_tl</name>
       <pose>40.5 -1.1 1.4 0 0 0</pose>
@@ -1199,105 +1312,125 @@
 <!-- NEWBOX -->
         <!-- ******************** BOXES 5 ROW ******************** -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n1_br</name>
       <pose>27.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n1_tr</name>
       <pose>27.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n1_bl</name>
       <pose>28.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n1_tl</name>
       <pose>28.5 4.8 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n2_br</name>
       <pose>30.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n2_tr</name>
       <pose>30.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n2_bl</name>
       <pose>31.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n2_tl</name>
       <pose>31.5 4.8 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n3_br</name>
       <pose>33.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n3_tr</name>
       <pose>33.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n3_bl</name>
       <pose>34.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n3_tl</name>
       <pose>34.5 4.8 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n4_br</name>
       <pose>36.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n4_tr</name>
       <pose>36.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n4_bl</name>
       <pose>37.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n4_tl</name>
       <pose>37.5 4.8 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n5_br</name>
       <pose>39.2 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n5_tr</name>
       <pose>39.2 4.8 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n5_bl</name>
       <pose>40.5 4.8 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r5_n5_tl</name>
       <pose>40.5 4.8 1.4 0 0 0</pose>
@@ -1305,84 +1438,100 @@
 <!-- NEWBOX -->
        <!-- ******************** BOXES 6 ROW ******************** -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n1_br</name>
       <pose>27.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n1_tr</name>
       <pose>27.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n1_bl</name>
       <pose>28.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n1_tl</name>
       <pose>28.5 8.3 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n3_br</name>
       <pose>33.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n3_tr</name>
       <pose>33.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n3_bl</name>
       <pose>34.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n3_tl</name>
       <pose>34.5 8.3 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n4_br</name>
       <pose>36.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n4_tr</name>
       <pose>36.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n4_bl</name>
       <pose>37.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n4_tl</name>
       <pose>37.5 8.3 1.4 0 0 0</pose>
     </include>
 <!-- NEWBOX -->
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n5_br</name>
       <pose>39.2 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n5_tr</name>
       <pose>39.2 8.3 1.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n5_bl</name>
       <pose>40.5 8.3 0.4 0 0 0</pose>
     </include>
     <include>
+      <static>1</static>
       <uri>model://box_1185x785x1010</uri>
       <name>shelf_box_r6_n5_tl</name>
       <pose>40.5 8.3 1.4 0 0 0</pose>
