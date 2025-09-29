@@ -75,7 +75,28 @@
 # gz topic published by OdometryPublisher
 # placeholder "gps"-data.
 - ros_topic_name: "jackal/pose_data"
-  gz_topic_name: "/jackal/pose_data"
+  gz_topic_name: "jackal/pose_data"
   ros_type_name: "nav_msgs/msg/Odometry"
   gz_type_name: "ignition.msgs.Odometry"
   direction: GZ_TO_ROS
+
+# gz topic published by OdometryPublisher
+- ros_topic_name: "robot_agent_1/pose_data"
+  gz_topic_name: "robot_agent_1/pose_data"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "ignition.msgs.Odometry"
+  direction: GZ_TO_ROS
+
+# # gz topic published by PosePublisher
+# # Used for ground truth pose data for the scenario manager and collision detection.
+# - ros_topic_name: "jackal/pose_truth"
+#   gz_topic_name: "model/jackal/pose"
+#   ros_type_name: "geometry_msgs/msg/PoseStamped"
+#   gz_type_name: "ignition.msgs.Pose"
+#   direction: GZ_TO_ROS
+
+# - ros_topic_name: "robot_agent_1/pose_truth"
+#   gz_topic_name: "model/robot_agent_1/pose"
+#   ros_type_name: "geometry_msgs/msg/PoseStamped"
+#   gz_type_name: "ignition.msgs.Pose"
+#   direction: GZ_TO_ROS
