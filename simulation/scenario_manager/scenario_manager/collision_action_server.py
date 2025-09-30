@@ -18,6 +18,12 @@ class CollisionActionServer(Node):
             "collision_action",
             self.execute_callback,
         )
+
+        self.declare_parameter("jackal_size", [0.5, 0.43])
+        self.declare_parameter("pallet_truck_size", [1.1, 0.87])
+        s1 = self.get_parameter("jackal_size").value
+        s2 = self.get_parameter("pallet_truck_size").value
+        
         self.collision_point = (25.0, 34.0)
         self.jackal_speed = 1.0
         self.pallet_truck_speed = 1.0
@@ -30,15 +36,15 @@ class CollisionActionServer(Node):
 
         # Distance from the base-link to the front of the robot
         # Should be half of the robot's length if the base-link is centered
-        self.pallet_truck_front_distance = 0.875
-        self.jackal_front_distance = 0.255
+        self.jackal_front_distance = s1[0]/2
+        self.pallet_truck_front_distance = s2[0]/2
 
-        self.pallet_truck_back_distance = 1.0
-        self.jackal_back_distance = 0.255
+        self.jackal_back_distance = s1[0]/2
+        self.pallet_truck_back_distance = s2[0]/2
 
         # Width of the robot, it is assumed the robot is symmetrical
-        self.jackal_width = 0.44
-        self.pallet_truck_width = 1.51
+        self.jackal_width = s1[1]
+        self.pallet_truck_width = s2[1]
 
     async def execute_callback(self, goal_handle):
         self.get_logger().info("Received action goal")
