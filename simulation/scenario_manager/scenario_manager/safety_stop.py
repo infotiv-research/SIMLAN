@@ -31,7 +31,7 @@ class SafetyStop(Node):
         self.confidence = 0
 
         self.jackal_speed = 1.0
-        self.jackal_crawl = 0.2
+        self.jackal_crawl = 0.4
         self.jackal_acceleration = 0.05
 
         self.last_command_time = self.get_clock().now()
@@ -81,7 +81,8 @@ class SafetyStop(Node):
             cmd.linear.x = self.jackal_speed
         else:  # move forward
             cmd.linear.x = self.jackal_speed
-
+        self.get_logger().info(f"Publishing cmd: {cmd.linear.x:.2f} m/s")
+         # Timeout safety: stop if no "move forward" command recently
         self.cmd_pub.publish(cmd)
 
     def _log_state_change(self, ttc, cpa):
