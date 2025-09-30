@@ -4,6 +4,8 @@ import launch_ros.actions
 
 
 def generate_launch_description():
+    start_safety_stop = launch.substitutions.LaunchConfiguration("start_safety_stop", default="true")
+
     namespace = "scenario_manager"
     return launch.LaunchDescription(
         [
@@ -34,6 +36,14 @@ def generate_launch_description():
                 namespace=namespace,
                 name="ttc",
                 output="screen",
+            ),
+            launch_ros.actions.Node(
+                package="scenario_manager",
+                executable="safety_stop",
+                namespace=namespace,
+                name="safety_stop",
+                output="screen",
+                condition=launch.conditions.IfCondition(start_safety_stop),
             ),
         ]
     )

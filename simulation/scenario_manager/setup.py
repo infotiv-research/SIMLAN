@@ -31,7 +31,7 @@ setup(
             "collision_action_server = scenario_manager.collision_action_server:main",
             "ttc_service_server = scenario_manager.ttc_service_server:main",
             "ttc = scenario_manager.ttc:main",
-            "safty_stop = scenario_manager.safty_stop:main",
+            "safety_stop = scenario_manager.safety_stop:main",
         ],
     },
 )

@@ -18,7 +18,7 @@ send_goals:
 	wait $$pid2
 
 teleop_pallet:
-	ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/robot_agent_4 -r cmd_vel:=key_vel
+	ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/robot_agent_1 -r cmd_vel:=key_vel
 
 scenario_replay:
 	ros2 launch visualize_real_data scenario_replayer.launch.py

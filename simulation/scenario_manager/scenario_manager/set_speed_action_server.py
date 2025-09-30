@@ -54,8 +54,8 @@ class SetSpeedActionServer(Node):
             elif robot_name == "infobot":
                 topic_name = "/cmd_vel"
             else:
-                self.get_logger().warn(f'Robot {robot_name} is not known. Creating publisher anyway on /{robot_name}/velocity_controller/cmd_vel_unstamped')
-                topic_name = f'/{robot_name}/velocity_controller/cmd_vel_unstamped'
+                topic_name = f'/{robot_name}/scenario_vel'
+                self.get_logger().warn(f'Robot {robot_name} is not known. Creating publisher anyway on {topic_name}')
 
             self._robot_pos_publishers[robot_name] = self.create_publisher(
                 Twist, topic_name, 10

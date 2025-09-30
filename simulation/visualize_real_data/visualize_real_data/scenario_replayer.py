@@ -110,7 +110,7 @@ class ScenarioReplayTeleport(Node):
             # Create cmd_vel publishers for each robot
             self.cmd_vel_publishers = {}
             for robot_name in self.available_robots:
-                topic_name = f'/{robot_name}/replay_vel'
+                topic_name = f'/{robot_name}/scenario_vel'
                 publisher = self.create_publisher(Twist, topic_name, qos_profile)
                 self.cmd_vel_publishers[robot_name] = publisher
                 self.get_logger().info(f'Created cmd_vel publisher for {robot_name} on {topic_name}')

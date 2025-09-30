@@ -6,15 +6,15 @@
           topic   : nav_vel
           timeout : 0.5
           priority: 10
-        safty:
-          topic   : scenario_vel
+        safety:
+          topic   : safety_vel
           timeout : 0.5
-          priority: 50
+          priority: 80
         keyboard:
           topic   : key_vel
           timeout : 0.5
           priority: 100
-        replay:
-          topic   : replay_vel
+        scenario:
+          topic   : scenario_vel
           timeout : 0.5
           priority: 50

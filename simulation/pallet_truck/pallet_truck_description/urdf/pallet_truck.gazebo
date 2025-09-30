@@ -138,7 +138,7 @@
   <gazebo>
     <plugin name="ignition::gazebo::systems::OdometryPublisher"
             filename="ignition-gazebo-odometry-publisher-system">
-      <odom_publish_frequency>50.0</odom_publish_frequency>
+      <odom_publish_frequency>20.0</odom_publish_frequency>
       <odom_topic>$(arg prefix)/pose_data</odom_topic>
       <odom_frame>$(arg prefix)/odom</odom_frame>
       <robot_base_frame>$(arg prefix)/base_link</robot_base_frame>
