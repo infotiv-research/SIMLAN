@@ -1,0 +1,7 @@
+geometry_msgs/Pose robot1_pose
+geometry_msgs/Twist robot1_vel
+
+geometry_msgs/Pose robot2_pose
+geometry_msgs/Twist robot2_vel
+---
+simlan_custom_msg/TTC ttc

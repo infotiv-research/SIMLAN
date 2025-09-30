@@ -35,7 +35,10 @@ setup(
     license='TODO: License declaration',
     entry_points={
         'console_scripts': [
-            'prepare = visualize_real_data.prepare:main'
+            'prepare = visualize_real_data.prepare:main',
+            'scenario_replayer = visualize_real_data.scenario_replayer:main',
+            'scenario_replay_cmd_vel = visualize_real_data.scenario_replay_cmd_vel:main',
+            'orientation_faker = visualize_real_data.orientation_faker:main',
         ],
     },
 )

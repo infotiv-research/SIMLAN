@@ -17,10 +17,10 @@ import rclpy.qos
 
 def kill_gazebo():
     # Kill lingering Gazebo processes from previous runs
-    for name in ["gzserver", "gzclient"]:
+    for name in ["gzserver", "gzclient", "gz", "gazebo", "ignition"]:
         while pid := os.popen(f"pidof {name}").read().strip():
             print(f"shutting down {name}...")
-            os.system(f"kill -9 {pid}")
+            os.system(f"pkill -9 {pid}")
             time.sleep(1)
         print(f"{name} is shutdown!")
 
@@ -125,24 +125,11 @@ def generate_launch_description():
             actions=[aruco_detection_launch]
         ),
         TimerAction(
-                    period=5.0,
+                    period=2.0,
                     actions=[robot_spawn_launch]
         ),
         # TimerAction(
         #             period=10.0,
         #             actions=[multi_nav_launch]
         # ),
-        # DynoWaitFor(
-        #     name="robot_spawn",
-        #     message_on_topics=[
-        #         ("/clock", rosgraph_msgs.msg.Clock, rclpy.qos.qos_profile_sensor_data), # Wait for Gazebo to launch
-        #         # ("/jackal/joint_states", std_msgs.msg.String, rclpy.qos.qos_profile_system_default), 
-        #         # ("/static_agents/robot_description", std_msgs.msg.String, rclpy.qos.qos_profile_system_default), # Wait for static agents to launch
-        #         # ("/pallet_truck/velocity_controller/odom", nav_msgs.msg.Odometry, rclpy.qos.qos_profile_system_default), # Wait for pallet truck to launch
-        #         # ("/scan", sensor_msgs.msg.LaserScan, rclpy.qos.qos_profile_sensor_data), # Wait for infobot to launch
-        #     ],
-        #     actions=[
-                
-        #     ],
-        # )
     ])

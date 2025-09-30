@@ -1,16 +1,15 @@
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess
 from launch_ros.actions import Node
+from launch.logging import get_logger
 from datetime import datetime
 from ament_index_python.packages import get_package_share_directory
 from pathlib import Path
 import yaml
 
+logger = get_logger('send.launch.py')
 
 def generate_launch_description():
-
-    # VARIABLES: Doesn't have to be changed, but can if you want.
-    namespace = "visualize_real_data"
 
     # TODO: Make it match real speed. Borde gå att använda tidsstämplarna.
     # Sen ska man kunna ändra playbac rate (realtivt den verkliga hastigheten) i yaml
@@ -21,9 +20,6 @@ def generate_launch_description():
 
     if not (playback_rate > 0):
         raise ValueError("Playback rate should always be larger than 0")
-    else:
-        # Transform x fps to 10 fps * playback rate
-        playback_rate = (1/params['processing_time_limit'])*params['extracted_fps']*playback_rate
 
     # image position in the map frame
     x = frame_position['x']
@@ -36,12 +32,22 @@ def generate_launch_description():
     _read_config_file()
 
     saved_bags_path = Path(
-        get_package_share_directory(namespace),
+        get_package_share_directory("visualize_real_data"),
         "data",
         "rosbags"
     )
-    latest_bag_path = _retrieve_latest_recording(saved_bags_path)
 
+    if params['bag_name'] is not None:
+        latest_bag_path = Path(saved_bags_path, params['bag_name'])
+        if not latest_bag_path.exists():
+            raise FileNotFoundError(f"Specified bag file does not exist: {latest_bag_path}")
+    else:
+        logger.warning(f"No bag name specified, retrieving latest recording from {saved_bags_path}")
+        latest_bag_path = _retrieve_latest_recording(saved_bags_path)
+
+    logger.info(f"Using rosbag2: {latest_bag_path}")
+    logger.info(f"Playback rate: {playback_rate}")
+    logger.info(f"Bag FPS: {params['extracted_fps']}")
 
     return LaunchDescription([
 
@@ -55,10 +61,16 @@ def generate_launch_description():
 
         ExecuteProcess(
             name='pointcloud_player',
-            cmd=['ros2', 'bag', 'play', str(latest_bag_path),
-                 '--loop',
-                 '--rate', str(playback_rate),
-                ],
+            cmd=[
+                'xterm',
+                '-title', 'ROS2 Bag Player',
+                '-hold',  # Keep window open after process ends
+                '-e',
+                'bash', '-c',
+                f'source /opt/ros/humble/setup.bash && '
+                f'ros2 bag play {str(latest_bag_path)} '
+                f'--loop --rate {str(playback_rate)}; exec bash'
+            ],
             output='screen'
         )
     ])
@@ -81,24 +93,25 @@ def _read_config_file():
 
     return data.get('send_data', {}) | data.get('shared', {})
 
-def _retrieve_latest_recording(saved_bags_path):
+def _retrieve_latest_recording(saved_bags_path: Path):
 
-    keyword = "rosbag2_"
-    keyword_size = len(keyword)
+    keyword = "__"
 
-    # TODO: Handle what happens if there are no existing
-    #       rosbag2's.
+    if not saved_bags_path.exists():
+        raise FileNotFoundError("Robsags directory does not exist. Have you recorded any data yet?")
+    elif not saved_bags_path.is_dir():
+        raise NotADirectoryError("Rosbags directory is a file. Delete it and re-record data (and double check your config).")
+    elif not any(saved_bags_path.iterdir()):
+        raise FileNotFoundError("Rosbag directory is empty. Have you recorded any data yet?")
     for idx, bag_path in enumerate(saved_bags_path.iterdir()):
-
-        slice_idx = str(bag_path).find(keyword)+keyword_size
 
         if idx == 0:
             latest_bag_path = bag_path
-            current = datetime.strptime(str(bag_path)[slice_idx:],
+            current = datetime.strptime(str(bag_path).split(keyword)[-1],
                                         "%Y%m%d_%H%M%S")
             continue
 
-        compare = datetime.strptime(str(bag_path)[slice_idx:],
+        compare = datetime.strptime(str(bag_path).split(keyword)[-1],
                                     "%Y%m%d_%H%M%S")
 
         if compare > current:

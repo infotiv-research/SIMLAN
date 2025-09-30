@@ -1,5 +1,4 @@
-from gazebo_msgs.msg import EntityState
-from gazebo_msgs.srv import SetEntityState
+from ros_gz_interfaces.srv import SetEntityPose
 
 import rclpy
 from rclpy.action import ActionServer
@@ -22,30 +21,28 @@ class TeleportActionServer(Node):
         )
 
         # Gazebo service client
-        self._client = self.create_client(SetEntityState, '/gazebo/set_entity_state')
+        self._client = self.create_client(SetEntityPose, '/world/default/set_pose')
         while not self._client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('Waiting for gazebo/set_entity_state service...')
+            self.get_logger().info('Waiting for /world/default/set_pose service...')
 
     async def execute_callback(self, goal_handle):
         self.get_logger().info(f'Received teleport request for {goal_handle.request.robot_name}')
-        # Prepare Gazebo service request
 
-        request = SetEntityState.Request()
-        state = EntityState()
-        state.name = goal_handle.request.robot_name
-        state.pose = goal_handle.request.target_pose
-        state.reference_frame = 'world'
-        request.state = state
+        # Prepare Gazebo SetEntityPose service request
+        request = SetEntityPose.Request()
+        request.entity.name = goal_handle.request.robot_name
+        request.entity.type = 1  # MODEL type
+        request.pose = goal_handle.request.target_pose
 
         future = self._client.call_async(request)
         await future
 
         if future.result() is not None:
-            self.get_logger().info(f'Successfully teleported {state.name}')
+            self.get_logger().info(f'Successfully teleported {goal_handle.request.robot_name}')
             goal_handle.succeed()
             return TeleportRobot.Result(success=True, message='Teleportation successful')
         else:
-            self.get_logger().error(f'Failed to teleport {state.name}')
+            self.get_logger().error(f'Failed to teleport {goal_handle.request.robot_name}')
             goal_handle.abort()
             return TeleportRobot.Result(success=False, message='Teleportation failed')
 
