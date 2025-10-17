@@ -5,7 +5,7 @@
       <pose>0 0 0 0 0 0</pose>
       <geometry>
         <mesh>
-          <uri>meshes/Body.dae</uri>
+          <uri>meshes/Body_low_poly.dae</uri>
           <scale>1.00000 1.00000 1.00000</scale>
         </mesh>
       </geometry>

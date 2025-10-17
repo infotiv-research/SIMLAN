@@ -11,8 +11,8 @@ robot_agent_1:
 
   velocity_controller:
     ros__parameters:
-      left_wheel_names: [ "robot_agent_1_front_left_wheel_joint", "robot_agent_1_rear_left_wheel_joint" ]
-      right_wheel_names: [ "robot_agent_1_front_right_wheel_joint", "robot_agent_1_rear_right_wheel_joint" ]
+      left_wheel_names: [ "robot_agent_1/front_left_wheel_joint", "robot_agent_1/rear_left_wheel_joint" ]
+      right_wheel_names: [ "robot_agent_1/front_right_wheel_joint", "robot_agent_1/rear_right_wheel_joint" ]
 
       wheel_separation: 0.36
       wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
@@ -24,7 +24,7 @@ robot_agent_1:
 
       publish_rate: 50.0
       odom_frame_id: odom
-      base_frame_id: robot_agent_1_base_link
+      base_frame_id: base_link
       pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
       twist_covariance_diagonal: [1000000.0, 1000000.0, 0.03, 1000000.0, 1000000.0, 0.03]
 
@@ -80,8 +80,8 @@ robot_agent_2:
 
   velocity_controller:
     ros__parameters:
-      left_wheel_names: [ "robot_agent_2_front_left_wheel_joint", "robot_agent_2_rear_left_wheel_joint" ]
-      right_wheel_names: [ "robot_agent_2_front_right_wheel_joint", "robot_agent_2_rear_right_wheel_joint" ]
+      left_wheel_names: [ "robot_agent_2/front_left_wheel_joint", "robot_agent_2/rear_left_wheel_joint" ]
+      right_wheel_names: [ "robot_agent_2/front_right_wheel_joint", "robot_agent_2/rear_right_wheel_joint" ]
 
       wheel_separation: 0.36
       wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
@@ -93,7 +93,7 @@ robot_agent_2:
 
       publish_rate: 50.0
       odom_frame_id: odom
-      base_frame_id: robot_agent_2_base_link
+      base_frame_id: base_link
       pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
       twist_covariance_diagonal: [1000000.0, 1000000.0, 0.03, 1000000.0, 1000000.0, 0.03]
 
@@ -149,8 +149,8 @@ robot_agent_3:
 
   velocity_controller:
     ros__parameters:
-      left_wheel_names: [ "robot_agent_3_front_left_wheel_joint", "robot_agent_3_rear_left_wheel_joint" ]
-      right_wheel_names: [ "robot_agent_3_front_right_wheel_joint", "robot_agent_3_rear_right_wheel_joint" ]
+      left_wheel_names: [ "robot_agent_3/front_left_wheel_joint", "robot_agent_3/rear_left_wheel_joint" ]
+      right_wheel_names: [ "robot_agent_3/front_right_wheel_joint", "robot_agent_3/rear_right_wheel_joint" ]
 
       wheel_separation: 0.36
       wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
@@ -162,7 +162,7 @@ robot_agent_3:
 
       publish_rate: 50.0
       odom_frame_id: odom
-      base_frame_id: robot_agent_3_base_link
+      base_frame_id: base_link
       pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
       twist_covariance_diagonal: [1000000.0, 1000000.0, 0.03, 1000000.0, 1000000.0, 0.03]
 
@@ -218,8 +218,8 @@ robot_agent_4:
 
   velocity_controller:
     ros__parameters:
-      left_wheel_names: [ "robot_agent_4_front_left_wheel_joint", "robot_agent_4_rear_left_wheel_joint" ]
-      right_wheel_names: [ "robot_agent_4_front_right_wheel_joint", "robot_agent_4_rear_right_wheel_joint" ]
+      left_wheel_names: [ "robot_agent_4/front_left_wheel_joint", "robot_agent_4/rear_left_wheel_joint" ]
+      right_wheel_names: [ "robot_agent_4/front_right_wheel_joint", "robot_agent_4/rear_right_wheel_joint" ]
 
       wheel_separation: 0.36
       wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
@@ -231,7 +231,7 @@ robot_agent_4:
 
       publish_rate: 50.0
       odom_frame_id: odom
-      base_frame_id: robot_agent_4_base_link
+      base_frame_id: base_link
       pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
       twist_covariance_diagonal: [1000000.0, 1000000.0, 0.03, 1000000.0, 1000000.0, 0.03]
 

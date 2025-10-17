@@ -1,0 +1,39 @@
+prepare_data:
+  # Topics
+  pointcloud_topic: pointcloud_topic
+
+  # Data folder
+  images_folder: images
+
+  # Runtime variables
+  image_scale: 0.04
+  set_frames: false
+  frames_to_process: 1
+  preprocess_all_data: true
+  fake_orientation: true
+
+send_data:
+  playback_rate: 1
+  # Can be changed to move the frame
+  frame_position:
+    x: 15.35
+    y: 6.5
+    z: -0.2
+  bag_name: window_1894_1746008596818_1746008606518__20250926_152346
+
+scenario_replayer:
+  gazebo_teleport_service: /world/default/set_pose
+  frame_id: real_data
+  use_cmd_vel: false
+
+shared:
+  frame_id: real_data
+  namespace: visualize_real_data
+  entity_topic: entity_topic
+  json_file_name: window_145_1746007093718_1746007099918__20250926_152246
+  # Calculated during preparation
+  extracted_fps: 10.0
+
+  # Could be increased for greater overhead,
+  # or reduced for greater processing speed (risky)
+  processing_time_limit: 0.8

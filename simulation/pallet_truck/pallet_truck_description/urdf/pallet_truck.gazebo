@@ -14,9 +14,9 @@
     </plugin>
   </gazebo>
 
-  <gazebo reference="$(arg prefix)_imu_link">
+  <gazebo reference="$(arg prefix)/imu_link">
   <!--
-  <sensor name="$(arg prefix)_imu_sensor" type="imu">
+  <sensor name="$(arg prefix)/imu_sensor" type="imu">
     <always_on>true</always_on>
     <update_rate>100</update_rate>
 
@@ -67,13 +67,13 @@
     <visualize>true</visualize>
     <pose>0 0 0 0 0 0</pose>
     <topic>$(arg prefix)/imu/data</topic>
-    <gz_frame_id>$(arg prefix)_imu_link</gz_frame_id>
+    <gz_frame_id>$(arg prefix)/imu_link</gz_frame_id>
   </sensor>
   -->
 </gazebo>
 
 
- <gazebo reference="$(arg prefix)_scan_link">
+ <gazebo reference="$(arg prefix)/scan_link">
     <material>Gazebo/Orange</material>
       <!--
       <sensor name="laser" type="gpu_lidar">
@@ -98,14 +98,14 @@
             <remapping>~/scan:=/$(arg prefix)/scan</remapping>
           </ros>
           <topic>$(arg prefix)/scan</topic>
-          <gz_frame_id>$(arg prefix)_scan_link</gz_frame_id>
+          <gz_frame_id>$(arg prefix)/scan_link</gz_frame_id>
       </sensor>
       -->
   </gazebo>
 
 
-  <gazebo reference="$(arg prefix)_gps_link">
-    <sensor name="$(arg prefix)_gps_sensor" type="gps">
+  <gazebo reference="$(arg prefix)/gps_link">
+    <sensor name="$(arg prefix)/gps_sensor" type="gps">
     <plugin filename="libgazebo_ros_gps_sensor.so" name="$(arg prefix)gps_plugin">
         <ros>
           <namespace>$(arg namespace)</namespace>
@@ -117,21 +117,35 @@
     </sensor>
   </gazebo>
 
-  <gazebo reference="$(arg prefix)_base_link">
+  <gazebo reference="$(arg prefix)/base_link">
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
-  <gazebo reference="$(arg prefix)_chassis_link">
+  <gazebo reference="$(arg prefix)/chassis_link">
     <material>Gazebo/DarkGrey</material>
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
-  <gazebo reference="$(arg prefix)_imu_link">
+  <gazebo reference="$(arg prefix)/imu_link">
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
-  <gazebo reference="$(arg prefix)_navsat_link">
+  <gazebo reference="$(arg prefix)/navsat_link">
     <material>Gazebo/DarkGrey</material>
     <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+
+  <gazebo>
+    <plugin name="ignition::gazebo::systems::OdometryPublisher"
+            filename="ignition-gazebo-odometry-publisher-system">
+      <odom_publish_frequency>20.0</odom_publish_frequency>
+      <odom_topic>$(arg prefix)/pose_data</odom_topic>
+      <odom_frame>$(arg prefix)/odom</odom_frame>
+      <robot_base_frame>$(arg prefix)/base_link</robot_base_frame>
+      <xyz_offset>0 0 0</xyz_offset>
+      <rpy_offset>0 0 0</rpy_offset>
+      <gaussian_noise>0</gaussian_noise>
+    </plugin>
   </gazebo>
 
 

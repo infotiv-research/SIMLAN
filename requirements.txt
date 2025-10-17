@@ -11,3 +11,4 @@ pysimplegui
 pyyaml>=5.4.1
 transforms3d==0.4.1
 utm
+ruamel.yaml

@@ -1,14 +1,14 @@
 robot_agent_1:
   behavior_server:
     ros__parameters:
-      robot_base_frame: "robot_agent_1_base_link"
+      robot_base_frame: "robot_agent_1/base_link"
       odom_frame: robot_agent_1_odom
 
   bt_navigator:
     ros__parameters:
       default_nav_to_pose_bt_xml: "/home/ros/src/simulation/pallet_truck/pallet_truck_navigation/config/navigate_w_replanning_and_recovery.xml"
       default_nav_through_poses_bt_xml: "/home/ros/src/simulation/pallet_truck/pallet_truck_navigation/config/navigate_through_poses_w_replanning_and_recovery.xml"
-      robot_base_frame: "robot_agent_1_base_link"
+      robot_base_frame: "robot_agent_1/base_link"
       plugin_lib_names:
       - nav2_compute_path_to_pose_action_bt_node
       - nav2_follow_path_action_bt_node
@@ -67,7 +67,7 @@ robot_agent_1:
 
   controller_server:
     ros__parameters:
-      robot_base_frame: robot_agent_1_base_link
+      robot_base_frame: robot_agent_1/base_link
       odom_frame: robot_agent_1_odom
       global_frame: map        
       map_topic: /map         
@@ -121,7 +121,7 @@ robot_agent_1:
         publish_frequency: 2.0
         global_frame: map
         map_topic: /map
-        robot_base_frame: robot_agent_1_base_link
+        robot_base_frame: robot_agent_1/base_link
         odom_frame: robot_agent_1_odom
         use_sim_time: true
         plugin_names: ["obstacle_layer", "voxel_layer", "inflation_layer"]
@@ -174,8 +174,8 @@ robot_agent_1:
       ros__parameters:
         update_frequency: 1.0
         publish_frequency: 1.0
-        global_frame: robot_agent_1_base_link
-        robot_base_frame: robot_agent_1_base_link
+        global_frame: robot_agent_1/base_link
+        robot_base_frame: robot_agent_1/base_link
         odom_frame: robot_agent_1_odom
 
         use_sim_time: true

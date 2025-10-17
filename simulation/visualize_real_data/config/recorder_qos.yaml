@@ -1,0 +1,10 @@
+topic_overrides:
+  reliability: reliable
+  durability: volatile
+  depth: 10
+
+default:
+  reliability: reliable
+  durability: volatile
+  history: keep_last
+  depth: 10

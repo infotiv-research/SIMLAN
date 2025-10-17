@@ -1,6 +1,6 @@
 
 
-FROM althack/ros2:humble-cuda-gazebo-nvidia
+FROM althack/ros2:humble-cuda-full
 
 # future work: ROS_DISTRO -> iron
 
@@ -20,14 +20,14 @@ ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
 ENV QT_X11_NO_MITSHM=1
 
-# To fix the expired key issue
-RUN apt-get update && \
-    apt-get install -y curl gnupg2 lsb-release && \
-    curl -fsSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /tmp/ros.key && \
-    gpg --batch --yes --dearmor -o /usr/share/keyrings/ros-archive-keyring.gpg /tmp/ros.key && \
-    echo "deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2.list && \
-    rm /tmp/ros.key
-
+# # To fix the expired key issue
+# RUN apt-get update && \
+#     apt-get install -y curl gnupg2 lsb-release && \
+#     curl -fsSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /tmp/ros.key && \
+#     gpg --batch --yes --dearmor -o /usr/share/keyrings/ros-archive-keyring.gpg /tmp/ros.key && \
+#     echo "deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2.list && \
+#     rm /tmp/ros.key
+RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 
 RUN apt-get update && apt-get install -y \
   # opengl stuff
@@ -69,7 +69,7 @@ RUN apt install -y \
   ros-${ROS_DISTRO}-launch-testing \
   ros-${ROS_DISTRO}-launch-testing-ament-cmake \
   ros-${ROS_DISTRO}-launch-testing-ros \
-  ros-${ROS_DISTRO}-gazebo-ros-pkgs \
+  ros-${ROS_DISTRO}-ros-gz \
   ros-${ROS_DISTRO}-cartographer-ros \
   ros-${ROS_DISTRO}-nav2-bringup  ros-${ROS_DISTRO}-navigation2
 
@@ -122,9 +122,15 @@ RUN echo "export GAZEBO_MASTER_URI=http://0.0.0.0:12345" >> /home/ros/.bashrc
 RUN echo "export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST" >> /home/ros/.bashrc
 RUN echo "export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-11" >> /home/ros/.bashrc
 RUN echo "export GAZEBO_MODEL_PATH=/usr/share/gazebo-11/models:/usr/share/gazebo-11/models" >> /home/ros/.bashrc
-RUN echo "source home/ros/src/install/setup.bash" >> /home/ros/.bashrc
+RUN echo "source /home/ros/src/install/setup.bash" >> /home/ros/.bashrc
 RUN echo "source /opt/dependencies_ws/install/setup.bash" >> /home/ros/.bashrc
 RUN echo 'source /opt/ros/${ROS_DISTRO}/setup.bash' >> /home/ros/.bashrc
+RUN echo "alias rosbuild='colcon build --merge-install --symlink-install --cmake-args -Wno-dev'" >> /home/ros/.bashrc
+
+RUN sudo apt update && \
+    sudo apt install ros-${ROS_DISTRO}-foxglove-bridge ros-${ROS_DISTRO}-rqt-tf-tree silversearcher-ag -y && \
+    sudo apt autoremove -y && \
+    sudo rm -rf /var/lib/apt/lists/*
 
 COPY . /home/ros/src/
 RUN chown -R ros:ros  /home/ros/src/

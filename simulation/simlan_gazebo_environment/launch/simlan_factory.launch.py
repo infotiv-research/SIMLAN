@@ -50,17 +50,17 @@ def launch_setup(context, *args, **kwargs):
     # If you want to run the simulator in headless mode, uncomment the line bew
     # os.environ["GZ_SIM_HEADLESS"]="true"
     os.environ["GZ_SIM_RESOURCE_PATH"] = (
-        os.environ["GZ_SIM_RESOURCE_PATH"]
-        + ":"
-        + os.path.join(
+        # os.environ["GZ_SIM_RESOURCE_PATH"]
+        # + ":" +
+        os.path.join(
             get_package_share_directory("simlan_gazebo_environment"), "models"
         )
     )
 
     os.environ["IGN_GAZEBO_RESOURCE_PATH"] = (
-        os.environ["IGN_GAZEBO_RESOURCE_PATH"]
-        + ":"
-        + os.path.join(
+        # os.environ["IGN_GAZEBO_RESOURCE_PATH"]
+        # + ":" +
+        os.path.join(
             get_package_share_directory("simlan_gazebo_environment"), "models"
         )
     )
@@ -100,6 +100,10 @@ def launch_setup(context, *args, **kwargs):
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[
+            # For some reason bridges cannot be started from the config file, so it has to be done here
+            "/world/default/set_pose@ros_gz_interfaces/srv/SetEntityPose",
+            "/world/default/create@ros_gz_interfaces/srv/SpawnEntity",
+            "/world/default/remove@ros_gz_interfaces/srv/DeleteEntity",
             "--ros-args",
             "-p",
             f"config_file:={bridge_params}",
