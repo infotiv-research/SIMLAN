@@ -440,7 +440,7 @@ Examples:
  - EUREKA ITEA4 ArtWork (Vinnova grant 2023-00970)
 
 - **infotiv Colleagues**:  Pär Aronsson, Anton Hill, David Espedalen, Siyu Yi,  Anders Bäckelie, Jacob Rohdin, Vasiliki Kostara, Nazeeh Alhosary
-- **Other contributors** Tove Casparsson , Filip Melberg (Chalmers), Christoffer Johannesson, Sebastian Olsson, Hjalmar Rusck from Dyno-robotics,  Erik Brorsson (Chalmers/Volvo), **<place holder for your name>**
+- **Other contributors** Tove Casparsson , Filip Melberg (Chalmers), Christoffer Johannesson, Sebastian Olsson, Hjalmar Ruscck from Dyno-robotics,  Erik Brorsson (Chalmers/Volvo), **<place holder for your name>**
 - thanks to: Infotiv AB, RISE, Volvo Group, Dyno-Robotics, Chalmers
 
 ---

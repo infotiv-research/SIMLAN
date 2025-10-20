@@ -1,16 +1,12 @@
-### 3.0.0: (Oct 2025)
+### 3.0.0: Jazzy, humanoid (Oct 2025) - Supervisor: Hamid Ebadi
 - Collision sensor: Anton Stigemyr Hill
-- Automatically generated parameter-files for robot_agents: Anton Stigemyr Hill
+- Automatically generated parameter-files for robot_agents and world fidelity : Anton Stigemyr Hill
 - Shared map and obstacle generation for robot_agents: Anton Stigemyr Hill
 - Geofencing and Safety stop: David Espedalen
-
-Humanoid integration
-Humanoid mocap with multi-camera training pipeline
-World fidelity
-Panda arm integration
-Dyno-robotics trajectory replay integration, scenario
-Credits for Panda arm and Humanoid
-
+- Humanoid integration : Siyu Yi, Pär Aronsson
+- Mocap (humanoid) with multi-camera training pipeline : Siyu Yi, Pär Aronsson
+- Panda arm integration: Pär Aronsson
+- Dyno-robotics trajectory replay integration, scenario: Sebastian Olsson
 
 ### 2.1.0: Namespace cleanup and multi-agent navigation (Aug 2025) - Supervisor: Hamid Ebadi
 
@@ -49,7 +45,7 @@ Credits for Panda arm and Humanoid
 - D3.2 Images for stitching : Hamid Ebadi
 - D3.1 Dataset draft for HH : Hamid Ebadi
 - CI/CD and Kubernetes integration by Filip Melberg, Vasiliki Kostara
-- Jackal integration : Christoffer Johannesson
+- Jackal integration : Christoffer Johannesson, Hjalmar Ruscck
 - Docker/vscode
 - Disable GPU support by default
 - POC for camera projection to pixel coordinates  (jupyter notebook) : Hamid Ebadi

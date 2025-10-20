@@ -37,7 +37,6 @@ Here are list of advantages of using SIMLAN Multi-Camera system
 - Cost-effective development
 
 
-
 ## Installation
 
 ### Dependencies
@@ -141,7 +140,7 @@ Finally, to view the bird's-eye perspective from each camera, run the following 
 ./control.sh birdeye
 ```
 
-## Humanoid controls
+## RITA controls (humanoid, robotic arm)
 
 ![](/resources/logos/youtube.png) [Humanoid/Arm demo video](https://www.youtube.com/watch?v=EiCNiPeifPk)
 
@@ -279,6 +278,7 @@ Learn more about the project by reading these documents:
   - [Aruco Localization Documentation](simulation/aruco_localization/README.md)
   - [humanoid_robot Simulation](simulation/humanoid_robot/)
   - [Geofencing and Collision safe stop](simulation/bt_failsafe/README.md)
+  - [Visualize Real Data](simulation/visualize_real_data/README.md) **requires data from Volvo**
 - [`CHANGELOG.md`](CHANGELOG.md)
 - [`CREDITS.md`](CREDITS.md)
 - [`LICENSE` (apache 2)](LICENSE)
