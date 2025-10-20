@@ -145,8 +145,8 @@ Finally, to view the bird's-eye perspective from each camera, run the following 
 ![](/resources/logos/youtube.png) [Humanoid/Arm demo](https://www.youtube.com/watch?v=EiCNiPeifPk)
 
 
-> The dataset, input and outputs are in `` directory
->
+> The dataset, input and outputs are in `humanoid_utulity/DATASET/` directory
+
 To select an empty world run:
 
 ```bash
@@ -257,8 +257,8 @@ In `config.sh` you can set the level of logs you want outputed into the terminal
 
 ### Older versions
 
-- **Gazebo Classic (Gazebo11)** has reached end-of-life (EOL). An earlier version of this repository, which uses Gazebo Classic, can be found in the [gz_classic_humble branch](https://github.com/infotiv-research/SIMLAN/tree/gz_classic_humble).
-- **ROS2 humble & Gazebo ignition**, an earlier version of this repository, which uses ROS2 humble and Gazebo ignition can be found in https://github.com/infotiv-research/SIMLAN/tree/ign_humble.
+- **Gazebo Classic (Gazebo11)** has reached end-of-life (EOL). An earlier version of this repository, which uses Gazebo Classic, can be found in the [`gz_classic_humble`](https://github.com/infotiv-research/SIMLAN/tree/gz_classic_humble) branch.
+- **ROS2 humble & Gazebo ignition**, an earlier version of this repository, which uses ROS2 humble and Gazebo ignition can be found in [`ign_humble`](https://github.com/infotiv-research/SIMLAN/tree/ign_humble) branch.
 
 
 ## Documentation
