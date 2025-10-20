@@ -2,63 +2,24 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction
 from launch.conditions import UnlessCondition
 from launch.substitutions import (
-    Command,
-    FindExecutable,
     PathJoinSubstitution,
     LaunchConfiguration,
 )
-from launch_ros.actions import Node, PushRosNamespace
+from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-from launch_ros.parameter_descriptions import ParameterValue
-
 
 def generate_launch_description():
 
     # Configs
-    config_pallet_truck_ekf = PathJoinSubstitution(
-        [FindPackageShare("pallet_truck_control"), "config", "localization.yaml"],
-    )
-
     config_velocity_controller = PathJoinSubstitution(
         [FindPackageShare("pallet_truck_control"), "config", "control.yaml"],
     )
 
-    # Launch Arguments
-
-    robot_description_command_arg = DeclareLaunchArgument(
-        "robot_description_command",
-        default_value=[
-            PathJoinSubstitution([FindExecutable(name="xacro")]),
-            " ",
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("pallet_truck_description"),
-                    "urdf",
-                    "pallet_truck.urdf.xacro",
-                ]
-            ),
-        ],
-    )
-
     is_sim = LaunchConfiguration("is_sim", default=True)
+    log_level = LaunchConfiguration("log_level", default="INFO")
 
     is_sim_arg = DeclareLaunchArgument("is_sim", default_value=is_sim)
     namespace = LaunchConfiguration("namespace")
-
-    # Localization
-    localization_group_action = GroupAction(
-        [
-            # Extended Kalman Filter
-            Node(
-                package="robot_localization",
-                executable="ekf_node",
-                name="ekf_node",
-                output="screen",
-                parameters=[config_pallet_truck_ekf],
-            ),
-        ]
-    )
-
     # ROS2 Controllers
     control_group_action = GroupAction(
         [
@@ -72,6 +33,7 @@ def generate_launch_description():
                     "stderr": "screen",
                 },
                 remappings=[("/tf", "tf")],
+                namespace=namespace,
                 condition=UnlessCondition(is_sim),
             ),
             # Joint State Broadcaster
@@ -82,8 +44,12 @@ def generate_launch_description():
                     "joint_state_broadcaster",
                     "-c",
                     "controller_manager",
+                    "--ros-args", "--log-level", log_level,
+
                 ],
                 output="screen",
+                namespace=namespace,
+
             ),
             # Velocity Controller
             Node(
@@ -93,8 +59,14 @@ def generate_launch_description():
                     "velocity_controller",
                     "-c",
                     "controller_manager",
+                    "--ros-args",
+                    "--log-level",
+                    log_level
                 ],
                 output="screen",
+               
+                namespace=namespace,
+
             ),
         ]
     )

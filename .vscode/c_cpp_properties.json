@@ -3,7 +3,7 @@
     {
       "name": "ROS",
       "includePath": [
-        "/opt/ros/humble/include/**",
+        "/opt/ros/jazzy/include/**",
         "/opt/dependencies_ws/install/include/**",
         "${workspaceFolder}/**"
       ],

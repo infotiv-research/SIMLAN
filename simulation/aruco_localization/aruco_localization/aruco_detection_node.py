@@ -15,9 +15,10 @@ This node is used to listen to a camera and subscribe to its intrinsic values an
 When a camera finds a marker, we run a function that get its pose and rotation relative to the camera and publish it to TF.
 """
 
-### CV2 ARUCO DETECTION CONFIG PARAMETERS ###
+# ### CV2 ARUCO DETECTION CONFIG PARAMETERS ###
 aruco_dictionary = cv.aruco.getPredefinedDictionary(cv.aruco.DICT_5X5_1000)
-aruco_parameters = cv.aruco.DetectorParameters()
+#aruco_parameters = cv.aruco.DetectorParameters()
+aruco_parameters = cv.aruco.DetectorParameters_create()  
 # These are key for low-res or off-center markers
 aruco_parameters.adaptiveThreshWinSizeMin = 3
 aruco_parameters.adaptiveThreshWinSizeMax = 23
@@ -86,7 +87,9 @@ class ArucoDetectionNode(Node):
                 f"Skipping image from camera_{camera_id} — no intrinsics yet."
             )
             return
+        
         cv_image = self.cv_bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
+
         # Detect corners of an aruco
         corners, marker_ids, _ = cv.aruco.detectMarkers(
             cv_image, aruco_dictionary, parameters=aruco_parameters

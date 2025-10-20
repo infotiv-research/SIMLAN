@@ -1,8 +1,18 @@
-### 2.0.1: Namespace cleanup and multi-agent navigation (Aug 2025) - Supervisor: Hamid Ebadi
+### 3.0.0: Jazzy, humanoid (Oct 2025) - Supervisor: Hamid Ebadi
+- Collision sensor: Anton Stigemyr Hill
+- Automatically generated parameter-files for robot_agents and world fidelity : Anton Stigemyr Hill
+- Shared map and obstacle generation for robot_agents: Anton Stigemyr Hill
+- Geofencing and Safety stop: David Espedalen
+- Humanoid integration : Siyu Yi, Pär Aronsson
+- Mocap (humanoid) with multi-camera training pipeline : Siyu Yi, Pär Aronsson
+- Panda arm integration: Pär Aronsson
+- Dyno-robotics trajectory replay integration, scenario: Sebastian Olsson
 
-- Generic robot-agent with different mesh(pallet_truck/forklift) and aruco id
-- Robot-agent and nav2 namespace
-- Multi-agent navigation using GPSS
+### 2.1.0: Namespace cleanup and multi-agent navigation (Aug 2025) - Supervisor: Hamid Ebadi
+
+- Implemented generic robot-agent control supporting multiple meshes (e.g., pallet truck, forklift) and distinct ArUco IDs: Pär Aronsson
+- Robot-agent and navigation2 (nav2) namespace: Pär Aronsson
+- Multi-agent navigation capabilities using GPSS: Pär Aronsson
 
 ### 2.0.0: GPSS (May 2025) - Supervisor: Hamid Ebadi
 
@@ -35,7 +45,7 @@
 - D3.2 Images for stitching : Hamid Ebadi
 - D3.1 Dataset draft for HH : Hamid Ebadi
 - CI/CD and Kubernetes integration by Filip Melberg, Vasiliki Kostara
-- Jackal integration : Christoffer Johannesson
+- Jackal integration : Christoffer Johannesson, Hjalmar Ruscck
 - Docker/vscode
 - Disable GPU support by default
 - POC for camera projection to pixel coordinates  (jupyter notebook) : Hamid Ebadi

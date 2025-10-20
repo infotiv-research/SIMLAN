@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="human_support">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import human_support urdf file -->
+    <xacro:include filename="$(find humanoid_robot)/model/support/human_support.xacro" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="human_support.ros2_control.xacro" />
+    <xacro:include filename="human_support_wheels.urdf.xacro" />
+
+
+    <xacro:human_support_ros2_control name="GazeboSimSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

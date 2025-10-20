@@ -1,4 +1,5 @@
 import os
+import ast
 from ament_index_python.packages import get_package_share_directory
 from launch.actions import DeclareLaunchArgument
 from launch import LaunchDescription
@@ -7,83 +8,119 @@ from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 
 def launch_setup(context, *args, **kwargs):
-    namespace = LaunchConfiguration("namespace").perform(context)
+    robots_str = LaunchConfiguration("robots").perform(context)
+    log_level = LaunchConfiguration("log_level").perform(context)
 
+    robots = ast.literal_eval(robots_str)
+    all_namespaces=[]
+    for robot in robots:
+        all_namespaces.append(robot["namespace"])
     # Get the launch directory
     nav2_yaml = os.path.join(
         get_package_share_directory("pallet_truck_navigation"),
         "config",
-        f"{namespace}_nav2_params.yaml",
+        "nav2_params.yaml",
     )
-    return [
+
+    actions =[]
+    for robot in robots:
+        if robot.get("robot_type") != "pallet_truck":
+            continue  # skip if robot is not pallet_truck
+        actions.append(
             Node(  # Manually setting the joint between map and odom to 0 0 0, i.e. identical to each other. map -> odom
                 package="tf2_ros",
                 executable="static_transform_publisher",
+                namespace=robot["namespace"],
                 name="static_map_to_odom",
-                namespace=namespace,
-                arguments=["0", "0", "0", "0", "0", "0", "map", f"{namespace}/odom"],
+                arguments=["0", "0", "0", "0", "0", "0", f"{robot["namespace"]}/map", f"{robot["namespace"]}/odom"],
             ),
-            Node(  # controller
-                package="nav2_controller",
-                executable="controller_server",
-                name="controller_server",
-                namespace=namespace,
-                output="screen",
-                parameters=[nav2_yaml], 
-                remappings=[
-                    ("cmd_vel", "nav_vel"),
-                ]
-            ),
-            Node(  # Planner
-                package="nav2_planner",
-                executable="planner_server",
-                name="planner_server",
-                output="screen",
-                namespace=namespace,
-
+        )
+        actions.append(
+            Node(
+                package='nav2_controller', # yes
+                executable='controller_server',
+                output='screen',
                 parameters=[nav2_yaml],
-            ),
-            Node(  # Behavior
-                package="nav2_behaviors",
-                executable="behavior_server",
-                name="behavior_server",
-                namespace=namespace,
+                remappings= [('cmd_vel', 'nav_vel')],
+                namespace=robot["namespace"],
+                arguments=['--ros-args', '--log-level', log_level],
 
-                output="screen",
-                parameters=[nav2_yaml],
             ),
-            Node(  # Navigator
-                package="nav2_bt_navigator",
-                executable="bt_navigator",
-                name="bt_navigator",
-                namespace=namespace,
-
-                output="screen",
+        )
+        actions.append(
+            Node(
+                package='nav2_planner', # yes
+                executable='planner_server',
+                name='planner_server',
+                output='screen',
+                arguments=['--ros-args', '--log-level', log_level],
                 parameters=[nav2_yaml],
+                namespace=robot["namespace"]
             ),
-            Node(  # Lifecycles, handle the nodes inactive/active states
+        )
+        actions.append(
+            Node(
+                package='nav2_behaviors', # yes
+                executable='behavior_server',
+                name='behavior_server',
+                output='screen',
+                parameters=[nav2_yaml],
+                namespace=robot["namespace"],
+                arguments=['--ros-args', '--log-level', log_level],
+            ),
+        )
+        actions.append(
+            Node(
+                package='nav2_bt_navigator',  # yes
+                executable='bt_navigator',
+                name='bt_navigator',
+                output='screen',
+                arguments=['--ros-args', '--log-level', log_level],
+                parameters=[nav2_yaml],
+                namespace=robot["namespace"],
+                
+            ),
+        )
+        actions.append(   
+            Node(# Lifecycles, handle the nodes inactive/active states
                 package="nav2_lifecycle_manager",
                 executable="lifecycle_manager",
-                namespace=namespace,
                 name="lifecycle_manager_navigation",
                 output="screen",
+                namespace=robot["namespace"],
+                arguments=['--ros-args', '--log-level', log_level],
                 parameters=[
                     {"autostart": True},
-                    {
-                        "node_names": [
-                            "controller_server",  
+                    {"node_names": 
+                        [
                             "planner_server",
                             "behavior_server",
+                            "controller_server",  
                             "bt_navigator",
                         ]
                     },
                 ],
             ),
-        ]
+        )
+        actions.append(
+            Node(
+                package="pallet_truck_communication",
+                executable="update_map_node",
+                name="update_map",
+                output="screen",
+                namespace=robot["namespace"],
+                parameters=[{"namespace": robot["namespace"]},
+                            {"all_namespaces":all_namespaces}],
+                arguments=['--ros-args', '--log-level', log_level],
+
+            )
+        )
+    return actions
     
 
 def generate_launch_description():
     return LaunchDescription([
-        DeclareLaunchArgument("namespace", default_value="robot_agent_1"),
+        DeclareLaunchArgument("robots", default_value=[]),
+        DeclareLaunchArgument("log_level", default_value="log_level"),
         OpaqueFunction(function=launch_setup),
     ])

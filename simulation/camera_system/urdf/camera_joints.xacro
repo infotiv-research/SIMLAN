@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <joint name="hhcamera_world_joint" type="fixed">
+        <parent link="world"/>
+        <child link="hhcamera"/>
+        <origin xyz="0 0 0" rpy="0 0.25 ${pi}"/>
+    </joint>
+
+    <joint name="base_base_footprint_joint" type="fixed">
+        <origin xyz="0.0 0.0 ${base_height / 2}" rpy="0.0 0.0 0.0"/>
+        <parent link="hhcamera"/>
+        <child link="base_link"/>
+    </joint>
+
+    <joint name="base_eye_joint" type="fixed">
+        <origin xyz="${(base_length + eye_length) / 2} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="eye_link"/>
+    </joint>
+
+    <joint name="eye_camera_joint" type="fixed">
+        <origin xyz="${eye_length} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="eye_link"/>
+        <child link="camera_link"/>
+    </joint>
+
+</robot>

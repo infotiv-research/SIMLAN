@@ -1,4 +1,5 @@
 from setuptools import find_packages, setup
+from glob import glob
 
 package_name = "camera_bird_eye_view"
 
@@ -9,6 +10,7 @@ setup(
     data_files=[
         ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
         ("share/" + package_name, ["package.xml"]),
+        ("share/" + package_name + "/launch", glob("launch/*.py")),
     ],
     install_requires=["setuptools"],
     zip_safe=True,
@@ -19,8 +21,9 @@ setup(
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
-            "camera_bird_eye_view_service = camera_bird_eye_view.camera_bird_eye_view_service:main",
             "camera_bird_eye_view_publisher = camera_bird_eye_view.camera_bird_eye_view_publisher:main",
+            "camera_bird_eye_view_stitcher = camera_bird_eye_view.camera_bird_eye_view_stitcher:main",
+            "camera_save = camera_bird_eye_view.camera_save:main",
         ],
     },
 )

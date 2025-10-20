@@ -38,3 +38,12 @@ Example robot setup:
 }
 
 ```
+
+---
+
+## automatically generated parameter files:
+
+When launching multiple robots, a script to automatically generate the `gz_bridge.yaml` file was introduce to dynamically remap topics for the spawned robots. This is done in the `/launch/generate_gz_bridge.py` file which sets both the static world topics as well as robot specific topics such as the `/namespace/contact` topics of the spawned `pallet_truck`s. This is run everytime `multiple_robot_spawn.launch.py` is executed.
+
+This is also implemented for the `control.yaml`file which is the ros2_controller. This is done in the `/launch/generate_control_yaml.py` with the same reasoning as before to dynamically add control for all robots that are spawned. The `control.yaml` is re-created every time `multiple_robot_spawn.launch.py` is executed
+

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="human_support">
+
+    <xacro:include filename="common_properties.xacro"/>
+    <xacro:include filename="arm_3dof.xacro"/>
+    <xacro:include filename="$(find humanoid_robot)/humanSubjectWithMesh_simplified.urdf"/>
+
+     <joint name="arm_human_joint" type="fixed">
+        <origin xyz="${(arm_base_length)*2} 0.0 ${twist_arm_length}" rpy="0.0 0.0 0.0"/>
+        <parent link="link4"/>
+        <child link="Pelvis"/>
+    </joint>
+
+</robot>

@@ -4,24 +4,19 @@
 install/
 log/
 build/
-
 # python
 *.pcd
 *.pyc
-
 # external repos
 simulation/jackal/
-
 #environments
 venv/
 env/
 .venv/
 .env/
 myenv/
-
 # lint config files
 .flake8
-
 # local
 experiments/
 *.iml
@@ -32,9 +27,6 @@ experiments/
 .idea
 **/phobos_out/
 # colcon/CMake output
-build
-install
-log
 .trunk
 Tools
 blender*
@@ -50,3 +42,26 @@ rosbag*
 ROS_DOMAIN_ID.txt
 *.pdf
 *.gv
+#### HUMANOID
+.vscode
+.vscode-server/src/ros2_numpy/
+DATASET/
+pymoveit2/
+*_motion.json
+*.png_display.jps
+*prediction.json
+mlenv/
+output/
+*.csv
+*.zip
+*.log
+camera_utility
+models*
+#auto-generated parameter files:
+control.yaml
+gz_bridge.yaml
+navigate_w_replanning_and_recovery_robot_agent_*
+nav2_params.yaml
+camera_config.xacro
+PRESENTATION.html
+config.sh

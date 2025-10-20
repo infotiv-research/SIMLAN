@@ -102,8 +102,8 @@ class Camera_config:
 
         # [OpenCV](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html) uses five parameters, known as distortion coefficients given by like this: `k1, k2, p1, p2 , k3 # pay attention to the order`
 
-        self.px = self.in_K[0][2]
-        self.py = self.in_K[1][2]
+        self.cx = self.in_K[0][2]
+        self.cy = self.in_K[1][2]
         self.fx = self.in_K[0][0]
         self.fy = self.in_K[1][1]
         self.fov_x = 2 * math.atan(self.width / (2 * self.fx))
@@ -137,7 +137,7 @@ class Camera_config:
         self.r, self.p, self.w = rotationMatrixToEulerAngles(R_gazebocam_to_world)
 
     def __str__(self):
-        return f"""<xacro:camera number="{self.camera_name}" x="{self.x}" y="{self.y}" z="{self.z}" r="{self.r}" p="{self.p}" w="{self.w}" width="{int(self.width)}" height="{int(self.height)}" k1="{self.k1}" k2="{self.k2}" k3="{self.k3}" p1="{self.p1}" p2="{self.p2}" horizontal_fov="{self.fovhor}" aspect_ratio="{self.aspect_ratio}"  />"""
+        return f"""<xacro:camera number="{self.camera_name}" x="{self.x}" y="{self.y}" z="{self.z}" r="{self.r}" p="{self.p}" w="{self.w}" width="{int(self.width)}" height="{int(self.height)}" k1="{self.k1}" k2="{self.k2}" k3="{self.k3}" p1="{self.p1}" p2="{self.p2}" horizontal_fov="{self.fovhor}" aspect_ratio="{self.aspect_ratio}" fx="{self.fx}" fy="{self.fy}" cx="{self.cx}" cy="{self.cy}"/>"""
 
 
 if __name__ == "__main__":

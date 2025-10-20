@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <sdf version="1.8">
   <model name="factory">
+    <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
+      <label>2</label>
+    </plugin>
     <static>true</static>
     <link name="building">
       <visual name="visual">
@@ -17,9 +20,10 @@
           </mesh>
         </geometry>
       </collision>
-      <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
-        <label>2</label>
-      </plugin>
+
     </link>
+    <plugin name="gz::sim::systems::Label" filename="gz-sim-label-system">
+      <label>2</label>
+    </plugin>
   </model>
 </sdf>

@@ -21,36 +21,23 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from launch.actions import OpaqueFunction
 
-
 def launch_setup(context, *args, **kwargs):
-
+    # Launch args
     camera_enabled_ids = LaunchConfiguration("camera_enabled_ids").perform(context)
-    pkg_simlan_gazebo_environment = get_package_share_directory(
-        "simlan_gazebo_environment"
-    )
+    log_level = LaunchConfiguration("log_level").perform(context)
+    world_setup = LaunchConfiguration("world_setup").perform(context)
+    use_sim_time = LaunchConfiguration("use_sim_time", default=True)
+    launch_rviz = LaunchConfiguration("rviz")
+
+    pkg_simlan_gazebo_environment = get_package_share_directory("simlan_gazebo_environment")
     pkg_static_agent_launcher = get_package_share_directory("static_agent_launcher")
-    pkg_pallet_truck_bringup = get_package_share_directory("pallet_truck_bringup")
-    
-    pkg_aruco_localization = get_package_share_directory("aruco_localization")
-    pkg_pallet_truck_navigation = get_package_share_directory("pallet_truck_navigation") # contains both localization and nav2
-    pkg_scenario_manager = get_package_share_directory("scenario_manager")
-    
 
     rviz_config_file = PathJoinSubstitution(
-        # [FindPackageShare("simlan_bringup"), "rviz", "rviz_config.rviz"]
-        [FindPackageShare("simlan_bringup"), "rviz", "visualize_real_data.rviz"]
+        [FindPackageShare("simlan_bringup"), "rviz", "rviz_config.rviz"]
     )
-
-    # Launch args
-    launch_rviz = LaunchConfiguration("rviz")
-    pallet_truck_manual_control = LaunchConfiguration("pallet_truck_manual_control")
-    use_sim_time = LaunchConfiguration("use_sim_time", default="true")
 
     launch_rviz_launch_argument = DeclareLaunchArgument(
         "rviz", default_value="True", description="To launch rviz"
-    )
-    use_sim_time_launch_argument = DeclareLaunchArgument(
-        "use_sim_time", default_value="true", description="Use simulation time"
     )
 
     simlan_gazebo = IncludeLaunchDescription(
@@ -59,10 +46,11 @@ def launch_setup(context, *args, **kwargs):
                 pkg_simlan_gazebo_environment, "launch", "simlan_factory.launch.py"
             )
         ),
-        launch_arguments={
-            "use_sim_time": use_sim_time,
-            "camera_enabled_ids": camera_enabled_ids,
-        }.items(),
+        launch_arguments={"camera_enabled_ids": camera_enabled_ids,
+                          "use_sim_time":use_sim_time,
+                          "world_setup":world_setup,
+                          "log_level":log_level
+                          }.items(),
     )
 
     static_agents = IncludeLaunchDescription(
@@ -75,39 +63,18 @@ def launch_setup(context, *args, **kwargs):
         package="rviz2",
         executable="rviz2",
         name="rviz",
-        arguments=["-d", rviz_config_file],
+        arguments=[
+            "-d", 
+            rviz_config_file,
+            "--ros-args", "--log-level", log_level
+            ],
         output="screen",
         condition=IfCondition(launch_rviz),
-        parameters=[{"use_sim_time": use_sim_time}],
     )
 
-    return [launch_rviz_launch_argument,
-            use_sim_time_launch_argument,
-            simlan_gazebo,
-            static_agents,
-            rviz2]
+    return [launch_rviz_launch_argument, simlan_gazebo, static_agents, rviz2]
 
 
 def generate_launch_description():
 
-    pkg_dyno_jackal_bringup = get_package_share_directory("dyno_jackal_bringup")
-    # pkg_pallet_truck_bringup = get_package_share_directory("pallet_truck_bringup")
-
-    # Declare camera_enabled_ids launch argument
-    camera_enabled_ids_arg = DeclareLaunchArgument(
-        "camera_enabled_ids",
-        default_value="163 164 165 166",
-        description='Camera IDs to enable in simulation'
-    )
-
-    jackal = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_dyno_jackal_bringup, "launch", "sim.launch.py")
-        )
-    )
-
-    return LaunchDescription([
-        camera_enabled_ids_arg,
-        OpaqueFunction(function=launch_setup),
-        jackal
-    ])
+    return LaunchDescription([OpaqueFunction(function=launch_setup)])
