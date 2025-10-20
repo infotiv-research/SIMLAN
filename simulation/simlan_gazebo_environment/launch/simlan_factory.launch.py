@@ -17,6 +17,7 @@
 # Authors: Joep Tool
 
 import os
+os.environ["RMW_FASTRTPS_USE_SHARED_MEMORY"] = "OFF"
 from launch.actions import OpaqueFunction, DeclareLaunchArgument
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
@@ -25,70 +26,48 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.actions import AppendEnvironmentVariable
 from launch_ros.actions import Node
+import sys
+import os
 
-# from static_agent_launcher.scripts.camera_config_manager import load_cameras
-import yaml
-
+sys.path.append(os.path.dirname(__file__))
+from generate_world_file import generate_world_file
 
 def launch_setup(context, *args, **kwargs):
 
     actions = []
 
     camera_enabled_ids = LaunchConfiguration("camera_enabled_ids").perform(context)
-    camera_enabled_ids = camera_enabled_ids.split(" ")
-    print(f"------------------------------> camera_enabled_ids: {camera_enabled_ids}")
-    # camera_ids_list = [163, 164, 165, 166]
-    launch_file_dir = os.path.join(
-        get_package_share_directory("simlan_gazebo_environment"), "launch"
-    )
-    # os.environ["GAZEBO_MODEL_PATH"] = (
-    #     os.environ["GAZEBO_MODEL_PATH"]
-    #     + ":" + os.path.join(
-    #         get_package_share_directory("simlan_gazebo_environment"), "models"
-    #     )
-    # )
-    # If you want to run the simulator in headless mode, uncomment the line bew
-    # os.environ["GZ_SIM_HEADLESS"]="true"
-    os.environ["GZ_SIM_RESOURCE_PATH"] = (
-        # os.environ["GZ_SIM_RESOURCE_PATH"]
-        # + ":" +
-        os.path.join(
-            get_package_share_directory("simlan_gazebo_environment"), "models"
-        )
-    )
-
-    os.environ["IGN_GAZEBO_RESOURCE_PATH"] = (
-        # os.environ["IGN_GAZEBO_RESOURCE_PATH"]
-        # + ":" +
-        os.path.join(
-            get_package_share_directory("simlan_gazebo_environment"), "models"
-        )
-    )
-    print(
-        "-----------------------> GZ_SIM_RESOURCE_PATH: ",
-        os.environ["GZ_SIM_RESOURCE_PATH"],
-    )
-    pkg_ros_gz_sim = get_package_share_directory("ros_gz_sim")
-
+    log_level = LaunchConfiguration("log_level").perform(context)
+    world_setup = LaunchConfiguration("world_setup").perform(context)
     use_sim_time = LaunchConfiguration("use_sim_time", default="true")
 
-    world = os.path.join(
+    camera_enabled_ids = camera_enabled_ids.split(" ")
+
+    pkg_ros_gz_sim = get_package_share_directory("ros_gz_sim")
+    original_world = os.path.join(
         get_package_share_directory("simlan_gazebo_environment"),
         "worlds",
         "ign_simlan_factory.world",
     )
+    
+    #Updates the world file depending on world_setup
+    world=generate_world_file(world_setup, original_world)
+
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_gz_sim, "launch", "gz_sim.launch.py")
         ),
         launch_arguments={
-            "gz_args": ["-r -v4 ", world],
+            "log_level": log_level,
+            "gz_args": ["-r -v 1 ", world],
             "on_exit_shutdown": "true",
             "use_sim_time": use_sim_time,
-            "verbose": "true",
+            "verbose": "false",
             "pause": "false",
         }.items(),
+        
     )
+    
 
     bridge_params = os.path.join(
         get_package_share_directory("simlan_gazebo_environment"),
@@ -107,15 +86,11 @@ def launch_setup(context, *args, **kwargs):
             "--ros-args",
             "-p",
             f"config_file:={bridge_params}",
+            "--log-level", 
+            log_level
         ],
-    )
-
-    ld = LaunchDescription()
-    ros_gz_image_bridge = Node(
-        package="ros_gz_image",
-        executable="image_bridge",
-        arguments=["/camera/camera_info"],
-    )
+        output = "screen"
+   )
 
     for camera_id in camera_enabled_ids:
         ros_gz_image = Node(
@@ -126,6 +101,9 @@ def launch_setup(context, *args, **kwargs):
             arguments=[
                 f"/camera_{camera_id}/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
                 f"/camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
+                "--ros-args",
+                "--log-level",
+                log_level
             ],
             remappings=[
                 (
@@ -149,6 +127,9 @@ def launch_setup(context, *args, **kwargs):
                 f"/depth_camera_{camera_id}/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
                 f"/depth_camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
                 # f"/depth_camera_{camera_id}/points@sensor_msgs/msg/PointCloud2@gz.msgs.PointCloudPacked",
+                "--ros-args",
+                "--log-level",
+                log_level
             ],
             remappings=[
                 (
@@ -177,6 +158,9 @@ def launch_setup(context, *args, **kwargs):
                 f"/semantic_camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
                 f"/semantic_camera_{camera_id}/labels_map@sensor_msgs/msg/Image@gz.msgs.Image",
                 f"/semantic_camera_{camera_id}/colored_map@sensor_msgs/msg/Image@gz.msgs.Image",
+                "--ros-args",
+                "--log-level",
+                log_level
             ],
             remappings=[
                 (
@@ -198,27 +182,10 @@ def launch_setup(context, *args, **kwargs):
             ],
         )
         actions.append(ros_gz_semantic_image)
-    # segmentation_bridge = Node(
-    #     package="ros_gz_bridge",
-    #     executable="parameter_bridge",
-    #     name="segmentation_bridge",
-    #     output="screen",
-    #     arguments=[
-    #         "/semantic/labels_map@sensor_msgs/msg/Image@gz.msgs.Image",
-    #         "/semantic/colored_map@sensor_msgs/msg/Image@gz.msgs.Image"
-    #     ],
-    #     remappings=[
-    #         ("/semantic/labels_map", "/segmentation/labels_map"),
-    #         ("/semantic/colored_map", "/segmentation/colored_map")
-    #     ]
-    # )
-    # ld.add_action(segmentation_bridge)
 
     actions.append(gzserver_cmd)
-    # ld.add_action(set_env_vars_resources)
-    actions.append(ros_gz_bridge)
 
-    # ld.add_action(world)
+    actions.append(ros_gz_bridge)
 
     try:
         value = os.environ["SIM_ENV"]  # "DEV" , "CICD" or empty
@@ -229,12 +196,15 @@ def launch_setup(context, *args, **kwargs):
 
     return actions
 
-
 def generate_launch_description():
+    set_gazebo_model_path_env = AppendEnvironmentVariable("GZ_SIM_RESOURCE_PATH",os.path.join(get_package_share_directory("simlan_gazebo_environment"), "models"))
+ 
     return LaunchDescription(
         [
+            set_gazebo_model_path_env,
             # Declare the launch argument (optional if passed from parent)
             DeclareLaunchArgument("camera_enabled_ids", default_value="163 164 165"),
             OpaqueFunction(function=launch_setup),
         ]
     )
+ 

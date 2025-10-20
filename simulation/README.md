@@ -1,3 +1,10 @@
+## World Fidelity
+
+It is possible to adjust the level fidelity for a world in `config.sh`, there the `world_setup` is sent to 
+- `simulation/simlan_bringup/launch/sim.launch.py`.
+- `simulation/simlan_gazebo_environment/launch/simlan_factory.launch.py` (for world generation)
+- `simulation/simlan_gazebo_environment/launch/generate_world_file.py` (both `original_world` and the `world_setup`)
+
 ## Adding Aruco and camera (static agents)
 
 Aruco codes and cameras are all attached to the same link in Gazebo. To create new static agents, go to `simulation/static_agent_launcher/description/agents.urdf.xacro`. There you only need to add a new line on the form `<xacro:camera number="1" x="3" y="3" z="6" r="0" p="0" w="0"/>` for a new camera, or a new line on the form `<xacro:aruco number="1" x="3" y="3" z="0.1" r="0" p="0" w="0"/>` for a new aruco. The commands are identical apart from the name.

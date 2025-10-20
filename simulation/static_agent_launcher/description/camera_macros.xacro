@@ -26,7 +26,7 @@
         </joint>
     </xacro:macro>
 
-    <xacro:macro name="camera_gazebo" params="number width height k1 k2 k3 p1 p2 horizontal_fov aspect_ratio">
+    <xacro:macro name="camera_gazebo" params="number width height k1 k2 k3 p1 p2 horizontal_fov aspect_ratio fx fy cx cy">
         <gazebo reference="camera_${number}_link">
             <!-- Camera Sensor -->
             <sensor name="camera_${number}" type="camera">
@@ -37,16 +37,20 @@
                   <!-- <segmentation_type>instance</segmentation_type> -->
                   <horizontal_fov>${horizontal_fov}</horizontal_fov>
                   <camera_info_topic>camera_${number}/camera_info</camera_info_topic>
-                  <aspect_ratio>${aspect_ratio}</aspect_ratio>
                   <image>
                     <width>${width}</width>
                     <height>${height}</height>
                     <format>R8G8B8</format>
                   </image>
+                <clip>
+                    <near>0.1</near>
+                    <far>100</far>
+                </clip>
                 <lens>
                     <radial_tangential>
                         <k1>${k1}</k1>
                         <k2>${k2}</k2>
+                        <k3>${k3}</k3>
                         <p1>${p1}</p1>
                         <p2>${p2}</p2>
                     </radial_tangential>
@@ -59,8 +63,7 @@
                 <gz_frame_id>camera_link_optical</gz_frame_id>
             </sensor>
 
-            <!-- Depth camera sensor -->
-            <!-- 
+            <!-- Depth camera sensor --> 
             <sensor name="depth_${number}" type="depth_camera">
                 <pose>0 0.0175 0.0125 0 0 0</pose>
                 <update_rate>6</update_rate>
@@ -69,20 +72,20 @@
                     <horizontal_fov>1.51843645</horizontal_fov>
                     <camera_info_topic>depth_camera_${number}/camera_info</camera_info_topic>
                     <image>
-                        <width>848</width>
-                        <height>480</height>
+                        <width>${width}</width>
+                        <height>${height}</height>
                         <format>R_FLOAT32</format>
                     </image>
                     <clip>
                         <near>0.1</near>
-                        <far>10</far>
+                        <far>100</far>
                     </clip>
                     <lens>
                         <intrinsics>
-                            <fx>421.61578369140625</fx>
-                            <fy>421.61578369140625</fy>
-                            <cx>422.2854309082031</cx>
-                            <cy>236.57237243652344</cy>
+                            <fx>${fx}</fx>
+                            <fy>${fy}</fy>
+                            <cx>${cx}</cx>
+                            <cy>${cy}</cy>
                             <s>0</s>
                         </intrinsics>
                     </lens>
@@ -90,42 +93,18 @@
                 <topic>depth_camera_${number}/image_raw</topic>
                 <gz_frame_id>depth_camera_link_optical</gz_frame_id>
             </sensor>
-            -->
-
-            <!-- <sensor name="semantic_segmentation_camera" type="segmentation">
-                <topic>semantic</topic>
-                <camera>
-                    <segmentation_type>semantic</segmentation_type>
-                    <horizontal_fov>1.57</horizontal_fov>
-                    <image>
-                    <width>800</width>
-                    <height>600</height>
-                    </image>
-                    <clip>
-                    <near>0.1</near>
-                    <far>100</far>
-                    </clip>
-                    <save enabled="true">
-                    <path>segmentation_data/semantic_camera</path>
-                    </save>
-                </camera>
-                <always_on>1</always_on>
-                <update_rate>30</update_rate>
-                <visualize>true</visualize>
-            </sensor> -->
 
             <!-- Segmentation camera sensor -->
-            <!--
             <sensor name="semantic_camera_${number}" type="segmentation">
                 <always_on>1</always_on>
                 <update_rate>10</update_rate>
                 <topic>semantic_camera_${number}</topic>
                 <camera>
-                    <segmentation_type>instance</segmentation_type>
+                    <segmentation_type>semantic</segmentation_type>
                     <horizontal_fov>${horizontal_fov}</horizontal_fov>
                     <camera_info_topic>semantic_camera_${number}/camera_info</camera_info_topic>
                     <image>
-                    <width>800</width><height>600</height>
+                    <width>${width}</width><height>${height}</height>
                     </image>
                     <clip><near>0.1</near><far>100</far></clip>
                     <save enabled="false"/>
@@ -134,15 +113,15 @@
                 <gz_frame_id>semantic_camera_link_optical</gz_frame_id>
                 <visualize>true</visualize>
             </sensor>
-            -->
+    
 
         </gazebo>
     </xacro:macro>
 
-    <xacro:macro name="camera" params="number x y z r p w width height k1 k2 k3 p1 p2 horizontal_fov aspect_ratio">
+    <xacro:macro name="camera" params="number x y z r p w width height k1 k2 k3 p1 p2 horizontal_fov aspect_ratio fx fy cx cy">
         <xacro:camera_link number="${number}"/>
         <xacro:camera_joint number="${number}" x="${x}" y="${y}" z="${z}" r="${r}" p="${p}" w="${w}"/>
-        <xacro:camera_gazebo number="${number}" width="${width}" height="${height}" k1="${k1}" k2="${k2}" k3="${k3}" p1="${p1}" p2="${p2}" horizontal_fov="${horizontal_fov}" aspect_ratio="${aspect_ratio}"  />
+        <xacro:camera_gazebo number="${number}" width="${width}" height="${height}" k1="${k1}" k2="${k2}" k3="${k3}" p1="${p1}" p2="${p2}" horizontal_fov="${horizontal_fov}" aspect_ratio="${aspect_ratio}" fx="${fx}" fy="${fy}" cx="${cx}" cy="${cy}" />
     </xacro:macro>
 
 </robot>

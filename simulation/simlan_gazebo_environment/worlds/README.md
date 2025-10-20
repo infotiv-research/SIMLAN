@@ -32,6 +32,11 @@ contact_surface_layer : contact_surface_layer This is the same parameter as the 
 min_step_size The minimum time duration which advances with each time step of a variable time step solver.
 iters The number of iterations for the solver to run for each time step.
 
+### objects:
+
+As of now there are many objects in the world file nad if you want to move them all it's quite cumbersome. Therefore the move_objects.py was added to be able to increment the poses by x amount if needed.
+See move_objects.py
+
 ### reference:
 
 https://classic.gazebosim.org/tutorials?tut=physics_params&cat=physics

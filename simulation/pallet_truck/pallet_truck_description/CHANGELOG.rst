@@ -2,6 +2,11 @@
 Changelog for package pallet_truck_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.5 (2025-09-30)
+------------------
+* [pallet_truck_description] Added collision_sensor to the pallet_truck.urdf.xacro
+* Contributors: Anton Stigemyr Hill
+
 1.0.4 (2023-04-20)
 ------------------
 * [pallet_truck_description] Changed the output type of the gazebo_ros_ray_sensor to LaserScan.

@@ -22,6 +22,11 @@ We also got inspired and used the skeleton code from these open source project a
 - ["ROS2 Nav2 \[Navigation 2 Stack\] - with SLAM and Navigation" Udemy course](https://www.udemy.com/course/ros2-tf-urdf-rviz-gazebo/)
 - [Visual Servoing in Gazebo grobot](https://github.com/nlamprian/grobot)
 
+
+- The modification of [Human-Gazebo](https://github.com/robotology/human-gazebo) in [/src/humanoid_robot/model/human-gazebo](/src/humanoid_robot/model/human-gazebo) is licensed under LGPL-2.1.
+- [Moveit2](https://github.com/moveit/moveit2) is licensed under  BSD-3-Clause license.
+
+
 ## Resources
 
 - [Gazebo official video playlist](https://www.youtube.com/watch?v=48TX-XJ14Gs&list=PL6FI-gIL5jiEd4Hv-NIAuO2Cbbs27UpAM&index=1)
@@ -99,6 +104,9 @@ Camera projection
 Jackal Robot:
 
 The Clearpath Jackal Robot code is forked by Dyno Robotics from Clearpaths [jackal](https://github.com/jackal/jackal) Github. Branch foxy-devel is ported to dyno_humble, where changes for namespacing and a bringup package is added.
+
+- To improve collaboration in development environment we use vscode and docker as explained in [this instruction](https://www.allisonthackston.com/articles/docker-development.html) using these [docker files](https://github.com/athackst/dockerfiles). For production environment follow installation procedure used in [.devcontainer/Dockerfile](.devcontainer/Dockerfile) to install dependencies.
+- The Docker setup is added by Christoffer Johanesson (Dyno Robotics), based on Dyno experience working with Docker.
 
 ## Licenses
 

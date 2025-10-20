@@ -10,7 +10,7 @@ from sensor_msgs.msg import Image
 from functools import partial
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 import time
-
+import numpy as np
 
 def convert_float64_to_mono8(float_img):
     # Normalize to 0–255
@@ -59,37 +59,45 @@ def inside_image(width, height, coordinates):
     # Example: returning the difference between the two elements
     return in_range
 
-
 def world2camera(Pw, K, R, t, width, height):
-
+    # build projection matrix
     T = np.concatenate((R, t), axis=1)
-    Pc_distorted = np.matmul(T, Pw)
-    Pc_norml = Pc_distorted / Pc_distorted[2][0]
-    p = np.matmul(K, Pc_norml)
+
+    # project world points into camera coordinates
+    Pc = np.matmul(T, Pw)  # shape (3, N)
+
+    # normalize each column by its own z
+    Pc_norm = Pc / Pc[2, :]   # broadcast division
+
+    # intrinsics
+    p = np.matmul(K, Pc_norm)
     uv = p[:-1]
 
+    # check if inside image
     inside_image_partial = partial(inside_image, width, height)
     inside_column = np.apply_along_axis(inside_image_partial, axis=0, arr=uv)
     inside_column = inside_column.reshape(1, -1)
-    new_uv = np.vstack([uv, inside_column])
 
+    new_uv = np.vstack([uv, inside_column])
     return new_uv
 
-
-class CameraStitchPublisher(Node):
+class CameraBirdEyeViewPublisher(Node):
 
     def __init__(self):
 
         super().__init__("camera_bird_eye_view_publisher")
 
-        self.declare_parameter("camera_id", 164)
-        self.declare_parameter("point_start", (4, -4))
-        self.declare_parameter("point_end", (24, 6))
+        self.declare_parameter("camera_id", "164")
+        self.declare_parameter("point_start", "4, -4")
+        self.declare_parameter("point_end", "24, 6")
         self.declare_parameter("resolution", 0.02)
+        self.declare_parameter("input_img", "image_raw")
+        self.input_img = self.get_parameter("input_img").get_parameter_value().string_value
+        
 
         self.camera_id = self.get_parameter("camera_id").value
-        self.point_start = self.get_parameter("point_start").value
-        self.point_end = self.get_parameter("point_end").value
+        self.point_start = [float(value) for value in self.get_parameter("point_start").value.split(" ")]
+        self.point_end = [float(value) for value in self.get_parameter("point_end").value.split(" ")]
         self.resolution = self.get_parameter("resolution").value
 
         self.cv_bridge = CvBridge()
@@ -118,8 +126,8 @@ class CameraStitchPublisher(Node):
         )
 
         self.K = calib.in_K
-        self.t_vec = calib.ex_t_vec
-        self.rot_matrix = calib.ex_rot_mat
+        self.t_vec = calib.ex_t_vec 
+        self.rot_matrix = calib.ex_rot_mat 
         self.width = calib.width
         self.height = calib.height
 
@@ -136,9 +144,14 @@ class CameraStitchPublisher(Node):
         )
 
         # Image callback
+        if self.input_img in ["colored_map", "labels_map"]:
+            topic_name = f"static_agents/semantic_camera_{self.camera_id}/{self.input_img}"
+        else:
+            topic_name = f"static_agents/camera_{self.camera_id}/{self.input_img}"
+
         self.image_sub = self.create_subscription(
             Image,
-            f"static_agents/camera_{self.camera_id}/image_raw",
+            topic_name,
             self.project_area_callback,
             10,
         )
@@ -150,6 +163,7 @@ class CameraStitchPublisher(Node):
     def project_area_callback(self, msg: Image):
         cv_image = self.cv_bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
         cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
+        
 
         num_coords = self.uv_s.shape[1]
         coords_color = np.zeros(num_coords)
@@ -170,11 +184,10 @@ class CameraStitchPublisher(Node):
         image_msg.header = msg.header
         self.projection_publisher.publish(image_msg)
 
-
 def main():
 
     rclpy.init()
-    node = CameraStitchPublisher()
+    node = CameraBirdEyeViewPublisher()
     rclpy.spin(node)
     rclpy.shutdown()
 

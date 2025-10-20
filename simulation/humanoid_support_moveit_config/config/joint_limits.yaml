@@ -1,0 +1,245 @@
+# joint_limits.yaml allows the dynamics properties specified in the URDF to be overwritten or augmented as needed
+
+# For beginners, we downscale velocity and acceleration limits.
+# You can always specify higher scaling factors (<= 1.0.0.0) in your motion requests.  # Increase the values below to 1.0.0.0 to always move at maximum speed.
+default_velocity_scaling_factor: 1.0
+default_acceleration_scaling_factor: 1.0
+
+# Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
+# Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
+joint_limits:
+  jC1Head_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jC1Head_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jC7LeftShoulder_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jC7RightShoulder_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jL5S1_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jL5S1_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftAnkle_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftAnkle_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftAnkle_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftBallFoot_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftElbow_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftElbow_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftHip_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftHip_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftHip_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftKnee_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftKnee_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftShoulder_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftShoulder_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftShoulder_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftWrist_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jLeftWrist_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightAnkle_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightAnkle_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightAnkle_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightBallFoot_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightElbow_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightElbow_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightHip_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightHip_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightHip_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightKnee_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightKnee_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightShoulder_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightShoulder_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightShoulder_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightWrist_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jRightWrist_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jT1C7_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jT1C7_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jT1C7_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jT9T8_rotx:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jT9T8_roty:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  jT9T8_rotz:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  link1_link2_joint:
+    has_velocity_limits: true
+    max_velocity: 100.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  link2_link3_joint:
+    has_velocity_limits: true
+    max_velocity: 100.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  link3_link4_joint:
+    has_velocity_limits: true
+    max_velocity: 100.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0

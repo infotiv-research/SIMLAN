@@ -36,7 +36,7 @@ def generate_launch_description():
             "-robot_namespace",
             "static_agents",
             "-name",
-            "cameras",
+            "cameras"
         ],
         output="screen",
     )

@@ -2,13 +2,15 @@ import rclpy
 from rclpy.node import Node
 import numpy as np
 import tf2_ros
+import json
 from geometry_msgs.msg import TransformStamped, Transform
 from scipy.spatial.transform import Rotation as R
 from tf2_ros import Buffer, TransformListener
 from rclpy.time import Time, Duration
 from typing import Dict
 from collections import defaultdict
-
+from std_msgs.msg import String
+from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy
 
 # Helper function that extracts the rotation matrix from a Transform
 def transform_to_matrix(transform: Transform):
@@ -51,138 +53,108 @@ def compose_transforms(tf1: Transform, tf2: Transform) -> Transform:
 
     return result
 
-
 class ArucoPosePubNode(Node):
 
     def __init__(self):
         super().__init__("aruco_pose_publisher")
 
-        self.declare_parameter(
-            "camera_enabled_ids",
-            [
-                163,
-                164,
-                165,
-            ],
-        )
-        self.declare_parameter("update_rate", 100)  # Updates N times per second
+        self.declare_parameter("camera_enabled_ids", [163, 164, 165])
+        self.declare_parameter("update_rate", 100)
+        self.declare_parameter("all_namespaces",["robot_agent_1"])
 
         self.camera_enabled_ids = self.get_parameter("camera_enabled_ids").value
         self.update_rate = self.get_parameter("update_rate").value
+        self.all_namespaces=self.get_parameter("all_namespaces").value
+        self.all_marker_ids=[
+            int(ns.replace("robot_agent_", ""))
+            for ns in self.all_namespaces
+            if ns.startswith("robot_agent_") and ns.replace("robot_agent_", "").isdigit()]
+
         self.last_stamp = self.get_clock().now()
-        self.max_frame_age = Duration(seconds=1)
+        self.max_frame_age = Duration(seconds=1.0)
         self.latest_transform_received: Dict[int, Transform] = defaultdict(list)
-        # node attributes
+
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
         self.tf_broadcaster = tf2_ros.TransformBroadcaster(self)
 
-        # Publishers
-        self.timer = self.create_timer(
-            1 / self.update_rate, self.camera_aruco_pose_callback
-        )  # Every 0.1 is 10Hz
-        self.create_timer(
-            1 / self.update_rate, self.publish_poses
-        )  # every 0.05s is 20Hz. 20 runs per sec
+        # Run detection and averaging at update_rate
+        self.create_timer(1 / self.update_rate, self.camera_aruco_pose_callback)
+        self.create_timer(1 / self.update_rate, self.publish_poses)
+
+        qos_profile = QoSProfile(
+            depth=10,
+            reliability=QoSReliabilityPolicy.RELIABLE,
+            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL
+        )
+        self.marker_lost_pub = self.create_publisher(String, "/aruco_marker_seen", qos_profile)
+
+        self.last_seen: Dict[int, rclpy.time.Time] = {}
+        self.seen_markers = set()
+
+        # Timer for publishing lost markers only once per second
+        self.create_timer(1/self.update_rate/10, self.publish_seen_markers)
 
     def publish_poses(self):
-
-        if self.latest_transform_received == {}:
+        if not self.latest_transform_received:
             return
 
-        for (
-            marker_id,
-            markers_latest_transform,
-        ) in self.latest_transform_received.items():
-
+        for marker_id, markers_latest_transform in self.latest_transform_received.items():
             now = self.get_clock().now()
             if now <= self.last_stamp:
                 now = self.last_stamp + Duration(nanoseconds=10)
 
-            # Creating frame with parent: robot_agent_X_odom and child: robot_agent_X_base_link.
             t_base_link_to_pallet_truck = TransformStamped()
-            t_base_link_to_pallet_truck.header.stamp = self.get_clock().now().to_msg()
-            t_base_link_to_pallet_truck.header.frame_id = (
-                f"robot_agent_{marker_id}/odom"
-            )
-            t_base_link_to_pallet_truck.child_frame_id = (
-                f"robot_agent_{marker_id}/base_link"
-            )
+            t_base_link_to_pallet_truck.header.stamp = now.to_msg()
+            t_base_link_to_pallet_truck.header.frame_id = f"robot_agent_{marker_id}/odom"
+            t_base_link_to_pallet_truck.child_frame_id = f"robot_agent_{marker_id}/base_link"
             t_base_link_to_pallet_truck.transform = markers_latest_transform
 
             self.tf_broadcaster.sendTransform(t_base_link_to_pallet_truck)
-            # we set new timestamp for next iteration
             self.last_stamp = now
 
-    # Callbacks
     def camera_aruco_pose_callback(self):
         now = self.get_clock().now()
-        markers_of_interest = [1, 2, 3, 4]
+        markers_of_interest = self.all_marker_ids
+        visible_transforms = defaultdict(list)
 
-        visible_transforms = defaultdict(
-            list
-        )  # visible transform is a dict with key: marker id of interest and value an array of the transforms.
-        now = self.get_clock().now()
-        # We check every camera
         for camera_id in self.camera_enabled_ids:
-            # We go over every marker of interest and see if they are noticed in camera
             for marker_id in markers_of_interest:
-
                 target_frame = f"camera_{camera_id}_marker_{marker_id}"
-                if self.tf_buffer.can_transform(
-                    "base_link", target_frame, rclpy.time.Time()
-                ):
-                    t = self.tf_buffer.lookup_transform(
-                        "base_link", target_frame, rclpy.time.Time()
-                    )
-                    # We only take recent frames into account based on max_frame_age
+                if self.tf_buffer.can_transform("base_link", target_frame, rclpy.time.Time()):
+                    t = self.tf_buffer.lookup_transform("base_link", target_frame, rclpy.time.Time())
                     if (now - Time.from_msg(t.header.stamp)) < self.max_frame_age:
                         visible_transforms[marker_id].append(t)
 
-        # For every marker ID we go over the transforms we got from the cameras and average them.
-        for marker_id, current_marker_transforms in visible_transforms.items():
-            # If marker had no transform then go for the next one. NOTE: Since this is a dict now this will never happen as the item won't exist
-            if not current_marker_transforms:
-                print(
-                    f"marker {marker_id} had no transforms, continuing to the next marker."
-                )
-                continue
-            #### AVERAGING THE TRANSFORMS. ####
+        # Update seen markers
+        for marker_id in markers_of_interest:
+            if visible_transforms.get(marker_id):  # Marker is currently visible
+                self.last_seen[marker_id] = now
+                self.seen_markers.add(f"robot_agent_{marker_id}")
+            else:
+                # Marker is not visible now — check how long ago we last saw it
+                if marker_id in self.last_seen:
+                    if (now - self.last_seen[marker_id]) > self.max_frame_age:
+                        self.seen_markers.discard(f"robot_agent_{marker_id}")
 
-            # 1. Translation averaging. We create a list of the poses from the translations and do an averaging on them
-            translations = np.array(
-                [
-                    [
-                        t.transform.translation.x,
-                        t.transform.translation.y,
-                        t.transform.translation.z,
-                    ]
-                    for t in current_marker_transforms
-                ]
-            )
-            # average translation result
+        # Averaging transforms
+        for marker_id, current_marker_transforms in visible_transforms.items():
+            if not current_marker_transforms:
+                continue
+            translations = np.array([[t.transform.translation.x,
+                                      t.transform.translation.y,
+                                      t.transform.translation.z]
+                                     for t in current_marker_transforms])
             avg_translation = np.mean(translations, axis=0)
 
-            # 2. Rotation averaging. We create a list of the poses from the translations and do an averaging on them
-            quaternions = np.array(
-                [
-                    [
-                        t.transform.rotation.x,
-                        t.transform.rotation.y,
-                        t.transform.rotation.z,
-                        t.transform.rotation.w,
-                    ]
-                    for t in current_marker_transforms
-                ]
-            )
-
-            # average rotation result
+            quaternions = np.array([[t.transform.rotation.x,
+                                     t.transform.rotation.y,
+                                     t.transform.rotation.z,
+                                     t.transform.rotation.w]
+                                    for t in current_marker_transforms])
             avg_quaternion = np.mean(quaternions, axis=0)
             avg_quaternion /= np.linalg.norm(avg_quaternion)
 
-            #### PUBLISHING THE TRANSFORM ####
-
-            # Since we want to set the base_link as the root we take the distance from the aruco marker and pallet_truck_base_link into account
             avg_transform = Transform()
             avg_transform.translation.x = float(avg_translation[0])
             avg_transform.translation.y = float(avg_translation[1])
@@ -192,24 +164,25 @@ class ArucoPosePubNode(Node):
             avg_transform.rotation.z = float(avg_quaternion[2])
             avg_transform.rotation.w = float(avg_quaternion[3])
 
-            # The transform between aruco_12_link and pallet_truck_base_link
             aruco_offset_transform = Transform()
-            aruco_offset_transform.translation.x = float(0)
-            aruco_offset_transform.translation.y = float(-0.8)  # -0.8 0 1.30
-            aruco_offset_transform.translation.z = float(-1.3)
-            aruco_offset_transform.rotation.x = float(0)
-            aruco_offset_transform.rotation.y = float(0)
-            aruco_offset_transform.rotation.z = float(-0.7071)  # 1.57 radians
-            aruco_offset_transform.rotation.w = float(0.7071)
+            aruco_offset_transform.translation.x = 0.0
+            aruco_offset_transform.translation.y = -0.8
+            aruco_offset_transform.translation.z = -1.3
+            aruco_offset_transform.rotation.x = 0.0
+            aruco_offset_transform.rotation.y = 0.0
+            aruco_offset_transform.rotation.z = -0.7071
+            aruco_offset_transform.rotation.w = 0.7071
 
-            # Combine the two transforms
             self.latest_transform_received[marker_id] = compose_transforms(
                 avg_transform, aruco_offset_transform
             )
 
+    def publish_seen_markers(self):
+        msg = String()
+        msg.data = ",".join(sorted(self.seen_markers))
+        self.marker_lost_pub.publish(msg)
 
 def main():
-
     rclpy.init()
     node = ArucoPosePubNode()
     rclpy.spin(node)

@@ -2,6 +2,7 @@
 services:
   factory_simulation: &research-base
     container_name: factory_simulation
+    shm_size: '1gb'
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
@@ -15,12 +16,10 @@ services:
     tty: true
     environment:
       DISPLAY: ${DISPLAY}
+      OS: ${OS}
       XAUTHORITY: /tmp/.docker.xauth
       ROS_DOMAIN_ID: 39
-      # CAMERA_ENABLED_IDS: "163 164 165 166"
-      CAMERA_ENABLED_IDS: "163"
       SDL_VIDEODRIVER: x11
-      ROS_AUTOMATIC_DISCOVERY_RANGE: LOCALHOST
     devices:
       - /dev/tty*:/dev/tty*
       - /dev:/dev
@@ -29,6 +28,7 @@ services:
     network_mode: host
     command: tail -f /dev/null
     restart: always
+    runtime: nvidia
 
   factory_simulation_nvidia:
    <<: *research-base

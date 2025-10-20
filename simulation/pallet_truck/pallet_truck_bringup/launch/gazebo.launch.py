@@ -1,21 +1,16 @@
-import os.path
 import os
-from launch.actions import OpaqueFunction
 from launch import LaunchDescription
-from launch.actions import RegisterEventHandler, GroupAction
-from launch.event_handlers import OnProcessExit
 from launch.substitutions import (
     Command,
     FindExecutable,
     LaunchConfiguration,
     PathJoinSubstitution,
 )
-from launch_ros.actions import Node, PushRosNamespace, SetRemap
+from launch_ros.actions import Node
 from launch_ros.descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 import launch
-
 
 def generate_launch_description():
     namespace = LaunchConfiguration("namespace")
@@ -23,6 +18,7 @@ def generate_launch_description():
     initial_pose_y = LaunchConfiguration("initial_pose_y")
     aruco_id = LaunchConfiguration("aruco_id")
     robot_type = LaunchConfiguration("robot_type")
+    log_level = LaunchConfiguration("log_level")
 
     pkg_pallet_truck_description = get_package_share_directory(
         "pallet_truck_description"
@@ -43,7 +39,6 @@ def generate_launch_description():
                 [
                     FindPackageShare("pallet_truck_description"),
                     "urdf",
-                    # "pallet_truck.urdf.xacro",
                     "pallet_truck_simple_collisions.urdf.xacro",
                 ]
             ),
@@ -68,6 +63,7 @@ def generate_launch_description():
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="screen",
+        arguments=["--ros-args", "--log-level", log_level],
         namespace=namespace,
         parameters=[
             {"use_sim_time": True},
@@ -75,7 +71,6 @@ def generate_launch_description():
         ]
     )
 
-    
     spawn_robot = Node(
         package="ros_gz_sim",
         executable="create",
@@ -86,13 +81,13 @@ def generate_launch_description():
             "-y", initial_pose_y,
             "-z", "0.2",
             "-topic",  PathJoinSubstitution([namespace, "robot_description"]),
-            "-robot_namespace", namespace
+            "-robot_namespace", namespace,
+            "--ros-args", "--log-level", log_level,
+
         ],
         output="screen",
         )
     
-    
-
     ld = LaunchDescription()
     ld.add_action(robot_state_publisher)
     ld.add_action(spawn_robot)

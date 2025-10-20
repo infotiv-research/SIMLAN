@@ -1,0 +1,4 @@
+<library path="/home/ros/src/install/lib/libbt_failsafe_nodes.so">
+  <class name="StopRobotCondition" type="bt_failsafe::StopRobotCondition" base_class_type="BT::ConditionNode"/>
+</library>
+

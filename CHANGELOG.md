@@ -1,8 +1,22 @@
-### 2.0.1: Namespace cleanup and multi-agent navigation (Aug 2025) - Supervisor: Hamid Ebadi
+### 3.0.0: (Oct 2025)
+- Collision sensor: Anton Stigemyr Hill
+- Automatically generated parameter-files for robot_agents: Anton Stigemyr Hill
+- Shared map and obstacle generation for robot_agents: Anton Stigemyr Hill
+- Geofencing and Safety stop: David Espedalen
 
-- Generic robot-agent with different mesh(pallet_truck/forklift) and aruco id
-- Robot-agent and nav2 namespace
-- Multi-agent navigation using GPSS
+Humanoid integration
+Humanoid mocap with multi-camera training pipeline
+World fidelity
+Panda arm integration
+Dyno-robotics trajectory replay integration, scenario
+Credits for Panda arm and Humanoid
+
+
+### 2.1.0: Namespace cleanup and multi-agent navigation (Aug 2025) - Supervisor: Hamid Ebadi
+
+- Implemented generic robot-agent control supporting multiple meshes (e.g., pallet truck, forklift) and distinct ArUco IDs: Pär Aronsson
+- Robot-agent and navigation2 (nav2) namespace: Pär Aronsson
+- Multi-agent navigation capabilities using GPSS: Pär Aronsson
 
 ### 2.0.0: GPSS (May 2025) - Supervisor: Hamid Ebadi
 

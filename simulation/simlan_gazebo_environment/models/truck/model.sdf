@@ -16,7 +16,7 @@
         <material>
           <ambient>0.02 0.32 0.67 1</ambient>
           <diffuse>0.02 0.32 0.67 1</diffuse>
-          <specular>0.2 0.2 0.2 64</specular>
+          <!-- <specular>0.2 0.2 0.2 64</specular> -->
           <emissive>0.1 0 0.1 1</emissive>
         </material>
       </visual>
@@ -65,7 +65,7 @@
         <material>
             <ambient>0.6 0.6 0.6 1</ambient>
             <diffuse>0.6 0.6 0.6 1</diffuse>
-            <specular>0.1 0.1 0.1 16</specular>
+            <!-- <specular>0.1 0.1 0.1 16</specular> -->
             <emissive>0.1 0.1 0.1 1</emissive>
         </material>
       </visual>
@@ -115,7 +115,7 @@
         <material>
           <ambient>0.05 0.05 0.05 1</ambient>
           <diffuse>0.05 0.05 0.05 1</diffuse>
-          <specular>0.1 0.1 0.1 16</specular>
+          <!-- <specular>0.1 0.1 0.1 16</specular> -->
           <emissive>0.1 0.1 0.1 1</emissive>
         </material>
       </visual>
@@ -165,7 +165,7 @@
         <material>
           <ambient>0.05 0.05 0.05 1</ambient>
           <diffuse>0.05 0.05 0.05 1</diffuse>
-          <specular>0.1 0.1 0.1 16</specular>
+          <!-- <specular>0.1 0.1 0.1 16</specular> -->
           <emissive>0.1 0.1 0.1 1</emissive>
         </material>
       </visual>

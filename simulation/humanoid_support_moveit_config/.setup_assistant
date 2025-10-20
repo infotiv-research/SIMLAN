@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: humanoid_robot
+    relative_path: model/support/human_support.xacro
+  srdf:
+    relative_path: config/human_support.srdf
+  package_settings:
+    author_name: Tove Casparsson
+    author_email: tove.casparsson@infotiv.se
+    generated_timestamp: 1745321471
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

@@ -5,7 +5,7 @@
       <pose>0 0 0 0 0 0</pose>
       <geometry>
         <mesh>
-          <uri>meshes/Body_low_poly.dae</uri>
+          <uri>meshes/Body.dae</uri>
           <scale>1.00000 1.00000 1.00000</scale>
         </mesh>
       </geometry>
@@ -27,20 +27,20 @@
     </inertial>
     <visual name="node0">
       <material>
-        <diffuse>0.80000 0.80000 0.80000 1.00000</diffuse>
+        <diffuse>0.80000 0.80000 0.00000 1.00000</diffuse>
         <specular>0.40000 0.40000 0.40000 0.49804</specular>
         <emissive>0 0 0 1.00000</emissive>
       </material>
       <pose>0 0 0 0 0 0</pose>
       <geometry>
         <mesh>
-          <uri>model://support_pole/meshes/Body.dae</uri>
+          <uri>model://support_pole/meshes/Body_low_poly.dae</uri>
           <scale>1.00000 1.00000 1.00000</scale>
         </mesh>
       </geometry>
     </visual>
   </link>
-  <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+  <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
     <label>4</label>
   </plugin>
 </model>

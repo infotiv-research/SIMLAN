@@ -1,7 +1,7 @@
 {
     "name": "ROS2 RESEARCH CONTAINER",
     "dockerComposeFile": "../docker-compose.yaml",
-    "service": "factory_simulation_nvidia",
+    "service": "factory_simulation",
     "remoteUser": "ros",
     "workspaceFolder": "/home/ros/src",
     "customizations": {

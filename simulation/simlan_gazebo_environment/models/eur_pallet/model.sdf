@@ -211,7 +211,7 @@
     <child>collision_holder_surface</child>
   </joint>
 
-  <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+  <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
     <label>3</label>
   </plugin>
 
