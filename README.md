@@ -2,7 +2,7 @@
 
 This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 
-![](/resources/logos/youtube.png)[GPSS video demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)
+![](/resources/logos/youtube.png)[GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)
 
 
 
@@ -22,7 +22,7 @@ This simulation environment, based on the Gazebo Ignition simulator and ROS2, re
 
 Please click the youTube link below to view the SIMLAN demo video:
 
-![](/resources/logos/youtube.png) [SIMLAN demo video](ttps://www.youtube.com/watch?v=mhA51PPdABc)
+![](/resources/logos/youtube.png) [SIMLAN demo](ttps://www.youtube.com/watch?v=mhA51PPdABc)
 
 ![SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation](resources/demo.png)
 
@@ -54,7 +54,7 @@ Install Visual Studio Code (VS Code) and open the project folder. VS Code will p
 Make sure the `Dev containers` extension is installed. Reopen the project in VS Code, and you will be prompted to rebuild the container. Accept the prompt, this process may take a few minutes.
 Once VS Code is connected to Docker (as shown in the image below), open the terminal and run the following commands:
 
-![](/resources/logos/youtube.png)  [Installation and how to start video](https://www.youtube.com/watch?v=DgJXlsXUa-w)
+![](/resources/logos/youtube.png)  [Installation and how to start](https://www.youtube.com/watch?v=DgJXlsXUa-w)
 
 ![dev container in vscode](resources/vscode.png)
 
@@ -86,7 +86,7 @@ It is possible for the cameras to detect ArUco markers on the floor and publish 
 You can also use nav2 to make a robot_agent (that can be either robot/pallet_truck) navigate by itself to a goal position. You can find the code in [simulation/pallet_truck/pallet_truck_navigation](simulation/pallet_truck/pallet_truck_navigation)
 
 
-![](/resources/logos/youtube.png) [GPSS inside SIMLAN demo video](https://www.youtube.com/watch?v=_UhRFR-L9iQ)
+![](/resources/logos/youtube.png) [GPSS inside SIMLAN demo](https://www.youtube.com/watch?v=_UhRFR-L9iQ)
 
 
 **Run these three in separate terminals**
@@ -142,7 +142,7 @@ Finally, to view the bird's-eye perspective from each camera, run the following 
 
 ## RITA controls (humanoid, robotic arm)
 
-![](/resources/logos/youtube.png) [Humanoid/Arm demo video](https://www.youtube.com/watch?v=EiCNiPeifPk)
+![](/resources/logos/youtube.png) [Humanoid/Arm demo](https://www.youtube.com/watch?v=EiCNiPeifPk)
 
 
 > The dataset, input and outputs are in `` directory
