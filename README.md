@@ -22,7 +22,7 @@ This simulation environment, based on the Gazebo Ignition simulator and ROS2, re
 
 Please click the youTube link below to view the SIMLAN demo video:
 
-![](/resources/logos/youtube.png) [SIMLAN demo](ttps://www.youtube.com/watch?v=mhA51PPdABc)
+![](/resources/logos/youtube.png) [SIMLAN demo](https://www.youtube.com/watch?v=mhA51PPdABc)
 
 ![SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation](resources/demo.png)
 
