@@ -5,7 +5,7 @@
             "label": "build",
             "detail": "Build workspace (default)",
             "type": "shell",
-            "command": "/home/ros/src/control.sh build",
+            "command": "cd /home/ros/src/; ./control.sh build",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -19,7 +19,7 @@
             "label": "rebuild",
             "detail": "Rebuild workspace",
             "type": "shell",
-            "command": "/home/ros/src/control.sh clean ; /home/ros/src/control.sh build",
+            "command": "cd /home/ros/src/; ./control.sh clean ; .control.sh build",
             "group": {
                 "kind": "build",
                 "isDefault": false

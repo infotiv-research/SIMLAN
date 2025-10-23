@@ -104,7 +104,7 @@ def launch_setup(context, *args, **kwargs):
         )
         actions.append(
             Node(
-                package="pallet_truck_communication",
+                package="pallet_truck_navigation",
                 executable="update_map_node",
                 name="update_map",
                 output="screen",

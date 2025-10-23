@@ -2,14 +2,12 @@ import cv2
 import yaml
 import os
 import rclpy
-import json
 from rclpy.node import Node
 import numpy as np
 from rclpy.qos import QoSProfile, DurabilityPolicy, HistoryPolicy
 from PIL import Image as PILImage
 from tf2_ros import Buffer, TransformListener
 from nav_msgs.msg import OccupancyGrid
-from std_msgs.msg import String
 
 RADIUS=1
 MAP_PATH = "/home/ros/src/simulation/pallet_truck/pallet_truck_navigation/maps/warehouse.yaml" #path to warehouse.pgm

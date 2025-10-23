@@ -3,8 +3,6 @@
 
 These instruction is tested on Windows 11, docker desktop for windows-ARM64 and VScode.
 
-# TODO:
-
 To get the docker container up and running, download and install Docker Desktop for your system: https://www.docker.com/products/docker-desktop/
   
 When this is done, clone the repo and open the folder in VScode. Then you should automatically be prompted to download and install VScode extensions which are needed and recommended for the project.
