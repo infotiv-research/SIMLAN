@@ -26,11 +26,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.actions import AppendEnvironmentVariable
 from launch_ros.actions import Node
-import sys
-import os
-
-sys.path.append(os.path.dirname(__file__))
-from generate_world_file import generate_world_file
+import xacro
 
 def launch_setup(context, *args, **kwargs):
 
@@ -40,18 +36,24 @@ def launch_setup(context, *args, **kwargs):
     log_level = LaunchConfiguration("log_level").perform(context)
     world_setup = LaunchConfiguration("world_setup").perform(context)
     use_sim_time = LaunchConfiguration("use_sim_time", default="true")
-
+    print(f"[DEBUG] world_setup={world_setup}")
     camera_enabled_ids = camera_enabled_ids.split(" ")
 
     pkg_ros_gz_sim = get_package_share_directory("ros_gz_sim")
     original_world = os.path.join(
         get_package_share_directory("simlan_gazebo_environment"),
         "worlds",
-        "ign_simlan_factory.world",
+        "ign_simlan_factory.world.xacro",
     )
+    world_sdf_path = os.path.join(
+            get_package_share_directory("simlan_gazebo_environment"),
+            "worlds", 
+            f"{world_setup}_world.world"
+        )
+    doc = xacro.process_file(original_world, mappings={"world_setup": world_setup})
+    with open(world_sdf_path, "w") as f:
+        f.write(doc.toprettyxml(indent="  "))
     
-    #Updates the world file depending on world_setup
-    world=generate_world_file(world_setup, original_world)
 
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -59,7 +61,7 @@ def launch_setup(context, *args, **kwargs):
         ),
         launch_arguments={
             "log_level": log_level,
-            "gz_args": ["-r -v 1 ", world],
+            "gz_args": f"-r -v 1 {world_sdf_path}",
             "on_exit_shutdown": "true",
             "use_sim_time": use_sim_time,
             "verbose": "false",
@@ -204,6 +206,7 @@ def generate_launch_description():
             set_gazebo_model_path_env,
             # Declare the launch argument (optional if passed from parent)
             DeclareLaunchArgument("camera_enabled_ids", default_value="163 164 165"),
+            DeclareLaunchArgument("world_setup", default_value="empty", description="Select world setup: empty, light, medium, regular"),
             OpaqueFunction(function=launch_setup),
         ]
     )

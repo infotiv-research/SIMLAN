@@ -24,8 +24,6 @@ This document contains explanations and motivations for the measurements as well
 | :--------------------------------------------------: |
 |               *The storage blueprint*                |
 
-TODO @Anders new blueprint
-
 ## Install instruction for BIM and Arch workbench
 
 The warehouse was created in FreeCAD's BIM Workbench. This workbench isn't available by default but can easily be acquired by:

@@ -2,9 +2,10 @@
 - Collision sensor: Anton Stigemyr Hill
 - Automatically generated parameter-files for robot_agents and world fidelity : Anton Stigemyr Hill
 - Shared map and obstacle generation for robot_agents: Anton Stigemyr Hill
-- Geofencing and Safety stop: David Espedalen
-- Humanoid integration : Siyu Yi, Pär Aronsson
-- Mocap (humanoid) with multi-camera training pipeline : Siyu Yi, Pär Aronsson
+- Geofencing and safety stop: David Espedalen
+- Humanoid motion capture: Casparsson and Siyu Yi, Hamid Ebadi
+- Humanoid integration (pymoveit2 to moveit_py): Siyu Yi, Pär Aronsson
+- Mocap (humanoid) with multi-camera training pipeline: Siyu Yi, Pär Aronsson
 - Panda arm integration: Pär Aronsson
 - Dyno-robotics trajectory replay integration, scenario: Sebastian Olsson
 

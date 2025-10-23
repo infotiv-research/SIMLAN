@@ -1,8 +1,8 @@
-# SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation (3.0.0)
+# SIMLAN, Simulation for Multi-Camera Robotics (3.0.0)
 
 This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 
-![](/resources/logos/youtube.png)[GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)
+![](/resources/logos/youtube.png) [GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)
 
 
 
@@ -10,13 +10,13 @@ This simulation environment, based on the Gazebo Ignition simulator and ROS2, re
 
 - Ignition Gazebo
 - Library of assets
-- Real-World Environment Inspired Design (camera position and warehouse layout)
-- ROS 2 Interfaces (Humble and Jazzy)
-- ArUco Marker Localization
-- Simple GPSS (Generic photo-based sensor system) navigation
-- Multi-Robot Localization and Navigation using Nav2
-- Bird's-Eye View Projection
-- Multi-Sensor Support (LiDAR, Camera, Semantic segmentation, Depth etc.)
+- Real-World environment inspired design (camera position and warehouse layout)
+- ROS 2 interfaces (Humble and Jazzy)
+- ArUco marker localization
+- Simple GPSS (Generic Photo-based Sensor System) navigation
+- Multi-Robot localization and navigation using Nav2
+- Bird's-Eye view projection
+- Multi-Sensor Support (LiDAR, RGB camera, semantic segmentation, Depth etc.)
 - Geofencing for safe zones and safestop on collision
 - Motion capture for Human-Robot Collaboration/Interaction (HRC/HRI)
 
@@ -28,11 +28,11 @@ Please click the youTube link below to view the SIMLAN demo video:
 
 Here are list of advantages of using SIMLAN Multi-Camera system
 
-- Rapid prototyping and iteration of ML based algorithm. (e.g. Reinforcement Learning)
+- Rapid prototyping and iteration of ML based algorithm. (e.g. reinforcement learning)
 - Enhanced monitoring and coordination using bird eye view
 - Simplified robot design and maintenance.
 - Extendible with additional ML based vision systems
-- Safety testing without physical Risk or Privacy concerns
+- Safety testing without physical risk or privacy concerns
 - Scalable and reproducible testing (CI/CD)
 - Cost-effective development
 
@@ -94,11 +94,11 @@ You can also use nav2 to make a robot_agent (that can be either robot/pallet_tru
 ```bash
 ./control.sh gpss # spawn the simulation, robot_agents and GPSS ArUco detection
 ./control.sh nav  # spawn map server, and separate nav2 stack in a separate namespace for each robot_agent
-./control.sh send_goals # send navigation goals to nav2 stack for each robot_agent
+./control.sh send_goal # send navigation goals to nav2 stack for each robot_agent
 ```
 
 
-If you want to control any robot manually you can run the following command. Remember to specify what robot you want to control by adding its namespace as argument, i.e. `./control.sh teleop pallet_truck_1`
+If you want to control any robot (pallet truck, humanoid, etc) manually you can run the following command. Remember to specify what robot you want to control by adding its namespace as argument, i.e. `./control.sh teleop pallet_truck_1`
 
 ```bash
 ./control.sh teleop ${YOUR_ROBOT_NAMESPACE}
@@ -121,12 +121,21 @@ If you want to do a camera dump and save the image from each camera as a .png ru
 ```bash
 ./control.sh camera_dump
 ```
+![](/resources/different-views.png)
 
 If you want to take a screenshot of one of the cameras view, run the following command. Replace `###` with the camera you want to take a screenshot of. (163, 164, 165 or 166)
 
 ```bash
 ./control.sh screenshot ###
 ```
+
+
+```bash
+./control.sh birdeye
+```
+
+![](/resources/stitched.png) 
+
 
 If you want to add the tf links between the cameras and the ArUco markers without running the `gpss` command you can run the following command. This is not that usable as the `gpss` run this as well, but it can be good for debugging.
 
@@ -136,28 +145,38 @@ If you want to add the tf links between the cameras and the ArUco markers withou
 
 Finally, to view the bird's-eye perspective from each camera, run the following command and open `rviz` Then, navigate to the scroll menu to the left, and under "Camera" change the Topic `/static_agents/camera_XXX/image_projected` topic to visualize the corresponding camera feed:
 
-```bash
-./control.sh birdeye
-```
+![](/resources/aruco_localisation.png) 
+
+
 
 ## RITA controls (humanoid, robotic arm)
 
 ![](/resources/logos/youtube.png) [Humanoid/Arm demo](https://www.youtube.com/watch?v=EiCNiPeifPk)
 
 
-> The dataset, input and outputs are in `humanoid_utulity/DATASET/` directory
+```bash
+./control.sh humanoid
+```
 
-To select an empty world run:
+To move humanoid around in the simulator 
 
 ```bash
-./control.sh world empty
+./control.sh teleop humanoid
 ```
+
+![](/resources/arm-humanoid.png) 
+
+
+
 
 To create a humanoid dataset ( paired pose data, motion data and reference images) in the `DATASET/TRAIN` directory:
 
 ```bash
 ./control.sh dataset TRAIN
 ```
+
+> The dataset, input and outputs are in `humanoid_utility/DATASET/` directory.
+
 
 The resulting files are stored as parallel `.json` files in multi-camera folders `camera_*/pose_data`, `camera_*/motion_data`, `camera_*/pose_images`.
 To avoid creation of `pose_images` that are only used as the ground truth and debugging (specially if you are building your training data), comment out then call to `self.save_pose_image()` in `camera_viewer.py`.
@@ -269,7 +288,7 @@ Learn more about the project by reading these documents:
 - [Marp Markdown Presentation](PRESENTATION.md)
 - [Pallet Truck Navigation Documentation](simulation/pallet_truck/pallet_truck_navigation/README.md)
 - [Camera positioning (Extrinsic/Intrinsic calibrations) and utilities](camera_utility/)
-- [Humanoid pose2motion Utilities](humanoid_utility/README.md)
+- [Humanoid Utilities (pose2motion)](humanoid_utility/README.md)
 - [`simulation/`](simulation/): ROS2 packages
   - [Simulation and Warehouse Specification (fidelity)](simulation/README.md)
   - [Building Gazebo models (Blender/Phobos)](simulation/raw_models/README.md)
@@ -283,12 +302,13 @@ Learn more about the project by reading these documents:
 - [`CREDITS.md`](CREDITS.md)
 - [`LICENSE` (apache 2)](LICENSE)
 
+
 ## Research Funding
 
 This work was carried out within these research projects:
 
 - The [SMILE IV](https://www.vinnova.se/p/smile-iv/) project financed by Vinnova, FFI, Fordonsstrategisk forskning och innovation under the grant number 2023-00789.
-- The EUREKA [ITEA4](https://www.vinnova.se/p/artwork---the-smart-and-connected-worker/) ArtWork - The smart and connected worker financed by Vinnova under the grant number 2023-00970.
+- The EUREKA ITEA4 [ArtWork](https://www.vinnova.se/p/artwork---the-smart-and-connected-worker/) - The smart and connected worker financed by Vinnova under the grant number 2023-00970.
 
 
 INFOTIV AB | Dyno-robotics | RISE Research Institutes of Sweden | CHALMERS | Volvo Group
