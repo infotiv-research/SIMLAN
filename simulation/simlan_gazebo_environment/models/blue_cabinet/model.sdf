@@ -1,0 +1,25 @@
+<sdf version="1.7">
+  <model name="blue_cabinet" canonical_link="blue_cabinet_link">
+    <link name="blue_cabinet_link">
+      <visual name="visual">
+        <pose>0 0 0 1.5708 0 0</pose> 
+        <geometry>
+          <mesh>
+            <uri>model://blue_cabinet/meshes/blue_cabinet.obj</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://blue_cabinet/meshes/blue_cabinet.obj</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
