@@ -122,8 +122,7 @@ build () {
     clean
     ROS_DOMAIN_ID=$((RANDOM % 102))
     export AMENT_PREFIX_PATH="${AMENT_PREFIX_PATH/#$PWD\/install:/}"
-
-    echo 
+    
     sed -i -E "s/^ROS_DOMAIN_ID=.*/ROS_DOMAIN_ID=$ROS_DOMAIN_ID/" "$CONFIG_FILE"
     export ROS_DOMAIN_ID=$ROS_DOMAIN_ID
     mkdir -p camera_utility/camera_data/
@@ -172,6 +171,8 @@ dataset () {
 
 mlenv () {
     python3 -m venv ~/mlenv
+    unset PYTHONPATH ROS_PACKAGE_PATH AMENT_PREFIX_PATH COLCON_PREFIX_PATH
+    export PYTHONNOUSERSITE=1
     source ~/mlenv/bin/activate
     pip install --upgrade pip
     pip install -r $humanoid_utility_dir/pose_to_motion/humanoid_ml_requirements.txt
@@ -347,6 +348,10 @@ then
     source ~/mlenv/bin/activate
     echo "TRAIN MODEL, OVERWRITING PREVIOUS MODEL"
     time python3 $humanoid_utility_dir/pose_to_motion/$model_script --mode train --filename $humanoid_dataset/train_wide.csv 2>&1 | tee training.log
+elif [[ "$*" == *"wide"* ]]
+then
+   echo "TRANSFER CSV TO WIDE FORMAT"
+   python3 $humanoid_utility_dir/pose_to_motion/csvtowide.py $humanoid_dataset/eval.csv $humanoid_dataset/eval_wide.csv
 elif [[ "$*" == *"eval"* ]]
 then
     source ~/mlenv/bin/activate
@@ -359,36 +364,46 @@ then
 # TODO example
 elif [[ "$*" == *"predict"* ]]
 then
+    echo "::: PREDICT MOTION FROM POSE DATA :::"
     if [ "$#" -ne 2 ]; then
     echo "Error: The second argument is missing" >&2
     echo "Usage: $0 predict PATH_TO_DIR that has pose_data" >&2
     exit 1
     fi
     source ~/mlenv/bin/activate
-    pose_dir="$2/pose_data" # input pose
+    dataset_root="$2"
     motion_dir="$2/motion_data" # output motion
-    poseimage_dir="$2/pose_images" # pose ground truth image
+    cams=(500 501 502 503)
+    sim &
+    sleep 15
     humanoid &
-    sleep 5
-    for file in $(ls $pose_dir | sort); do
-
-        number="${file%%_*}"
-        full_pose_path=$pose_dir/$number""_pose.json
-        full_motion_path=$motion_dir/$number""_motion.json
-        full_poseimage_path=$poseimage_dir/$number""_display.jpg
-        echo ":::::::::::: GROUND TRUTH {$full_poseimage_path}"
-        if [ -f $full_poseimage_path ]; then
-            eog $full_poseimage_path & # open pose ground truth image
-        else
-            echo "NOT FOUND: $full_poseimage_path"
+    sleep 10
+    echo "START TO FIND DATA IN $dataset_root"
+    find "$motion_dir" -maxdepth 1 -type f -name '*_motion.json' -print0 \
+    | sort -z \
+    | while IFS= read -r -d '' motion_file; do
+        fname="$(basename "$motion_file")"
+        number="${fname%_motion.json}"
+        full_motion_path=$motion_dir/${number}_motion.json
+        gt_opened=0
+        for cam in "${cams[@]}"; do
+            gt_img="$dataset_root/camera_${cam}/pose_images/${number}_display.jpg"
+            if [ -f "$gt_img" ]; then
+                echo ":::::::::::: GROUND TRUTH {$gt_img}"
+                eog "$gt_img" & # open pose ground truth image
+                gt_opened=1
+                break
+            fi
+        done
+        if [ $gt_opened -eq 0 ]; then
+            echo "NOT FOUND: Ground truth image for $number"
         fi
-        echo "Processing: $file --- $number ----"
-        python3 $humanoid_utility_dir/pose_to_motion/$model_script --mode predict --posefile $full_pose_path --motionfile "${full_motion_path}_PREDICTED"
-        replay_motion_helper "${full_motion_path}_PREDICTED" &
-
-        sleep 10
-        pkill -9 -f motion_planner
-        pkill -9 -f eog
+        echo "Processing: $fname --- $number ----"
+        python3 "$humanoid_utility_dir/pose_to_motion/AUTOGLUON_model.py" --mode predict --sample_root "$dataset_root" --sample_id "$number" --motionfile "${full_motion_path}_PREDICTED"
+        replay_motion_helper "${full_motion_path}_PREDICTED" &         
+        sleep 10         
+        pkill -9 -f motion_planner || true         
+        pkill -9 -f eog || true 
     done
 elif [[ "$*" == *"image_pipeline"* ]]
 then
@@ -398,8 +413,13 @@ elif [[ "$*" == *"video_pipeline"* ]]
 then
     clean_humanoid_output
     python3 $humanoid_utility_dir/pose_to_motion/mp_detection.py --action video $humanoid_input_dir/20250611video.mp4 $humanoid_output_dir
+elif [[ "$*" == *"test"* ]]
+then
+    colcon test --packages-select integration_tests --event-handlers console_direct+ --merge-install --pytest-args "-s"
 
-
+elif [[ "$*" == *"actionlist"* ]]
+then
+    ros2 action list 
 #################### dyno
 elif [[ "$*" == *"visualize"* ]]
 then

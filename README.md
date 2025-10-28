@@ -79,7 +79,7 @@ To clean up and build the ros2 simulation
 ./control.sh build
 ```
 
-## GPSS controls
+## GPSS controls (pallet trucks, aruco)
 
 It is possible for the cameras to detect ArUco markers on the floor and publish their location to TF, both relative to the camera, and the ArUcos transform from origin. The package [./camera_utility/aruco_localization](./camera_utility/aruco_localization) contain the code for handling ArUco detection.
 
@@ -189,6 +189,14 @@ Results in merging:
 - `DATASET/TRAIN` to `DATASET/train.csv`
 - `DATASET/EVAL` to `DATASET/eval.csv`
 
+Then to convert the default datasets format to the wide datasets format run the following command:
+```
+ ./control.sh wide
+```
+Results will be:
+- `DATASET/train.csv` to `DATASET/train_wide.csv`
+- `DATASET/eval.csv` to `DATASET/eval_wide.csv`
+  
 You can replay_motion each motion data separately: `./control.sh replay_motion DATASET/EVAL/motion_data/AAAAAAA_motion.json`
 
 
@@ -272,13 +280,10 @@ The active worlds are:
 
 In `config.sh` you can set the level of logs you want outputed into the terminal. Per default it is set to "info" to allow all logs. Possible values are: "debug", "info", "warn", and "error". Setting it to "warn" filters out all debug and info messages. Additionally, to filter out specific lines you can add the phrase you want filtered, inside of `log_blacklist.txt` and setting the `log_level` flag to "warn" or "error" will start filtering out all phrases found in the blacklist.
 
-
-
 ### Older versions
 
 - **Gazebo Classic (Gazebo11)** has reached end-of-life (EOL). An earlier version of this repository, which uses Gazebo Classic, can be found in the [`gz_classic_humble`](https://github.com/infotiv-research/SIMLAN/tree/gz_classic_humble) branch.
 - **ROS2 humble & Gazebo ignition**, an earlier version of this repository, which uses ROS2 humble and Gazebo ignition can be found in [`ign_humble`](https://github.com/infotiv-research/SIMLAN/tree/ign_humble) branch.
-
 
 ## Documentation
 
@@ -287,7 +292,7 @@ Learn more about the project by reading these documents:
 - [Control script as a shortcut to run different scripts](control.sh)
 - [Marp Markdown Presentation](PRESENTATION.md)
 - [Pallet Truck Navigation Documentation](simulation/pallet_truck/pallet_truck_navigation/README.md)
-- [Camera positioning (Extrinsic/Intrinsic calibrations) and utilities](camera_utility/)
+- [Camera Utilities and notebooks](camera_utility/):  ([Extrinsic/Intrinsic calibrations](camera_utility/camera_calib.ipynb) and [Projection](camera_utility/projection.ipynb) )
 - [Humanoid Utilities (pose2motion)](humanoid_utility/README.md)
 - [`simulation/`](simulation/): ROS2 packages
   - [Simulation and Warehouse Specification (fidelity)](simulation/README.md)

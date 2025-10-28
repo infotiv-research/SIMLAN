@@ -8,10 +8,12 @@ import json
 sys.path.append('.')
 import humanoid_config
 from MultilabelPredictor import MultilabelPredictor
+from pathlib import Path
 
 theta = np.pi / 2  # 90 degrees
 save_path = 'models/'
-
+CAM_IDS = [500, 501, 502, 503]
+AXES = ['x', 'y', 'z']
 # def preprocess_normalization(df):
 #     print("RAW DATA:\n", df.shape, type(df) )
 #     # POSITION NORMALIZATION: Make all points relative to one single point (MARKER_L_HIP)
@@ -24,7 +26,35 @@ save_path = 'models/'
 #     df_1.to_csv('NORM_1.csv', index=True)
 #     return df_1
 
+def _load_pose_list_json(path: Path):
+    with open(path, 'r') as f:
+        arr = json.load(f)
+    arr = sorted(arr, key=lambda x: x['index'])
+    return arr
 
+def _to_row_with_prefix_nan(pose_list, cam_prefix: str):
+    row = {}
+    for j in range (humanoid_config.NUM_MARKERS):
+        item = pose_list[j]
+        for axis in AXES:
+            row[f'{cam_prefix}_{j}_{axis}'] = float(item.get(axis, float('nan')))
+    return row
+
+def build_multicam_row_nan(sample_root: Path, sample_id: str):
+    row = {}
+    for cam_id in CAM_IDS:
+        prefix = f'cam{cam_id}'
+        p = sample_root / f'camera_{cam_id}' / 'pose_data' / f'{sample_id}_pose.json'
+        if p.exists():
+            pose_list = _load_pose_list_json(p)
+            cam_row = _to_row_with_prefix_nan(pose_list, prefix)
+            row.update(cam_row)
+        else:
+            for j in range (humanoid_config.NUM_MARKERS):
+                for axis in AXES:
+                    row[f'{prefix}_{j}_{axis}'] = float('nan')
+    return pd.DataFrame([row])
+    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Model control")
     parser.add_argument(
@@ -49,6 +79,17 @@ if __name__ == "__main__":
         type=str,
         help="JSON file"
     )
+    parser.add_argument(
+        '--sample_root',
+        type=str,
+        help="Root that contains cameras directories"
+    )
+    parser.add_argument(
+        '--sample_id',
+        type=str,
+        help="used to find the pose and motion json files"
+    )
+
     args = parser.parse_args()
 
     if args.mode == 'train':
@@ -105,12 +146,31 @@ if __name__ == "__main__":
         with open('eval_results.json', 'w') as f:
             json.dump(eval_results, f, indent=2)
         print("Evaluation results saved to eval_results.json")
+        
+    
+    # elif args.mode == 'predict':
+    #     p_val, p_key = load_json_data.load_pose_from_json(args.posefile)
+    #     # df = preprocess_normalization(pd.DataFrame([p_val], columns=humanoid_config.pose_names))
+    #     df = pd.DataFrame([p_val], columns=humanoid_config.pose_names)
+    #     multi_predictor = MultilabelPredictor.load(save_path)
+    #     predicted_motion = multi_predictor.predict(df)
+    #     print("Predicted motion:\n", predicted_motion, type(predicted_motion) )
+    #     data_dict = predicted_motion.iloc[0].to_dict()
+    #     print(data_dict)
+    #     with open(args.motionfile, 'w') as f:
+    #         json.dump(data_dict, f, indent=2)
     
     elif args.mode == 'predict':
-        p_val, p_key = load_json_data.load_pose_from_json(args.posefile)
-        # df = preprocess_normalization(pd.DataFrame([p_val], columns=humanoid_config.pose_names))
-        df = pd.DataFrame([p_val], columns=humanoid_config.pose_names)
         multi_predictor = MultilabelPredictor.load(save_path)
+        if args.sample_root and args.sample_id:
+            sample_root = Path(args.sample_root)
+            df = build_multicam_row_nan(sample_root, args.sample_id)
+
+            try:
+                expected_columns = list(multi_predictor.feature_metadata.get_features())
+                df = df.reindex(columns=expected_columns, fill_value = np.nan)
+            except Exception :
+                pass 
         predicted_motion = multi_predictor.predict(df)
         print("Predicted motion:\n", predicted_motion, type(predicted_motion) )
         data_dict = predicted_motion.iloc[0].to_dict()

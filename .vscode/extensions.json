@@ -19,7 +19,8 @@
 		"ms-vscode-remote.remote-ssh-edit",
 		"ms-vscode-remote.remote-ssh",
 		"ms-toolsai.jupyter",
-		"marp-team.marp-vscode"
+		"marp-team.marp-vscode",
+		"ms-python.isort"
 	],
 	"unwantedRecommendations": [
 

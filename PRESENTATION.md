@@ -255,7 +255,7 @@ Use MARP to see these slides [https://marp.app/](https://marp.app/)
 - Input: `tf2` (positions)
 - `Nav2` navigates (with a lot of wiring)
 
-![bg right:40% 100%](resources/SIMLAN_DIAGRAM.drawio.png)
+![bg right:40% 100%](resources/drawio_file/SIMLAN_DIAGRAM.drawio.png)
 
 ---
 
