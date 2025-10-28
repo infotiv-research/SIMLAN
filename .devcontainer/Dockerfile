@@ -91,6 +91,7 @@ RUN apt-get update && apt-get install -y \
     ros-${ROS_DISTRO}-ros2-control \
     ros-${ROS_DISTRO}-ros2-controllers \
     ros-${ROS_DISTRO}-behaviortree-cpp \
+    ros-${ROS_DISTRO}-launch-pytest \
     && rm -rf /var/lib/apt/lists/*
 
 

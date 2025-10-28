@@ -27,4 +27,6 @@ empy==4.2
 lark==1.2.2
 catkin_pkg
 rospkg==1.6.0
+pytest
 ruamel.yaml
+notebook

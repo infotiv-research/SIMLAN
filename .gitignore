@@ -64,4 +64,4 @@ navigate_w_replanning_and_recovery_robot_agent_*
 nav2_params.yaml
 camera_config.xacro
 PRESENTATION.html
-config.sh
+simulation/static_agent_launcher/description/camera_config.xacro
