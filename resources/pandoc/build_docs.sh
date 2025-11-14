@@ -31,7 +31,7 @@ run_command_docker() {
         -v "$(pwd)/output:/output" \
         -p 8000:8000 \
         "$DOCKER_IMAGE" \
-        -c "cd $CONTAINER_DIR ; $COMMAND"
+        -c "cd $CONTAINER_DIR ; chmod 700 ~/.ssh ; chmod 600 ~/.ssh/config ; chmod 600 ~/.ssh/id_rsa ; chmod 644 ~/.ssh/id_rsa.pub ; $COMMAND"
 }
 
 
