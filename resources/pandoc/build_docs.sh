@@ -27,6 +27,7 @@ run_command_docker() {
         --entrypoint /bin/sh \
         -v "$HOST_DIR/resources/pandoc/mkdocs.yml:/mkdocs.yml" \
         -v "$HOST_DIR:$CONTAINER_DIR" \
+        -v $HOME/.ssh:/root/.ssh \
         -v "$(pwd)/output:/output" \
         -p 8000:8000 \
         "$DOCKER_IMAGE" \
