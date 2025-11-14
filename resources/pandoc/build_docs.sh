@@ -27,11 +27,21 @@ run_command_docker() {
         --entrypoint /bin/sh \
         -v "$HOST_DIR/resources/pandoc/mkdocs.yml:/mkdocs.yml" \
         -v "$HOST_DIR:$CONTAINER_DIR" \
-        -v $HOME/.ssh:/root/.ssh \
+        -v "$HOME/.ssh:/tmp/ssh_mount:ro" \
         -v "$(pwd)/output:/output" \
         -p 8000:8000 \
         "$DOCKER_IMAGE" \
-        -c "cd $CONTAINER_DIR ; chmod 700 ~/.ssh ; chmod 600 ~/.ssh/config ; chmod 600 ~/.ssh/id_rsa ; chmod 644 ~/.ssh/id_rsa.pub ; $COMMAND"
+        -c "
+        mkdir -p /root/.ssh && \
+        cp -r /tmp/ssh_mount/* /root/.ssh/ && \
+        chmod 700 /root/.ssh && \
+        chmod 600 /root/.ssh/config 2>/dev/null || true && \
+        chmod 600 /root/.ssh/id_rsa 2>/dev/null || true && \
+        chmod 644 /root/.ssh/id_rsa.pub 2>/dev/null || true && \
+        chown -R root:root /root/.ssh && \
+        cd $CONTAINER_DIR && \
+        $COMMAND
+        "
 }
 
 
