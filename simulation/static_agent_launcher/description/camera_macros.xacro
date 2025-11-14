@@ -1,0 +1,127 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="camera_link" params="number">
+        <link name="static_agents/camera_${number}_link">
+          <visual>
+              <origin xyz="-0.03 0 0" rpy="0 0 0"/>
+              <geometry>
+                  <box size="0.06 0.15 0.15" />
+              </geometry>
+          </visual>
+          <visual>
+              <origin xyz="0.00 0 0" rpy="0 ${pi/2} 0"/>
+              <geometry>
+                  <cylinder length="0.03" radius="0.04" />
+              </geometry>
+          </visual>
+        </link>
+        <xacro:inertial_box mass="0.1" x="0.12" y="0.15" z="0.15"/>
+    </xacro:macro>
+
+    <xacro:macro name="camera_joint" params="number x y z r p w">
+        <joint name="camera_${number}_joint" type="fixed">
+            <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${w}"/>
+            <parent link="static_agents/base_link"/>
+            <child link="static_agents/camera_${number}_link"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="camera_gazebo" params="number width height k1 k2 k3 p1 p2 horizontal_fov aspect_ratio fx fy cx cy">
+        <gazebo reference="static_agents/camera_${number}_link">
+            <!-- Camera Sensor -->
+            <sensor name="camera_${number}" type="camera">
+                <always_on>true</always_on>
+                <visualize>true</visualize>
+                <update_rate>10</update_rate>
+                <camera name="intel_realsense_r200">
+                  <!-- <segmentation_type>instance</segmentation_type> -->
+                  <horizontal_fov>${horizontal_fov}</horizontal_fov>
+                  <camera_info_topic>camera_${number}/camera_info</camera_info_topic>
+                  <image>
+                    <width>${width}</width>
+                    <height>${height}</height>
+                    <format>R8G8B8</format>
+                  </image>
+                <clip>
+                    <near>0.1</near>
+                    <far>100</far>
+                </clip>
+                <lens>
+                    <radial_tangential>
+                        <k1>${k1}</k1>
+                        <k2>${k2}</k2>
+                        <k3>${k3}</k3>
+                        <p1>${p1}</p1>
+                        <p2>${p2}</p2>
+                    </radial_tangential>
+                </lens>
+
+                </camera>
+
+
+                <topic>camera_${number}/image_raw</topic>
+                <gz_frame_id>camera_link_optical</gz_frame_id>
+            </sensor>
+
+            <!-- Depth camera sensor --> 
+            <sensor name="depth_${number}" type="depth_camera">
+                <pose>0 0.0175 0.0125 0 0 0</pose>
+                <update_rate>6</update_rate>
+                <always_on>0</always_on>
+                <camera>
+                    <horizontal_fov>1.51843645</horizontal_fov>
+                    <camera_info_topic>depth_camera_${number}/camera_info</camera_info_topic>
+                    <image>
+                        <width>${width}</width>
+                        <height>${height}</height>
+                        <format>R_FLOAT32</format>
+                    </image>
+                    <clip>
+                        <near>0.1</near>
+                        <far>100</far>
+                    </clip>
+                    <lens>
+                        <intrinsics>
+                            <fx>${fx}</fx>
+                            <fy>${fy}</fy>
+                            <cx>${cx}</cx>
+                            <cy>${cy}</cy>
+                            <s>0</s>
+                        </intrinsics>
+                    </lens>
+                </camera>
+                <topic>depth_camera_${number}/image_raw</topic>
+                <gz_frame_id>depth_camera_link_optical</gz_frame_id>
+            </sensor>
+
+            <!-- Segmentation camera sensor -->
+            <sensor name="semantic_camera_${number}" type="segmentation">
+                <always_on>1</always_on>
+                <update_rate>10</update_rate>
+                <topic>semantic_camera_${number}</topic>
+                <camera>
+                    <segmentation_type>semantic</segmentation_type>
+                    <horizontal_fov>${horizontal_fov}</horizontal_fov>
+                    <camera_info_topic>semantic_camera_${number}/camera_info</camera_info_topic>
+                    <image>
+                    <width>${width}</width><height>${height}</height>
+                    </image>
+                    <clip><near>0.1</near><far>100</far></clip>
+                    <save enabled="false"/>
+                </camera>
+                <topic>semantic_camera_${number}/image_raw</topic>
+                <gz_frame_id>semantic_camera_link_optical</gz_frame_id>
+                <visualize>true</visualize>
+            </sensor>
+    
+
+        </gazebo>
+    </xacro:macro>
+
+    <xacro:macro name="camera" params="number x y z r p w width height k1 k2 k3 p1 p2 horizontal_fov aspect_ratio fx fy cx cy">
+        <xacro:camera_link number="${number}"/>
+        <xacro:camera_joint number="${number}" x="${x}" y="${y}" z="${z}" r="${r}" p="${p}" w="${w}"/>
+        <xacro:camera_gazebo number="${number}" width="${width}" height="${height}" k1="${k1}" k2="${k2}" k3="${k3}" p1="${p1}" p2="${p2}" horizontal_fov="${horizontal_fov}" aspect_ratio="${aspect_ratio}" fx="${fx}" fy="${fy}" cx="${cx}" cy="${cy}" />
+    </xacro:macro>
+
+</robot>

@@ -1,0 +1,64 @@
+repositories:
+
+  #wireless:
+  #  type: git
+  #  url: https://github.com/clearpathrobotics/wireless.git
+  #  version: foxy-devel
+
+  #imu_tools:
+  #  type: git
+  #  url: https://github.com/CCNYRoboticsLab/imu_tools.git
+  #  version: jazzy
+
+  # others...
+  gz_ros2_control:
+    type: git
+    url: https://github.com/ros-controls/gz_ros2_control.git
+    version: jazzy
+
+  #jackal:
+   # type: git
+    #url: https://github.com/DynoRobotics/jackal
+    #version: dyno_humble
+
+  #scenario_execution:
+    type: git
+    url: https://github.com/IntelLabs/scenario_execution
+    version: jazzy
+
+  # pytrees
+  #py_trees:
+  #  type: git
+  #  url: https://github.com/splintered-reality/py_trees.git
+  #  version: release/2.2.x
+
+  #py_trees_ros:
+  #  type: git
+  #  url: https://github.com/splintered-reality/py_trees_ros.git
+  #  version: release/2.2.x
+
+  #py_trees_ros_interfaces:
+  #  type: git
+  #  url: https://github.com/splintered-reality/py_trees_ros_interfaces.git
+  #  version: release/2.1.x
+
+  #py_trees_js:
+  #  type: git
+  #  url: https://github.com/splintered-reality/py_trees_js.git
+  #  version: release/0.6.x
+
+  #py_trees_ros_viewer:
+  #  type: git
+  #  url: https://github.com/splintered-reality/py_trees_ros_viewer.git
+  #  version: release/0.2.x
+
+
+  joy2twist:
+    type: git
+    url: https://github.com/husarion/joy2twist
+    version: ros2
+
+  #actor_collisions:
+  #  type: git
+  #  url: https://github.com/JiangweiNEU/actor_collisions
+  #  version: master

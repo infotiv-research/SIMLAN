@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/humanoid_robot/model/human-gazebo/" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>human-gazebo - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "human-gazebo";
+        var mkdocs_page_input_path = "simulation/humanoid_robot/model/human-gazebo/README.md";
+        var mkdocs_page_url = "/SIMLAN/simulation/humanoid_robot/model/human-gazebo/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../pallet_truck/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../pallet_truck/pallet_truck_bringup/">Bringup</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../pallet_truck/pallet_truck_control/">Control</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../pallet_truck/pallet_truck_navigation/">Navigation</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../humanoid_utility/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Models</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../raw_models/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../resources/ISSUES/">Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">human-gazebo</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/humanoid_robot/model/human-gazebo/README.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="human-gazebo">human-gazebo</h1>
+<p>This repository contains the human gazebo models that are used with <a href="https://github.com/robotology/human-dynamics-estimation">Human Dynamics Estimation</a> software suite.  The files are generated using <a href="https://www.xsens.com/">xsens motion capture</a> data and <a href="https://github.com/ami-iit/mvnx-to-urdf">mvnx-to-urdf</a>. The human model links are made of several simple rigid bodies as shown in the figure below:</p>
+<p><img alt="Human model image" src="misc/human-model.png" /></p>
+<p>The measurements of each of the human subject are available from the table. Please refer to the human subject data pdf file to know how these measurements are taken. The urdf models are generated from xsens mvnx file generated through xsens mvn studio software suite.  The code to generate the model is available <a href="https://github.com/dic-iit/human-model-generator">here</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Subject</th>
+<th style="text-align: center;">Mass [kg]</th>
+<th style="text-align: center;">Height [cm]</th>
+<th style="text-align: center;">Foot size [cm]</th>
+<th style="text-align: center;">Arm span [cm]</th>
+<th style="text-align: center;">Ankle height [cm]</th>
+<th style="text-align: center;">Hip height [cm]</th>
+<th style="text-align: center;">Hip width [cm]</th>
+<th style="text-align: center;">Knee height [cm]</th>
+<th style="text-align: center;">Shoulder width [cm]</th>
+<th style="text-align: center;">Shoulder height [cm]</th>
+<th style="text-align: center;">Sole height [cm]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">62.2</td>
+<td style="text-align: center;">168</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">163</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">91</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">48.5</td>
+<td style="text-align: center;">35.4</td>
+<td style="text-align: center;">140</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">79.4</td>
+<td style="text-align: center;">176</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">169</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">94</td>
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">48</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">140</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">75.4</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">102</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">148</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">72.7</td>
+<td style="text-align: center;">182</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">197</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">102</td>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">56</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">150</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">168</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">168</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">98</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">139</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">71.2</td>
+<td style="text-align: center;">179</td>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">49</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">147</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">78.9</td>
+<td style="text-align: center;">178</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">192</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">102</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">44</td>
+<td style="text-align: center;">148</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">55.2</td>
+<td style="text-align: center;">166</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">170</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">139</td>
+<td style="text-align: center;">-</td>
+</tr>
+</tbody>
+</table>
+<p>Currently, the legacy directory contains files related to joint motor control boards based on <a href="https://github.com/robotology/gazebo-yarp-plugins">gazebo-yarp-plugins</a> and other configuration files needed to control the human joints.</p>
+<h2 id="human-subject-with-meshes">Human subject with meshes</h2>
+<p>In the folder <a href="./humanSubjectWithMeshes">humanSubjectWithMeshes</a> there is a <code>urdf</code> model of a human subject generated using the code in <a href="https://github.com/ami-iit/human-model-generator">human-model-generator</a> with meshes  under CC-BY_SA license (https://creativecommons.org/licenses/by-sa/2.0/deed.en); all the meshes were trimmed, morphed and totally or partially reconstructed to reach the desired shape and topology. The model is shown in the following figure:</p>
+<p><img alt="humanSubjectWithMesh" src="https://github.com/user-attachments/assets/dafeaf9a-3c15-4b72-a21d-4f20b1897350" /></p>
+<h2 id="mantainers">Mantainers</h2>
+<ul>
+<li>Davide Gorbani (<a href="https://github.com/davidegorbani">@davidegorbani</a>)</li>
+<li>Carlotta Sartore (<a href="https://github.com/CarlottaSartore">@CarlottaSartore</a>)</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Overview - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Overview";
+        var mkdocs_page_input_path = "simulation/README.md";
+        var mkdocs_page_url = "/SIMLAN/simulation/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#world-fidelity">World Fidelity</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-aruco-and-camera-static-agents">Adding Aruco and camera (static agents)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-actors-in-gazebo">Using actors in Gazebo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#simulation-specification">Simulation Specification</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#amr">AMR</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#warehouse">Warehouse</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#add-warehouse-to-world-file">Add warehouse to world-file</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#textures">Textures</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#conventions">Conventions</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="pallet_truck/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="pallet_truck/pallet_truck_bringup/">Bringup</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="pallet_truck/pallet_truck_control/">Control</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="pallet_truck/pallet_truck_navigation/">Navigation</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="humanoid_robot/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="humanoid_support_moveit_config/">Humanoid Moveit</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Models</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="raw_models/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resources/ISSUES/">Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Simulation</li>
+      <li class="breadcrumb-item active">Overview</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/README.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="simulation">Simulation</h1>
+<h2 id="world-fidelity">World Fidelity</h2>
+<p>It is possible to adjust the level fidelity for a world in <code>config.sh</code>, there the <code>world_setup</code> is sent to</p>
+<ul>
+<li><code>simulation/simlan_bringup/launch/sim.launch.py</code>.</li>
+<li><code>simulation/simlan_gazebo_environment/launch/simlan_factory.launch.py</code> (for world generation)</li>
+<li><code>simulation/simlan_gazebo_environment/launch/generate_world_file.py</code> (both <code>original_world</code> and the <code>world_setup</code>)</li>
+</ul>
+<h2 id="adding-aruco-and-camera-static-agents">Adding Aruco and camera (static agents)</h2>
+<p>Aruco codes and cameras are all attached to the same link in Gazebo. To create new static agents, go to <code>simulation/static_agent_launcher/description/agents.urdf.xacro</code>. There you only need to add a new line on the form <code>&lt;xacro:camera number="1" x="3" y="3" z="6" r="0" p="0" w="0"/&gt;</code> for a new camera, or a new line on the form <code>&lt;xacro:aruco number="1" x="3" y="3" z="0.1" r="0" p="0" w="0"/&gt;</code> for a new aruco. The commands are identical apart from the name.</p>
+<ul>
+<li><code>Number</code> is added to the name to make the static agent unique. For cameras this mean they will publish on e.g. the topic <code>static_agents/camera_[number]/image_raw</code>. For aruco the number indicates which aruco png to use.</li>
+<li><code>x, y, z</code> is the coordinate offset from the link the agents are all attached to.</li>
+<li><code>r, p, w</code> are the rotation, pitch, and yaw of the camera, dictating in which direction and at what angle the cameras are looking.</li>
+</ul>
+<p><a href="https://classic.gazebosim.org/tutorials?tut=camera_distortion">Gazebo supports simulation of camera</a> based on the Brown's distortion model. It expects 5 distortion coefficients k1, k2, k3, p1, p2 that you can get from the camera calibration tools. The k coefficients are the radial components of the distortion model, while the p coefficients are the tangential components.</p>
+<ul>
+<li><code>&lt;aspect_ratio&gt;</code>  : The ratio of the width and height of the camera.</li>
+<li><code>&lt;horizontal_fov&gt;</code>: The horizontal field of view of the camera in radians.</li>
+</ul>
+<p><a href="https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html">OpenCV</a> uses five parameters, known as distortion coefficients given by like this: <code>k1, k2, p1, p2 , k3 # pay attention to the order</code></p>
+<h2 id="using-actors-in-gazebo">Using actors in Gazebo</h2>
+<ul>
+<li>Placed in sdf or world file</li>
+<li>Actors use the actor tag (as opposed to the model tag most other objects use).</li>
+<li>actor tags contain links like usual, but also a <code>&lt;script&gt;</code> tag.</li>
+<li>The script tag contains:</li>
+<li>loop: Whether the script should loop on completion</li>
+<li>delay_start: Time to wait before running the script, also waits between loops</li>
+<li>auto_start: Whether the script should start automatically when the sim starts</li>
+<li>A trajectory tag, which has an (unique) id and a type (used to couple it with an animation)<ul>
+<li>Inside the trajectory tags we define waypoint tags which consist of a pose and the time where we are supposed to reach the pose.</li>
+<li>Note: The trajectory is smoothed as a whole. This means that you'll get a fluid motion, but the exact poses contained in the waypoints might not be reached.</li>
+</ul>
+</li>
+</ul>
+<p>Script structure:</p>
+<pre><code class="language-xml">&lt;script&gt;
+  &lt;loop&gt;1&lt;/loop&gt;
+  &lt;auto_start&gt;1&lt;/auto_start&gt;
+  &lt;trajectory id='0' type='square'&gt;
+    &lt;waypoint&gt;
+      &lt;time&gt;0&lt;/time&gt;
+      &lt;pose&gt;-1 -1 1 0 -0 0&lt;/pose&gt;
+    &lt;/waypoint&gt;
+    &lt;waypoint&gt;
+      &lt;time&gt;1&lt;/time&gt;
+      &lt;pose&gt;-1 1 1 0 -0 0&lt;/pose&gt;
+    &lt;/waypoint&gt;
+    &lt;waypoint&gt;
+      &lt;time&gt;2&lt;/time&gt;
+      &lt;pose&gt;1 1 1 0 -0 0&lt;/pose&gt;
+    &lt;/waypoint&gt;
+    &lt;waypoint&gt;
+      &lt;time&gt;3&lt;/time&gt;
+      &lt;pose&gt;1 -1 1 0 -0 0&lt;/pose&gt;
+    &lt;/waypoint&gt;
+    &lt;waypoint&gt;
+      &lt;time&gt;4&lt;/time&gt;
+      &lt;pose&gt;-1 -1 1 0 -0 0&lt;/pose&gt;
+    &lt;/waypoint&gt;
+  &lt;/trajectory&gt;
+&lt;/script&gt;
+</code></pre>
+<ul>
+<li>Gazebo supports two different skeleton animation file formats: COLLADA (.dae) and Biovision Hierarchy (.bvh).</li>
+<li>.bvh: Text-based format with section 'HIERARCHY' and section 'MOTION'.</li>
+<li>.dae: XML-based format, structured into multiple sections.</li>
+<li>.bvh works for Ignition, while .dae works for both Gazebo classic and Ignition</li>
+<li>Skin is similar, simply import a collada file</li>
+<li>\<interpolate_x>true\</interpolate_x> makes the animation match the movement. The animation is done briefly along the x-axis and then it can be interpolated into any direction by gazebo.</li>
+<li>In a top down positive x,y frame of reference:  0 = right, 1.57 = up, -1.57 = down, 3.14 = left</li>
+<li>Pos/negative matters! 0 to -1.57 does not behave the same as 0 to 4.71!</li>
+<li>In other words increasing the angle of rotation means rotating left, and decreasing it means rotating right.</li>
+<li>Tension = how strictly it follows the waypoints in a span 0-1 where 0 is not very strict, 1 very strict</li>
+</ul>
+<h2 id="simulation-specification">Simulation Specification</h2>
+<p>Environment (world)</p>
+<ul>
+<li>An in-door factory warehouse</li>
+<li>An out door street/sidewalk (side walk or street) (FUTURE WORK)</li>
+</ul>
+<p>Objects</p>
+<ul>
+<li>human actor</li>
+<li>shelves</li>
+<li><a href="https://en.wikipedia.org/wiki/Pallet">standard euro pallets</a></li>
+<li><a href="https://www.iqsdirectory.com/articles/storage-rack/pallet-racks.html">pallet racks</a></li>
+<li>traffic cone</li>
+<li>Boxes</li>
+<li><a href="https://www.mobile-industrial-robots.com/insights/get-started-with-amrs/agv-vs-amr-whats-the-difference/">differential-drive AMR (Autonomous Mobile Robot)</a> (FUTURE WORK)</li>
+<li>forklift (FUTURE WORK)</li>
+</ul>
+<p>Textures</p>
+<ul>
+<li>Aruco tag on actor and floor</li>
+<li>objects texture</li>
+<li>Floor texture</li>
+</ul>
+<p>Placement of sensors</p>
+<ul>
+<li>camera (depth) on ceiling</li>
+<li>2D Lidar/camera on AMR (FUTURE WORK)</li>
+</ul>
+<p>Physics</p>
+<ul>
+<li>mass</li>
+<li>moment of inertia</li>
+<li>collision</li>
+<li>friction (FUTURE WORK)</li>
+<li>damping</li>
+</ul>
+<p>Lighting</p>
+<p>Agents movements:</p>
+<ul>
+<li>deterministically following waypoints trajectories (in curve or in form of A-B-C...Z)</li>
+<li>AMR differential-drive using nav2 with obstacle avoidance (FUTURE WORK)</li>
+<li>replaying scenario using rosbag​ (FUTURE WORK)</li>
+</ul>
+<p>Additionally these are expected from the simulator:</p>
+<ul>
+<li>following realistic and standard measurements and sizes for warehouse, pallettes, shelves, cart, human body, etc</li>
+<li>agent/robot status (position) and control via ROS</li>
+<li>exposing and recording camera images and agent status (e.g. positions) in Python</li>
+<li>tele-operation with keyboard and programmatically from python</li>
+</ul>
+<h2 id="amr">AMR</h2>
+<p>differential-drive (casterwheel)/achermann (car) type of robot</p>
+<p><code>/cmd_vel</code> topic accepts <code>Twist</code> formatted messages only non-zero value for linear.x (forward/backward) and non-zero value for angular.z (differential drive, rotating in z axis)</p>
+<h2 id="warehouse">Warehouse</h2>
+<p>The warehouse was created in FreeCAD's BIM Workbench. This workbench isn't available by default but can easily be acquired by going to <code>Tools</code> -&gt; <code>Addon Manager</code> -&gt; <code>BIM</code> -&gt; <code>Install/update Selected</code>.</p>
+<p>Using the measurements found in the blueprint in the documentation folder I drew four lines and turned them into walls (line tool and wall tool respectively). By default the wall will be created around the line, so that the line is in the middle of the wall. This can be changed in the wall properties so that it ends up entirely on one side of the line.
+As the blueprint lacked walls I used the dimensions specified there as the inner measurements, meaning that the origin point is located at the inner bottom left corner of the wall. All the inner space is in positive x and y coordinates, while the two of the walls are in negative coordinate space.
+I used the Aligned Dimension tool from the Annotation tools to confirm that the inner measurements matched those of the blueprint.</p>
+<p>While the BIM Workbench has support for door objects, they tend to act as solids when imported into gazebo, so the door is just a hole in the wall. This hole was created by adding a cube object and having it intersect the wall where the door should be located. Then you select the cube and the wall (in that order) in the tree view and press <code>Remove Component</code>. This should remove the cube object and create a hole where the cube and wall overlapped. The hole didn't appear in the right place, but it was possible to edit the position of the hole in its properties. I measured the location of the hole using Aligned Dimension to make sure it ended up in the right spot.</p>
+<p>Going to the top view, I created a new rectangle object covering the whole warehouse. Then I turned it into a slab with the slab tool to create a floor for the warehouse.</p>
+<p>Everything was added to a level object (note: by default this level object is named "Floor", but don't confuse it with the slab that constitutes the physical floor) so that it's grouped together. If we set the wall heights to 0 they will automatically inherit the height of the Level object, so we can change all the walls easily by changing the height of the level.</p>
+<p>I added two materials from presets, concrete and wood. I applied the concrete material to all walls and the wood material to the floor. These should be considered to be temporary placeholders.</p>
+<p>Finally I exported the project as a Collada file (.dae) and added it into a simple .world file to see if it loaded properly in Gazebo, and the results seemed correct.</p>
+<p>Since the warehouse will be static we shouldn't need to define any additional parameters like mass or inertia, visuals and collision should be enough. Textures might need some improvement as currently they're just basic colors but it should be possible to add those in FreeCAD and have them included in the .dae file so we can load them visually in Gazebo later.</p>
+<p>I also added windows for slightly better visibility.</p>
+<h2 id="add-warehouse-to-world-file">Add warehouse to world-file</h2>
+<p>The floor of the warehouse goes below z=0 so the ground plane was lowered by 0.2 so that the warehouse still rests on top of it. As our simulations will mainly take place inside the warehouse the warehouse floor replaces the ground plane at z=0. The warehouse itself was placed in the models directory and loaded into the world with an <code>&lt;include&gt;</code> tag. Additionally the maze in the stage4 world was moved away from the origin so that it is fully contained inside the warehouse, though in the future it should be removed altogether.</p>
+<h2 id="textures">Textures</h2>
+<p>Shelf, pallet, warehouse walls are using CC0 textures from https://polyhaven.com/textures
+Box and warehouse floor are using images from Volvo as a base.</p>
+<ul>
+<li>box: picture from <a href="https://www.volvogroup.com/content/dam/volvo-group/markets/master/suppliers/useful-links-and-documents-for-existing-suppliers/logistics-solutions/volvo-group-packaging-system/Volvo-group-packaging-specifications_2015.pdf">Volvo-group-packaging-specifications_2015.pdf</a></li>
+</ul>
+<h3 id="conventions">Conventions</h3>
+<ul>
+<li>Keep your links/joints paired, and use the suffix _link and _joint (e.g. arm_link and arm_joint) and maybe follow <a href="https://www.ros.org/reps/rep-0120.html">REP 120 naming conventions</a></li>
+<li>Define visual, collision, inertial and Gazebo material (and maybe friction) for all objects</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../config_generation/" class="btn btn-neutral float-left" title="Config Generation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="simlan_gazebo_environment/worlds/" class="btn btn-neutral float-right" title="Gazebo Worlds">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../config_generation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="simlan_gazebo_environment/worlds/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

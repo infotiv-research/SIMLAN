@@ -1,0 +1,79 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="Page-1" id="bjVDkqN4jfYfFJxV3ved">
+    <mxGraphModel dx="2881" dy="1726" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tC6INBS62KU_Nt3FtVll-3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=light-dark(#000000,#000000);strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="171" width="132.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-4" value="&lt;div align=&quot;center&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&quot;simlan_bringup&quot;&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;center&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;sim.launch.py&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="336.25" y="181" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-7" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=light-dark(#000000,#000000);strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="90" y="151" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-8" value="&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&quot;rviz2&quot;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;rviz2&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="80" y="181" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-11" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;strokeColor=light-dark(#000000,#000000);exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=1;" parent="1" source="tC6INBS62KU_Nt3FtVll-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="261" as="sourcePoint" />
+            <mxPoint x="190" y="201" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-12" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=light-dark(#000000,#000000);strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="281" y="291" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-13" value="&lt;div align=&quot;center&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&quot;simlan_gazebo_environment&quot;&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;center&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;simlan_factory.launch.py&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="337.25" y="301" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-14" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;strokeColor=light-dark(#000000,#000000);entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeWidth=1;" parent="1" source="tC6INBS62KU_Nt3FtVll-3" target="tC6INBS62KU_Nt3FtVll-12" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="261" as="sourcePoint" />
+            <mxPoint x="687" y="261" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-15" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=light-dark(#000000,#000000);strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="231" y="401" width="132.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-16" value="&lt;div align=&quot;center&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&quot;ros_gz_sim&quot;&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;center&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;gz_sim.launch.py&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="237.25" y="411" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;strokeColor=light-dark(#000000,#000000);entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;strokeWidth=1;" parent="1" source="tC6INBS62KU_Nt3FtVll-12" target="tC6INBS62KU_Nt3FtVll-15" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="539" y="291" as="sourcePoint" />
+            <mxPoint x="401" y="331" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-18" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=light-dark(#000000,#000000);strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="411" y="401" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-19" value="&lt;div style=&quot;line-height: 80%;&quot;&gt;&lt;div&gt;&lt;font style=&quot;line-height: 80%; font-size: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&quot;ros_gz_bridge&quot;&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;line-height: 80%; font-size: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;ros_gz_bridge&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="401" y="428" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tC6INBS62KU_Nt3FtVll-21" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;strokeColor=light-dark(#000000,#000000);entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;strokeWidth=1;" parent="1" source="tC6INBS62KU_Nt3FtVll-12" target="tC6INBS62KU_Nt3FtVll-18" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="363" y="361" as="sourcePoint" />
+            <mxPoint x="321" y="411" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LwuG_tn0pAPCiOy2kRqj-2" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;WORLD_SETUP&lt;/span&gt;&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="426.99850753721" y="255.00316465777072" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LwuG_tn0pAPCiOy2kRqj-14" value="&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;WORLD_SETUP&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="291.25" y="110" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LwuG_tn0pAPCiOy2kRqj-15" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;strokeColor=light-dark(#000000,#000000);entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=1;" parent="1" target="tC6INBS62KU_Nt3FtVll-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="396" y="140" as="sourcePoint" />
+            <mxPoint x="395.6599999999999" y="161.82000000000008" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LwuG_tn0pAPCiOy2kRqj-18" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;WORLD_SETUP&lt;/span&gt;&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="237.24850753721" y="361.00316465777075" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

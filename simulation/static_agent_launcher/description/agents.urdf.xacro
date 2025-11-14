@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+
+
+    <xacro:include filename="properties.xacro" />
+    <xacro:include filename="camera_macros.xacro"/>
+    <xacro:include filename="aruco_macros.xacro" />
+    <!-- DEFINE INERTIA FOR ALL LINKS, GAZEBO COMPLAINS OTHERWISE-->
+
+    <link name="world">
+        <!-- <xacro:inertial_box mass="0.1" x="0.12" y="0.15" z="0.15"/> -->
+    </link>
+
+    <link name="static_agents/base_link">
+        <xacro:inertial_box mass="0.1" x="0.12" y="0.15" z="0.15"/>
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="world"/>
+        <child link="static_agents/base_link"/>
+    </joint>
+
+    <xacro:include filename="camera_config.xacro" />
+
+
+   <!-- <xacro:aruco number="20" x="7" y="3" z="0.001" r="0" p="0" w="0"/> -->
+   <!-- <xacro:aruco number="30" x="6" y="0" z="0.001" r="0" p="0" w="0"/> -->
+</robot>

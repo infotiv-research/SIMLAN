@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<robot name="pallet_truck" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="is_sim" default="true" />
+  <xacro:arg name="prefix" default="pallet_truck" />
+  <xacro:arg name="namespace" default="pallet_truck" />
+
+  <xacro:property name="robot_type" value="$(arg robot_type)" />
+
+  <!-- <xacro:property name="prefix" default="$(arg prefix)"/> -->
+  <xacro:arg name="gazebo_controllers" default="$(find pallet_truck_control)/config/control.yaml" />
+
+  <xacro:property name="PI" value="3.1415926535897931" />
+
+  <xacro:property name="wheelbase" value="0.262" />
+  <xacro:property name="track" value="0.37559" />
+  <xacro:property name="wheel_vertical_offset" value="0.0345" />
+  <xacro:property name="footprint_vertical_offset" value="0.5" />
+
+  <xacro:property name="wheel_radius" value="0.098" />
+  <xacro:property name="wheel_width" value="0.040" />
+
+  <xacro:property name="chassis_length" value="1.8" />
+  <xacro:property name="chassis_width" value="0.85" />
+  <xacro:property name="chassis_height" value="0.20" />
+
+  <xacro:property name="dummy_inertia" value="1e-09"/>
+
+  <xacro:property name="mount_spacing" value="0.120" />
+
+  <xacro:property name="prefix" value="$(arg prefix)"/>
+
+
+
+  <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
+  <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
+  <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
+  <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+
+  <xacro:include filename="$(find pallet_truck_description)/urdf/aruco.xacro"/>
+
+  <xacro:include filename="$(find pallet_truck_description)/urdf/pallet_truck.gazebo" />
+
+  <xacro:macro name="wheel" params="wheel_prefix *joint_pose">
+
+    <link name="${wheel_prefix}_wheel_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find pallet_truck_description)/meshes/pallet_truck-wheel.stl"/>
+        </geometry>
+        <material name="black" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.477"/>
+        <inertia
+          ixx="0.0013" ixy="0" ixz="0"
+          iyy="0.0024" iyz="0"
+          izz="0.0013"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="${wheel_prefix}_wheel_link">
+      <material>Gazebo/DarkGrey</material>
+      <selfCollide>false</selfCollide>
+      <mu1 value="0.5"/>
+      <mu2 value="0.5"/>
+      <kp value="10000000.0" />
+      <kd value="1" />
+      <fdir1 value="1 0 0"/>
+    </gazebo>
+
+    <joint name="${wheel_prefix}_wheel_joint" type="continuous">
+      <parent link="$(arg prefix)/chassis_link"/>
+      <child link="${wheel_prefix}_wheel_link" />
+      <xacro:insert_block name="joint_pose" />
+      <axis xyz="0 1 0" />
+    </joint>
+
+    <!-- In reality, pallet_truck has only two motors, one per side. However, it's more
+         straightforward for Gazebo to simulate as if there's an actuator per wheel. -->
+    <transmission name="${wheel_prefix}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${wheel_prefix}_wheel">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${wheel_prefix}_actuator">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:wheel wheel_prefix="$(arg prefix)/front_left">
+    <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:wheel>
+  <xacro:wheel wheel_prefix="$(arg prefix)/front_right">
+    <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:wheel>
+  <xacro:wheel wheel_prefix="$(arg prefix)/rear_left">
+    <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:wheel>
+  <xacro:wheel wheel_prefix="$(arg prefix)/rear_right">
+    <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:wheel>
+
+ <!-- LIDAR -->
+  <!-- 
+  <joint name="scan_joint" type="fixed">
+    <origin xyz="0 0 1.5" rpy="0 0 0"/>
+    <parent link="$(arg prefix)/base_link"/>
+    <child link="$(arg prefix)/scan_link"/>
+  </joint>
+ 
+  <link name="$(arg prefix)/scan_link">
+      <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+  -->
+  <link name="$(arg prefix)/base_link"></link>
+
+
+  <joint name="$(arg prefix)/base_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="$(arg prefix)/base_link"/>
+    <child link="$(arg prefix)/chassis_link" />
+  </joint>
+
+  <link name="$(arg prefix)/chassis_link">
+
+
+  <xacro:if value="${robot_type == 'pallet_truck'}">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="0.6 0.6 0.6" />
+      </geometry> 
+      <material name="black" />
+    </visual>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="0.6 0.6 0.6" />
+      </geometry>
+    </collision>
+
+    <inertial>
+      <!-- Center of mass -->
+      <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
+      <mass value="16.523"/>
+      <inertia
+        ixx="0.3136" ixy="-0.0008" ixz="0.0164"
+        iyy="0.3922" iyz="-0.0009"
+        izz="0.4485"/>
+    </inertial>
+  </xacro:if>
+
+
+
+
+  <xacro:if value="${robot_type == 'forklift'}">
+    <visual>
+      <origin xyz="-0.5 -0.25 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae" scale="0.6 0.6 0.6" />
+      </geometry>
+        <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="-0.5 -0.25 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae" scale="0.6 0.6 0.6" />
+      </geometry>
+    </collision>
+
+    <inertial>
+      <!-- Center of mass -->
+      <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
+      <mass value="16.523"/>
+      <inertia
+        ixx="0.3136" ixy="-0.0008" ixz="0.0164"
+        iyy="0.3922" iyz="-0.0009"
+        izz="0.4485"/>
+    </inertial>
+  </xacro:if>
+
+  </link>
+
+
+  <!-- TODO Make this internal_imu_link or something, and use a mixed-in xacro
+       to supply the joint between it and imu_link. This is important so that imu_link
+       always points to the "active" IMU. When an upgrade IMU is connected, the
+       internal_imu_link should remain, but imu_link should point to the upgrade one. -->
+  <link name="$(arg prefix)/imu_link">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
+    </inertial>
+  </link>
+  <joint name="$(arg prefix)/imu_joint" type="fixed">
+    <parent link="$(arg prefix)/chassis_link" />
+    <child link="$(arg prefix)/imu_link" />
+  </joint>
+
+  <!-- TODO Same note as applies to imu_link -->
+  <!--
+  <link name="$(arg prefix)/navsat_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.026" length="0.016" />
+      </geometry>
+      <origin xyz="0 0 0.008" />
+      <material name="black" />
+    </visual>
+  </link>
+  <joint name="$(arg prefix)/navsat_joint" type="fixed">
+    <parent link="$(arg prefix)/chassis_link" />
+    <child link="$(arg prefix)/navsat_link" />
+    <origin xyz="-0.180 0.126 0.1815" />
+  </joint>
+
+  <link name="$(arg prefix)/mid_mount"></link>
+  <joint name="$(arg prefix)/mid_mount_joint" type="fixed">
+    <parent link="$(arg prefix)/chassis_link" />
+    <child link="$(arg prefix)/mid_mount" />
+    <origin xyz="0 0 ${chassis_height}" />
+  </joint>
+
+  <link name="$(arg prefix)/rear_mount"></link>
+  <joint name="$(arg prefix)/rear_mount_joint" type="fixed">
+    <parent link="$(arg prefix)/mid_mount" />
+    <child link="$(arg prefix)/rear_mount" />
+    <origin xyz="${-mount_spacing} 0 0" />
+  </joint>
+
+  <link name="$(arg prefix)/front_mount"></link>
+  <joint name="$(arg prefix)/front_mount_joint" type="fixed">
+    <parent link="$(arg prefix)/mid_mount" />
+    <child link="$(arg prefix)/front_mount" />
+    <origin xyz="${mount_spacing} 0 0" />
+  </joint>
+  -->
+  <!-- ROS2 controls -->
+  <ros2_control name="pallet_truck_hardware" type="system">
+    <hardware>
+      <xacro:if value="$(arg is_sim)">
+        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      </xacro:if>
+      <xacro:unless value="$(arg is_sim)">
+        <plugin>pallet_truck_hardware/pallet_truckHardware</plugin>
+        <plugin>fake_components/GenericSystem</plugin>
+      </xacro:unless>
+    </hardware>
+    <joint name="$(arg prefix)/front_left_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="$(arg prefix)/rear_left_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="$(arg prefix)/front_right_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="$(arg prefix)/rear_right_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+  <xacro:if value="${robot_type == 'pallet_truck'}">
+    <gazebo reference="$(arg prefix)/chassis_link">
+      <sensor name="$(arg prefix)/contact_sensor" type="contact">
+        <always_on>true</always_on>
+        <contact>
+            <collision>${prefix}_base_link_fixed_joint_lump__collision_collision</collision>
+        </contact>
+      </sensor>
+    </gazebo>
+  </xacro:if>
+
+  <!-- Bring in simulation data for Gazebo. -->
+  <!-- <xacro:if value="$(arg is_sim)"> -->
+  <!-- </xacro:if> -->
+
+  <!-- Optional standard accessories, including their simulation data. The rendering
+       of these into the final description is controlled by optenv variables, which
+       default each one to off.-->
+  <!-- <xacro:include filename="$(find pallet_truck_description)/urdf/accessories.urdf.xacro" />-->
+
+  <!-- Optional custom includes. -->
+  <!--<xacro:include filename="$(optenv pallet_truck_URDF_EXTRAS empty.urdf)" />-->
+
+
+<!-- This is for the semantic segmentation, to have different labels for pallet truck and forklift-->
+  <xacro:if value="${robot_type == 'forklift'}">
+    <gazebo>
+      <!-- Semantic Segmentation Label Plugin -->
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
+        <label>50</label>  <!-- unique ID for forklift -->
+      </plugin>
+    </gazebo>
+  </xacro:if> 
+
+  <xacro:if value="${robot_type == 'pallet_truck'}">
+    <gazebo>
+      <!-- Semantic Segmentation Label Plugin -->
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
+        <label>51</label>  <!-- unique ID for pallet truck -->
+      </plugin>
+    </gazebo>
+  </xacro:if> 
+
+  <gazebo>
+      <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+          <publish_link_pose>false</publish_link_pose>
+          <publish_collision_pose>false</publish_collision_pose>
+          <publish_visual_pose>false</publish_visual_pose>
+          <publish_nested_model_pose>true</publish_nested_model_pose>
+      </plugin>
+  </gazebo>
+
+</robot>

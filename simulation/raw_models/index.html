@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/raw_models/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Overview - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Overview";
+        var mkdocs_page_input_path = "simulation/raw_models/README.md";
+        var mkdocs_page_url = "/SIMLAN/simulation/raw_models/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Models</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#script-step-by-step">Script step-by-step</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#in-gui">In GUI</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="warehouse/">Warehouse Specification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../resources/ISSUES/">Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Models</li>
+      <li class="breadcrumb-item active">Overview</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/raw_models/README.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="converting-meshes-to-sdf-models">Converting meshes to SDF models</h1>
+<p>Here are steps to convert FreeCAD meshes to SDF models (for Gazebo):</p>
+<h2 id="script-step-by-step">Script step-by-step</h2>
+<ul>
+<li>Install freecad <code>sudo apt-get install freecad=0.19.2+dfsg1-3ubuntu1</code> (Tested with version 0.19)</li>
+<li>Install Blender v3.3 LTS</li>
+<li>Download phobos.zip (tested with <a href="https://github.com/dfki-ric/phobos/releases/tag/2.0.0">phobos 2.0 "Perilled Pangolin".</a> )</li>
+<li>Install phobos by following <a href="https://github.com/dfki-ric/phobos/tree/2.0.0#installation">the guide on their github</a></li>
+<li>In your phobos settings (easiest accessed through the blender GUI), change the the models folder to where you want the output to be. You can add a relative path here so that the output folder depends on where you run the script, e.g. setting the model folder to <code>./phobos_out/</code> would create a <code>./phobos_out/</code> directory as a sub-directory to wherever your run the script and save the exported sdfs there.</li>
+<li>Enter freecad and load your <code>.FCstd</code>, then select the body in the tree view and select <code>File</code>-&gt;<code>Export</code> and choose to export it as a Collada (<code>.dae</code>) file.</li>
+<li>Run <code>./build.sh</code></li>
+</ul>
+<p>You should now be able to load the model/directory created by the reformat script directly through Gazebo.</p>
+<pre><code class="language-bash">wget https://download.blender.org/release/Blender3.3/blender-3.3.0-linux-x64.tar.xz
+tar -xf blender-3.3.0-linux-x64.tar.xz
+mv blender-3.3.0-linux-x64 blender
+alias blender=&quot;`pwd`/blender/blender&quot;
+blender --version
+git clone git@github.com:dfki-ric/phobos.git
+cd phobos
+git checkout 2.0.0
+blender -b --python install_requirements.py
+cd ..
+./build.sh
+</code></pre>
+<h2 id="in-gui">In GUI</h2>
+<ul>
+<li>Import <code>.dae</code> file</li>
+<li>Set phobostype to <code>visual</code></li>
+<li>Select the object and set the <code>geometry type</code></li>
+<li><a href="https://github.com/dfki-ric/phobos/wiki/Modeling-Walkthrough">Guide</a> says to <code>Object-&gt;Apply-&gt;Rotation &amp; Scale</code> here but I'm not sure what it actually accomplishes</li>
+<li>This will apply the scaling of objects to their mesh information (vertices) and applies the current orientation to the mesh as well. After this option all objects have zero orientation. If this is not desired one can also only apply the <code>Scale</code>.</li>
+<li>Create a "visual" collection and put the model into there, this lets us create a tree structure. (unsure of necessity when we only have one model)</li>
+<li>Select object and press <code>Create Link(s)</code>, make sure <code>selected objects</code> mode is chosen.</li>
+<li>Select the visual and then <code>Create Collision</code>.</li>
+<li>Select the object and then <code>Create Inertials</code>.</li>
+<li>Here we need to manually enter our mass, should check if that can be adjusted somehow.</li>
+<li>Save and export.</li>
+<li>Then we need to move around the resulting files so they're structured in the way Gazebo wants them, i.e.:</li>
+</ul>
+<pre><code class="language-text">model
+├── meshes
+│   └── filename.dae
+├── model.config
+└── model.sdf
+</code></pre>
+<p>In order to accomplish this we'll have to create the model.config file, however this is relatively simple as it doesn't contain any unique data between different models aside from the model name.</p>
+<p>Example of a successful build:</p>
+<pre><code>simulation/raw_models$ ./build_models.sh
+
+../simlan_gazebo_environment/models/aruco/materials/textures/0.png
+../simlan_gazebo_environment/models/aruco/materials/textures/1.png
+../simlan_gazebo_environment/models/aruco/materials/textures/2.png
+../simlan_gazebo_environment/models/aruco/materials/textures/3.png
+
+
+
+Color management: using fallback mode for management
+Color management: Error could not find role data role.
+Blender 3.0.1
+Read prefs: [HOME]/.config/blender/3.0/config/userpref.blend
+Color management: scene view &quot;Filmic&quot; not found, setting default &quot;Standard&quot;.
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version &gt;=1.17.3 and &lt;1.25.0 is required for this version of SciPy (detected version 1.26.2
+  warnings.warn(f&quot;A NumPy version &gt;={np_minversion} and &lt;{np_maxversion}&quot;
+Checking requirements:
+ensurepip is disabled in Debian/Ubuntu for the system python.
+
+Python modules for the system python are usually handled by dpkg and apt-get.
+
+    apt install python3-&lt;module name&gt;
+
+Install the python3-pip package to use pip itself.  Using pip together
+with the system python might have unexpected results for any system installed
+module, so use it on your own risk, or make sure to only use it in virtual
+environments.
+
+WARNING: We couldn't do ensurepip, we try to continue anyways
+  Checking yaml
+  Checking numpy
+  Checking scipy
+  Checking collada
+  Checking pydot
+  Checking lxml
+  Checking networkx
+  Checking trimesh
+  Checking PIL
+Importing phobos
+IMPORT:  phobos.blender.defs
+Parsing definitions from: [HOME]/.config/blender/3.0/scripts/addons/phobos/data/blender/definitions
+  defaultControllers.yml
+  defaultSensors.yml
+  defaultMaterials.yml
+  defaultJoints.yml
+  defaultSubmechanisms.yml
+  defaultMotors.yml
+Creating new definition type: joints
+Creating new definition type: motors
+IMPORT:  phobos.blender.display
+IMPORT:  phobos.blender.io
+RELOAD:  phobos.blender.model
+IMPORT:  phobos.blender.operators
+RELOAD:  phobos.blender.phobosgui
+RELOAD:  phobos.blender.phoboslog
+RELOAD:  phobos.blender.phobossystem
+RELOAD:  phobos.blender.reserved_keys
+RELOAD:  phobos.blender.utils
+Registering operators.selection...
+Registering operators.io...
+Registering operators.editing...
+TypeError: EnumProperty(..., default='mechanism'): not found in enum members
+ValueError: bpy_struct &quot;PHOBOS_OT_define_submodel&quot; registration error: 'submodeltype' EnumProperty could not register (see previous error)
+Registering operators.naming...
+Registering operators.misc...
+
+Registering phobosgui...
+  ... successful.
++-- Collada Import parameters------
+| input file      : ./objects/meshes/eur-pallet.dae
+| use units       : no
+| autoconnect     : yes
++-- Armature Import parameters ----
+| find bone chains: yes
+| min chain len   : 0
+| fix orientation : yes
+| keep bind info  : no
+IOR of negative value is not allowed for materials (using Blender default value instead)+-- Import Scene --------
+| NODE  id='node0', name='node0'
++----------------------------------
+| Collada Import : OK
++----------------------------------
+Error in sys.excepthook:
+
+Original exception was:
+File &quot;[HOME]/.config/blender/3.0/scripts/addons/phobos/blender/operators/editing.py&quot;, line 1048, in toggleVisual
+Error in sys.excepthook:
+
+Original exception was:
+File &quot;[HOME]/.config/blender/3.0/scripts/addons/phobos/blender/operators/editing.py&quot;, line 1051, in toggleCollision
+[20231211_08:52:53] WARNING No text file README.md found. (phobos/blender/utils/blender.py - readTextFile (l259))
+Collada export to: [PATH]simulation/raw_models/phobos_out/unnamed/meshes/dae/Body.dae
+Info: Exported 1 Objects
+Info: Exported 1 Objects
+Collada export to: [PATH]simulation/raw_models/phobos_out/unnamed/meshes/dae/Body.dae
+Info: Exported 1 Objects
+Info: Exported 1 Objects
+Info: Phobos exported to: phobos_out/unnamed
+Info: Export successful.
+Info: Phobos exported to: phobos_out/unnamed
+Info: Export successful.
+
+----------------------------------------------------------------------------------------------------
+Unregistering Phobos...
+Unregistering phobosgui...
+Unregistering display...
+Unregistering icons...
+Unregistering classes...
+Unregistering manuals...
+  ... successful.
+
+Blender quit
+Error: Not freed memory blocks: 14, total unfreed memory 0.002426 MB
+
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../humanoid_utility/pose_to_motion/autogluon/" class="btn btn-neutral float-left" title="Pose to Motion AutoGluon model"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="objects/" class="btn btn-neutral float-right" title="Object Modeling">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../humanoid_utility/pose_to_motion/autogluon/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="objects/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

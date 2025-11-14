@@ -1,0 +1,40 @@
+#VRML_SIM R2021a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# tags: hidden
+# Extracted from: urdf/forklift_robot.urdf
+
+PROTO ForkliftRobotWheel [
+  field       SFString   name             "forklift wheel"
+  field       SFFloat    tireRadius       0.203200
+  field       SFBool     boundingObject   TRUE
+]
+{
+  VehicleWheel {
+    name IS name
+    thickness 0.25
+    tireRadius IS tireRadius
+    rimRadius 0.138
+    rimBeamWidth 0.07
+    centralInnerRadius 0.08
+    centralOuterRadius 0.12
+    rimBeamThickness 0.08
+    rimBeamOffset 0.065
+    boundingObject IS boundingObject
+    tireAppearance GenericTireAppearance {
+    }
+    rimAppearance PBRAppearance {
+      baseColor 0.7 0.7 0.7
+      roughness 0.5
+    }
+    physics Physics {
+        density -1
+        mass 5
+        inertiaMatrix [
+          1.000000e-03 1.500000e-03 1.000000e-03
+          0.000000e+00 0.000000e+00 0.000000e+00
+        ]
+        centerOfMass 0 0 0
+    }
+  }
+}

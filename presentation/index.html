@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/presentation/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Presentation - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Presentation";
+        var mkdocs_page_input_path = "presentation.md";
+        var mkdocs_page_url = "/SIMLAN/presentation/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Models</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resources/ISSUES/">Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Presentation</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/presentation.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p>TODO
+- Video as GIF and embedded 
+- Slides as Powerpoint, check videos are loaded? : Needs manual intervention (https://github.com/orgs/marp-team/discussions/491)
+- Infotiv intro (internal/ifotiv.pptx)
+- Slide notes
+- spellcheck and grammar check
+- time estimate</p>
+<p>TO export PDF or Powerpoint : https://github.com/orgs/marp-team/discussions/491</p>
+<hr />
+<h1 id="open-source-simulation-for-multi-camera-robotics">Open-Source Simulation for Multi-Camera Robotics</h1>
+<h2 id="the-simlan-framework">The SIMLAN Framework</h2>
+<p><strong>Hamid Ebadi</strong></p>
+<p><em>Infotiv AB</em></p>
+<!--
+Use MARP to see these slides [https://marp.app/](https://marp.app/)
+-->
+
+<hr />
+<h1 id="research-projects">Research Projects</h1>
+<ul>
+<li>
+<p><strong>SMILE-IV</strong>: safety assurance framework for <strong>transport services</strong></p>
+</li>
+<li>
+<p><strong>ARTWORK</strong>: The <strong>smart</strong> and <strong>connected worker</strong></p>
+</li>
+</ul>
+<!--
+- **SMILE-IV**: Developing technologies and a **safety assurance framework** for transport services using small autonomous vehicles.
+- **ARTWORK**: The **smart** and **connected worker** project, the goal is to create a real-time, context-aware assistance system for workers.
+- Infotiv supports other partners with their research projects
+-->
+
+<hr />
+<h1 id="volvo-projects">Volvo Projects</h1>
+<p>Volvo GTO in Tuve, Göteborg: </p>
+<ul>
+<li>
+<p><strong>RITA</strong> (Robot In The Air) : a collaborative robot designed to assist with kitting</p>
+</li>
+<li>
+<p><strong>GPSS</strong> (Generic Photogrammetry based Sensor System): <strong>ceiling-mounted cameras</strong> that detect and classify all static and dynamic obstacles on the factory floor, guiding transport robots to their destinations without collisions or accidents. These cameras act as the <strong>shared "eyes"</strong> of the robot fleet.</p>
+</li>
+</ul>
+<hr />
+<h1 id="autonomous-robotics">Autonomous Robotics</h1>
+<h2 id="slam">SLAM</h2>
+<ul>
+<li>Simultaneous localization and mapping</li>
+<li>Reliance on onboard sensors</li>
+<li>Distributed decision making</li>
+<li>Communication and synchronization</li>
+</ul>
+<!--
+- [SLAM](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping): constructing (or updating) a map of an unknown environment while simultaneously keeping track of an agent's location within it usually using  [Lidar](https://www.youtube.com/watch?v=ZAESH7bu3IY) or [Camera](https://youtu.be/9cPqbtiGWKM?feature=shared&t=16).
+-->
+
+<p><img alt="bg right:40% 100% &quot;SLAM-R Algorithm of Simultaneous Localization and Mapping Using RFID for Obstacle Location and Recognition&quot;" src="../resources/slam_toolbox_odom.gif" /></p>
+<hr />
+<h1 id="autonomous-robotics-cons">Autonomous Robotics (cons)</h1>
+<ul>
+<li>Limited field of view</li>
+<li>Sensor interference (LiDAR)</li>
+<li>No global view</li>
+<li>resolving right-of-way</li>
+<li>avoiding gridlock</li>
+<li>Handling challenging environments</li>
+<li>no landmarks</li>
+<li>repetitive landmarks</li>
+<li>dynamic landmarks</li>
+</ul>
+<hr />
+<p><img alt="Video Preview" src="https://img.youtube.com/vi/DA7lKiCdkCc/0.jpg" title="Click to play video" /></p>
+<p><a href="https://youtu.be/DA7lKiCdkCc?t=122">Watch the Video</a></p>
+<!--
+(read more: [Chalmers website](https://www.chalmers.se/en/current/news/e2-in-the-factory-of-the-future-humans-and-robots-work-together-on-equal-terms/))
+-->
+
+<hr />
+<ul>
+<li>No mapping but only localization using fixed cameras</li>
+</ul>
+<hr />
+<h1 id="centralised-robotics-pros">Centralised Robotics (pros)</h1>
+<ul>
+<li>GPSS (camera based)</li>
+<li>Simpler onboard computation</li>
+<li>Focus on control </li>
+<li>Energy consumption</li>
+<li>Simpler hardware</li>
+<li>Easier to maintain and upgrade</li>
+<li>No robot-to-robot communication</li>
+</ul>
+<hr />
+<h1 id="centralised-robotics-pros_1">Centralised Robotics (pros)</h1>
+<ul>
+<li>Improved explainability and accountability</li>
+<li>Camera is used for safety monitoring and repudiation.</li>
+<li>Improving the safety by using both onboard and offboard sensors</li>
+<li>More flexible to add ML based models</li>
+</ul>
+<hr />
+<h1 id="centralised-robotics-cons">Centralised Robotics (cons)</h1>
+<ul>
+<li>Realtime needs and latency</li>
+<li>Centralised processing and single point of failure</li>
+</ul>
+<hr />
+<h1 id="open-source-simulation-for-multi-camera-robotics_1">Open-Source Simulation for Multi-Camera Robotics</h1>
+<h2 id="the-simlan-framework_1">The SIMLAN Framework</h2>
+<ul>
+<li>Using simulation for complex human-robot collaboration.</li>
+<li>Inspired by Volvo Group’s GPSS/RITA</li>
+<li>Models ceiling-mounted cameras + factory layouts</li>
+</ul>
+<hr />
+<ul>
+<li>OS:</li>
+<li>mouse/screen compatible</li>
+<li>editor/harddisk compatible</li>
+<li>ROS: Robot <strong>Operating System</strong></li>
+<li>camera/LiDAR</li>
+<li>steering/wheel</li>
+<li>robotic arm</li>
+<li>Gazebo: Simulator</li>
+<li>physics</li>
+<li>sensors</li>
+</ul>
+<p><img alt="bg right:45% 100%" src="https://www.differencebetween.net/wp-content/uploads/2020/05/Difference-Between-Device-Driver-and-Application-Software.jpg" /></p>
+<hr />
+<h1 id="simlan-asset-environment-modeling-1">SIMLAN: Asset &amp; Environment Modeling (1)</h1>
+<ul>
+<li>Realistic warehouse models</li>
+<li>Free/Opensource 3D software: FreeCAD, Blender</li>
+<li>Relevant Assets:</li>
+<li>shelves</li>
+<li>pallets</li>
+<li>boxes, ...</li>
+<li>Configurable physical properties:</li>
+<li>collision, inertia, mass, dimensions, visuals</li>
+</ul>
+<p><img alt="bg contain right:30%" src="../resources/factory.png" /></p>
+<hr />
+<h1 id="simlan-asset-environment-modeling-2">SIMLAN: Asset &amp; Environment Modeling (2)</h1>
+<p><img alt="bg right:30% 100%" src="../resources/volvo.png" /></p>
+<ul>
+<li><strong>Sensors</strong>:</li>
+<li>camera</li>
+<li>semantic segmentation</li>
+<li>depth sensors</li>
+<li>collision sensors</li>
+<li><strong>Static Elements</strong>:</li>
+<li>boxes, pallets, shelves</li>
+<li>layouts</li>
+<li>camera coordination and orientation</li>
+<li>ArUco markers on agents</li>
+</ul>
+<hr />
+<p><a href="https://youtu.be/wXyfRg-_eic">DEMO: SIMAN physics failures</a></p>
+<hr />
+<h1 id="simlan-asset-environment-modeling-3">SIMLAN: Asset &amp; Environment Modeling (3)</h1>
+<p><img alt="bg right:50% 100%" src="../resources/side.png" /></p>
+<ul>
+<li>
+<p><strong>Dynamic Elements</strong>:</p>
+</li>
+<li>
+<p>pallet truck</p>
+</li>
+<li>forklift</li>
+<li>worker</li>
+</ul>
+<hr />
+<h1 id="multi-agent-namespace-support-domain-id">Multi-Agent &amp; Namespace Support &amp; DOMAIN ID</h1>
+<ul>
+<li>each agent has unique <strong>namespace + ArUco ID</strong></li>
+<li>supports static &amp; dynamic agent spawning</li>
+<li>isolated navigation stacks for each robot</li>
+<li>agents: pallet trucks, forklifts, jackal robots, human actors</li>
+</ul>
+<p><img alt="bg right:30% 100%" src="../resources/aruco_on_pallet_truck.png" /></p>
+<hr />
+<h1 id="camera">Camera</h1>
+<h2 id="configurationcalibration">Configuration/Calibration</h2>
+<ul>
+<li><strong>Intrinsics</strong>: focal lengths, principal point, distortion coeffs</li>
+<li><strong>Extrinsics</strong>: rotation matrix + translation vector</li>
+<li>enables precise <strong>world-to-pixel projection</strong></li>
+<li>crucial for image stitching &amp; ArUco localization</li>
+</ul>
+<p><img alt="bg right:30% 100%" src="resources/multicamera.png" /></p>
+<hr />
+<h1 id="birds-eye-view-image-stitching">Bird’s-Eye View &amp; Image stitching</h1>
+<ul>
+<li>transform world → camera → pixel coordinates</li>
+<li>enables stitching of multiple camera feeds</li>
+<li><code>camera_bird_eye_view</code> package
+<img alt="bg right:30% 100%" src="../resources/stitched.png" /></li>
+</ul>
+<hr />
+<h1 id="aruco-localization">ArUco Localization</h1>
+<ul>
+<li>proof-of-concept GPSS system in SIMLAN</li>
+<li>uses OpenCV ArUco markers for localization</li>
+<li>multi-camera robustness</li>
+<li><code>aruco_localization</code> package
+<img alt="bg right:40% 100%" src="../resources/rviz2.png" /></li>
+</ul>
+<hr />
+<p><img alt="" src="https://docs.opencv.org/4.x/singlemarkersaxes.jpg" /></p>
+<hr />
+<h1 id="aruco-navigation">ArUco Navigation</h1>
+<ul>
+<li>Input: <code>tf2</code> (positions)</li>
+<li><code>Nav2</code> navigates (with a lot of wiring)</li>
+</ul>
+<p><img alt="bg right:40% 100%" src="resources/drawio_file/SIMLAN_DIAGRAM.drawio.png" /></p>
+<hr />
+<h1 id="safety">Safety</h1>
+<p>integrated ROS2 "Behavior Tree" for Geo-fencing and immediate truck stop upon safety triggers 
+ - loss of observability
+ - restricted area
+ - collision</p>
+<hr />
+<p><a href="https://youtu.be/mhA51PPdABc?si=aGnCkyvzAF7rpz8v&amp;t=108">SIMAN GPSS video demo</a></p>
+<hr />
+<h1 id="gazebo-actors">Gazebo Actors</h1>
+<ul>
+<li>Gazebo's actor supports advanced visual features like skeleton animation from COLLADA or BVH files and scripted trajectories </li>
+<li>Gazebo actors are static (scripted trajectories only) and cannot interact physically.</li>
+<li>limiting their behavior to what they are strictly scripted for
+<img alt="bg right:30% 100%" src="../resources/arm-humanoid.png" /></li>
+</ul>
+<hr />
+<h1 id="humanoid-worker-modeling">Humanoid Worker Modeling</h1>
+<p><img alt="bg right:30% 100%" src="../resources/pose_landmarks_index.png" /></p>
+<p>Simulating humanoid robots to replicate real worker movement for safety monitoring and study its interaction with other agents.</p>
+<ul>
+<li>Google Mediapipe landmarks (human pose estimation).</li>
+<li>custom Neural Network translates landmarks to joint controls.</li>
+<li>MoveIt2 handles motion planning and execution of the humanoid in Gazebo.</li>
+</ul>
+<hr />
+<p><a href="https://www.youtube.com/watch?v=iNW2jYUsv9c">Humanoid training</a></p>
+<hr />
+<p><a href="https://www.youtube.com/watch?v=3yCLIu5GAn8">Panda arm demo</a>
+<a href="https://www.youtube.com/watch?v=EiCNiPeifPk">Panda arm and humanoid demo</a></p>
+<hr />
+<h1 id="summary-of-simlan-features">Summary of SIMLAN Features</h1>
+<ul>
+<li>lower barriers for research in robotics/ML</li>
+<li>dockerized dev environment</li>
+<li>features:</li>
+<li>bird’s-eye stitching</li>
+<li>ArUco-based localization</li>
+<li>ROS 2 / Nav2 integration</li>
+<li>Panda arm and humanoid</li>
+</ul>
+<hr />
+<h1 id="simlan-use-cases">SIMLAN Use Cases</h1>
+<ul>
+<li><strong>rapid prototyping</strong> of ML-based localization/navigation</li>
+<li><strong>reproducible experiments</strong> : consistent testing</li>
+<li><strong>synthetic data generation</strong> for ML models</li>
+<li><strong>safety testing</strong> without risking physical assets</li>
+<li><strong>high level of interaction</strong> reinforcement learning &amp; genetic algorithm experimentation</li>
+<li><strong>CI/CD</strong> : continuous development</li>
+<li><strong>V&amp;V</strong> to support verification and validation of complex, machine learning-based systems</li>
+</ul>
+<hr />
+<h1 id="simlan-use-cases_1">SIMLAN Use Cases</h1>
+<ul>
+<li>cost-efficient</li>
+<li>scalable</li>
+<li>fast</li>
+<li>safe</li>
+<li>privacy-friendly</li>
+<li>reproducible (unit tests for CI/CD)</li>
+</ul>
+<hr />
+<h1 id="open-source">Open source</h1>
+<ul>
+<li>
+<p>SIMLAN : <a href="https://github.com/infotiv-research/SIMLAN">https://github.com/infotiv-research/SIMLAN</a></p>
+</li>
+<li>
+<p>Infotiv portfolio of projects (academic papers) : <a href="https://infotiv-research.github.io/">https://infotiv-research.github.io/</a></p>
+</li>
+</ul>
+<hr />
+<h1 id="future-work-reinforcement-learning">Future Work : Reinforcement Learning</h1>
+<h3 id="google-deepmind">Google Deepmind</h3>
+<p>Reward for actions</p>
+<p><img alt="bg right:40% 100%" src="https://lh3.googleusercontent.com/rxzwNa9kfxo5dw7mQ6_nmdAG2LCbAd7MwNLfRjqyu9-et3yh2AyyM4PURdX9qeu1cmbpETzZbLRYnCuIyA-7qBT9OOa48zs5_ejJvE_-J8-q4Hqj=w1232-rw" /></p>
+<p><img alt="bg right:40% 100%" src="https://lh3.googleusercontent.com/nddC5Rsg5sRkKDHRmz6K416kagQT7c3ODGiGu2UKf9xpd3nFzF3f_t7diBLvcQpcJ5No7HFo5cpa2Z3RGLh-robnjaz2SsiyvbuC3gm0RqC4VRrG=w1232-rw" /></p>
+<p><img alt="bg right:60% 100%" src="https://lh3.googleusercontent.com/yy9tKsOgcyHvtmGlLdNm8M_mGSE4W1PJc2d_LXRh4goC9MvZ60TMp6HQx1z9is69dKP5irRtisR9_KCR2tCLyVND_TQBdTK65J9Ghl1A2On5Fwzpkw=w1232-rw" /></p>
+<hr />
+<h1 id="future-work-machine-learning">Future Work :  Machine Learning</h1>
+<p><img alt="" src="https://www.ml4devs.com/images/illustrations/traditional-program-vs-machine-learning.webp" /></p>
+<hr />
+<h1 id="future-work-classic-ai">Future Work : Classic AI</h1>
+<p><img alt="" src="https://data-flair.training/blogs/wp-content/uploads/sites/2/2020/05/Cats-Dogs-Classification-deep-learning.gif" /></p>
+<hr />
+<h1 id="future-work-generative-ai-upscaling">Future Work : Generative AI (upscaling)</h1>
+<p><img alt="" src="https://scx2.b-cdn.net/gfx/news/2020/31-artificialin.jpg" /></p>
+<hr />
+<h1 id="future-work-generative-ai">Future Work : Generative AI</h1>
+<ul>
+<li>output is not known</li>
+<li>low dimension to high dimension</li>
+<li>hallucination</li>
+</ul>
+<p>Examples:
+- text -&gt; image
+- blurry image -&gt; sharp image
+- text -&gt; more text (LLMs)</p>
+<hr />
+<h1 id="future-work-wfm">Future Work : WFM</h1>
+<ul>
+<li>distribute computation across nodes</li>
+<li>move from ArUco markers : markerless vision pipelines</li>
+<li>integrate <strong>World Foundation Models</strong> (e.g., NVIDIA Cosmos)</li>
+<li>style transfer w/ GANs : higher visual fidelity</li>
+<li>human-robot interaction simulation</li>
+</ul>
+<p><img alt="bg right:40% 100%" src="../resources/cosmos-transfer.png" /></p>
+<p><a href="https://github.com/user-attachments/assets/4c1da01f-c3fd-4b6c-b084-f5ef653abb80">Demo 1</a> , <a href="https://github.com/user-attachments/assets/169cf5c5-de59-44db-b1bf-19fb57cb7e2e">Demo 2</a></p>
+<hr />
+<h1 id="conclusion">Conclusion</h1>
+<ul>
+<li><strong>SIMLAN</strong>: powerful platform for indoor multi-camera robotics</li>
+<li>reproducible, scalable, open-source</li>
+<li>useful for academia &amp; industry</li>
+<li>roadmap: ML integration, human-robot collaboration, sim-to-real transfer</li>
+<li>need your support</li>
+</ul>
+<hr />
+<h1 id="technical-highlights">Technical Highlights</h1>
+<ul>
+<li><strong>simulation Engine</strong>: Ignition Gazebo (High-fidelity physics and sensor models)</li>
+<li><strong>middleware</strong>: ROS 2 (Jazzy Jalisco) for component communication</li>
+<li><strong>developer environment</strong>: Docker + VSCode devcontainers (consistency and reproducibility)</li>
+<li><strong>documentation</strong>: extensive &amp; reproducible</li>
+</ul>
+<hr />
+<h2 id="acknowledgements">Acknowledgements</h2>
+<ul>
+<li>INFOTIV AB</li>
+<li>SMILE IV (Vinnova grant 2023-00789)</li>
+<li>EUREKA ITEA4 ArtWork (Vinnova grant 2023-00970)</li>
+<li><strong>INFOTIV Colleagues</strong>:  Pär Aronsson, Anton Hill, David Espedalen, Siyu Yi,  Anders Bäckelie, Jacob Rohdin, Vasiliki Kostara, Nazeeh Alhosary, Marwa XXXXXX</li>
+<li><strong>Other contributors</strong>: Tove Casparsson , Filip Melberg (Chalmers), Christoffer Johannesson, Sebastian Olsson, Hjalmar Ruscck from Dyno-robotics,  Erik Brorsson (Chalmers/Volvo), <strong><place holder for your name></strong></li>
+<li><strong>Other Partners</strong>: Infotiv AB, RISE, Volvo Group, Dyno-Robotics, Chalmers</li>
+</ul>
+<hr />
+<table>
+<thead>
+<tr>
+<th>INFOTIV AB</th>
+<th>Dyno-robotics</th>
+<th>RISE Research Institutes of Sweden</th>
+<th>CHALMERS</th>
+<th>Volvo Group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="../resources/logos/INFOTIV-logo.png" /></td>
+<td><img alt="" src="../resources/logos/dyno-robotics.png" /></td>
+<td><img alt="" src="../resources/logos/RISE-logo.png" /></td>
+<td><img alt="" src="../resources/logos/CHALMERS-logo.png" /></td>
+<td><img alt="" src="../resources/logos/volvo.jpg" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><a href="https://infotiv-research.github.io/">https://infotiv-research.github.io/</a></li>
+<li><a href="https://github.com/infotiv-research/SIMLAN">https://github.com/infotiv-research/SIMLAN</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

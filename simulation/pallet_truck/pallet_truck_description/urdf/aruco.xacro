@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<robot name="infobot_infobot"
+    xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:property name="aruco_id" value="0" />
+
+    <xacro:macro name="aruco_link" params="number">
+
+        <link name="$(arg prefix)/aruco_${number}_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+                <geometry>
+                    <box size="0.5 0.5 .001" comment="THE ACTUAL SIZE OF ARUCO"/>
+                </geometry>
+            </visual>
+        </link>
+
+
+        <joint name="aruco_${number}_joint" type="fixed">
+            <origin xyz="-0.8 0 1.30" rpy="0 0 0"/>
+            <parent link="$(arg prefix)/base_link"/>
+            <child link="$(arg prefix)/aruco_${number}_link"/>
+
+
+        </joint>
+
+        <gazebo reference="$(arg prefix)/aruco_${number}_link">
+            <static>true</static>
+            <visual name="aruco_front_face">
+                <pose>0.00005 0 0 0 0 0</pose>
+
+                <material>
+                    <ambient>1 1 1 1</ambient>
+                    <diffuse>1 1 1 1</diffuse>
+                    <specular>0 0 0 0</specular>
+                    <emissive>0 0 0 0</emissive>
+                    <pbr>
+                        <metal>
+                            <albedo_map>model://aruco/materials/textures/${number}.png</albedo_map>
+                            <name>"aruco_${number}"</name>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+
+        </gazebo>
+
+    </xacro:macro>
+
+    <xacro:aruco_link number="$(arg aruco_id)" />
+
+</robot>

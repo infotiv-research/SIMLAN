@@ -1,0 +1,98 @@
+import osc.example
+import osc.helpers
+import osc.ros
+
+scenario collision:
+    do serial:
+        # vary Pallet Truck Speed
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.1
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.2
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.3
+
+        # Vary Collision Angle
+        # 45 degrees
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.4
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.5
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.6
+
+        # 135 degrees
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.7
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.8
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 0}}") # TDRL1.9
+
+        # Vary Collision Type
+        # Collision Type 1
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.10
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.11
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.12
+
+        # 45 degrees
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.13
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.14
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.15
+
+        # 135 degrees
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.16
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.17
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 1}}") # TDRL1.18
+
+        # Collision Type 2
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.19
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.20
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 90, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.21
+
+        # 45 degrees
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.22
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.23
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 45, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.24
+
+        # 135 degrees
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 0.5, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.25
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 1.0, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.26
+
+        action_call("/scenario_manager/collision_action", "simlan_custom_msg.action.Collision",
+                    "{\"angle\": 135, \"pallet_truck_speed\": 1.5, \"collision_type\": {\"collision_type\": 2}}") # TDRL1.27
+

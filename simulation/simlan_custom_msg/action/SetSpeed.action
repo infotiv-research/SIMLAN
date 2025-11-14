@@ -1,0 +1,12 @@
+# Goal
+string robot_name
+float32 duration
+geometry_msgs/Twist twist
+---
+# Result
+string robot_name
+bool success
+string message
+---
+# Feedback
+string status

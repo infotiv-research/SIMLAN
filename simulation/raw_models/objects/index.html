@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/raw_models/objects/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Object Modeling - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Object Modeling";
+        var mkdocs_page_input_path = "simulation/raw_models/objects/README.md";
+        var mkdocs_page_url = "/SIMLAN/simulation/raw_models/objects/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/pallet_truck_bringup/">Bringup</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/pallet_truck_control/">Control</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/pallet_truck_navigation/">Navigation</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../humanoid_robot/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Models</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Object Modeling</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../warehouse/">Warehouse Specification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../resources/ISSUES/">Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Models</li>
+      <li class="breadcrumb-item active">Object Modeling</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/raw_models/objects/README.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="blueprint">Blueprint</h2>
+<p>This document contains explanations and motivations for the measurements as well as names for variables that should be used when designing the objects. The categories are mostly self explanatory, the one that might need more of an explanation is the color red. This refers to loose objects such as pallets, barrels, boxes and things that will be placed directly on the ground.</p>
+<p><strong>Measurements:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Category</th>
+<th style="text-align: center;">Part / Object</th>
+<th style="text-align: center;">Variable Name</th>
+<th style="text-align: right;">Value [unit]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Load Beam</td>
+<td style="text-align: center;">beam_length</td>
+<td style="text-align: right;">2.7 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Load Beam</td>
+<td style="text-align: center;">beam_depth</td>
+<td style="text-align: right;">0.05 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Load Beam</td>
+<td style="text-align: center;">beam_height</td>
+<td style="text-align: right;">0.14 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Load Beam</td>
+<td style="text-align: center;">beam_weight</td>
+<td style="text-align: right;">15.2 [kg]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Footplate</td>
+<td style="text-align: center;">footplate_length</td>
+<td style="text-align: right;">0.111 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Footplate</td>
+<td style="text-align: center;">footplate_width</td>
+<td style="text-align: right;">0.1 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Footplate</td>
+<td style="text-align: center;">footplate_height</td>
+<td style="text-align: right;">0.004 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Stand / Pole</td>
+<td style="text-align: center;">stand_length</td>
+<td style="text-align: right;">0.07 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Stand / Pole</td>
+<td style="text-align: center;">stand_width</td>
+<td style="text-align: right;">0.08 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Stand / Pole</td>
+<td style="text-align: center;">stand_height</td>
+<td style="text-align: right;">3 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Stand / Pole</td>
+<td style="text-align: center;">stand_weight</td>
+<td style="text-align: right;">8.5 [kg]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Cross Brace</td>
+<td style="text-align: center;">brace_length</td>
+<td style="text-align: right;">0.96 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Cross Brace</td>
+<td style="text-align: center;">brace_width</td>
+<td style="text-align: right;">0.01 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Cross Brace</td>
+<td style="text-align: center;">brace_height</td>
+<td style="text-align: right;">0.02 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Shelf</td>
+<td style="text-align: center;">Cross Brace</td>
+<td style="text-align: center;">brace_weight</td>
+<td style="text-align: right;">1 [kg]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">EUR-Pallet</td>
+<td style="text-align: center;">EUR_pallet_length</td>
+<td style="text-align: right;">1.2 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">EUR-Pallet</td>
+<td style="text-align: center;">EUR_pallet_width</td>
+<td style="text-align: right;">0.8 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">EUR-Pallet</td>
+<td style="text-align: center;">EUR_pallet_height</td>
+<td style="text-align: right;">0.144 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">EUR-Pallet</td>
+<td style="text-align: center;">EUR_pallet_weight</td>
+<td style="text-align: right;">25 [kg]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Steel Drum</td>
+<td style="text-align: center;">steel_drum_radius</td>
+<td style="text-align: right;">0.3 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Steel Drum</td>
+<td style="text-align: center;">steel_drum_height</td>
+<td style="text-align: right;">0.9 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Steel Drum</td>
+<td style="text-align: center;">full_steel_drum_weight</td>
+<td style="text-align: right;">188 [kg]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Steel Drum</td>
+<td style="text-align: center;">empty_steel_drum_weight</td>
+<td style="text-align: right;">15 [kg]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Traffic Cone</td>
+<td style="text-align: center;">traffic_cone_radius</td>
+<td style="text-align: right;">0.22 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Traffic Cone</td>
+<td style="text-align: center;">traffic_cone_angle</td>
+<td style="text-align: right;">-10 [degrees]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Traffic Cone</td>
+<td style="text-align: center;">traffic_cone_total_height</td>
+<td style="text-align: right;">1 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Traffic Cone</td>
+<td style="text-align: center;">traffic_cone_base_length</td>
+<td style="text-align: right;">0.52 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Traffic Cone</td>
+<td style="text-align: center;">traffic_cone_base_width</td>
+<td style="text-align: right;">0.52 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Traffic Cone</td>
+<td style="text-align: center;">traffic_cone_base_height</td>
+<td style="text-align: right;">0.03 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Traffic Cone</td>
+<td style="text-align: center;">traffic_cone_base_angle</td>
+<td style="text-align: right;">-20 [degrees]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Traffic Cone</td>
+<td style="text-align: center;">traffic_cone_weight</td>
+<td style="text-align: right;">6.5 [kg]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Box</td>
+<td style="text-align: center;">box_length</td>
+<td style="text-align: right;">Varies [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Box</td>
+<td style="text-align: center;">box_width</td>
+<td style="text-align: right;">Varies [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Box</td>
+<td style="text-align: center;">box_height</td>
+<td style="text-align: right;">Varies [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loose Object</td>
+<td style="text-align: center;">Box</td>
+<td style="text-align: center;">box_weight</td>
+<td style="text-align: right;">Varies [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Warehouse</td>
+<td style="text-align: center;">Support Pole</td>
+<td style="text-align: center;">pole_length</td>
+<td style="text-align: right;">0.3 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Warehouse</td>
+<td style="text-align: center;">Support Pole</td>
+<td style="text-align: center;">pole_width</td>
+<td style="text-align: right;">0.3 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Warehouse</td>
+<td style="text-align: center;">Support Pole</td>
+<td style="text-align: center;">pole_hole_side_length</td>
+<td style="text-align: right;">0.27 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Warehouse</td>
+<td style="text-align: center;">Support Pole</td>
+<td style="text-align: center;">pole_hole_side_width</td>
+<td style="text-align: right;">0.13 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Warehouse</td>
+<td style="text-align: center;">Support Pole</td>
+<td style="text-align: center;">pole_height</td>
+<td style="text-align: right;">6 [m]</td>
+</tr>
+<tr>
+<td style="text-align: left;">Warehouse</td>
+<td style="text-align: center;">Support Pole</td>
+<td style="text-align: center;">pole_weight</td>
+<td style="text-align: right;">Undefined [kg]</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="EUR-pallet" src="resources/eur-pall.gif" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em>EUR-pallet Measurements</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="amr">AMR</h2>
+<p><img alt="AMR" src="resources/AMR.png" /></p>
+<p>It is defined in XY plane and the center of the AMR is on x,y=0,0 and the bottom of the robot is on z=0.</p>
+<p>Define <strong>scale</strong> , <strong>pos</strong> and collision in these files:</p>
+<p>We write our AMR description in <code>simlan_gazebo_environment/urdf</code> and use <code>xacro</code> to create a <code>urdf</code> file with gazebo tags (so not a pure urdf file) that can be used both by <code>state_publisher</code> and <code>gazebo</code> (unlike 2 separate files  <code>model.sdf</code> that is used for Gazebo and <code>turtlebot.urf</code> that is used for state_publisher in original Turtlebot_simulation git project.</p>
+<p>There are two actual diffdrive wheels that are named <code>left</code> and <code>right</code> and four supporting wheel to balance the robot that are named <code>front_left</code>, <code>front_right</code> and <code>back_left</code> and <code>back_right</code> (they have no friction and can be moved to different position) with the radius of 0.98 of the main wheels.</p>
+<p><strong>Note</strong>: The reason for the shake is difference between the radius of the real wheels and caster wheels</p>
+<h3 id="infobot-amr-specification">Infobot AMR specification</h3>
+<p>Orientation:</p>
+<ul>
+<li>x : forward</li>
+<li>y: left</li>
+<li>z: up</li>
+</ul>
+<h2 id="objects-modeled-in-freecad">Objects Modeled in FreeCAD</h2>
+<p>All the objects are located in <code>objects</code>. Below follows a list of the objects currently available, models created in FreeCAD.</p>
+<ul>
+<li>EUR-pallet</li>
+<li>Shelf</li>
+<li>Modular Shelf - a stackable shelf part that can create shelves of varying size</li>
+<li>Steel Drum</li>
+<li>Traffic Cone</li>
+<li>Support Pole</li>
+<li>Boxes with measurements in mm [Box-Length x Width x Height]</li>
+<li>Box-160x130x70</li>
+<li>Box-185x185x75</li>
+<li>Box-185x185x185</li>
+<li>Box-210x180x130</li>
+<li>Box-230x160x85</li>
+<li>Box-250x195x160</li>
+<li>Box-430x250x260</li>
+<li>Box-440x320x175</li>
+<li>Box-570x380x380</li>
+<li>Box-1185x785x1010</li>
+<li>Box-600x800x400 (2 per level on EUR-Pallet)</li>
+<li>Box-600x400x400 (4 per level on EUR-Pallet)</li>
+<li>Box-300x400x400 (8 per level on EUR-pallet)</li>
+</ul>
+<h2 id="amr-camera">AMR camera</h2>
+<p><img alt="Camera" src="resources/camera.png" /></p>
+<p>Inspired by  <a href="https://sz-camera.en.made-in-china.com/productimage/OxfRauwdhIcY-2f1j00jPcbKhZkSIoC/China-3G-SDI-HDMI-Simultaneous-Output-1080-60-50-30-25p-1080-60-50I-HD-Digital-Camera-6-12mm-Manual-Lens-Live-Broadcast-Camera.html">CCTV Camera 3G-SDI</a></p>
+<p>In the model: camera base height(70mm) + camera lense height(50mm) = 120mm</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.cisco-eagle.com/category/3051/selective-rack-configuration">Pallet Rack Specification &amp; Configuration Guide</a></li>
+<li><a href="https://webtools.cisco-eagle.com/rack/">Pallet Rack Estimator</a></li>
+<li><a href="https://www.topregal.com/en/pallet-racks/configurator/">Pallet rack configurator</a></li>
+<li><a href="https://app.gazebosim.org/search;q=Pallet">pallet</a></li>
+<li>Shelf typical measurements: <a href="https://arkerwarehouse.com/standard-upright-sizes/#:~:text=The%20most%20common%20upright%20depth,is%208" title="%20to%2024">Shelf Measurements</a></li>
+<li>Forklift height which influences Shelf height: <a href="https://www.bigrentz.com/blog/dimensions-of-forklift#:~:text=Forklift%20heights%20can%20span%20anywhere,is%20about%2013.5%2D14.5%20feet.">Forklift Height</a></li>
+<li>EUR-pallet: <a href="https://www.svenskttra.se/bygg-med-tra/traforpackningar/val-av-emballagetyp/lastpallar/#:~:text=EUR%2Dpallen%20med%20m%C3%A5tten%20800,lastpallen%20%C3%B6verstiga%205%20500%20kg.">EUR-pallet</a></li>
+<li>Shelf design: <a href="https://www.topregal.com/en/pallet-racks/configurator/">Shelf design</a></li>
+<li>Shelf exact measurements: <a href="https://www.topregal.com/out/media/29386_tdb_INT_PR9000.pdf">Shelf exact measurement</a></li>
+<li>Examples of boxes: <a href="https://wulffsupplies.se/produkter/emballage/emballage/wellador-och-kartonger/">Boxes Examples</a></li>
+<li>Measurement for steel drum: <a href="https://eshop-best-chemical.com/products/210-litres-tight-head-steel-drum-with-pe-gasket-grey">Steel Drum</a></li>
+<li>Full Steel drum weight is based on the oil density of 825kg/m^3 and the drum fits 210 liters.</li>
+<li>Some values helping in constructing the traffic cone: <a href="https://www.roadware.co.uk/starlite-1-meter-road-traffic-cones/">Traffic Cone</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../warehouse/" class="btn btn-neutral float-right" title="Warehouse Specification">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../warehouse/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

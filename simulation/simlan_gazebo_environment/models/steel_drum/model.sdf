@@ -1,0 +1,42 @@
+<sdf version="1.7">
+<model name="steel_drum" canonical_link="node0_link">
+  <link name="node0_link">
+    <collision name="node0_collision">
+      <pose relative_to="node0_link">0.00000 0.00000 0.00000 0.00000 0.00000 0.00000</pose>
+      <geometry>
+        <mesh>
+          <uri>meshes/Body.dae</uri>
+          <scale>1.00000 1.00000 1.00000</scale>
+        </mesh>
+      </geometry>
+      <surface>
+        <contact><ode>  <max_vel>0.001</max_vel><min_depth>0.01</min_depth><kd>1e15</kd>  </ode></contact>
+      </surface>
+    </collision>
+    <inertial>
+      <inertia>
+        <ixx>3.54829</ixx>
+        <ixy>-0.00000</ixy>
+        <ixz>0.00012</ixz>
+        <iyy>3.54876</iyy>
+        <iyz>0.00000</iyz>
+        <izz>1.70922</izz>
+      </inertia>
+      <pose relative_to="node0_link">-0.00001 -0.00000 0.43007 0.00000 0.00000 0.00000</pose>
+      <mass>40.00000</mass>
+    </inertial>
+    <visual name="node0">
+      <material>
+        <emissive>0.00000 0.00000 0.00000 1.00000</emissive>
+      </material>
+      <pose relative_to="node0_link">0.00000 0.00000 0.00000 0.00000 0.00000 0.00000</pose>
+      <geometry>
+        <mesh>
+          <uri>meshes/textured_drum.dae</uri>
+          <scale>1.00000 1.00000 1.00000</scale>
+        </mesh>
+      </geometry>
+    </visual>
+  </link>
+</model>
+</sdf>

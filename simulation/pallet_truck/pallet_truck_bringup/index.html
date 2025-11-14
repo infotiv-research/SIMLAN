@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/pallet_truck/pallet_truck_bringup/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Bringup - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Bringup";
+        var mkdocs_page_input_path = "simulation/pallet_truck/pallet_truck_bringup/README.md";
+        var mkdocs_page_url = "/SIMLAN/simulation/pallet_truck/pallet_truck_bringup/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Pallet Truck</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../">Overview</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Bringup</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#configuring-and-spawning-robots-inside-the-sim">Configuring and spawning robots inside the sim</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#robot-spawning-attributes">🤖 Robot Spawning Attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#automatically-generated-parameter-files">automatically generated parameter files</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck_description/urdf/">URDF</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck_control/">Control</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck_navigation/">Navigation</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../humanoid_robot/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Models</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../raw_models/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../resources/ISSUES/">Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Simulation</li>
+          <li class="breadcrumb-item">Pallet Truck</li>
+      <li class="breadcrumb-item active">Bringup</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/pallet_truck/pallet_truck_bringup/README.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="pallet-truck-bringup">Pallet Truck bringup</h1>
+<p>This package handles initilization and status of spawned robots. </p>
+<ul>
+<li><a href="launch/gazebo.launch.py">gazebo.launch.py</a> - Spawns robot, handles robot_state_publisher, robot_description </li>
+<li><a href="launch/keyboard_steering.launch.py">keyboard_steering.launch.py</a> - keyboard steering. </li>
+<li><a href="launch/multiple_robot_spawn.launch.py">multiple_robot_spawn.launch.py</a> - contains configurable list of robots you spawn in the sim. <br></li>
+<li><a href="launch/sim.launch.py">sim.launch.py</a> - main launch file for single robot. Make sure gazebo is running, control, twist_mux, keyboard_steering as all launched.</li>
+<li><a href="launch/rviz.launch.py">rviz.launch.py</a> - runs rviz</li>
+</ul>
+<p>The package focuses on pallet_truck for now but could be made modular to spawn other types of robots.</p>
+<h2 id="configuring-and-spawning-robots-inside-the-sim">Configuring and spawning robots inside the sim</h2>
+<p>Below is the structure which we use to spawn robots inside of the sim. Please read these notes before setting up a new or editing a robot.  </p>
+<p>Here is the information from the table presented as a markdown list:</p>
+<h2 id="robot-spawning-attributes">🤖 Robot Spawning Attributes</h2>
+<ul>
+<li><strong><code>namespace</code></strong><ul>
+<li><strong>Description:</strong> Used to differentiate between multiple robots. Follows the format <code>robot_agent_N</code>, where <code>N</code> is the robot ID.</li>
+<li><strong>Example:</strong> <code>"robot_agent_1"</code></li>
+</ul>
+</li>
+<li><strong><code>initial_pose_x</code></strong><ul>
+<li><strong>Description:</strong> The robot's initial x-coordinate position. <strong>Float value</strong> wrapped as a string.</li>
+<li><strong>Example:</strong> <code>"10.0"</code></li>
+</ul>
+</li>
+<li><strong><code>initial_pose_y</code></strong><ul>
+<li><strong>Description:</strong> The robot's initial y-coordinate position. <strong>Float value</strong> wrapped as a string.</li>
+<li><strong>Example:</strong> <code>"1.0"</code></li>
+</ul>
+</li>
+<li><strong><code>robot_type</code></strong><ul>
+<li><strong>Description:</strong> Selects the robot mesh or appearance. Options are <strong><code>"pallet_truck"</code></strong> or <strong><code>"forklift"</code></strong>.</li>
+<li><strong>Example:</strong> <code>"pallet_truck"</code></li>
+</ul>
+</li>
+<li><strong><code>aruco_id</code></strong><ul>
+<li><strong>Description:</strong> Sets the ID shown on the robot's ArUco marker. Must match the ID in the <code>namespace</code>.</li>
+<li><strong>Example:</strong> <code>"1"</code> if namespace ID is <code>1</code></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>Would you like me to use these attributes to create a sample robot configuration?</p>
+<pre><code>Example robot setup:
+{
+    &quot;namespace&quot;: &quot;robot_agent_1&quot;, 
+    &quot;initial_pose_x&quot;:&quot;10.0&quot;, 
+    &quot;initial_pose_y&quot;:&quot;1.0&quot;, 
+    &quot;robot_type&quot;:&quot;pallet_truck&quot;, 
+    &quot;aruco_id&quot;:&quot;1&quot;
+}
+
+</code></pre>
+<hr />
+<h2 id="automatically-generated-parameter-files">automatically generated parameter files</h2>
+<p>Some parameter files are automatically generated for the pallet_truck_bringup package. The generation scripts can be found in the ~/src/config_generation/ directory. The automatically generated files include the <code>nav2_params.yaml</code>, <code>gz_bridge.yaml</code> and more. To look at all the automatically generated files, build the workspace and the generated files will be printed in the terminal or look manually in the ~/src/config_generation/ directory.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../pallet_truck_description/urdf/" class="btn btn-neutral float-right" title="URDF">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../pallet_truck_description/urdf/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

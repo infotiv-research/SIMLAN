@@ -1,0 +1,55 @@
+site_name: SIMLAN, Simulation for Multi-Camera Robotics
+site_description: This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by GPSS (Generic photo-based sensor system) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
+site_author: Hamid Ebadi
+
+site_url: https://infotiv-research.github.io/SIMLAN/
+repo_name: infotiv-research/SIMLAN
+repo_url: https://github.com/infotiv-research/SIMLAN
+docs_dir: /pandoc
+nav:
+  - SIMLAN, Simulation for Multi-Camera Robotics: README.md
+  - Dependencies: dependencies.md
+  - Contributing: contributing.md
+  - Config Generation: config_generation/README.md
+  - Simulation:
+      - Overview: simulation/README.md
+      - Gazebo Worlds: simulation/simlan_gazebo_environment/worlds/README.md
+      - GPSS cameras: simulation/static_agent_launcher/README.md
+      - Camera Bird Eye View: simulation/camera_bird_eye_view/README.md
+      - Aruco Localization: simulation/aruco_localization/README.md
+      - Failsafe: simulation/bt_failsafe/README.md
+      - SIMLAN Bringup: simulation/simlan_bringup/README.md
+      - Pallet Truck:
+          - Overview: simulation/pallet_truck/README.md
+          - Bringup: simulation/pallet_truck/pallet_truck_bringup/README.md
+          - URDF: simulation/pallet_truck/pallet_truck_description/urdf/README.md
+          - Control: simulation/pallet_truck/pallet_truck_control/README.md
+          - Navigation: simulation/pallet_truck/pallet_truck_navigation/README.md
+      - Humanoid Robot:
+          - Overview: simulation/humanoid_robot/README.md
+          - Humanoid Moveit: simulation/humanoid_support_moveit_config/README.md
+      - Panda MoveIt2: simulation/moveit2/README.md
+      - Object Mover: simulation/object_mover/README.md
+  - Humanoid Motion Capture Utility:
+      - Overview: humanoid_utility/README.md
+      - Pose to Motion AutoGluon model: humanoid_utility/pose_to_motion/autogluon/README.md
+  - Models:
+      - Overview: simulation/raw_models/README.md
+      - Object Modeling: simulation/raw_models/objects/README.md
+      - Warehouse Specification: simulation/raw_models/warehouse/README.md
+  - Credits: credits.md
+  - Appendix:
+      - Changelog: CHANGELOG.md
+      - Issues: resources/ISSUES.md
+      - Diagrams: resources/diagrams/README.md
+theme:
+  name: readthedocs
+  locale: en
+  highlightjs: true
+  hljs_languages:
+    - bash
+    - c
+plugins:
+  - search:
+      lang: en
+

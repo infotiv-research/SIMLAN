@@ -1,0 +1,43 @@
+
+services:
+  factory_simulation: &research-base
+    container_name: factory_simulation
+    shm_size: '1gb'
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      # - ${XAUTHORITY}:/tmp/.Xauthority
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./:/home/ros/src
+    privileged: true
+    tty: true
+    environment:
+      DISPLAY: ${DISPLAY}
+      OS: ${OS}
+      XAUTHORITY: /tmp/.docker.xauth
+      ROS_DOMAIN_ID: 39
+      SDL_VIDEODRIVER: x11
+    devices:
+      - /dev/tty*:/dev/tty*
+      - /dev:/dev
+    device_cgroup_rules:
+      - 'c *:* rmw'
+    network_mode: host
+    command: tail -f /dev/null
+    restart: always
+    runtime: nvidia
+
+  factory_simulation_nvidia:
+   <<: *research-base
+   container_name: factory_simulation_nvidia
+   runtime: nvidia
+   deploy:
+     resources:
+       reservations:
+         devices:
+           - driver: nvidia
+             count: "all"
+             capabilities: [compute,utility,graphics,display]

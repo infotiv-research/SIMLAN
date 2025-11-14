@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!--Scale property 1 is normal scale, every property is multiplied by this-->
+    <xacro:property name="scale" value="1"/>
+    <!--Gravity property: true or false-->
+    <xacro:property name="gravity_on" value="true"/>
+
+    <xacro:macro name="property_scale" params="name value">
+        <xacro:property name="${name}" value="${value * scale}" scope="global"/>
+    </xacro:macro>
+
+    <xacro:macro name="property_scale_mass" params="name value">
+        <xacro:property name="${name}" value="${value * scale * scale * scale}" scope="global"/>
+    </xacro:macro>
+
+
+    <material name="blue">
+        <color rgba="0 0 0.5 1"/>
+    </material>
+
+    <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.65 0.5 1"/>
+    </material>
+
+    <material name="yellow">
+        <color rgba="1 1 0.5 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <xacro:macro name="box_inertia" params="m l w h xyz rpy">
+        <inertial>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <mass value="${m}"/>
+            <inertia ixx="${(m/12) * (w*w + h*h)}" ixy="0.0" ixz="0.0"
+                     iyy="${(m/12) * (l*l + h*h)}" iyz="0.0"
+                     izz="${(m/12) * (l*l + w*w)}"/>
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_inertia" params="m r h xyz rpy">
+        <inertial>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <mass value="${m}"/>
+            <inertia ixx="${(m/12) * (3*r*r + h*h)}" ixy="0.0" ixz="0.0"
+                     iyy="${(m/12) * (3*r*r + h*h)}" iyz="0.0"
+                     izz="${(m/2) * (r*r)}"/>
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="sphere_inertia" params="m r xyz rpy">
+        <inertial>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <mass value="${m}"/>
+            <inertia ixx="${(m/12) * (r*r)}" ixy="0.0" ixz="0.0"
+                     iyy="${(m/12) * (r*r)}" iyz="0.0"
+                     izz="${(m/12) * (r*r)}"/>
+        </inertial>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,176 @@
+<sdf version="1.9">
+  <model name="shelf" canonical_link="node0_link">
+  
+    <link name="node0_link">
+      <inertial>
+        <inertia>
+          <ixx>24.93052</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>54.42990</iyy>
+          <iyz>0</iyz>
+          <izz>42.61899</izz>
+        </inertia>
+        <pose>1.44044 0.43986 1.49318 0 0 0</pose>
+        <mass>40.00000</mass>
+      </inertial>
+
+      <visual name="node0">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://shelf/meshes/textured_shelf_low_poly.dae</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
+      <label>10</label>
+    </plugin>
+
+    <link name="collision_shelf_1">
+      <inertial>
+        <mass>0.0001</mass>
+        <inertia>
+          <ixx>1e-6</ixx>
+          <iyy>1e-6</iyy>
+          <izz>1e-6</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <collision name="collision_shelf_1">
+        <pose>1.45 0.45 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.7 1.2 0.13</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <link name="collision_shelf_2">
+      <inertial>
+        <mass>0.0001</mass>
+        <inertia>
+          <ixx>1e-6</ixx>
+          <iyy>1e-6</iyy>
+          <izz>1e-6</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <collision name="collision_shelf_2">
+        <pose>1.45 0.45 1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.7 1.2 0.13</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <link name="collision_shelf_3">
+      <inertial>
+        <mass>0.0001</mass>
+        <inertia>
+          <ixx>1e-6</ixx>
+          <iyy>1e-6</iyy>
+          <izz>1e-6</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <collision name="collision_shelf_3">
+        <pose>1.45 0.45 2 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.7 1.2 0.13</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name="fixed_joint_1" type="fixed">
+      <parent>node0_link</parent>
+      <child>collision_shelf_1</child>
+    </joint>
+
+
+    <joint name="fixed_joint_2" type="fixed">
+      <parent>node0_link</parent>
+      <child>collision_shelf_2</child>
+    </joint>
+
+    <joint name="fixed_joint_3" type="fixed">
+      <parent>node0_link</parent>
+      <child>collision_shelf_3</child>
+    </joint>
+
+  </model>
+</sdf>

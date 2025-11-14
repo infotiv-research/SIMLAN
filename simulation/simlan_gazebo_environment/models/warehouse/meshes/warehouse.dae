@@ -1,0 +1,442 @@
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor/>
+    <created>2023-10-27T16:06:10.790291</created>
+    <modified>2023-10-27T16:06:10.790297</modified>
+    <unit name="meter" meter="1.0"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="effect_Material" name="effect_Material">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0.0 0.0 0.0 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.0 0.0 0.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <color>0.6000000238418579 0.550000011920929 0.6700000166893005 1.0</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1.0</color>
+            </specular>
+            <shininess>
+              <float>0.0</float>
+            </shininess>
+            <reflective>
+              <color>0.0 0.0 0.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.0</float>
+            </reflectivity>
+            <transparent>
+              <color>0.0 0.0 0.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>0</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+    <effect id="effect_Material" name="effect_Material">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0.0 0.0 0.0 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.0 0.0 0.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <color>0.6000000238418579 0.550000011920929 0.6700000166893005 1.0</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1.0</color>
+            </specular>
+            <shininess>
+              <float>0.0</float>
+            </shininess>
+            <reflective>
+              <color>0.0 0.0 0.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.0</float>
+            </reflectivity>
+            <transparent>
+              <color>0.0 0.0 0.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>0</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+    <effect id="effect_Material" name="effect_Material">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0.0 0.0 0.0 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.0 0.0 0.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <color>0.6000000238418579 0.550000011920929 0.6700000166893005 1.0</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1.0</color>
+            </specular>
+            <shininess>
+              <float>0.0</float>
+            </shininess>
+            <reflective>
+              <color>0.0 0.0 0.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.0</float>
+            </reflectivity>
+            <transparent>
+              <color>0.0 0.0 0.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>0</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+    <effect id="effect_Material" name="effect_Material">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0.0 0.0 0.0 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.0 0.0 0.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <color>0.6000000238418579 0.550000011920929 0.6700000166893005 1.0</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1.0</color>
+            </specular>
+            <shininess>
+              <float>0.0</float>
+            </shininess>
+            <reflective>
+              <color>0.0 0.0 0.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.0</float>
+            </reflectivity>
+            <transparent>
+              <color>0.0 0.0 0.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>0</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+    <effect id="effect_Material001" name="effect_Material001">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0.0 0.0 0.0 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.0 0.0 0.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <color>0.7098039215686275 0.6274509803921569 0.5254901960784314 1.0</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1.0</color>
+            </specular>
+            <shininess>
+              <float>0.0</float>
+            </shininess>
+            <reflective>
+              <color>0.0 0.0 0.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.0</float>
+            </reflectivity>
+            <transparent>
+              <color>0.0 0.0 0.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>0</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="geometry0" name="Wall">
+      <mesh>
+        <source id="cubeverts-array0">
+          <float_array count="72" id="cubeverts-array0-array">1.6 0 2.6 -1.188035e-17 0 6 1.6 0 4.6 -1.188035e-17 0 0 10.6 6.82121e-16 4.6 10.6 6.82121e-16 2.6 12.6 6.82121e-16 4.6 12.6 6.82121e-16 2.6 23.2 1.364242e-15 6 21.6 1.364242e-15 4.6 21.6 1.364242e-15 2.6 23.2 1.364242e-15 0 -1.196463e-19 -0.2 0 -1.196463e-19 -0.2 6 23.2 -0.2 0 23.2 -0.2 6 10.6 -0.2 4.6 1.6 -0.2 4.6 10.6 -0.2 2.6 1.6 -0.2 2.6 21.6 -0.2 4.6 12.6 -0.2 4.6 21.6 -0.2 2.6 12.6 -0.2 2.6</float_array>
+          <technique_common>
+            <accessor count="24" source="#cubeverts-array0-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cubenormals-array0">
+          <float_array count="156" id="cubenormals-array0-array">0 1 -0 0 1 0 -7.579122e-17 1 -8.661854e-17 -7.579122e-17 1 4.664075e-17 0 1 4.872293e-16 0 1 0 0 1 -0 -7.579122e-17 1 8.661854e-17 -5.880354e-17 1 -4.200253e-17 0 1 0 -7.579122e-17 1 -4.664075e-17 0 1 -0 -5.880354e-17 1 -2.261674e-17 0 1 2.623542e-16 -1 -5.880354e-17 0 -1 -5.880354e-17 0 0 0 -1 0 0 -1 0 0 1 0 0 1 1 0 0 1 0 0 0 -0 -1 0 0 -1 -1 0 0 -1 0 0 0 -0 1 0 0 1 1 0 0 1 0 0 0 -0 -1 0 0 -1 -1 0 0 -1 0 0 1 0 0 1 0 0 0 -0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0</float_array>
+          <technique_common>
+            <accessor count="52" source="#cubenormals-array0-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cubeverts-array0-vertices">
+          <input semantic="POSITION" source="#cubeverts-array0"/>
+        </vertices>
+        <triangles count="52" material="ref_Material">
+          <input offset="0" semantic="VERTEX" source="#cubeverts-array0-vertices"/>
+          <input offset="1" semantic="NORMAL" source="#cubenormals-array0"/>
+          <p>0 0 1 0 2 0 3 1 1 1 0 1 4 2 2 2 1 2 5 3 3 3 0 3 6 4 4 4 1 4 7 5 5 5 4 5 7 6 4 6 6 6 8 7 9 7 6 7 8 8 6 8 1 8 10 9 9 9 8 9 11 10 7 10 10 10 11 11 10 11 8 11 11 12 3 12 5 12 11 13 5 13 7 13 3 14 12 14 1 14 1 15 12 15 13 15 3 16 11 16 14 16 3 17 14 17 12 17 8 18 1 18 15 18 15 19 1 19 13 19 14 20 11 20 8 20 14 21 8 21 15 21 4 22 16 22 17 22 4 23 17 23 2 23 18 24 16 24 5 24 16 25 4 25 5 25 18 26 5 26 19 26 19 27 5 27 0 27 17 28 19 28 0 28 2 29 17 29 0 29 9 30 20 30 21 30 9 31 21 31 6 31 22 32 20 32 10 32 20 33 9 33 10 33 21 34 23 34 7 34 6 35 21 35 7 35 22 36 10 36 23 36 23 37 10 37 7 37 13 38 19 38 17 38 13 39 12 39 19 39 17 40 16 40 13 40 12 41 18 41 19 41 16 42 21 42 13 42 18 43 23 43 16 43 16 44 23 44 21 44 20 45 15 45 21 45 21 46 15 46 13 46 20 47 22 47 15 47 23 48 14 48 22 48 22 49 14 49 15 49 12 50 14 50 18 50 18 51 14 51 23 51</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="geometry1" name="Wall001">
+      <mesh>
+        <source id="cubeverts-array1">
+          <float_array count="24" id="cubeverts-array1-array">-0.2 18.2 6 -0.2 -0.2 0 -0.2 -0.2 6 -0.2 18.2 0 -7.105427e-18 -0.2 0 -7.105427e-18 -0.2 6 1.136868e-15 18.2 6 1.136868e-15 18.2 0</float_array>
+          <technique_common>
+            <accessor count="8" source="#cubeverts-array1-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cubenormals-array1">
+          <float_array count="36" id="cubenormals-array1-array">-1 -0 0 -1 0 0 0 -1 0 0 -1 0 1 -6.217249e-17 0 1 -6.217249e-17 0 0 1 0 0 1 -0 0 0 -1 0 0 -1 0 0 1 0 0 1</float_array>
+          <technique_common>
+            <accessor count="12" source="#cubenormals-array1-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cubeverts-array1-vertices">
+          <input semantic="POSITION" source="#cubeverts-array1"/>
+        </vertices>
+        <triangles count="12" material="ref_Material">
+          <input offset="0" semantic="VERTEX" source="#cubeverts-array1-vertices"/>
+          <input offset="1" semantic="NORMAL" source="#cubenormals-array1"/>
+          <p>0 0 1 0 2 0 3 1 1 1 0 1 1 2 4 2 2 2 2 3 4 3 5 3 4 4 6 4 5 4 4 5 7 5 6 5 7 6 3 6 0 6 7 7 0 7 6 7 3 8 7 8 4 8 3 9 4 9 1 9 6 10 0 10 5 10 5 11 0 11 2 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="geometry2" name="Wall002">
+      <mesh>
+        <source id="cubeverts-array2">
+          <float_array count="72" id="cubeverts-array2-array">1.6 18.2 2.6 -1.133e-15 18.2 6 1.6 18.2 4.6 -1.133e-15 18.2 0 10.6 18.2 4.6 10.6 18.2 2.6 12.6 18.2 2.6 12.6 18.2 4.6 23.2 18.2 6 21.6 18.2 4.6 21.6 18.2 2.6 23.2 18.2 0 -1.133e-15 18 0 -1.133e-15 18 6 23.2 18 0 23.2 18 6 10.6 18 4.6 1.6 18 4.6 10.6 18 2.6 1.6 18 2.6 21.6 18 4.6 12.6 18 4.6 21.6 18 2.6 12.6 18 2.6</float_array>
+          <technique_common>
+            <accessor count="24" source="#cubeverts-array2-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cubenormals-array2">
+          <float_array count="156" id="cubenormals-array2-array">0 1 -0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 -0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 -0 0 1 0 0 1 0 -1 0 0 -1 -0 0 0 0 -1 0 0 -1 0 0 1 0 0 1 1 0 0 1 0 0 0 -0 -1 -0 0 -1 -1 0 0 -1 0 0 1 0 0 1 0 0 0 -0 1 0 0 1 0 -0 -1 -0 0 -1 -1 0 0 -1 0 0 0 -0 1 0 0 1 1 0 0 1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0</float_array>
+          <technique_common>
+            <accessor count="52" source="#cubenormals-array2-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cubeverts-array2-vertices">
+          <input semantic="POSITION" source="#cubeverts-array2"/>
+        </vertices>
+        <triangles count="52" material="ref_Material">
+          <input offset="0" semantic="VERTEX" source="#cubeverts-array2-vertices"/>
+          <input offset="1" semantic="NORMAL" source="#cubenormals-array2"/>
+          <p>0 0 1 0 2 0 3 1 1 1 0 1 4 2 2 2 1 2 5 3 3 3 0 3 6 4 5 4 4 4 6 5 4 5 7 5 8 6 9 6 7 6 8 7 7 7 4 7 8 8 4 8 1 8 10 9 9 9 8 9 11 10 6 10 10 10 11 11 10 11 8 11 11 12 3 12 5 12 11 13 5 13 6 13 3 14 12 14 1 14 1 15 12 15 13 15 3 16 11 16 14 16 3 17 14 17 12 17 8 18 1 18 15 18 15 19 1 19 13 19 14 20 11 20 8 20 14 21 8 21 15 21 4 22 16 22 17 22 4 23 17 23 2 23 16 24 4 24 18 24 18 25 4 25 5 25 2 26 17 26 19 26 2 27 19 27 0 27 18 28 5 28 19 28 19 29 5 29 0 29 9 30 20 30 21 30 9 31 21 31 7 31 20 32 9 32 22 32 22 33 9 33 10 33 22 34 10 34 23 34 23 35 10 35 6 35 7 36 21 36 23 36 7 37 23 37 6 37 13 38 19 38 17 38 13 39 12 39 19 39 17 40 16 40 13 40 12 41 18 41 19 41 18 42 23 42 16 42 16 43 23 43 21 43 20 44 15 44 21 44 21 45 15 45 16 45 16 46 15 46 13 46 20 47 22 47 15 47 23 48 14 48 22 48 22 49 14 49 15 49 12 50 14 50 18 50 18 51 14 51 23 51</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="geometry3" name="Wall003">
+      <mesh>
+        <source id="cubeverts-array3">
+          <float_array count="48" id="cubeverts-array3-array">23.4 18.2 0 23.4 18.2 6 23.4 16 4 23.4 13 4 23.4 16 0 23.4 -0.2 6 23.4 -0.2 0 23.4 13 0 23.2 18.2 0 23.2 16 0 23.2 16 4 23.2 13 4 23.2 13 0 23.2 -0.2 0 23.2 -0.2 6 23.2 18.2 6</float_array>
+          <technique_common>
+            <accessor count="16" source="#cubeverts-array3-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cubenormals-array3">
+          <float_array count="84" id="cubenormals-array3-array">1 0 -0 1 0 0 1 0 0 1 -0 0 1 0 0 1 0 0 0 0 -1 0 0 -1 0 -1 0 0 -1 0 0 0 -1 -0 0 -1 0 1 0 0 1 -0 0 0 -1 0 0 -1 0 -1 0 0 -1 0 0 0 1 0 0 1 0 1 -0 0 1 0 -1 0 -0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 -0 0</float_array>
+          <technique_common>
+            <accessor count="28" source="#cubenormals-array3-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cubeverts-array3-vertices">
+          <input semantic="POSITION" source="#cubeverts-array3"/>
+        </vertices>
+        <triangles count="28" material="ref_Material">
+          <input offset="0" semantic="VERTEX" source="#cubeverts-array3-vertices"/>
+          <input offset="1" semantic="NORMAL" source="#cubenormals-array3"/>
+          <p>0 0 1 0 2 0 3 1 2 1 1 1 4 2 0 2 2 2 5 3 3 3 1 3 6 4 7 4 3 4 6 5 3 5 5 5 8 6 0 6 4 6 8 7 4 7 9 7 10 8 9 8 4 8 10 9 4 9 2 9 3 10 11 10 2 10 2 11 11 11 10 11 12 12 11 12 7 12 7 13 11 13 3 13 12 14 7 14 6 14 12 15 6 15 13 15 13 16 6 16 5 16 13 17 5 17 14 17 1 18 15 18 5 18 5 19 15 19 14 19 0 20 8 20 1 20 1 21 8 21 15 21 15 22 8 22 10 22 10 23 11 23 15 23 8 24 9 24 10 24 11 25 14 25 15 25 12 26 13 26 11 26 11 27 13 27 14 27</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="geometry4" name="Structure">
+      <mesh>
+        <source id="cubeverts-array4">
+          <float_array count="24" id="cubeverts-array4-array">23.4 -0.2 0 -0.2 -0.2 0 -0.2 -0.2 -0.2 23.4 -0.2 -0.2 23.4 18.2 0 23.4 18.2 -0.2 -0.2 18.2 0 -0.2 18.2 -0.2</float_array>
+          <technique_common>
+            <accessor count="8" source="#cubeverts-array4-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cubenormals-array4">
+          <float_array count="36" id="cubenormals-array4-array">-0 -1 0 0 -1 -0 1 0 0 1 0 0 -0 1 0 0 1 0 -1 0 0 -1 0 0 0 0 1 0 0 1 0 0 -1 0 0 -1</float_array>
+          <technique_common>
+            <accessor count="12" source="#cubenormals-array4-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cubeverts-array4-vertices">
+          <input semantic="POSITION" source="#cubeverts-array4"/>
+        </vertices>
+        <triangles count="12" material="ref_Material001">
+          <input offset="0" semantic="VERTEX" source="#cubeverts-array4-vertices"/>
+          <input offset="1" semantic="NORMAL" source="#cubenormals-array4"/>
+          <p>0 0 1 0 2 0 0 1 2 1 3 1 4 2 0 2 3 2 4 3 3 3 5 3 6 4 4 4 5 4 6 5 5 5 7 5 1 6 6 6 7 6 1 7 7 7 2 7 4 8 1 8 0 8 4 9 6 9 1 9 2 10 5 10 3 10 7 11 5 11 2 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_materials>
+    <material id="mat_Material" name="Material">
+      <instance_effect url="#effect_Material"/>
+    </material>
+    <material id="mat_Material" name="Material">
+      <instance_effect url="#effect_Material"/>
+    </material>
+    <material id="mat_Material" name="Material">
+      <instance_effect url="#effect_Material"/>
+    </material>
+    <material id="mat_Material" name="Material">
+      <instance_effect url="#effect_Material"/>
+    </material>
+    <material id="mat_Material001" name="Material001">
+      <instance_effect url="#effect_Material001"/>
+    </material>
+  </library_materials>
+  <library_visual_scenes>
+    <visual_scene id="myscene">
+      <node id="node0" name="node0">
+        <instance_geometry url="#geometry0">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="ref_Material" target="#mat_Material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="node1" name="node1">
+        <instance_geometry url="#geometry1">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="ref_Material" target="#mat_Material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="node2" name="node2">
+        <instance_geometry url="#geometry2">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="ref_Material" target="#mat_Material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="node3" name="node3">
+        <instance_geometry url="#geometry3">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="ref_Material" target="#mat_Material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="node4" name="node4">
+        <instance_geometry url="#geometry4">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="ref_Material001" target="#mat_Material001"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#myscene"/>
+  </scene>
+</COLLADA>

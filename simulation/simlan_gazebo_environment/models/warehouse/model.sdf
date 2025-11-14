@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='warehouse'>
+    <static>true</static>
+    <link name="building">
+      <visual name="visual">
+        <geometry>
+            <mesh>
+                <uri>meshes/textured_warehouse.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+      <collision name="collision">
+        <geometry>
+            <mesh>
+                <uri>meshes/warehouse.dae</uri>
+            </mesh>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>

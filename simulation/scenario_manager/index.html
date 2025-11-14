@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/scenario_manager/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>🚀 Scenario Manager - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\ud83d\ude80 Scenario Manager";
+        var mkdocs_page_input_path = "simulation/scenario_manager/README.md";
+        var mkdocs_page_url = "/SIMLAN/simulation/scenario_manager/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Models</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../resources/ISSUES/">Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">🚀 Scenario Manager</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/scenario_manager/README.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="scenario-manager">🚀 Scenario Manager</h1>
+<h2 id="overview">📌 Overview</h2>
+<p>The <code>scenario_manager</code> package is a ROS2 package designed to manage and execute various robot scenarios involving teleportation, speed setting, and collision simulations. It provides action servers to control robot behavior and a tool for calculating Time to Collision (TTC).</p>
+<h2 id="launching-the-scenario-manager">🚦 Launching the Scenario Manager</h2>
+<p>To start the <code>scenario_manager</code>, launch it using the following command:</p>
+<pre><code class="language-bash">ros2 launch scenario_manager scenario_manager.launch.py
+</code></pre>
+<p>This initializes three action servers:
+- <strong>🚀 teleport_action_server</strong>: Handles teleportation of robots.
+- <strong>⚡ set_speed_action_server</strong>: Controls robot speed.
+- <strong>💥 collision_action_server</strong>: Configures scenarios where robots collide (only applicable to <code>jackal</code> and <code>pallet_truck</code>).</p>
+<h2 id="collision-action-server">🔄 Collision Action Server</h2>
+<p>The <strong>collision_action_server</strong> configures collisions by setting speeds and initial positions for two robots to ensure a collision occurs. It requires:
+- <strong>📐 Angle</strong>: The approach angle.
+- <strong>🏎️ Speed of pallet_truck</strong>: The movement speed of the pallet truck.
+- <strong>💠 Collision Type</strong>: An enum from the <code>simlan_custom_msg</code> package specifying the type of collision.</p>
+<h3 id="collision-types">💥 Collision Types</h3>
+<p>There are three predefined collision types:</p>
+<table>
+<thead>
+<tr>
+<th>Collision Type</th>
+<th>Enum Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HEAD_ON</td>
+<td><code>0</code></td>
+<td>Robots collide head-on.</td>
+</tr>
+<tr>
+<td>PALLET_TRUCK_SIDE</td>
+<td><code>1</code></td>
+<td>Pallet truck collides into the side of Jackal.</td>
+</tr>
+<tr>
+<td>JACKAL_SIDE</td>
+<td><code>2</code></td>
+<td>Jackal collides into the side of the pallet truck.</td>
+</tr>
+</tbody>
+</table>
+<p>Below are images illustrating the different collision types:</p>
+<p align="center">
+  <img src="images/head_on_collision.png" alt="Head-On Collision" width="30%">
+  <img src="images/pallet_truck_side_collision.png" alt="Pallet Truck Side Collision" width="30%">
+  <img src="images/jackal_side_collision.png" alt="Jackal Side Collision" width="30%">
+</p>
+<p align="center">
+  <b>Left: Head-On Collision | Middle: Pallet Truck Side Collision | Right: Jackal Side Collision</b>
+</p>
+
+<h2 id="running-a-scenario">🎬 Running a Scenario</h2>
+<p>To execute a scenario, use the following command:</p>
+<pre><code class="language-bash">ros2 launch scenario_execution_ros scenario_launch.py scenario:=&lt;scenario_file&gt;
+</code></pre>
+<p>Replace <code>&lt;scenario_file&gt;</code> with a specific scenario file, such as:</p>
+<pre><code class="language-bash">ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/case1.osc
+</code></pre>
+<p>This runs a collision action client, executing multiple collision simulations with varying angles and speeds.</p>
+<h2 id="time-to-collision-ttc-calculation">⏳ Time to Collision (TTC) Calculation</h2>
+<p>The package includes a <strong>TTC node</strong> that logs the <strong>Time to Collision (TTC)</strong> and <strong>Closest Point of Arrival (CPA)</strong> for two robots assuming constant speed and direction.</p>
+<h3 id="running-the-ttc-node">▶️ Running the TTC Node</h3>
+<pre><code class="language-bash">ros2 run scenario_manager ttc
+</code></pre>
+<p>This node calculates and logs:
+- <strong>⏱️ TTC</strong>: The time at which the closest approach occurs.
+- <strong>📍 CPA</strong>: The closest distance between the two robots assuming constant speed and trajectory.</p>
+<p>📌 <em>Note:</em> As of version <strong>1.0.6 (February 2025)</strong>, the TTC node logs data but does not publish it elsewhere.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
