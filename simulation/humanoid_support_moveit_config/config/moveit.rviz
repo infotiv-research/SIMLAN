@@ -248,7 +248,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        arm_base_link:
+        base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -292,7 +292,7 @@ Visualization Manager:
       Value: true
     - Class: moveit_rviz_plugin/PlanningScene
       Enabled: true
-      Move Group Namespace: "/humanoid"
+      Move Group Namespace: "/humanoid_1"
       Name: PlanningScene
       Planning Scene Topic: /monitored_planning_scene
       Robot Description: robot_description
@@ -512,7 +512,7 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          arm_base_link:
+          base_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -562,7 +562,7 @@ Visualization Manager:
     - Acceleration_Scaling_Factor: 0.9999999999999999
       Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
-      Move Group Namespace: "/humanoid"
+      Move Group Namespace: "/humanoid_1"
       MoveIt_Allow_Approximate_IK: false
       MoveIt_Allow_External_Program: false
       MoveIt_Allow_Replanning: false
@@ -791,7 +791,7 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          arm_base_link:
+          base_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -1067,7 +1067,7 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          arm_base_link:
+          base_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false

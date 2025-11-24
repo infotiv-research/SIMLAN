@@ -25,9 +25,6 @@ def launch_setup(context, *args, **kwargs):
     pkg_pallet_truck_bringup = get_package_share_directory("pallet_truck_bringup")
     pkg_pallet_truck_control = get_package_share_directory("pallet_truck_control")
 
-    twist_mux_params = os.path.join(get_package_share_directory("pallet_truck_bringup"), "params", "twist_mux.yaml"
-    )
-
     gazebo_spawn = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(pkg_pallet_truck_bringup, "launch", "gazebo.launch.py")
@@ -52,36 +49,9 @@ def launch_setup(context, *args, **kwargs):
             }.items(),
         )
 
-    twist_mux = Node(   
-        package="twist_mux",
-        executable="twist_mux",
-        output="screen",
-        remappings={("cmd_vel_out", "velocity_controller/cmd_vel_unstamped")},
-        parameters=[twist_mux_params,{'use_sim_time': True}],
-        namespace=namespace,
-        arguments=[
-            "--ros-args",
-            "--log-level",
-            log_level
-        ]
-    )
-
-    twist_stamper = Node(
-        package = "twist_stamper",
-        executable = "twist_stamper",
-        name = "twist_stamper_node",
-        output = "screen",
-        remappings={("cmd_vel_in", "velocity_controller/cmd_vel_unstamped"), 
-            ("cmd_vel_out", "velocity_controller/cmd_vel")},
-        parameters=[{"frame_id": f"{namespace}/base_link"},{'use_sim_time': True}],
-        namespace=namespace
-    )
-    
     actions=[
         gazebo_spawn,
         control,
-        twist_mux,
-        twist_stamper
     ]
     
     return actions

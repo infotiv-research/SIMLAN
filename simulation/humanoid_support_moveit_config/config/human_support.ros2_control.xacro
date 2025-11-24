@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="human_support_ros2_control" params="name initial_positions_file">
+    <xacro:macro name="human_support_ros2_control" params="name initial_positions_file namespace">
         <xacro:property name="initial_positions" value="${load_yaml(initial_positions_file)['initial_positions']}"/>
 
         <ros2_control name="${name}" type="system">
@@ -345,7 +345,8 @@
         <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
           <parameters>$(find humanoid_support_moveit_config)/config/ros2_controllers.yaml</parameters>
           <ros>
-              <namespace>/humanoid</namespace>
+              <!-- <namespace>/humanoid_1</namespace> -->
+              <namespace>/${namespace}</namespace>
               <!-- <remapping>/robot_description:=/humanoid/robot_description</remapping> -->
           </ros>
         </plugin>
@@ -358,22 +359,22 @@
     <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
     </hardware>
-    <joint name="humanoid_front_left_wheel_joint">
+    <joint name="front_left_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="humanoid_rear_left_wheel_joint">
+    <joint name="rear_left_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="humanoid_front_right_wheel_joint">
+    <joint name="front_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="humanoid_rear_right_wheel_joint">
+    <joint name="rear_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>

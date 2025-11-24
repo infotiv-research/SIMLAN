@@ -9,7 +9,6 @@ from launch.actions import OpaqueFunction
 
 
 def launch_setup(context, *args, **kwargs):
-
     robots_str = LaunchConfiguration("robots").perform(context)
     log_level = LaunchConfiguration("log_level").perform(context)
     robots = ast.literal_eval(robots_str)
@@ -23,8 +22,6 @@ def launch_setup(context, *args, **kwargs):
 
     actions=[]
     for robot in robots:
-        if robot.get("robot_type") != "pallet_truck":
-            continue  # skip if robot is not pallet_truck
         actions.append(
             Node(  # Hosting the map
                 package="nav2_map_server",
@@ -44,8 +41,18 @@ def launch_setup(context, *args, **kwargs):
             Node(  # Manually setting the joint between map and odom to 0 0 0, i.e. identical to each other. map -> odom
                 package="tf2_ros",
                 executable="static_transform_publisher",
+                namespace=robot["namespace"],
                 name="static_world_to_map",
                 arguments=["0", "0", "0", "0", "0", "0", "world", f"{robot["namespace"]}/map"],
+            ),
+        )
+        actions.append(
+            Node(  # Manually setting the joint between map and odom to initial_pose_x initial_pose_y 0, i.e. the location of where the robot spawn. map -> odom
+                package="tf2_ros",
+                executable="static_transform_publisher",
+                namespace=robot["namespace"],
+                name="static_map_to_odom",
+                arguments=[f"{robot["initial_pose_x"]}", f"{robot["initial_pose_y"]}", "0", "0", "0", "0", f"{robot["namespace"]}/map", f"{robot["namespace"]}/odom"],
             ),
         )
         actions.append(

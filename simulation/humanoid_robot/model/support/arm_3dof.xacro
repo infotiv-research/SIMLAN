@@ -14,7 +14,7 @@
     <!-- twist arm length is the rest of the length to get to 1 meter from end of link 1 -->
     <xacro:property name="twist_arm_length" value="${1-(revolute_arm_length*2)}"/>
 
-    <link name="arm_base_link">
+    <link name="base_link">
         <visual>
             <geometry>
                 <box size="${arm_base_length} ${arm_base_width} ${arm_base_height}"/>
@@ -106,7 +106,7 @@
 
     <!-- Fixed joint to slightly raise humanoid before movement -->
     <joint name="base_link1_joint" type="fixed">
-        <parent link="arm_base_link"/>
+        <parent link="base_link"/>
         <child link="link1"/>
         <origin xyz="0 0 ${arm_base_height}" rpy="0 0 0"/>
     </joint>

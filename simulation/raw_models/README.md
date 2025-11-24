@@ -1,4 +1,6 @@
-# Converting FreeCAD meshes to SDF models (for Gazebo)
+# Converting meshes to SDF models
+
+Here are steps to convert FreeCAD meshes to SDF models (for Gazebo):
 
 ## Script step-by-step
 

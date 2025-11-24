@@ -1,7 +1,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:macro name="camera_link" params="number">
-        <link name="camera_${number}_link">
+        <link name="static_agents/camera_${number}_link">
           <visual>
               <origin xyz="-0.03 0 0" rpy="0 0 0"/>
               <geometry>
@@ -21,13 +21,13 @@
     <xacro:macro name="camera_joint" params="number x y z r p w">
         <joint name="camera_${number}_joint" type="fixed">
             <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${w}"/>
-            <parent link="base_link"/>
-            <child link="camera_${number}_link"/>
+            <parent link="static_agents/base_link"/>
+            <child link="static_agents/camera_${number}_link"/>
         </joint>
     </xacro:macro>
 
     <xacro:macro name="camera_gazebo" params="number width height k1 k2 k3 p1 p2 horizontal_fov aspect_ratio fx fy cx cy">
-        <gazebo reference="camera_${number}_link">
+        <gazebo reference="static_agents/camera_${number}_link">
             <!-- Camera Sensor -->
             <sensor name="camera_${number}" type="camera">
                 <always_on>true</always_on>

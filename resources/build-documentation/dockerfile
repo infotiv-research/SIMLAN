@@ -1,0 +1,14 @@
+# Start from a base image that has pandoc (e.g., the official pandoc image)
+FROM pandoc/extra:latest-ubuntu
+
+# Install MkDocs and Ghostscript
+RUN apt-get update && \
+    apt-get install -y git mkdocs ghostscript && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set up a default working directory in the container
+WORKDIR /docvolume
+
+# By default, run pandoc as the entrypoint
+ENTRYPOINT ["pandoc"]
+

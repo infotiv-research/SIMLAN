@@ -1,3 +1,4 @@
+import os
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction
 from launch.conditions import UnlessCondition
@@ -7,9 +8,10 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
-
+    TWIST_MUX_PARAMS = os.path.join(get_package_share_directory("pallet_truck_bringup"), "params", "twist_mux.yaml")
     # Configs
     config_velocity_controller = PathJoinSubstitution(
         [FindPackageShare("pallet_truck_control"), "config", "control.yaml"],
@@ -17,12 +19,37 @@ def generate_launch_description():
 
     is_sim = LaunchConfiguration("is_sim", default=True)
     log_level = LaunchConfiguration("log_level", default="INFO")
-
     is_sim_arg = DeclareLaunchArgument("is_sim", default_value=is_sim)
     namespace = LaunchConfiguration("namespace")
     # ROS2 Controllers
     control_group_action = GroupAction(
         [
+            # Twist_muxers
+            Node(   
+                package="twist_mux",
+                executable="twist_mux",
+                output="screen",
+                remappings={("cmd_vel_out", "velocity_controller/cmd_vel_unstamped")},
+                parameters=[TWIST_MUX_PARAMS,{'use_sim_time': True}],
+                namespace=namespace,
+                arguments=[
+                    "--ros-args",
+                    "--log-level",
+                    log_level
+                ]
+            ),
+
+            Node(
+                package = "twist_stamper",
+                executable = "twist_stamper",
+                name = "twist_stamper_node",
+                output = "screen",
+                remappings={("cmd_vel_in", "velocity_controller/cmd_vel_unstamped"), 
+                    ("cmd_vel_out", "velocity_controller/cmd_vel")},
+                parameters=[{"frame_id": f"{namespace}/base_link"},{'use_sim_time': True}],
+                namespace=namespace
+            ),
+
             # ROS2 Control
             Node(
                 package="controller_manager",

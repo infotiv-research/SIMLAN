@@ -12,6 +12,9 @@ from collections import defaultdict
 from std_msgs.msg import String
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy
 
+MAX_FAILSAFE_TIME = Duration(seconds=5.0)
+
+
 # Helper function that extracts the rotation matrix from a Transform
 def transform_to_matrix(transform: Transform):
     trans = transform.translation
@@ -53,6 +56,7 @@ def compose_transforms(tf1: Transform, tf2: Transform) -> Transform:
 
     return result
 
+
 class ArucoPosePubNode(Node):
 
     def __init__(self):
@@ -60,15 +64,17 @@ class ArucoPosePubNode(Node):
 
         self.declare_parameter("camera_enabled_ids", [163, 164, 165])
         self.declare_parameter("update_rate", 100)
-        self.declare_parameter("all_namespaces",["robot_agent_1"])
+        self.declare_parameter("all_namespaces", ["robot_agent_1"])
 
         self.camera_enabled_ids = self.get_parameter("camera_enabled_ids").value
         self.update_rate = self.get_parameter("update_rate").value
-        self.all_namespaces=self.get_parameter("all_namespaces").value
-        self.all_marker_ids=[
+        self.all_namespaces = self.get_parameter("all_namespaces").value
+        self.all_marker_ids = [
             int(ns.replace("robot_agent_", ""))
             for ns in self.all_namespaces
-            if ns.startswith("robot_agent_") and ns.replace("robot_agent_", "").isdigit()]
+            if ns.startswith("robot_agent_")
+            and ns.replace("robot_agent_", "").isdigit()
+        ]
 
         self.last_stamp = self.get_clock().now()
         self.max_frame_age = Duration(seconds=1.0)
@@ -85,29 +91,38 @@ class ArucoPosePubNode(Node):
         qos_profile = QoSProfile(
             depth=10,
             reliability=QoSReliabilityPolicy.RELIABLE,
-            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL
+            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
         )
-        self.marker_lost_pub = self.create_publisher(String, "/aruco_marker_seen", qos_profile)
+        self.marker_lost_pub = self.create_publisher(
+            String, "/aruco_marker_seen", qos_profile
+        )
 
         self.last_seen: Dict[int, rclpy.time.Time] = {}
         self.seen_markers = set()
 
         # Timer for publishing lost markers only once per second
-        self.create_timer(1/self.update_rate/10, self.publish_seen_markers)
+        self.create_timer(1 / self.update_rate / 10, self.publish_seen_markers)
 
     def publish_poses(self):
         if not self.latest_transform_received:
             return
 
-        for marker_id, markers_latest_transform in self.latest_transform_received.items():
+        for (
+            marker_id,
+            markers_latest_transform,
+        ) in self.latest_transform_received.items():
             now = self.get_clock().now()
             if now <= self.last_stamp:
                 now = self.last_stamp + Duration(nanoseconds=10)
 
             t_base_link_to_pallet_truck = TransformStamped()
             t_base_link_to_pallet_truck.header.stamp = now.to_msg()
-            t_base_link_to_pallet_truck.header.frame_id = f"robot_agent_{marker_id}/odom"
-            t_base_link_to_pallet_truck.child_frame_id = f"robot_agent_{marker_id}/base_link"
+            t_base_link_to_pallet_truck.header.frame_id = (
+                f"robot_agent_{marker_id}/odom"
+            )
+            t_base_link_to_pallet_truck.child_frame_id = (
+                f"robot_agent_{marker_id}/base_link"
+            )
             t_base_link_to_pallet_truck.transform = markers_latest_transform
 
             self.tf_broadcaster.sendTransform(t_base_link_to_pallet_truck)
@@ -120,9 +135,13 @@ class ArucoPosePubNode(Node):
 
         for camera_id in self.camera_enabled_ids:
             for marker_id in markers_of_interest:
-                target_frame = f"camera_{camera_id}_marker_{marker_id}"
-                if self.tf_buffer.can_transform("base_link", target_frame, rclpy.time.Time()):
-                    t = self.tf_buffer.lookup_transform("base_link", target_frame, rclpy.time.Time())
+                target_frame = f"static_agents/camera_{camera_id}_marker_{marker_id}"
+                if self.tf_buffer.can_transform(
+                    f"robot_agent_{marker_id}/odom", target_frame, rclpy.time.Time()
+                ):
+                    t = self.tf_buffer.lookup_transform(
+                        f"robot_agent_{marker_id}/odom", target_frame, rclpy.time.Time()
+                    )
                     if (now - Time.from_msg(t.header.stamp)) < self.max_frame_age:
                         visible_transforms[marker_id].append(t)
 
@@ -134,24 +153,36 @@ class ArucoPosePubNode(Node):
             else:
                 # Marker is not visible now — check how long ago we last saw it
                 if marker_id in self.last_seen:
-                    if (now - self.last_seen[marker_id]) > self.max_frame_age:
+                    if (now - self.last_seen[marker_id]) > MAX_FAILSAFE_TIME:
                         self.seen_markers.discard(f"robot_agent_{marker_id}")
 
         # Averaging transforms
         for marker_id, current_marker_transforms in visible_transforms.items():
             if not current_marker_transforms:
                 continue
-            translations = np.array([[t.transform.translation.x,
-                                      t.transform.translation.y,
-                                      t.transform.translation.z]
-                                     for t in current_marker_transforms])
+            translations = np.array(
+                [
+                    [
+                        t.transform.translation.x,
+                        t.transform.translation.y,
+                        t.transform.translation.z,
+                    ]
+                    for t in current_marker_transforms
+                ]
+            )
             avg_translation = np.mean(translations, axis=0)
 
-            quaternions = np.array([[t.transform.rotation.x,
-                                     t.transform.rotation.y,
-                                     t.transform.rotation.z,
-                                     t.transform.rotation.w]
-                                    for t in current_marker_transforms])
+            quaternions = np.array(
+                [
+                    [
+                        t.transform.rotation.x,
+                        t.transform.rotation.y,
+                        t.transform.rotation.z,
+                        t.transform.rotation.w,
+                    ]
+                    for t in current_marker_transforms
+                ]
+            )
             avg_quaternion = np.mean(quaternions, axis=0)
             avg_quaternion /= np.linalg.norm(avg_quaternion)
 
@@ -181,6 +212,7 @@ class ArucoPosePubNode(Node):
         msg = String()
         msg.data = ",".join(sorted(self.seen_markers))
         self.marker_lost_pub.publish(msg)
+
 
 def main():
     rclpy.init()

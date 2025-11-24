@@ -8,7 +8,7 @@ from geometry_msgs.msg import TransformStamped
 from scipy.spatial.transform import Rotation as R
 from sensor_msgs.msg import CameraInfo, Image
 from tf2_ros import Buffer, TransformListener
-from rclpy.qos import qos_profile_sensor_data
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 
 """_summary_
 This node is used to listen to a camera and subscribe to its intrinsic values and raw camera data and detect potential aruco markers.
@@ -17,8 +17,8 @@ When a camera finds a marker, we run a function that get its pose and rotation r
 
 # ### CV2 ARUCO DETECTION CONFIG PARAMETERS ###
 aruco_dictionary = cv.aruco.getPredefinedDictionary(cv.aruco.DICT_5X5_1000)
-#aruco_parameters = cv.aruco.DetectorParameters()
-aruco_parameters = cv.aruco.DetectorParameters_create()  
+# aruco_parameters = cv.aruco.DetectorParameters()
+aruco_parameters = cv.aruco.DetectorParameters_create()
 # These are key for low-res or off-center markers
 aruco_parameters.adaptiveThreshWinSizeMin = 3
 aruco_parameters.adaptiveThreshWinSizeMax = 23
@@ -40,7 +40,6 @@ class ArucoDetectionNode(Node):
 
     def __init__(self):
         super().__init__("aruco_detection_node")
-
         self.declare_parameter("camera_id", 163)
         self.camera_id = self.get_parameter("camera_id").value
         self.last_stamp = self.get_clock().now()
@@ -52,6 +51,12 @@ class ArucoDetectionNode(Node):
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
         self.tf_broadcaster = tf2_ros.TransformBroadcaster(self)
+
+        reliable_qos = QoSProfile(
+            reliability=ReliabilityPolicy.RELIABLE,
+            history=HistoryPolicy.KEEP_LAST,
+            depth=10,
+        )
 
         # Subscribers
         self.camera_info_sub = self.create_subscription(
@@ -66,7 +71,7 @@ class ArucoDetectionNode(Node):
             lambda msg, camera_id=self.camera_id: self.update_aruco_poses(
                 msg, camera_id
             ),
-            qos_profile_sensor_data,
+            reliable_qos,
         )
 
         # Publishers
@@ -81,13 +86,12 @@ class ArucoDetectionNode(Node):
 
     # Source for this logic: https://automaticaddison.com/how-to-publish-tf-between-an-aruco-marker-and-a-camera/
     def update_aruco_poses(self, msg: Image, camera_id: int):
-
         if not self.intrinsic_mat.any():
             self.get_logger().warn(
                 f"Skipping image from camera_{camera_id} — no intrinsics yet."
             )
             return
-        
+
         cv_image = self.cv_bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
 
         # Detect corners of an aruco
@@ -142,8 +146,10 @@ class ArucoDetectionNode(Node):
                 t = TransformStamped()
                 t.header.stamp = self.get_clock().now().to_msg()
 
-                t.header.frame_id = f"camera_{camera_id}_link"
-                t.child_frame_id = f"camera_{camera_id}_marker_{marker_id[0]}"
+                t.header.frame_id = f"static_agents/camera_{camera_id}_link"
+                t.child_frame_id = (
+                    f"static_agents/camera_{camera_id}_marker_{marker_id[0]}"
+                )
 
                 # Store the translation (i.e. position) information
                 t.transform.translation.x = float(aruco_tvec[0])

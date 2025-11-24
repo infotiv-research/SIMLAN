@@ -51,7 +51,7 @@
    </xacro:macro>
 
    <xacro:macro name="aruco" params="number x y z r p w">
-        <xacro:attach_aruco attach_to="base_link" number="${number}" x="${x}" y="${y}" z="${z}" r="${r}" p="${p}" w="${w}"/>
+        <xacro:attach_aruco attach_to="static_agents/base_link" number="${number}" x="${x}" y="${y}" z="${z}" r="${r}" p="${p}" w="${w}"/>
    </xacro:macro>
 
     <xacro:macro name="attach_aruco" params="attach_to number x y z r p w">
