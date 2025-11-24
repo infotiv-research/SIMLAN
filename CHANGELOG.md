@@ -1,4 +1,16 @@
-### 3.0.0: Jazzy, humanoid (Oct 2025) - Supervisor: Hamid Ebadi
+# Changelog
+
+### 4.0.0: Improvements (Dec 2025) - Team/Tech Lead: Hamid Ebadi
+
+- Documentation and presentation: Hamid Ebadi
+- System integration tests : Pär Aronsson
+- Overall system diagrams : Anton Stigemyr Hill
+- Pytorch model for humanoid MoCap : Pär Aronsson
+- Improved documentation and AutoGluon configuration : Marwa Naili
+- Demo scenario : Anton Stigemyr Hill
+
+### 3.0.0: Jazzy, humanoid (Oct 2025) - Team/Tech Lead: Hamid Ebadi
+
 - Collision sensor: Anton Stigemyr Hill
 - Automatically generated parameter-files for robot_agents and world fidelity : Anton Stigemyr Hill
 - Shared map and obstacle generation for robot_agents: Anton Stigemyr Hill
@@ -9,13 +21,13 @@
 - Panda arm integration: Pär Aronsson
 - Dyno-robotics trajectory replay integration, scenario: Sebastian Olsson
 
-### 2.1.0: Namespace cleanup and multi-agent navigation (Aug 2025) - Supervisor: Hamid Ebadi
+### 2.1.0: Namespace cleanup and multi-agent navigation (Aug 2025) - Team/Tech Lead: Hamid Ebadi
 
 - Implemented generic robot-agent control supporting multiple meshes (e.g., pallet truck, forklift) and distinct ArUco IDs: Pär Aronsson
 - Robot-agent and navigation2 (nav2) namespace: Pär Aronsson
 - Multi-agent navigation capabilities using GPSS: Pär Aronsson
 
-### 2.0.0: GPSS (May 2025) - Supervisor: Hamid Ebadi
+### 2.0.0: GPSS (May 2025) - Team/Tech Lead: Hamid Ebadi
 
 - Upgrade Gazebo from classic to ignition, adapting new sensors: Nazeeh Alhosary
 - Aruco_localization, added localization and nav2 to new robot: Pär Aronsson
@@ -72,7 +84,7 @@
 - Integrate Infobot_navigation2 2.1.5: Standard Nav2 stack launcher : Hamid Ebadi
 - Integrate Infobot_teleop 0.0.2: Teleoperation for InfotBot
 
-### 1.0.1: Delivery 1 (Dec 2023) - Supervisor: Hamid Ebadi
+### 1.0.1: Delivery 1 (Dec 2023) - Team/Tech Lead: Hamid Ebadi
 
 - Basic warehouse model 1.0.0: Anders Bäckelie
 - CAD modelling (eur-pallet, boxes, shelf, support_pole, traffic-cone, steel_drum) 1.0.0 : Jacob Rohdin

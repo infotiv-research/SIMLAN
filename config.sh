@@ -1,22 +1,54 @@
-# GENERAL GAZEBO AND ROS2 CONFIG
+#################################################################
+#         GENERAL GAZEBO AND ROS2 CONFIG                        #
+#################################################################
+#region GENERAL GAZEBO AND ROS2 CONFIG
 
 ## ROS_DOMAIN_ID is an auto generated value, modified by control.sh BUILD command
 ROS_DOMAIN_ID=
 ## WORLD_SETUP can be set to either "default", "medium", "light", "empty"
-WORLD_SETUP=empty 
+WORLD_SETUP=medium
 ## CAMERA_ENABLED_IDS can be set as a string of camera_ids separated by space ' '. valid camera ids are 160-171
-CAMERA_ENABLED_IDS='162 163 164 165 166 500 501 502 503'
+CAMERA_ENABLED_IDS='163 164 165'
+## CAMERA_STREAMS can be set as a string of stream options separated by space ' '. valid camera ids are image depth semantic
+CAMERA_STREAMS='image'
 ## DEFAULT: "info". Specify what level of logs you want. Valid log_levels are: "info", "warn", "error", "debug"
-log_level="info" 
+log_level="info"
+#endregion
+#################################################################
+#         HUMANOID CONFIG                                       #
+#################################################################
+#region HUMANOID CONFIG
 
-# HUMANOID CONFIG
 humanoid_utility_dir="$(pwd)/humanoid_utility"
 humanoid_input_dir="$humanoid_utility_dir/input"
 humanoid_output_dir="$humanoid_utility_dir/output"
-humanoid_dataset="$humanoid_utility_dir/DATASET"
-model_script="AUTOGLUON_model.py" 
+humanoid_dataset="$humanoid_utility_dir/DATASET_RAW"
+humanoid_preprocessed_dataset="$humanoid_utility_dir/DATASET_PREPROCESSED"
 
-# ENABLED ROBOT SETUP CONFIG
+humanoid_dataset_training="multi_train.csv"
+humanoid_dataset_evaluation="multi_eval.csv"
+model_type="autogluon" # Possible selections: pytorch, autogluon
+model_instance="autogluon_single_nostack_nobagging_nocorrolation" # If you want to reuse a model, specify its name here. Keep blank if you dont want to save.
+
+HUMANOIDS='[
+        {
+            "namespace": "humanoid_1",
+            "initial_pose_x":10,
+            "initial_pose_y":0.0,
+            "cam_ns": "camera0"
+        },
+        {
+            "namespace": "humanoid_2",
+            "initial_pose_x":5,
+            "initial_pose_y":1.0,
+            "cam_ns": "camera0"
+        }
+    ]'
+#endregion
+#################################################################
+#         ENABLED ROBOT SETUP CONFIG                            #
+#################################################################
+#region ENABLED ROBOT SETUP CONFIG
 ROBOTS='[
         {
             "namespace": "robot_agent_1",
@@ -41,8 +73,8 @@ ROBOTS='[
          },
          {
              "namespace": "robot_agent_4",
-             "initial_pose_x":"10.0",
-             "initial_pose_y":"0.0",
+             "initial_pose_x":"7.0",
+             "initial_pose_y":"1.0",
              "robot_type":"forklift",
              "aruco_id":"4"
          }

@@ -17,7 +17,7 @@ from moveit.core.kinematic_constraints import construct_joint_constraint
 random.seed(int(time.time()))
 NUM_MOTION = 10000
 sys.path.append('.')
-import humanoid_config
+import humanoid_utility.humanoid_config as humanoid_config
 
 class WholeBodyMotionPlanner(Node):
     def __init__(self, filename=None):
@@ -26,7 +26,7 @@ class WholeBodyMotionPlanner(Node):
         self.declare_parameter('motion_filename', "DEFAULT_MOTION_FILENAME")
         motion_filename = self.get_parameter('motion_filename').get_parameter_value().string_value
 
-        self.declare_parameter('output_dir', 'DATASET')
+        self.declare_parameter('output_dir', 'DATASET_RAW')
         self.output_dir = self.get_parameter('output_dir').get_parameter_value().string_value
 
         self.declare_parameter('motion_dir', self.output_dir + '/motion_data')
@@ -111,7 +111,7 @@ class WholeBodyMotionPlanner(Node):
                 )
             self.pc.set_goal_state(motion_plan_constraints=[self.joint_constraints])
             time.sleep(2)
-            self.plan_and_execute_motion()
+            self.plan_and_execute_fromfile()
 
     def random_joint_positions(self):
         positions = []
@@ -165,6 +165,23 @@ class WholeBodyMotionPlanner(Node):
             logger.error("Planning failed")
 
         time.sleep(sleep_time)
+    def plan_and_execute_fromfile(self, sleep_time=5.0):
+        logger = self.logger
+        pc = self.pc
+        """Helper function to plan and execute a motion (from example)."""
+        logger.info("Planning trajectory")
+        plan_result = pc.plan()
+        if plan_result and getattr(plan_result, "trajectory", None) is not None:
+            logger.info("Executing plan")
+            self.robot.execute(plan_result.trajectory, controllers=[])
+            self.get_logger().info(f'Motion is successful')
+            print("=== Current joint states after execution ===")
+        else:
+            logger.error("Planning failed")
+
+        time.sleep(sleep_time)
+    
+    
 
 
 def main(args=None):

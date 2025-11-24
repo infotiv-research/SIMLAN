@@ -839,7 +839,7 @@
     <include>
       <uri>model://eur_pallet</uri>
       <name>pallet_group_dropoff</name>
-      <pose>32.3 6.6 0.001 0 -0 0</pose>
+      <pose>33.0 4.5 0.001 0 -0 0</pose>
     </include>
 
     <include>

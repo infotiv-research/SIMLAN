@@ -39,7 +39,7 @@ def generate_launch_description():
                 [
                     FindPackageShare("pallet_truck_description"),
                     "urdf",
-                    "pallet_truck_simple_collisions.urdf.xacro",
+                    "pallet_truck.urdf.xacro",
                 ]
             ),
             " ",

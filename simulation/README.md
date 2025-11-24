@@ -1,6 +1,9 @@
+# Simulation
+
 ## World Fidelity
 
-It is possible to adjust the level fidelity for a world in `config.sh`, there the `world_setup` is sent to 
+It is possible to adjust the level fidelity for a world in `config.sh`, there the `world_setup` is sent to
+
 - `simulation/simlan_bringup/launch/sim.launch.py`.
 - `simulation/simlan_gazebo_environment/launch/simlan_factory.launch.py` (for world generation)
 - `simulation/simlan_gazebo_environment/launch/generate_world_file.py` (both `original_world` and the `world_setup`)

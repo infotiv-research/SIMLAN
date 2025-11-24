@@ -4,6 +4,11 @@ This package is responsible for launching all things related to the simulation. 
 
 `ros2 launch simlan_bringup full_sim.launch.py`
 
+This is also called in the `sim` operation in control.sh:
+```bash
+./control.sh sim
+```
+
 ## Launch arguments
 
 There are different launch arguments that can be changed to launch the simulation in different states. These can either be called from the terminal by appending the argument to the launch command above.
@@ -12,7 +17,7 @@ There are different launch arguments that can be changed to launch the simulatio
 
 Another way to edit what is launched it to change the _default value_ in [_full_sim.launch.py_](launch/full_sim.launch.py).
 
-`launch_rviz_launch_argument = DeclareLaunchArgument(         "rviz",         default_value="False",         description="To launch rviz")`
+`launch_rviz_launch_argument = DeclareLaunchArgument("rviz", default_value="False", description="To launch rviz")`
 
 The launch arguments are then either added as a condition straight to a Node:
 

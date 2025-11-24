@@ -11,14 +11,14 @@
         <!-- <xacro:inertial_box mass="0.1" x="0.12" y="0.15" z="0.15"/> -->
     </link>
 
-    <link name="base_link">
+    <link name="static_agents/base_link">
         <xacro:inertial_box mass="0.1" x="0.12" y="0.15" z="0.15"/>
     </link>
 
     <joint name="base_joint" type="fixed">
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <parent link="world"/>
-        <child link="base_link"/>
+        <child link="static_agents/base_link"/>
     </joint>
 
     <xacro:include filename="camera_config.xacro" />

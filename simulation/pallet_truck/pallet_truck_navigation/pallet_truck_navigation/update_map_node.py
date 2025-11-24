@@ -11,7 +11,7 @@ from nav_msgs.msg import OccupancyGrid
 
 RADIUS=1
 MAP_PATH = "/home/ros/src/simulation/pallet_truck/pallet_truck_navigation/maps/warehouse.yaml" #path to warehouse.pgm
-MAP_PUBLISHER_FREQUENCY=0.1
+MAP_PUBLISHER_FREQUENCY=1 #hz
 OBSTACLE_VALUE=100
 FREE_SPACE_VALUE=0
 UNKNOWN_SPACE_VALUE=-1
@@ -19,7 +19,7 @@ MAX_PGM_VALUE=255
 
 class MapUpdater(Node):
     def __init__(self):
-        super().__init__('map_updater')
+        super().__init__('map_updater', namespace='')
  
         self.declare_parameter("namespace", "robot_agent_1")
         self.declare_parameter("all_namespaces", ["robot_agent_1"])
@@ -73,7 +73,7 @@ class MapUpdater(Node):
             durability=DurabilityPolicy.TRANSIENT_LOCAL
         )
  
-        self.create_timer(MAP_PUBLISHER_FREQUENCY, self.publish_map)
+        self.create_timer(1/MAP_PUBLISHER_FREQUENCY, self.publish_map)
 
         self.map_pub = self.create_publisher(OccupancyGrid, f'/{self.namespace}/map', qos)
 
@@ -84,7 +84,7 @@ class MapUpdater(Node):
 
         for ns in self.all_namespace:
             
-            parent_frame = f"{ns}/odom"
+            parent_frame = "world"
             child_frame = f"{ns}/base_link"
  
             try:

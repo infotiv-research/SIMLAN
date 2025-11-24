@@ -47,6 +47,7 @@ RUN apt-get update && apt-get install -y \
     cmake \
     gdb \
     git \
+    eog \
     tig
 
 
@@ -150,21 +151,23 @@ RUN . /opt/ros/${ROS_DISTRO}/setup.sh && colcon build --merge-install --cmake-ar
 
 WORKDIR /home/ros/src/
 
-RUN echo "if [ -f /home/ros/install/setup.bash ]; then source /home/ros/install/setup.bash; fi" >> /home/ros/.bashrc
-RUN echo "if [ -f /usr/share/gazebo/setup.sh ]; then . /usr/share/gazebo/setup.sh; fi" >> /home/ros/.bashrc
 RUN echo "export RCUTILS_COLORIZED_OUTPUT=1" >> /home/ros/.bashrc
 RUN echo "export GAZEBO_MASTER_URI=http://0.0.0.0:12345" >> /home/ros/.bashrc
 RUN echo "export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-11" >> /home/ros/.bashrc
 RUN echo "export GAZEBO_MODEL_PATH=/usr/share/gazebo-11/models:/usr/share/gazebo-11/models" >> /home/ros/.bashrc
-RUN echo "source home/ros/src/install/setup.bash" >> /home/ros/.bashrc
+
+RUN echo "[[ -f /usr/share/gazebo/setup.sh ]]       && source /usr/share/gazebo/setup.sh" >> /home/ros/.bashrc
+RUN echo "[[ -f /home/ros/src/install/setup.bash ]] && source /home/ros/src/install/setup.bash || echo 'Warning: the project is not built yet. run ./control.sh build'" >> /home/ros/.bashrc
+
 RUN echo "source /opt/dependencies_ws/install/setup.bash" >> /home/ros/.bashrc
 RUN echo 'source /opt/ros/${ROS_DISTRO}/setup.bash' >> /home/ros/.bashrc
 RUN echo 'sudo chown -R ros:ros  /home/ros/src/' >> /home/ros/.bashrc
 RUN echo 'if [[ "$OS" == *"win"* || "$OS" == *"Win"* ]]; then export DISPLAY=host.docker.internal:0.0; fi' >> /home/ros/.bashrc
-RUN echo 'if [ -f /home/ros/src/config.sh ]; then trap '"'"'source /home/ros/src/config.sh; export ROS_DOMAIN_ID'"'"' DEBUG; fi' >> /home/ros/.bashrc 
+RUN echo 'if [ -f /home/ros/src/config.sh ]; then trap '"'"'source /home/ros/src/config.sh; export ROS_DOMAIN_ID'"'"' DEBUG; fi' >> /home/ros/.bashrc
+RUN echo 'pre-commit install' >> /home/ros/.bashrc
 USER ros
 
 # With the following:
 # RUN echo 'if [ -f /home/ros/src/config.sh ]; then trap '"'"'source /home/ros/src/config.sh; export ROS_DOMAIN_ID'"'"' DEBUG; fi' >> /home/ros/.bashrc
-# It is impossible to change ROS_DOMAIN_ID manually, if that is needed do something similar to the following instead: 
+# It is impossible to change ROS_DOMAIN_ID manually, if that is needed do something similar to the following instead:
 #RUN echo "if [ -f /home/ros/src/ROS_DOMAIN_ID.txt ]; then prev_ros_domain_id=\"\"; trap 'new_ros_domain_id=\$(cat /home/ros/src/ROS_DOMAIN_ID.txt); if [ \"\$new_ros_domain_id\" != \"\$prev_ros_domain_id\" ]; then export ROS_DOMAIN_ID=\"\$new_ros_domain_id\"; echo ROS_DOMAIN_ID = \$new_ros_domain_id; prev_ros_domain_id=\"\$new_ros_domain_id\"; fi' DEBUG; fi" >> /home/ros/.bashrc

@@ -19,7 +19,7 @@ class PoseDetector(Node):
     def __init__(self):
         super().__init__('pose_detector')
 
-        self.declare_parameter('output_dir', 'DATASET')
+        self.declare_parameter('output_dir', 'DATASET_RAW')
         self.output_dir = self.get_parameter('output_dir').get_parameter_value().string_value
         
         
@@ -60,7 +60,7 @@ class PoseDetector(Node):
         self.mp_drawing = mp.solutions.drawing_utils
         
         self.pose = self.mp_pose.Pose(
-            static_image_mode=False, # TODO: Hamid, Only those that you can detect by looking at the image and not the stream
+            static_image_mode=True, # TODO: Hamid, Only those that you can detect by looking at the image and not the stream
             model_complexity=2,
             min_detection_confidence=0.6, # higher confidence
             min_tracking_confidence=0.8
@@ -141,10 +141,12 @@ class PoseDetector(Node):
         cv_image = self.bridge.imgmsg_to_cv2(self.latest_image[camera_id], "bgr8")
         
         # Process with MediaPipe
+        
         results = self.pose.process(cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB))
         
         if save and results.pose_landmarks:
             # Save pose data to camera-specific folder
+            #TODO: Siyu, it is possible to use pose_world_landmarks for 3D coordinates
             self.save_pose_data(results.pose_landmarks, motion_id, camera_id)
             
             # Create display image with landmarks

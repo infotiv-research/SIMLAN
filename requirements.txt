@@ -30,3 +30,4 @@ rospkg==1.6.0
 pytest
 ruamel.yaml
 notebook
+pre-commit

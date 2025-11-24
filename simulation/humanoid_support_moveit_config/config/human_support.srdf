@@ -96,12 +96,12 @@
         <joint name="jT9T8_rotz" value="0"/>
     </group_state>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="arm_base_link"/>
+    <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="base_link"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="Head" link2="LeftToe" reason="Never"/>
     <disable_collisions link1="Head" link2="Neck" reason="Adjacent"/>
     <disable_collisions link1="Head" link2="Pelvis" reason="Never"/>
-    <disable_collisions link1="Head" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="Head" link2="base_link" reason="Never"/>
     <disable_collisions link1="Head" link2="link1" reason="Never"/>
     <disable_collisions link1="Head" link2="link2" reason="Never"/>
     <disable_collisions link1="Head" link2="link3" reason="Never"/>
@@ -118,12 +118,12 @@
     <disable_collisions link1="LeftForeArm" link2="LeftHand" reason="Adjacent"/>
     <disable_collisions link1="LeftForeArm" link2="LeftShoulder" reason="Never"/>
     <disable_collisions link1="LeftForeArm" link2="LeftUpperArm" reason="Adjacent"/>
-    <disable_collisions link1="LeftForeArm" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="LeftForeArm" link2="base_link" reason="Never"/>
     <disable_collisions link1="LeftForeArm" link2="link1" reason="Never"/>
     <disable_collisions link1="LeftForeArm" link2="link2" reason="Never"/>
     <disable_collisions link1="LeftForeArm" link2="link3" reason="Never"/>
     <disable_collisions link1="LeftHand" link2="LeftUpperArm" reason="Never"/>
-    <disable_collisions link1="LeftHand" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="LeftHand" link2="base_link" reason="Never"/>
     <disable_collisions link1="LeftHand" link2="link1" reason="Never"/>
     <disable_collisions link1="LeftHand" link2="link2" reason="Never"/>
     <disable_collisions link1="LeftHand" link2="link3" reason="Never"/>
@@ -131,7 +131,7 @@
     <disable_collisions link1="LeftLowerLeg" link2="LeftUpperLeg" reason="Adjacent"/>
     <disable_collisions link1="LeftLowerLeg" link2="LowerTrunk" reason="Never"/>
     <disable_collisions link1="LeftLowerLeg" link2="Pelvis" reason="Never"/>
-    <disable_collisions link1="LeftLowerLeg" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="LeftLowerLeg" link2="base_link" reason="Never"/>
     <disable_collisions link1="LeftLowerLeg" link2="link1" reason="Never"/>
     <disable_collisions link1="LeftLowerLeg" link2="link2" reason="Never"/>
     <disable_collisions link1="LeftLowerLeg" link2="link3" reason="Never"/>
@@ -144,7 +144,7 @@
     <disable_collisions link1="LeftShoulder" link2="RightShoulder" reason="Never"/>
     <disable_collisions link1="LeftShoulder" link2="RightToe" reason="Never"/>
     <disable_collisions link1="LeftShoulder" link2="UpperTrunk" reason="Adjacent"/>
-    <disable_collisions link1="LeftShoulder" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="LeftShoulder" link2="base_link" reason="Never"/>
     <disable_collisions link1="LeftShoulder" link2="link1" reason="Never"/>
     <disable_collisions link1="LeftShoulder" link2="link2" reason="Never"/>
     <disable_collisions link1="LeftShoulder" link2="link3" reason="Never"/>
@@ -155,13 +155,13 @@
     <disable_collisions link1="LeftToe" link2="Pelvis" reason="Never"/>
     <disable_collisions link1="LeftToe" link2="RightShoulder" reason="Never"/>
     <disable_collisions link1="LeftToe" link2="UpperTrunk" reason="Never"/>
-    <disable_collisions link1="LeftUpperArm" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="LeftUpperArm" link2="base_link" reason="Never"/>
     <disable_collisions link1="LeftUpperArm" link2="link1" reason="Never"/>
     <disable_collisions link1="LeftUpperArm" link2="link2" reason="Never"/>
     <disable_collisions link1="LeftUpperArm" link2="link3" reason="Never"/>
     <disable_collisions link1="LeftUpperArm" link2="link4" reason="Never"/>
     <disable_collisions link1="LeftUpperLeg" link2="Pelvis" reason="Adjacent"/>
-    <disable_collisions link1="LeftUpperLeg" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="LeftUpperLeg" link2="base_link" reason="Never"/>
     <disable_collisions link1="LeftUpperLeg" link2="link1" reason="Never"/>
     <disable_collisions link1="LeftUpperLeg" link2="link2" reason="Never"/>
     <disable_collisions link1="LeftUpperLeg" link2="link3" reason="Never"/>
@@ -173,7 +173,7 @@
     <disable_collisions link1="LowerTrunk" link2="RightShoulder" reason="Never"/>
     <disable_collisions link1="LowerTrunk" link2="RightToe" reason="Never"/>
     <disable_collisions link1="LowerTrunk" link2="UpperTrunk" reason="Adjacent"/>
-    <disable_collisions link1="LowerTrunk" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="LowerTrunk" link2="base_link" reason="Never"/>
     <disable_collisions link1="LowerTrunk" link2="link1" reason="Never"/>
     <disable_collisions link1="LowerTrunk" link2="link2" reason="Never"/>
     <disable_collisions link1="LowerTrunk" link2="link3" reason="Never"/>
@@ -183,7 +183,7 @@
     <disable_collisions link1="Neck" link2="RightShoulder" reason="Never"/>
     <disable_collisions link1="Neck" link2="RightToe" reason="Never"/>
     <disable_collisions link1="Neck" link2="UpperTrunk" reason="Adjacent"/>
-    <disable_collisions link1="Neck" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="Neck" link2="base_link" reason="Never"/>
     <disable_collisions link1="Neck" link2="link1" reason="Never"/>
     <disable_collisions link1="Neck" link2="link2" reason="Never"/>
     <disable_collisions link1="Neck" link2="link3" reason="Never"/>
@@ -194,7 +194,7 @@
     <disable_collisions link1="Pelvis" link2="RightToe" reason="Never"/>
     <disable_collisions link1="Pelvis" link2="RightUpperLeg" reason="Adjacent"/>
     <disable_collisions link1="Pelvis" link2="UpperTrunk" reason="Never"/>
-    <disable_collisions link1="Pelvis" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="Pelvis" link2="base_link" reason="Never"/>
     <disable_collisions link1="Pelvis" link2="link1" reason="Never"/>
     <disable_collisions link1="Pelvis" link2="link2" reason="Never"/>
     <disable_collisions link1="Pelvis" link2="link3" reason="Never"/>
@@ -207,50 +207,50 @@
     <disable_collisions link1="RightForeArm" link2="RightHand" reason="Adjacent"/>
     <disable_collisions link1="RightForeArm" link2="RightShoulder" reason="Never"/>
     <disable_collisions link1="RightForeArm" link2="RightUpperArm" reason="Adjacent"/>
-    <disable_collisions link1="RightForeArm" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="RightForeArm" link2="base_link" reason="Never"/>
     <disable_collisions link1="RightForeArm" link2="link1" reason="Never"/>
     <disable_collisions link1="RightForeArm" link2="link2" reason="Never"/>
     <disable_collisions link1="RightForeArm" link2="link3" reason="Never"/>
     <disable_collisions link1="RightHand" link2="RightUpperArm" reason="Never"/>
-    <disable_collisions link1="RightHand" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="RightHand" link2="base_link" reason="Never"/>
     <disable_collisions link1="RightHand" link2="link1" reason="Never"/>
     <disable_collisions link1="RightHand" link2="link2" reason="Never"/>
     <disable_collisions link1="RightHand" link2="link3" reason="Never"/>
     <disable_collisions link1="RightLowerLeg" link2="RightToe" reason="Never"/>
     <disable_collisions link1="RightLowerLeg" link2="RightUpperLeg" reason="Adjacent"/>
-    <disable_collisions link1="RightLowerLeg" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="RightLowerLeg" link2="base_link" reason="Never"/>
     <disable_collisions link1="RightLowerLeg" link2="link1" reason="Never"/>
     <disable_collisions link1="RightLowerLeg" link2="link2" reason="Never"/>
     <disable_collisions link1="RightLowerLeg" link2="link3" reason="Never"/>
     <disable_collisions link1="RightShoulder" link2="RightToe" reason="Never"/>
     <disable_collisions link1="RightShoulder" link2="RightUpperArm" reason="Adjacent"/>
     <disable_collisions link1="RightShoulder" link2="UpperTrunk" reason="Adjacent"/>
-    <disable_collisions link1="RightShoulder" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="RightShoulder" link2="base_link" reason="Never"/>
     <disable_collisions link1="RightShoulder" link2="link1" reason="Never"/>
     <disable_collisions link1="RightShoulder" link2="link2" reason="Never"/>
     <disable_collisions link1="RightShoulder" link2="link3" reason="Never"/>
     <disable_collisions link1="RightShoulder" link2="link4" reason="Never"/>
     <disable_collisions link1="RightToe" link2="RightUpperLeg" reason="Never"/>
     <disable_collisions link1="RightToe" link2="UpperTrunk" reason="Never"/>
-    <disable_collisions link1="RightUpperArm" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="RightUpperArm" link2="base_link" reason="Never"/>
     <disable_collisions link1="RightUpperArm" link2="link1" reason="Never"/>
     <disable_collisions link1="RightUpperArm" link2="link2" reason="Never"/>
     <disable_collisions link1="RightUpperArm" link2="link3" reason="Never"/>
     <disable_collisions link1="RightUpperArm" link2="link4" reason="Never"/>
-    <disable_collisions link1="RightUpperLeg" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="RightUpperLeg" link2="base_link" reason="Never"/>
     <disable_collisions link1="RightUpperLeg" link2="link1" reason="Never"/>
     <disable_collisions link1="RightUpperLeg" link2="link2" reason="Never"/>
     <disable_collisions link1="RightUpperLeg" link2="link3" reason="Never"/>
     <disable_collisions link1="RightUpperLeg" link2="link4" reason="Never"/>
-    <disable_collisions link1="UpperTrunk" link2="arm_base_link" reason="Never"/>
+    <disable_collisions link1="UpperTrunk" link2="base_link" reason="Never"/>
     <disable_collisions link1="UpperTrunk" link2="link1" reason="Never"/>
     <disable_collisions link1="UpperTrunk" link2="link2" reason="Never"/>
     <disable_collisions link1="UpperTrunk" link2="link3" reason="Never"/>
     <disable_collisions link1="UpperTrunk" link2="link4" reason="Never"/>
-    <disable_collisions link1="arm_base_link" link2="link1" reason="Adjacent"/>
-    <disable_collisions link1="arm_base_link" link2="link2" reason="Never"/>
-    <disable_collisions link1="arm_base_link" link2="link3" reason="Never"/>
-    <disable_collisions link1="arm_base_link" link2="link4" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link1" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="link2" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link3" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link4" reason="Never"/>
     <disable_collisions link1="link1" link2="link2" reason="Adjacent"/>
     <disable_collisions link1="link1" link2="link3" reason="Never"/>
     <disable_collisions link1="link1" link2="link4" reason="Never"/>

@@ -32,12 +32,11 @@ def launch_setup(context, *args, **kwargs):
 
     actions = []
 
-    camera_enabled_ids = LaunchConfiguration("camera_enabled_ids").perform(context)
+
     log_level = LaunchConfiguration("log_level").perform(context)
     world_setup = LaunchConfiguration("world_setup").perform(context)
     use_sim_time = LaunchConfiguration("use_sim_time", default="true")
     print(f"[DEBUG] world_setup={world_setup}")
-    camera_enabled_ids = camera_enabled_ids.split(" ")
 
     pkg_ros_gz_sim = get_package_share_directory("ros_gz_sim")
     original_world = os.path.join(
@@ -94,100 +93,8 @@ def launch_setup(context, *args, **kwargs):
         output = "screen"
    )
 
-    for camera_id in camera_enabled_ids:
-        ros_gz_image = Node(
-            package="ros_gz_bridge",
-            executable="parameter_bridge",
-            name=f"camera_{camera_id}_bridge",
-            output="screen",
-            arguments=[
-                f"/camera_{camera_id}/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
-                f"/camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
-                "--ros-args",
-                "--log-level",
-                log_level
-            ],
-            remappings=[
-                (
-                    f"/camera_{camera_id}/image_raw",
-                    f"/static_agents/camera_{camera_id}/image_raw",
-                ),
-                (
-                    f"/camera_{camera_id}/camera_info",
-                    f"/static_agents/camera_{camera_id}/camera_info",
-                ),
-            ],
-        )
-        actions.append(ros_gz_image)
-
-        ros_gz_depth_image = Node(
-            package="ros_gz_bridge",
-            executable="parameter_bridge",
-            name=f"depth_camera_{camera_id}_bridge",
-            output="screen",
-            arguments=[
-                f"/depth_camera_{camera_id}/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
-                f"/depth_camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
-                # f"/depth_camera_{camera_id}/points@sensor_msgs/msg/PointCloud2@gz.msgs.PointCloudPacked",
-                "--ros-args",
-                "--log-level",
-                log_level
-            ],
-            remappings=[
-                (
-                    f"/depth_camera_{camera_id}/image_raw",
-                    f"/static_agents/depth_camera_{camera_id}/image_raw",
-                ),
-                (
-                    f"/depth_camera_{camera_id}/camera_info",
-                    f"/static_agents/depth_camera_{camera_id}/camera_info",
-                ),
-                # (
-                #     f"/depth_camera_{camera_id}/points",
-                #     f"/static_agents/depth_camera_{camera_id}/points",
-                # ),
-            ],
-        )
-        actions.append(ros_gz_depth_image)
-
-        ros_gz_semantic_image = Node(
-            package="ros_gz_bridge",
-            executable="parameter_bridge",
-            name=f"semantic_camera_{camera_id}_bridge",
-            output="screen",
-            arguments=[
-                f"/semantic_camera_{camera_id}/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
-                f"/semantic_camera_{camera_id}/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
-                f"/semantic_camera_{camera_id}/labels_map@sensor_msgs/msg/Image@gz.msgs.Image",
-                f"/semantic_camera_{camera_id}/colored_map@sensor_msgs/msg/Image@gz.msgs.Image",
-                "--ros-args",
-                "--log-level",
-                log_level
-            ],
-            remappings=[
-                (
-                    f"/semantic_camera_{camera_id}/image_raw",
-                    f"/static_agents/semantic_camera_{camera_id}/image_raw",
-                ),
-                (
-                    f"/semantic_camera_{camera_id}/camera_info",
-                    f"/static_agents/semantic_camera_{camera_id}/camera_info",
-                ),
-                (
-                    f"/semantic_camera_{camera_id}/labels_map",
-                    f"/static_agents/semantic_camera_{camera_id}/labels_map",
-                ),
-                (
-                    f"/semantic_camera_{camera_id}/colored_map",
-                    f"/static_agents/semantic_camera_{camera_id}/colored_map",
-                ),
-            ],
-        )
-        actions.append(ros_gz_semantic_image)
-
-    actions.append(gzserver_cmd)
-
     actions.append(ros_gz_bridge)
+    actions.append(gzserver_cmd)
 
     try:
         value = os.environ["SIM_ENV"]  # "DEV" , "CICD" or empty
@@ -205,7 +112,6 @@ def generate_launch_description():
         [
             set_gazebo_model_path_env,
             # Declare the launch argument (optional if passed from parent)
-            DeclareLaunchArgument("camera_enabled_ids", default_value="163 164 165"),
             DeclareLaunchArgument("world_setup", default_value="empty", description="Select world setup: empty, light, medium, regular"),
             OpaqueFunction(function=launch_setup),
         ]

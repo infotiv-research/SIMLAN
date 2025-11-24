@@ -1,3 +1,5 @@
+# Gazebo Worlds
+
 ```xml
     <physics type="ode">
       <ode>
@@ -39,5 +41,5 @@ See move_objects.py
 
 ### reference:
 
-https://classic.gazebosim.org/tutorials?tut=physics_params&cat=physics
-http://sdformat.org/spec
+- [Physics Parameters](https://classic.gazebosim.org/tutorials?tut=physics_params&cat=physics)
+- [SDF format](http://sdformat.org/spec)

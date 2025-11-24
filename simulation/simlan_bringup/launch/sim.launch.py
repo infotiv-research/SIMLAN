@@ -23,7 +23,6 @@ from launch.actions import OpaqueFunction
 
 def launch_setup(context, *args, **kwargs):
     # Launch args
-    camera_enabled_ids = LaunchConfiguration("camera_enabled_ids").perform(context)
     log_level = LaunchConfiguration("log_level").perform(context)
     world_setup = LaunchConfiguration("world_setup").perform(context)
     use_sim_time = LaunchConfiguration("use_sim_time", default=True)
@@ -46,17 +45,10 @@ def launch_setup(context, *args, **kwargs):
                 pkg_simlan_gazebo_environment, "launch", "simlan_factory.launch.py"
             )
         ),
-        launch_arguments={"camera_enabled_ids": camera_enabled_ids,
-                          "use_sim_time":use_sim_time,
+        launch_arguments={"use_sim_time":use_sim_time,
                           "world_setup":world_setup,
                           "log_level":log_level
                           }.items(),
-    )
-
-    static_agents = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_static_agent_launcher, "launch", "static-agent.launch.py")
-        )
     )
 
     rviz2 = Node(
@@ -72,7 +64,7 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(launch_rviz),
     )
 
-    return [launch_rviz_launch_argument, simlan_gazebo, static_agents, rviz2]
+    return [launch_rviz_launch_argument, simlan_gazebo, rviz2]
 
 
 def generate_launch_description():

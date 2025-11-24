@@ -34,7 +34,7 @@
     </gazebo>
 
     <joint name="${wheel_prefix}_wheel_joint" type="continuous">
-      <parent link="humanoid_chassi_link"/>
+      <parent link="chassi_link"/>
       <child link="${wheel_prefix}_wheel_link" />
       <xacro:insert_block name="joint_pose" />
       <axis xyz="0 1 0" />
@@ -51,25 +51,25 @@
     </transmission>
   </xacro:macro>
 
-  <xacro:wheel wheel_prefix="humanoid_front_left">
+  <xacro:wheel wheel_prefix="front_left">
     <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="humanoid_front_right">
+  <xacro:wheel wheel_prefix="front_right">
     <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="humanoid_rear_left">
+  <xacro:wheel wheel_prefix="rear_left">
     <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="humanoid_rear_right">
+  <xacro:wheel wheel_prefix="rear_right">
     <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
 
-  <joint name="humanoid_base_link_joint" type="fixed">
+  <joint name="base_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="arm_base_link"/>
-    <child link="humanoid_chassi_link" />
+    <parent link="base_link"/>
+    <child link="chassi_link" />
   </joint>
 
-  <link name="humanoid_chassi_link"/>
+  <link name="chassi_link"/>
 
   </robot>

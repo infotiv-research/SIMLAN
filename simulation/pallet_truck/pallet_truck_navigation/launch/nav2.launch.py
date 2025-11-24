@@ -16,25 +16,21 @@ def launch_setup(context, *args, **kwargs):
     for robot in robots:
         all_namespaces.append(robot["namespace"])
     # Get the launch directory
-    nav2_yaml = os.path.join(
-        get_package_share_directory("pallet_truck_navigation"),
-        "config",
-        "nav2_params.yaml",
-    )
 
     actions =[]
     for robot in robots:
-        if robot.get("robot_type") != "pallet_truck":
-            continue  # skip if robot is not pallet_truck
-        actions.append(
-            Node(  # Manually setting the joint between map and odom to 0 0 0, i.e. identical to each other. map -> odom
-                package="tf2_ros",
-                executable="static_transform_publisher",
-                namespace=robot["namespace"],
-                name="static_map_to_odom",
-                arguments=["0", "0", "0", "0", "0", "0", f"{robot["namespace"]}/map", f"{robot["namespace"]}/odom"],
-            ),
+        if "humanoid" in robot["namespace"]:
+            nav2_yaml = os.path.join(
+            get_package_share_directory("pallet_truck_navigation"),
+            "config",
+            "nav2_params_humanoid.yaml",
         )
+        else:
+            nav2_yaml = os.path.join(
+                get_package_share_directory("pallet_truck_navigation"),
+                "config",
+                "nav2_params.yaml",
+            )
         actions.append(
             Node(
                 package='nav2_controller', # yes
