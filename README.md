@@ -1,9 +1,11 @@
-# SIMLAN, Simulation for Multi-Camera Robotics (3.0.0)
+# SIMLAN, Simulation for Multi-Camera Robotics (4.0.0)
 
 This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 \[[![](/resources/logos/youtube.png) GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)\]
 
-## SIMLAN Features   
+📃 \[Documentation\] https://infotiv-research.github.io/SIMLAN/
+
+## SIMLAN Features
 
 - Ignition Gazebo
 - Library of assets
@@ -19,19 +21,7 @@ This simulation environment, based on the Gazebo Ignition simulator and ROS2, re
 
 ![](/resources/logos/youtube.png) Click the Youtube link below to view the SIMLAN demo video:
 
-
 [![SIMLAN demo](https://img.youtube.com/vi/FJcsVDP3DHg/0.jpg)](https://www.youtube.com/watch?v=FJcsVDP3DHg)
-
-
-Here are list of advantages of using SIMLAN Multi-Camera system
-
-- Rapid prototyping and iteration of ML based algorithm. (e.g. reinforcement learning)
-- Enhanced monitoring and coordination using bird eye view
-- Simplified robot design and maintenance.
-- Extendible with additional ML based vision systems
-- Safety testing without physical risk or privacy concerns
-- Scalable and reproducible testing (CI/CD)
-- Cost-effective development
 
 ## Installation \[[![](/resources/logos/youtube.png) Demo](https://www.youtube.com/watch?v=DgJXlsXUa-w)\]
 
@@ -221,15 +211,23 @@ In `config.sh` you can set the level of logs you want outputted into the termina
 Learn more about the project by reading these documents:
 
 - [`control.sh` script](control.sh) is  a shortcut to run different launch scripts, please also see [these diagram](resources/diagrams/).
+
 - [`config.sh`](config.sh) contains information about, which world is loaded, which cameras are active, what and where the robots are spawned.
+
 - [Marp Markdown Presentation](PRESENTATION.md)
+
 - [Configuration Generation](config_generation/README.md)
+
 - [Bringup and launch files](/resources/diagrams/launch_bringup.drawio.png)
+
 - [Pallet Truck Navigation Documentation](simulation/pallet_truck/pallet_truck_navigation/README.md)
+
 - [Camera Utilities and notebooks](camera_utility/):  ([Extrinsic/Intrinsic calibrations](camera_utility/camera_calib.ipynb) and [Projection](camera_utility/projection.ipynb) )
+
 - [Humanoid Utilities (pose2motion)](humanoid_utility/README.md)
 
 - [`simulation/`](simulation/): ROS2 packages
+
   - [Simulation and Warehouse Specification (fidelity)](simulation/README.md)
   - [Building Gazebo models (Blender/Phobos)](simulation/raw_models/README.md)
   - [Objects Specifications](simulation/raw_models/objects/README.md)
@@ -241,8 +239,11 @@ Learn more about the project by reading these documents:
   - [Humanoid Control](simulation/humanoid_support_moveit_config/README.md)
 
 - [`CHANGELOG.md`](CHANGELOG.md)
+
 - [`credits.md`](credits.md)
+
 - [`LICENSE` (apache 2)](LICENSE)
+
 - [`contributing.md`](contributing.md)
 
 ## Research Funding
