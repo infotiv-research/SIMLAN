@@ -78,7 +78,6 @@ exclude_docs: |
   **/*.xacro
   **/*.sh
   **/*.txt
-  **/*.html
   **/*.sdf
   **/*.config
   **/*.dae
@@ -102,7 +101,6 @@ exclude_docs: |
   **/*.woff
   **/*.woff2
   **/*.eot
-  **/*.js
   **/*.json
   **/*.log
   **/*.lua
@@ -110,7 +108,6 @@ exclude_docs: |
   **/*.action
   **/*.world
   **/LICENSE
-  **/*.css
   **/*.ico
   **/*.cpp
   **/*.h
