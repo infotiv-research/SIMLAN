@@ -1,10 +1,16 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
 
+    <xacro:arg name="camera_update_rate" default="30"/>
+    <xacro:arg name="camera_streams" default="image depth semantic"/>
 
+    <xacro:property name="camera_streams" value="$(arg camera_streams)" />
+    <xacro:property name="camera_update_rate" value="$(arg camera_update_rate)" />
+    
     <xacro:include filename="properties.xacro" />
     <xacro:include filename="camera_macros.xacro"/>
     <xacro:include filename="aruco_macros.xacro" />
+    
     <!-- DEFINE INERTIA FOR ALL LINKS, GAZEBO COMPLAINS OTHERWISE-->
 
     <link name="world">

@@ -4,7 +4,7 @@
 [gzserver-1] [ERROR] [1727951819.671190014] [jackal.gazebo_ros2_control]: controller manager doesn't have an update_rate parameter
 ```
 
-No solution
+No solution.
 
 ## OpenAL
 
@@ -12,11 +12,11 @@ No solution
 [gzserver-1] [Err] [OpenAL.cc:84] Unable to open audio device[default]
 ```
 
-Related to support for audio inside docker container. It will not be resolved
+Related to support for audio inside a Docker container. It will not be resolved.
 
 ## Command failed: docker compose
 
-If you have any issue with docker incompatibility (e.g. `Error: Command failed: docker compose ...`), make sure that `docker compose` or `docker-compose` is set correctly in the setting.
+If you have any issue with docker incompatibility (e.g. `Error: Command failed: docker compose ...`), make sure that `docker compose` or `docker-compose` is set correctly in the settings.
 
 ![dev container in vscode](resources/dev-container-config.png)
 
@@ -58,11 +58,11 @@ If you get this error when building the docker container:
 nvidia-container-cli: requirement error: unsatisfied condition: cuda>=12.6, please update your driver to a newer version, or use an earlier cuda container: unknown
 ```
 
-A solution to try is first: re-install nvidia-container-toolkit. Or if that does not work, update your nvidia-drivers.
+A solution to try is first: re-install nvidia-container-toolkit. Or, if that does not work, update your nvidia-drivers.
 
 ## GLIBC_2 issue
 
-Sometimes the wrong `nvidia-container-toolkit` results this issue below:
+Sometimes the wrong `nvidia-container-toolkit` results in this issue below:
 
 ```
 $/usr/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by /usr/lib/x86_64-linux-gnu/libGLdispatch.so.0)
@@ -86,7 +86,7 @@ Make sure docker is installed correctly by following these two instructions:
 
 ## Advanced options:
 
-To record camera images for available cameras we use a simple python code [./camera_utility/camera_subscriber.py](./camera_utility/camera_subscriber.py) that continuously record camera images in `camera_utility/camera_data/` :
+To record camera images for available cameras we use a simple Python code [./camera_utility/camera_subscriber.py](./camera_utility/camera_subscriber.py) that continuously records camera images in `camera_utility/camera_data/`:
 
 ```bash
 ./control.sh cam_dump
@@ -110,7 +110,7 @@ Here is an example of extracting tf2 hierarchy
 
 These features and commands are under development and not fully supported yet and therefore are subject to change.
 
-**Cartographer**: With both Gazebo and rviz running you can start creating a map of a robots surroundings
+**Cartographer**: With both Gazebo and rviz running you can start creating a map of a robot's surroundings.
 
 To start: `./control.sh cartographer`
 
@@ -128,7 +128,7 @@ To record one screenshot after use:
 
 The result will be stored in `./camera_utility/camera_data/`.
 
-To record ros messages in ROS bag files to replay the scenario later:
+To record ROS messages in ROS bag files to replay the scenario later:
 
 ```bash
 ./control.sh ros_record
@@ -140,7 +140,7 @@ To replay the last rosbag recording:
 ./control.sh ros_replay
 ```
 
-To test the unit tests before pushing new codes:
+To test the unit tests before pushing new code:
 
 ```bash
 ./control.sh test
@@ -148,7 +148,7 @@ To test the unit tests before pushing new codes:
 
 ## Jackal
 
-If you want to control the Jackal you add the following lines into the control.sh:
+If you want to control the Jackal, you add the following lines into the control.sh:
 
 ```bash
 elif [[ "$*" == *"jackal_teleop"* ]]
@@ -162,7 +162,7 @@ And then run:
 ./control.sh jackal_teleop
 ```
 
-These ones did not work so we put it here in issues
+These ones did not work, so we put them here in issues
 
 ```bash
 elif [[ "$*" == *"move_object"* ]]

@@ -5,7 +5,7 @@
 #region environment variables
 source install/setup.bash 2>/dev/null
 source /opt/dependencies_ws/install/setup.bash 2>/dev/null
-
+source /opt/venv/bin/activate  2>/dev/null
 export GZ_SIM_RESOURCE_PATH=/usr/share/ignition/
 export IGN_GAZEBO_RESOURCE_PATH=usr/share/ignition/
 export PYTHONPATH="$(pwd)/camera_utility/:$PYTHONPATH"
@@ -38,7 +38,7 @@ if [[ "$CURRENT_DIR" != "$SCRIPT_DIR" ]]; then
     exit 1
 fi
 
-echo "Available camera IDs: ${CAMERA_ENABLED_IDS[@]}"
+echo "Available camera IDs in simulation: ${CAMERA_ENABLED_IDS[@]}"
 if [ $# -eq 0 ]
 then
     echo "No arguments supplied. ** Try passing 'sim' as an argument ** "
@@ -105,7 +105,6 @@ kill (){
     pkill -9 -f rviz
     pkill -9 -f jazzy
     pkill -9 -f object_mover
-    pkill -9 -f camera_subscriber
     pkill -9 -f ign
     pkill -9 -f gz
     pkill -9 -f camera_system
@@ -157,7 +156,7 @@ sim () {
 
 }
 static_agent() {
-    ros2 launch static_agent_launcher static-agent.launch.py "camera_enabled_ids:=${CAMERA_ENABLED_IDS}" "camera_streams:=${CAMERA_STREAMS}" "log_level:=${log_level}"
+    ros2 launch static_agent_launcher static-agent.launch.py "camera_enabled_ids:=${CAMERA_ENABLED_IDS}" "camera_streams:=${CAMERA_STREAMS}" "camera_update_rate":=${CAMERA_UPDATE_RATE} "log_level:=${log_level}"
 }
 #endregion
 #################################################################
@@ -176,7 +175,8 @@ humanoid () {
 
 random () {
     echo "::: RANDOM  :::"
-    source install/setup.bash ; ros2 launch random_motion_planner random_motion.launch.py output_dir:=$1 "log_level:=${log_level}"
+    source install/setup.bash ;
+    ros2 launch random_motion_planner random_motion.launch.py run_random_generate:=true output_dir:=$1 "log_level:=${log_level}"
 }
 
 dataset () {
@@ -205,87 +205,28 @@ mlenv () {
 
 moveit () {
     echo "::: MOVEIT  :::"
-    source install/setup.bash ; ros2 launch random_motion_planner random_motion.launch.py motion_filename:=random output_dir:=$humanoid_dataset/motion_data "log_level:=${log_level}"
+    source install/setup.bash ; ros2 launch random_motion_planner random_motion.launch.py namespace:=$replay_motion_namespace run_random_generate:=false "log_level:=${log_level}"
 }
 
 clean_humanoid_output () {
     echo "::: DELETE AND REBUILD :::"
     rm -rf $humanoid_output_dir ; mkdir $humanoid_output_dir ;
-    mkdir  $humanoid_output_dir/motion_data
-    mkdir  $humanoid_output_dir/pose_data
-    mkdir  $humanoid_output_dir/pose_images
-}
-
-replay_motion_helper () {
-    echo "::: REPAYING $1 :::"
-    source install/setup.bash ; ros2 launch random_motion_planner random_motion.launch.py motion_filename:="$1" "log_level:=${log_level}"
-}
-multi_ground_truth_viewer () {
-    echo "START TO FIND DATA IN  $humanoid_dataset/$dataset_root"
-    cams=(500 501 502 503)
-    find "$motion_dir" -maxdepth 1 -type f -name '*_motion.json' | sort | while read -r motion_file; do
-        fname="$(basename "$motion_file")"
-        number="${fname%_motion.json}"
-        predict_file="$predict_dir/${number}_predict.json"
-
-        gt_opened=0
-        for cam in "${cams[@]}"; do
-            gt_img="$humanoid_dataset/$dataset_root/camera_${cam}/pose_images/${number}_display.jpg"
-            if [ -f "$gt_img" ]; then
-                echo ":::::::::::: GROUND TRUTH {$gt_img}"
-                eog "$gt_img" & # open pose ground truth image
-                gt_opened=1
-            fi
-        done
-        if [ $gt_opened -eq 0 ]; then
-            echo "NOT FOUND: Ground truth image for $number"
-        fi
-        echo "Processing: $fname --- $number ----"
-        echo "Saving prediction to: $predict_file"
-        python3 $humanoid_utility_dir/pose_to_motion/$model_type/model.py \
-        --mode multi_predict \
-        --sample_root "$dataset_root" \
-        --sample_id "$number" \
-        --motion_file "$predict_file" \
-        --model_instance $model_instance \
-
-        replay_motion_helper "$predict_file" &
-        sleep 30
-        pkill -9 -f motion_planner || true
-        pkill -9 -f eog || true
-    done
 
 }
-single_ground_truth_viewer () {
-    echo "START TO FIND DATA IN  $humanoid_dataset/$dataset_root"
-    find "$pose_dir" -maxdepth 1 -type f -name '*_pose.json' | sort | while read -r pose_file; do
-        fname="$(basename "$pose_file")"
-        number="${fname%_pose.json}"
-        full_pose_path="$pose_dir/${number}_pose.json"
-        pose_image_path="$pose_image_dir/${number}_display.jpg"
-        predict_file="$predict_dir/${number}_predict_cam${cam_id}.json"
-        if [ -f "$pose_image_path" ]; then
-                echo "Ground truth image: $pose_image_path"
-                eog "$pose_image_path" &
-        else
-                echo "WARNING: No ground truth image found at $pose_image_path"
-        fi
-        echo "Processing: $fname --- $number ----"
-        echo "Saving prediction to: $predict_file"
-        python3 $humanoid_utility_dir/pose_to_motion/$model_type/model.py \
-        --mode single_predict \
-        --sample_root "$dataset_root" \
-        --sample_id "$number" \
-        --model_instance $model_instance \
-        --pose_file "$full_pose_path" \
-        --motion_file "$predict_file"
 
-        replay_motion_helper "$predict_file" &
-        sleep 30
-        pkill -9 -f motion_planner || true
-        pkill -9 -f eog || true
-    done
+execute_motion () {
+    echo "::: REPLAYING $1 for $replay_motion_namespace:::"
+    ros2 topic pub --once $replay_motion_namespace/execute_motion std_msgs/String "{data: '$1'"}
 }
+save_depth_seg_videos (){
+    ros2 run camera_bird_eye_view record_camera_stream --ros-args -p camera_ids:="${CAMERA_ENABLED_IDS}" -p camera_update_rate:=${CAMERA_UPDATE_RATE}
+}
+
+save_depth_seg_images(){
+    ros2 run camera_bird_eye_view camera_save --ros-args -p camera_ids:="${CAMERA_ENABLED_IDS}"
+}
+
+
 #endregion
 #################################################################
 #                         OPERATIONS                            #
@@ -330,9 +271,11 @@ then
 ## Run this command to save the segmentation and depth images from the simulation ####
 elif [[ "$1" == *"save_depth_seg_images"* ]]
 then
-    ros2 run camera_bird_eye_view camera_save --ros-args -p camera_ids:="${CAMERA_ENABLED_IDS}"
+    save_depth_seg_images
 
-
+elif [[ "$1" == *"save_depth_seg_videos"* ]]
+then
+    save_depth_seg_videos
 elif [[ "$1" == *"gpss"* ]]
 then
     sim &
@@ -384,7 +327,6 @@ then
     dataset $humanoid_dataset/$2
 elif [[ "$1" == *"humanoid"* ]]
 then
-    sim &
     humanoid
 elif [[ "$1" == *"random"* ]]
 then
@@ -401,93 +343,80 @@ then
 elif [[ "$1" == *"convert2csv"* ]]
 then
     echo "::: Convert dataset to CSV, please wait :::"
-    python3 $humanoid_utility_dir/pre_processing/load_json_data.py $humanoid_dataset/EVAL/pose_data/  $humanoid_dataset/EVAL/motion_data/   $humanoid_preprocessed_dataset/default_eval.csv
-    python3 $humanoid_utility_dir/pre_processing/load_json_data.py $humanoid_dataset/TRAIN/pose_data/ $humanoid_dataset/TRAIN/motion_data/  $humanoid_preprocessed_dataset/default_train.csv
-    echo "TRANSFER CSV TO WIDE FORMAT"
-    python3 $humanoid_utility_dir/pre_processing/csvtowide.py $humanoid_preprocessed_dataset/default_train.csv $humanoid_preprocessed_dataset/TRAIN/multi_train.csv
-    python3 $humanoid_utility_dir/pre_processing/csvtowide.py $humanoid_preprocessed_dataset/default_eval.csv $humanoid_preprocessed_dataset/EVAL/multi_eval.csv
+    python3 $humanoid_utility_dir/pre_processing/dataframe_converter.py \
+    --dataset_dir $humanoid_dataset/$2 \
+    --csv_filename $humanoid_dataset/$2/flattened_data.csv \
+    --camera_ids "$dataset_cameras"
 
-elif [[ "$1" == *"multi_train"* ]]
+elif [[ "$1" == *"train"* ]]
 then
+    echo "Available camera IDs for machine learning: ${dataset_cameras}"
     source ~/mlenv/bin/activate
-    echo "TRAIN MODEL, OVERWRITING PREVIOUS MODEL"
-    time python3 $humanoid_utility_dir/pose_to_motion/$model_type/model.py \
-        --mode multi_train \
-        --dataset_filename $humanoid_preprocessed_dataset/TRAIN/$humanoid_dataset_training \
+    time python3 $humanoid_utility_dir/pose_to_motion/model.py \
+        --mode train \
+        --input_dir $humanoid_dataset/$2 \
         --model_instance $model_instance \
-         2>&1 | tee training.log
-elif [[ "$1" == *"single_train"* ]] # SINGLE TRAIN: KEEP
-then
-    source ~/mlenv/bin/activate
-    time python3 $humanoid_utility_dir/pose_to_motion/$model_type/model.py \
-        --mode single_train \
-        --dataset_filename $humanoid_preprocessed_dataset/TRAIN/$humanoid_dataset_training \
-        --model_instance $model_instance \
+        --model_type $model_type \
+        --camera_ids "$dataset_cameras" \
          2>&1 | tee training.log
 
-elif [[ "$1" == *"eval"* ]] # same eval as before
+
+elif [[ "$1" == *"eval"* ]]
 then
     source ~/mlenv/bin/activate
-    python3 $humanoid_utility_dir/pose_to_motion/$model_type/model.py \
+    python3 $humanoid_utility_dir/pose_to_motion/model.py \
         --mode eval \
-        --dataset_filename $humanoid_preprocessed_dataset/EVAL/$humanoid_dataset_evaluation\
+        --input_dir $humanoid_dataset/$2 \
         --model_instance $model_instance \
+        --model_type $model_type \
+        --camera_ids "$dataset_cameras"
 
+elif [[ "$1" == *"predict"* ]]
+then
+    kill
+    sim &
+    sleep 5
+    humanoid &
+    sleep 5
+    moveit &
+    sleep 10
+
+    source ~/mlenv/bin/activate
+    python3 $humanoid_utility_dir/pose_to_motion/model.py \
+            --mode predict \
+            --input_dir "$2" \
+            --camera_ids "$dataset_cameras" \
+            --model_type "$model_type" \
+            --model_instance "$model_instance"\
+            --humanoid_namespace $replay_motion_namespace\
+            --replay_motions
+
+elif [[ "$1" == *"execute_motion"* ]]
+then
+    execute_motion $2
 elif [[ "$1" == *"replay_motion"* ]]
 then
     sim &
-    sleep 15 ; humanoid &
-    sleep 5  ; replay_motion_helper $2 # 2nd terminal argument
+    sleep 5 ; humanoid &
+    sleep 5; moveit &
+    sleep 20;
+    execute_motion $2 # 2nd terminal argument
 
-elif [[ "$1" == *"multi_predict"* ]]
+# arguments: 1. the action: image, video. 2. The directory name.
+# Looks for input folder in /humanoid_utility/input/
+# Saves processed data to /humanoid_utility/output/
+elif [[ "$1" == *"process_input"* ]]
 then
-    echo "::: PREDICT MOTION FROM MULTI CAM POSE DATA :::"
-    if [ "$#" -ne 2 ]; then
-    echo "Error: The second argument is missing" >&2
-    echo "Usage: $0 predict PATH_TO_DIR that has pose_data" >&2
-    exit 1
-    fi
     source ~/mlenv/bin/activate
 
-    dataset_root="$2"
-    motion_dir="$humanoid_dataset/$2/motion_data" # output motion
-    predict_dir="$humanoid_dataset/$2/predict_data" # prediction output folder
-    mkdir -p "$predict_dir"
-
-    sim &
-    sleep 15 ; humanoid &
-    sleep 10 ; multi_ground_truth_viewer "$dataset_root" "$predict_dir"
-
-elif [[ "$1" == *"single_predict"* ]]
-then
-    echo "::: PREDICT MOTION FROM SINGLE CAM POSE DATA :::"
-    if [ "$#" -ne 3 ]; then
-        echo "Error: Missing arguments" >&2
-        echo "Usage: $0 single_predict PATH_TO_DIR CAM_ID" >&2
-        echo "Example: $0 single_predict TEST 500" >&2
-        exit 1
-    fi
-    source ~/mlenv/bin/activate
-
-    dataset_root="$2"
-    cam_id="$3"
-    pose_dir="$humanoid_dataset/$dataset_root/camera_${cam_id}/pose_data"
-    pose_image_dir="$humanoid_dataset/$dataset_root/camera_${cam_id}/pose_images"
-    predict_dir="$humanoid_dataset/$2/predict_data" # prediction output folder
-    mkdir -p "$predict_dir"
-
-    sim &
-    sleep 15 ; humanoid &
-    sleep 10 ; single_ground_truth_viewer "$dataset_root" "$cam_id" "$predict_dir"
-
-elif [[ "$1" == *"image_pipeline"* ]]
-then
     clean_humanoid_output
-    python3 $humanoid_utility_dir/pre_processing/mp_detection.py --action image $humanoid_input_dir/image.png $humanoid_output_dir
-elif [[ "$1" == *"video_pipeline"* ]]
-then
-    clean_humanoid_output
-    python3 $humanoid_utility_dir/pre_processing/mp_detection.py --action video $humanoid_input_dir/20250611video.mp4 $humanoid_output_dir
+    python3 $humanoid_utility_dir/pre_processing/process_input_data.py \
+        --mode $2 \ # image or video \
+        --data_dir $3 \ # input dataset directory name \
+        --camera_ids "$dataset_cameras" \
+        --input_dir $humanoid_input_dir \
+        --output_dir $humanoid_output_dir
+
 #endregion
 ######################## TESTS ##################################
 #region tests
@@ -500,37 +429,6 @@ elif [[ "$1" == *"visualize"* ]]
 then
     	ros2 launch visualize_real_data scenario_replayer.launch.py
 #endregion
-######################## Other operations #######################
-#region other operations
-## Store and replay
-elif [[ "$1" == *"ros_record"* ]]
-then
-    ros2 bag record /cmd_vel
-elif [[ "$1" == *"ros_replay"* ]]
-then
-    # replay last recording
-    LAST_ROSBAG_DIR=$(ls -td rosbag* | head -1)
-    ros2 bag info $LAST_ROSBAG_DIR
-    ros2 bag play $LAST_ROSBAG_DIR
 
-elif [[ "$1" == *"screenshot"* ]]
-then
-    # python3 ./camera_subscriber.py
-    # python3 ./camera_subscriber.py  --action save
-    # python3 ./camera_subscriber.py  --action removebg  --algo KNN
-    # algo: MOG2, KNN
-    cd ./camera_utility ;
-    python3 camera_subscriber.py --action screenshot --camera $2 --shottime 4
-
-elif [[ "$1" == *"camera_dump"* ]]
-then
-    cd ./camera_utility ;
-    echo "Starting camera dump for cameras: ${CAMERA_ENABLED_IDS}"
-    for camera_id in $CAMERA_ENABLED_IDS; do
-        echo "Starting camera $camera_id"
-        python3 camera_subscriber.py --action save --camera $camera_id &
-    done
-    # wait  # Wait for all background processes to complete
-#endregion
 #endregion
 fi

@@ -2,10 +2,10 @@
 
 ## Linux Dependencies
 
-## nvidia Driver
+## NVIDIA Driver
 
-Use 'nvidia-smi' to ensure that the right nvidia driver is installed.
-If you have not installed **Additional Drivers** when installing Ubuntu, you need to manually install nvidia drivers.
+Use 'nvidia-smi' to ensure that the right NVIDIA driver is installed.
+If you have not installed **Additional Drivers** when installing Ubuntu, you need to manually install NVIDIA drivers.
 
 ## Docker
 
@@ -20,7 +20,7 @@ newgrp docker
 
 ## nvidia-container-toolkit
 
-To install docker and `nvidia-container-toolkit` use the following commands:
+To install Docker and `nvidia-container-toolkit`, use the following commands:
 
 ```
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -53,7 +53,7 @@ INFO[0000] It is recommended that containerd daemon be restarted.
 
 Restart the computer to apply the group and user changes.
 
-To check for correct installation docker's nvidia runtime:
+To check for correct installation of Docker's NVIDIA runtime:
 
 ```
 docker info|grep -i runtime
@@ -61,21 +61,21 @@ docker info|grep -i runtime
  Default Runtime: runc
 ```
 
-Otherwise you get the following error message in vscode: `Error response from daemon: unknown or invalid runtime name: nvidia`
+Otherwise you get the following error message in VS Code: `Error response from daemon: unknown or invalid runtime name: nvidia`
 
 On a **host** machine's terminal (**not** inside Visual Studio Code terminal): `xhost +local:docker`.
 
 ## Windows Dependencies
 
-These instruction is tested on Windows 11, docker desktop for windows-ARM64 and VScode.
+These instructions are tested on Windows 11, Docker Desktop for Windows ARM64 and VS Code.
 
-To get the docker container up and running, download and install Docker Desktop for your system: https://www.docker.com/products/docker-desktop/
+To get the Docker container up and running, download and install Docker Desktop for your system: https://www.docker.com/products/docker-desktop/
 
-When this is done, clone the repo and open the folder in VScode. Then you should automatically be prompted to download and install VScode extensions which are needed and recommended for the project.
+When this is done, clone the repo and open the folder in VS Code. Then you should automatically be prompted to download and install VS Code extensions that are needed and recommended for the project.
 
-Once that is completed, make sure Docker Desktop ir running and then you should be able to start the container environment in VScode by pressing Ctrl+Shift+p and searching for Dev Containers: Rebuild and Reopen in Container.
+Once that is completed, make sure Docker Desktop is running and then you should be able to start the container environment in VS Code by pressing Ctrl+Shift+P and searching for Dev Containers: Rebuild and Reopen in Container.
 
-To make Gazebo's and Rviz's GUI be visible from the docker container to your screen, download and install the following program: https://sourceforge.net/projects/vcxsrv/
+To make Gazebo's and RViz's GUIs visible from the Docker container on your screen, download and install the following program: https://sourceforge.net/projects/vcxsrv/
 
 When this is done, start the XLaunch program and configure it with these settings:
 
@@ -107,7 +107,7 @@ ______________________________________________________________________
 ```
 ☑ Clipboard (optional)
 ☑ Primary Selection (optional)
-☐ Native opengl
+☐ Native OpenGL
 ☑ Disable access control
 ```
 

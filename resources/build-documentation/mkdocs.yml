@@ -13,34 +13,29 @@ nav:
   - Config Generation: config_generation/README.md
   - Simulation:
       - Overview: simulation/README.md
-      - Gazebo Worlds: simulation/simlan_gazebo_environment/worlds/README.md
+      - SIMLAN Bringup: simulation/simlan_bringup/README.md
       - GPSS cameras: simulation/static_agent_launcher/README.md
       - Camera Bird Eye View: simulation/camera_bird_eye_view/README.md
       - Aruco Localization: simulation/aruco_localization/README.md
       - Failsafe: simulation/bt_failsafe/README.md
-      - SIMLAN Bringup: simulation/simlan_bringup/README.md
-      - Pallet Truck:
-          - Overview: simulation/pallet_truck/README.md
-          - Bringup: simulation/pallet_truck/pallet_truck_bringup/README.md
-          - URDF: simulation/pallet_truck/pallet_truck_description/urdf/README.md
-          - Control: simulation/pallet_truck/pallet_truck_control/README.md
-          - Navigation: simulation/pallet_truck/pallet_truck_navigation/README.md
-      - Humanoid Robot:
-          - Overview: simulation/humanoid_robot/README.md
-          - Humanoid Moveit: simulation/humanoid_support_moveit_config/README.md
-      - Panda MoveIt2: simulation/moveit2/README.md
-      - Object Mover: simulation/object_mover/README.md
-  - Humanoid Motion Capture Utility:
+      - Bringup: simulation/pallet_truck/pallet_truck_bringup/README.md
+      - Pallet Truck: simulation/pallet_truck/README.md  # Pallet Truck
+      - URDF: simulation/pallet_truck/pallet_truck_description/urdf/README.md
+      - Control: simulation/pallet_truck/pallet_truck_control/README.md
+      - Navigation: simulation/pallet_truck/pallet_truck_navigation/README.md
+      - Overview: simulation/humanoid_robot/README.md # Humanoid Robot
+      - Humanoid Moveit: simulation/humanoid_support_moveit_config/README.md
       - Overview: humanoid_utility/README.md
       - Pose to Motion AutoGluon model: humanoid_utility/pose_to_motion/autogluon/README.md
-  - Models:
-      - Overview: simulation/raw_models/README.md
+      - Panda MoveIt2: simulation/moveit2/README.md # Panda
+      - Gazebo Worlds: simulation/simlan_gazebo_environment/worlds/README.md
+      - Overview: simulation/raw_models/README.md # Models
       - Object Modeling: simulation/raw_models/objects/README.md
       - Warehouse Specification: simulation/raw_models/warehouse/README.md
+      - Object Mover: simulation/object_mover/README.md
   - Credits: credits.md
   - Appendix:
       - Changelog: CHANGELOG.md
-      - Issues: resources/ISSUES.md
       - Diagrams: resources/diagrams/README.md
 theme:
   name: readthedocs
@@ -48,8 +43,77 @@ theme:
   highlightjs: true
   hljs_languages:
     - bash
-    - c
+    - python
 plugins:
   - search:
       lang: en
+
+exclude_docs: |
+  # Exclude Python cache and binary files
+  **/__pycache__/**/*
+  **/*.pyc
+
+  # Exclude large datasets and zips
+  humanoid_utility/*.zip
+  **/*.zip
+
+  # Exclude large datasets and zips
+  **/*.py
+  **/*.xacro
+  **/*.yaml
+  **/*.ipynb
+  **/TRAIN/**
+  **/EVAL/**
+  **/TEST/**
+  **/DATASET/**
+  **/DATASET**/**
+  **/internal/**
+  **/meshes/**
+  **/textures/**
+  **/materials/**
+  **/camera_**/**
+  **/output/**
+  **/fonts/**
+  **/recordings/**
+  **/*.xacro
+  **/*.sh
+  **/*.txt
+  **/*.html
+  **/*.sdf
+  **/*.config
+  **/*.dae
+  **/*.stl
+  **/*.proto
+  **/*.xml
+  **/*.material
+  **/*.mtl
+  **/*.obj
+  **/*.FCStd
+  **/*.cfg
+  **/*.pgm
+  **/*.msg
+  **/*.srv
+  **/*.rst
+  **/*.srdf
+  **/*.rviz
+  **/*.ini
+  **/*.urdf
+  **/*.ttf
+  **/*.woff
+  **/*.woff2
+  **/*.eot
+  **/*.js
+  **/*.json
+  **/*.log
+  **/*.lua
+  **/*.osc
+  **/*.action
+  **/*.world
+  **/LICENSE
+  **/*.css
+  **/*.ico
+  **/*.cpp
+  **/*.h
+  **/*.xcf
+  **/*.wbt
 

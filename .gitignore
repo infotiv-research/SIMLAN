@@ -51,17 +51,14 @@ pymoveit2/
 *.png_display.jps
 *prediction.json
 mlenv/
-train_report.csv
-saved_model_states/
-optuna_studies/
+output/
+input/
+*.csv
 *.zip
 *.log
+*.png
 camera_utility
 autogluon_models*
-DATASET_JSON
-DATASET_CSV
-DATASET_RAW
-DATASET_PREPROCESSED
 #auto-generated parameter files:
 control.yaml
 gz_bridge.yaml
@@ -74,3 +71,4 @@ simulation/humanoid_support_moveit_config/config/ros2_controllers.yaml
 simulation/simlan_gazebo_environment/config/gz_bridge.yaml
 *.bkp
 pandoc-log.txt
+recordings/

@@ -176,7 +176,7 @@
       </geometry>
         <material name="black" />
     </visual>
-    <collision>
+    <collision name='collision'>
       <origin xyz="-0.5 -0.25 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae" scale="0.6 0.6 0.6" />
@@ -284,16 +284,16 @@
     </joint>
   </ros2_control>
 
-  <xacro:if value="${robot_type == 'pallet_truck'}">
-    <gazebo reference="$(arg prefix)/chassis_link">
-      <sensor name="$(arg prefix)/contact_sensor" type="contact">
-        <always_on>true</always_on>
-        <contact>
-            <collision>${prefix}_base_link_fixed_joint_lump__collision_collision</collision>
-        </contact>
-      </sensor>
-    </gazebo>
-  </xacro:if>
+  <gazebo reference="$(arg prefix)/chassis_link">
+    <sensor name="$(arg prefix)/contact_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+          <collision>${prefix}/base_link_fixed_joint_lump__collision_collision</collision>
+      </contact>
+    </sensor>
+  </gazebo>
+
+
 
   <!-- Bring in simulation data for Gazebo. -->
   <!-- <xacro:if value="$(arg is_sim)"> -->

@@ -17,6 +17,9 @@ def launch_robots(context):
 
     actions=[]
     robot_namespaces=[]
+    gz_parameters=[]
+    gz_remappings=[]
+
     for robot in robots:
         robot_namespaces.append(robot["namespace"])
         actions.append(
@@ -34,6 +37,26 @@ def launch_robots(context):
                 }.items()
             )
         )
+
+        # Gz pose and contact bridging
+        gz_parameters.append(f"/model/{robot["namespace"]}/pose@geometry_msgs/msg/Pose@gz.msgs.Pose")
+        gz_remappings.append((f"/model/{robot["namespace"]}/pose", f"{robot["namespace"]}/pose"))
+        gz_parameters.append(f"/world/default/model/{robot['namespace']}/link/{robot['namespace']}/base_link/sensor/{robot['namespace']}/contact_sensor/contact@ros_gz_interfaces/msg/Contacts@gz.msgs.Contacts")
+        gz_remappings.append((f"/world/default/model/{robot['namespace']}/link/{robot['namespace']}/base_link/sensor/{robot['namespace']}/contact_sensor/contact",f"{robot['namespace']}/contact"))
+
+    ros_gz_images=Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        name=f"robot_agents_gz_bridge",
+        output="screen",
+        arguments=[
+                    *gz_parameters,
+                    "--ros-args",
+                    "--log-level",
+                    log_level ],
+        remappings=[*gz_remappings]
+    )
+    actions.append(ros_gz_images)
     return actions
 
 def generate_launch_description():

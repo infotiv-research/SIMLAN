@@ -25,6 +25,4 @@
     <xacro:property name="camera_fov" value="1.02974"/>
     <xacro:property name="camera_resolution_width" value="1920"/>
     <xacro:property name="camera_resolution_height" value="1080"/>
-    <xacro:property name="camera_update_rate" value="30"/>
-
 </robot>
