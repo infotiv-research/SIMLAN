@@ -15,9 +15,10 @@ def launch_robots(context):
     humanoids = ast.literal_eval(humanoid_str)
 
     actions = []
-    # robot_namespaces=[]
+    gz_parameters = []
+    gz_remappings = []
+
     for humanoid in humanoids:
-        # robot_namespaces.append(robot["namespace"])
         actions.append(
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
@@ -33,6 +34,24 @@ def launch_robots(context):
                 }.items(),
             )
         )
+        # Gz pose bridging
+        gz_parameters.append(
+            f"/model/{humanoid["namespace"]}/pose@geometry_msgs/msg/Pose@gz.msgs.Pose"
+        )
+        gz_remappings.append(
+            (f"/model/{humanoid["namespace"]}/pose", f"{humanoid["namespace"]}/pose")
+        )
+
+    ros_gz_images = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        name=f"humanoids_gz_bridge",
+        output="screen",
+        arguments=[*gz_parameters, "--ros-args", "--log-level", log_level],
+        remappings=[*gz_remappings],
+    )
+    actions.append(ros_gz_images)
+
     return actions
 
 

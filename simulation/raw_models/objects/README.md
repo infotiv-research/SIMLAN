@@ -1,6 +1,6 @@
 ## Blueprint
 
-This document contains explanations and motivations for the measurements as well as names for variables that should be used when designing the objects. The categories are mostly self explanatory, the one that might need more of an explanation is the color red. This refers to loose objects such as pallets, barrels, boxes and things that will be placed directly on the ground.
+This document contains explanations and motivations for the measurements as well as names for variables that should be used when designing the objects. The categories are mostly self-explanatory; the one that might need more of an explanation is the color red. This refers to loose objects such as pallets, barrels, boxes, and things that will be placed directly on the ground.
 
 **Measurements:**
 
@@ -56,21 +56,19 @@ This document contains explanations and motivations for the measurements as well
 
 ![AMR](resources/AMR.png)
 
-It is defined in XY plane and the center of the AMR is on x,y=0,0 and the bottom of the robot is on z=0.
+It is defined in the XY plane, and the center of the AMR is on x,y=0,0, and the bottom of the robot is on z=0.
 
-Define **scale** , **pos** and collision in these files:
+Define **scale**, **pos**, and collision in these files:
 
-We write our AMR description in `simlan_gazebo_environment/urdf` and use `xacro` to create a `urdf` file with gazebo tags (so not a pure urdf file) that can be used both by `state_publisher` and `gazebo` (unlike 2 separate files  `model.sdf` that is used for Gazebo and `turtlebot.urf` that is used for state_publisher in original Turtlebot_simulation git project.
+We write our AMR description in `simlan_gazebo_environment/urdf` and use `xacro` to create a `urdf` file with gazebo tags (so not a pure urdf file) that can be used both by `state_publisher` and `gazebo` (unlike 2 separate files: `model.sdf` that is used for Gazebo and `turtlebot.urf` that is used for state_publisher in the original Turtlebot_simulation git project).
 
-There are two actual diffdrive wheels that are named `left` and `right` and four supporting wheel to balance the robot that are named `front_left`, `front_right` and `back_left` and `back_right` (they have no friction and can be moved to different position) with the radius of 0.98 of the main wheels.
+There are two actual diffdrive wheels that are named `left` and `right` and four supporting wheels to balance the robot that are named `front_left`, `front_right`, `back_left`, and `back_right` (they have no friction and can be moved to different positions) with the radius of 0.98 of the main wheels.
 
-**Note**: The reason for the shake is difference between the radius of the real wheels and caster wheels
-
-### Infobot AMR specification
+**Note**: The reason for the shake is the difference between the radius of the real wheels and caster wheels.
 
 Orientation:
 
-- x : forward
+- x: forward
 - y: left
 - z: up
 
@@ -80,7 +78,7 @@ All the objects are located in `objects`. Below follows a list of the objects cu
 
 - EUR-pallet
 - Shelf
-- Modular Shelf - a stackable shelf part that can create shelves of varying size
+- Modular Shelf - a stackable shelf part that can create shelves of varying sizes
 - Steel Drum
 - Traffic Cone
 - Support Pole
@@ -103,9 +101,9 @@ All the objects are located in `objects`. Below follows a list of the objects cu
 
 ![Camera](resources/camera.png)
 
-Inspired by  [CCTV Camera 3G-SDI](https://sz-camera.en.made-in-china.com/productimage/OxfRauwdhIcY-2f1j00jPcbKhZkSIoC/China-3G-SDI-HDMI-Simultaneous-Output-1080-60-50-30-25p-1080-60-50I-HD-Digital-Camera-6-12mm-Manual-Lens-Live-Broadcast-Camera.html)
+Inspired by [CCTV Camera 3G-SDI](https://sz-camera.en.made-in-china.com/productimage/OxfRauwdhIcY-2f1j00jPcbKhZkSIoC/China-3G-SDI-HDMI-Simultaneous-Output-108-60-50-30-25p-1080-60-50I-HD-Digital-Camera-6-12mm-Manual-Lens-Live-Broadcast-Camera.html)
 
-In the model: camera base height(70mm) + camera lense height(50mm) = 120mm
+In the model: camera base height (70mm) + camera lens height (50mm) = 120mm
 
 ## Resources
 

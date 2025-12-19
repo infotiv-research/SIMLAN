@@ -57,7 +57,7 @@ ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scena
 This runs a collision action client, executing multiple collision simulations with varying angles and speeds.
 
 ## ⏳ Time to Collision (TTC) Calculation
-The package includes a **TTC node** that logs the **Time to Collision (TTC)** and **Closest Point of Arrival (CPA)** for two robots assuming constant speed and direction.
+The package includes a **TTC node** that logs the **Time to Collision (TTC)** and **Closest Point of Arrival (CPA)** for two robots, assuming constant speed and direction.
 
 ### ▶️ Running the TTC Node
 
@@ -67,6 +67,6 @@ ros2 run scenario_manager ttc
 
 This node calculates and logs:
 - **⏱️ TTC**: The time at which the closest approach occurs.
-- **📍 CPA**: The closest distance between the two robots assuming constant speed and trajectory.
+- **📍 CPA**: The closest distance between the two robots, assuming constant speed and trajectory.
 
 📌 *Note:* As of version **1.0.6 (February 2025)**, the TTC node logs data but does not publish it elsewhere.

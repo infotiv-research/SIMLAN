@@ -8,9 +8,10 @@ ROS_DOMAIN_ID=
 ## WORLD_SETUP can be set to either "default", "medium", "light", "empty"
 WORLD_SETUP=medium
 ## CAMERA_ENABLED_IDS can be set as a string of camera_ids separated by space ' '. valid camera ids are 160-171
-CAMERA_ENABLED_IDS='163 164 165'
+CAMERA_ENABLED_IDS='164 165 166 167 168'
 ## CAMERA_STREAMS can be set as a string of stream options separated by space ' '. valid camera ids are image depth semantic
 CAMERA_STREAMS='image'
+CAMERA_UPDATE_RATE=5
 ## DEFAULT: "info". Specify what level of logs you want. Valid log_levels are: "info", "warn", "error", "debug"
 log_level="info"
 #endregion
@@ -22,19 +23,21 @@ log_level="info"
 humanoid_utility_dir="$(pwd)/humanoid_utility"
 humanoid_input_dir="$humanoid_utility_dir/input"
 humanoid_output_dir="$humanoid_utility_dir/output"
-humanoid_dataset="$humanoid_utility_dir/DATASET_RAW"
-humanoid_preprocessed_dataset="$humanoid_utility_dir/DATASET_PREPROCESSED"
+humanoid_dataset="$humanoid_utility_dir/DATASET"
 
-humanoid_dataset_training="multi_train.csv"
-humanoid_dataset_evaluation="multi_eval.csv"
-model_type="autogluon" # Possible selections: pytorch, autogluon
-model_instance="autogluon_single_nostack_nobagging_nocorrolation" # If you want to reuse a model, specify its name here. Keep blank if you dont want to save.
 
+# The cameras you want to train on. This can be a list of cameras i.e. "500 501 502". For single training set this to one  ""
+dataset_cameras='500'
+# Possible selections: pytorch, autogluon
+model_type="pytorch"
+# If you want to reuse a model, specify its name here. Keep blank if you dont want to save.
+model_instance="pytorch_test_pred_500"
+replay_motion_namespace="humanoid_2"
 HUMANOIDS='[
         {
             "namespace": "humanoid_1",
-            "initial_pose_x":10,
-            "initial_pose_y":0.0,
+            "initial_pose_x":5.5,
+            "initial_pose_y":-10.0,
             "cam_ns": "camera0"
         },
         {

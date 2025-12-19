@@ -11,5 +11,5 @@ for file in *.drawio; do
   [ -f "$file" ] || continue
   drawio --export --format png --scale 3 --transparent "$file" --output "$file.png"
   echo "###" $file  >> README.md
-  echo "![\"$file.png\"](<$file.png>)" >> README.md
+  echo "![$file.png]($file.png)" >> README.md
 done

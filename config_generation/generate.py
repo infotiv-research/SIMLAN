@@ -16,13 +16,14 @@ def main():
     humanoids_index = sys.argv.index("--humanoids") + 1
     humanoids_str = sys.argv[humanoids_index]
 
+    ##world_setup##
+    generate_gz_bridge()
     ##validation##
     robots = validate_robots(robots_str)
     humanoids = validate_humanoids(humanoids_str)
     ##robot_generation##
     generate_bt_xml(robots)
     generate_control_yaml(robots)
-    generate_gz_bridge(robots, humanoids)
     generate_nav2_params(robots)
     ##humanoid_generation##
     generate_humanoid_control_yaml(humanoids)

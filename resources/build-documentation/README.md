@@ -1,5 +1,6 @@
 This script is responsible to build two type of documentations:
-- a PDF file using Pandoc 
+
+- a PDF file using Pandoc
 - a webpage using MkDocs
 
-> **Run the bash script OUTSIDE the visual studio dev-container**
+> **Run the bash script OUTSIDE the visual studio dev-container** within this directory.
