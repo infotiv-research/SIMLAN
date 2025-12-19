@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,7 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,67 +71,49 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Humanoid Robot</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Humanoid Moveit</a>
     <ul class="current">
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Humanoid Moveit</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#moveit">Moveit</a>
+    <li class="toctree-l2"><a class="reference internal" href="#moveit">Moveit</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#dynamically-updated-urdfs">Dynamically updated urdfs</a>
+    <li class="toctree-l2"><a class="reference internal" href="#dynamically-updated-urdfs">Dynamically updated URDFs</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#planning-scene-monitor">Planning scene monitor</a>
+    <li class="toctree-l2"><a class="reference internal" href="#planning-scene-monitor">Planning scene monitor</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#figures">Figures</a>
+    <li class="toctree-l2"><a class="reference internal" href="#figures">Figures</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#rviz2-visualization">Rviz2 visualization</a>
+    <li class="toctree-l2"><a class="reference internal" href="#rviz2-visualization">Rviz2 visualization</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#bugs">Bugs</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#tf-visualization-and-gazebo-simulation-not-matching">TF visualization and gazebo simulation not matching</a>
-    </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#bugs-tf-visualization-and-gazebo-simulation-not-matching">Bugs: TF visualization and Gazebo simulation not matching</a>
     </li>
     </ul>
-                </li>
-    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -141,8 +123,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -162,7 +142,6 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Simulation</li>
-          <li class="breadcrumb-item">Humanoid Robot</li>
       <li class="breadcrumb-item active">Humanoid Moveit</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/humanoid_support_moveit_config/README.md">Edit on infotiv-research/SIMLAN</a>
@@ -174,17 +153,17 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="humanoid">Humanoid</h1>
-<p>In this file, the basics of the humanoid structure will be described. In the future all nodes will be namespaced to add the functionality of spawning and controlling multiple humanoids.</p>
-<h3 id="moveit">Moveit</h3>
-<p>For moveit to work 3 component must have correct information:</p>
+<p>In this file, the basics of the humanoid structure will be described. In the future, all nodes will be namespaced to add the functionality of spawning and controlling multiple humanoids.</p>
+<h2 id="moveit">Moveit</h2>
+<p>For MoveIt to work, 3 components must have correct information:</p>
 <ul>
 <li>URDF link names</li>
 <li>SRDF joint definitions</li>
 <li>TF frames published by robot_state_publisher</li>
 </ul>
-<p>There was an issue when trying to add namespaces to the humanoid project. Since the humanoid is made of 40+ links, it was decided to add the <code>"frame_prefix": f"{namespace}"</code> in the robot_state_publisher node. This however made a conflict since the URDF, SRDF and TF frames no longer matched. This was solved by adding <code>base_link</code> in between the world and namespace/base_link frames and creating a static transform between them. <strong>This means that all further humanoids will be spawned under `base_link frame.</strong> (otherwise the warning below again appears)</p>
-<h3 id="dynamically-updated-urdfs">Dynamically updated urdfs</h3>
-<p>to make the multiple_humanoid_spawn work we need to be able to launch different namespaces in the robot_description. this is done by running:</p>
+<p>There was an issue when trying to add namespaces to the humanoid project. Since the humanoid is made of 40+ links, it was decided to add the <code>"frame_prefix": f"{namespace}"</code> in the robot_state_publisher node. This, however, made a conflict since the URDF, SRDF, and TF frames no longer matched. This was solved by adding <code>base_link</code> in between the world and namespace/base_link frames and creating a static transform between them. <strong>This means that all further humanoids will be spawned under the <code>base_link</code> frame.</strong> (otherwise, the warning below again appears)</p>
+<h2 id="dynamically-updated-urdfs">Dynamically updated URDFs</h2>
+<p>To make the multiple_humanoid_spawn work, we need to be able to launch different namespaces in the robot_description. This is done by running:</p>
 <pre><code class="language-python">moveit_config = (
     MoveItConfigsBuilder(&quot;human_support&quot;, package_name=&quot;humanoid_support_moveit_config&quot;)
     .robot_description(
@@ -193,28 +172,27 @@
     .to_moveit_configs()
 )
 </code></pre>
-<p>this updates the <code>namespace</code> argument inside the .xacro files</p>
-<h3 id="planning-scene-monitor">Planning scene monitor</h3>
-<p>When working with the moveit package, some bugs or undesired features were found. When moveit is launched, the PlanningSceneMonitor and PlanningFrame subscribes to all TF_frames that exists and assumes it can transform any known object or sensor data into its planning frame which is base_link in this case. If this cannot be done it will throw a warning saying the following:</p>
+<p>This updates the <code>namespace</code> argument inside the .xacro files.</p>
+<h2 id="planning-scene-monitor">Planning scene monitor</h2>
+<p>When working with the MoveIt package, some bugs or undesired features were found. When MoveIt is launched, the PlanningSceneMonitor and PlanningFrame subscribe to all TF frames that exist and assume they can transform any known object or sensor data into its planning frame, which is <code>base_link</code> in this case. If this cannot be done, it will throw a warning saying the following:</p>
 <pre><code>[WARN] [humanoid.moveit.moveit.ros.planning_scene_monitor] [id]: Unable to transform object from frame 'unconnected_frame' to planning frame 'base_link' (Could not find a connection between 'base_link' and 'unconnected_frame' because they are not part of the same tree. TF has two or more unconnected trees)
 </code></pre>
-<p>to limit this a wait function was added: <code>ld.add_action(TimerAction(period=5.0, actions=[rsp_node]))</code> to make sure the transform is published before the rsp_node starts</p>
-<h3 id="figures">Figures</h3>
+<p>To limit this, a wait function was added: <code>ld.add_action(TimerAction(period=5.0, actions=[rsp_node]))</code> to make sure the transform is published before the rsp_node starts.</p>
+<h2 id="figures">Figures</h2>
 <p><img alt="My Robot Diagram" src="/resources/humanoid-static_agents-frames.png" />
 <em>Figure 1: Humanoid frames visualization</em></p>
 <h2 id="rviz2-visualization">Rviz2 visualization</h2>
-<p>If you want to visualize the movement in rviz you need to configure the <code>config/moveit.rviz</code> file and change all <code>/humanoid_X</code>instances to the namespace you want to visualize.</p>
-<h2 id="bugs">Bugs</h2>
-<h3 id="tf-visualization-and-gazebo-simulation-not-matching">TF visualization and gazebo simulation not matching</h3>
-<p>When visualizing and comparing the actual TF data and simulated locations of the humanoids when doing navigation nad teleoping it can be seen that these do not match. This is a major issue since that means the location of where the humanoids think they are in the map and the location of where the humanoids actual are in gazebo will be different. This can be visualized by turning the humanoid 360 degrees in gazebo with the <code>./control.sh teleop humanoid_1</code> command and comparing to rviz. There the humanoid has turned closer to 300 degrees.</p>
-<p>This problem probably comes from some urdf descriptions not matching the actual geometry or specifications the humanoid has in <code>/home/ros/src/simulation/humanoid_support_moveit_config/config/human_support_wheels.urdf.xacro</code>. By tuning the <code>mass</code>, <code>mu</code> and <code>inertial</code> values in the <code>&lt;xacro:macro name="wheel" params="wheel_prefix *joint_pose"&gt;</code> xacro tag it was possible to tune the degree mismatch.</p>
-<p>For proper navigation and control this needs to be fixed!</p>
+<p>If you want to visualize the movement in Rviz, you need to configure the <code>config/moveit.rviz</code> file and change all <code>/humanoid_X</code> instances to the namespace you want to visualize.</p>
+<h2 id="bugs-tf-visualization-and-gazebo-simulation-not-matching">Bugs: TF visualization and Gazebo simulation not matching</h2>
+<p>When visualizing and comparing the actual TF data and simulated locations of the humanoids when doing navigation and teleop, it can be seen that these do not match. This is a major issue since that means the location of where the humanoids think they are in the map and the location of where the humanoids actually are in Gazebo will be different. This can be visualized by turning the humanoid 360 degrees in Gazebo with the <code>./control.sh teleop humanoid_1</code> command and comparing it to Rviz. There, the humanoid has turned closer to 300 degrees.</p>
+<p>This problem probably comes from some URDF descriptions not matching the actual geometry or specifications the humanoid has in <code>/home/ros/src/simulation/humanoid_support_moveit_config/config/human_support_wheels.urdf.xacro</code>. By tuning the <code>mass</code>, <code>mu</code>, and <code>inertial</code> values in the <code>&lt;xacro:macro name="wheel" params="wheel_prefix *joint_pose"&gt;</code> xacro tag, it was possible to tune the degree mismatch.</p>
+<p>For proper navigation and control, this needs to be fixed!</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../humanoid_robot/" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../moveit2/" class="btn btn-neutral float-right" title="Panda MoveIt2">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../humanoid_utility/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -240,7 +218,7 @@
       <span><a href="../humanoid_robot/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../moveit2/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../humanoid_utility/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

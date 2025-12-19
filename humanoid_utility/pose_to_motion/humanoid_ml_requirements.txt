@@ -1,9 +1,0 @@
-pandas
-torch
-torchvision
-torchaudio
-optuna
-optuna-dashboard
-tqdm
-numpy
-autogluon==1.3.1

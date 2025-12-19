@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,49 +71,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -123,8 +109,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -154,19 +138,14 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="humanoid_odom_pub">Humanoid_odom_pub</h1>
-<p>When driving around with the humanoid it was noticed that the tfs the ros2 controller published did not cohere with the humanoids position in gazebo. Since the humanoids purpose is only to simulate human behavior it was decided to not use the odom frame from the ros2 controllers but to get the odom frame from the gazebo pose instead. Therefore, the humanoid_odom_pub was created to get that pose and use it as the odom frame.</p>
-<p>For some reason it was hard to pass this as a gazebo_bridge so a work around was found. That was to run a subprocess in the background which echos the gz topic -l like the following</p>
-<pre><code class="language-python">cmd = [&quot;gz&quot;, &quot;topic&quot;, &quot;-e&quot;, &quot;-t&quot;, &quot;/world/default/pose/info&quot;]
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True)
-</code></pre>
-<p>by doing this we can filter out everything except the model poses for the specific robots and use that information to publish a transform between <code>namespace/odom</code> and <code>namespace/base_link</code></p>
-<p>When this is done the the map_updater and teleop should work flawlessly.</p>
-<p>This is quite hacky but works, if someone finds a way to use gz_bridge for the poses instead that solution would be advised.</p>
+<p>When driving around with the humanoid, it was noticed that the TFs the ROS2 controller published did not cohere with the humanoid's position in Gazebo. Since the humanoid's purpose is only to simulate human behavior, it was decided to not use the odom frame from the ROS2 controllers but to get the odom frame from the Gazebo pose instead. Therefore, the humanoid_odom_pub was created to get that pose and use it as the odom frame.</p>
+<p>This is done by bridging the poses of the robot_agents and humanoids to the <code>namespace/pose</code> topic. Then a subscriber is created which listens to the given topic and publishes a transform between <code>namespace/odom</code> -&gt; <code>namespace/base_link</code> depending on the pose of the robots. This works as the ground truth of the position.</p>
 <h2 id="how-to-remove">How to remove</h2>
-<p>If it is decided to remove this pkg in the future follow these steps:</p>
+<p>If it is decided to remove this pkg in the future, follow these steps:</p>
 <ol>
-<li>got to simulation/humanoid_support_moveit_config/launch/launch_controllers.launch.py and delete the following:
-   <code>python
+<li>Go to simulation/humanoid_support_moveit_config/launch/launch_controllers.launch.py and delete the following:</li>
+</ol>
+<p><code>python
    odom_publisher = Node(
         package="humanoid_odom_pub",
         executable="humanoid_odom_pub",
@@ -181,30 +160,24 @@
                     ],
     )
     ...
-    actions.append(odom_publisher)</code></li>
-<li>
-<p>The humanoids still need a dynamic transform from  humanoid_x/odom -&gt; humanoid_x/base_link. Either implement the newly decided solution or revert the changes in the ros2_controller. To revert changes in the ros2_controller go to config_generation/scripts/generate_humanoid_control_yaml.py and change:
-   <code>python
-   "enable_odom_tf": False,</code>
-   to:
-   <code>python
-   "enable_odom_tf": True,</code>
-   Please note if the pose and orientation in both gazebo and rviz are the same after teleoping or doing navigation to not break the navigation stack for the humanoids.</p>
-</li>
-<li>
-<p>Delete the simulation/humanoid_odom_pub pkg</p>
-</li>
-<li>Build the workspace </li>
+    actions.append(odom_publisher)</code></p>
+<ol>
+<li>The humanoids still need a dynamic transform from humanoid_x/odom -&gt; humanoid_x/base_link. Either implement the newly decided solution or revert the changes in the ros2_controller. To revert changes in the ros2_controller, go to config_generation/scripts/generate_humanoid_control_yaml.py and change:</li>
 </ol>
-<h2 id="how-to-improve">How to improve</h2>
-<p>Since the active solution is hacky it is advised to work on a new solution. Here are some suggestions:</p>
-<ul>
-<li>Bridge the gz pose topics to ros2 topics. If this is the case. remove the sub-process in the simulation/humanoid_odom_pub/humanoid_odom_pub/humanoid_odom_pub.py and replace that with a subscriber to the newly created ros2 topic. The filtering will probably be the same since the gz topic atm includes poses for all models in th simulation.</li>
-<li>fix the ros2_controller's published odom_frame, this is done in the config_generation/scripts/generate_humanoid_control_yaml.py where the enable_odom_tf can be set to:
-   <code>python
-   "enable_odom_tf": True,</code>
-   Then the URDF (simulation/humanoid_support_moveit_config/config/human_support_wheels.urdf.xacro) needs to be correctly configured by probably tuning the mass, mu (friciton) or inertial tags. It was atlesat noticed that the rotation speed of the humanoid changed when these were tuned. </li>
-</ul>
+<p><code>python
+   "enable_odom_tf": False,</code></p>
+<p>to:</p>
+<p><code>python
+   "enable_odom_tf": True,</code></p>
+<p>Please note if the pose and orientation in both Gazebo and RViz are the same after teleoping or doing navigation, to not break the navigation stack for the humanoids.</p>
+<ol>
+<li>
+<p>Delete the simulation/humanoid_odom_pub pkg.</p>
+</li>
+<li>
+<p>Build the workspace.</p>
+</li>
+</ol>
               
             </div>
           </div><footer>

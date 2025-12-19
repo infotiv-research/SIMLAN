@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,13 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">SIMLAN Bringup</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#launch-arguments">Launch arguments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#diagram-of-launch-structure">Diagram of launch structure</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,55 +77,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">SIMLAN Bringup</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#launch-arguments">Launch arguments</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#diagram-of-launch-structure">Diagram of launch structure</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -129,8 +115,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -161,27 +145,30 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="simlan-bringup">SIMLAN bringup</h1>
-<p>This package is responsible for launching all things related to the simulation. The launch files in the package calls launch files in all other packages to start everything up with the following command</p>
+<p>This package is responsible for launching all things related to the simulation. The launch files in the package call launch files in all other packages to start everything up with the following command</p>
 <p><code>ros2 launch simlan_bringup full_sim.launch.py</code></p>
+<p>This is also called in the <code>sim</code> operation in control.sh:</p>
+<pre><code class="language-bash">./control.sh sim
+</code></pre>
 <h2 id="launch-arguments">Launch arguments</h2>
 <p>There are different launch arguments that can be changed to launch the simulation in different states. These can either be called from the terminal by appending the argument to the launch command above.</p>
 <p><code>rviz:='True'</code></p>
-<p>Another way to edit what is launched it to change the <em>default value</em> in <a href="launch/full_sim.launch.py"><em>full_sim.launch.py</em></a>.</p>
+<p>Another way to edit what is launched is to change the <em>default value</em> in <a href="launch/full_sim.launch.py"><em>full_sim.launch.py</em></a>.</p>
 <p><code>launch_rviz_launch_argument = DeclareLaunchArgument("rviz", default_value="False", description="To launch rviz")</code></p>
 <p>The launch arguments are then either added as a condition straight to a Node:</p>
 <p><code>condition=IfCondition(rviz)</code></p>
-<p>or passed downward to the launch file being called from the top level launch file:</p>
+<p>or passed downward to the launch file being called from the top-level launch file:</p>
 <p><code>launch_arguments={"jackal_manual_control":jackal_manual_control,}.items()</code></p>
-<p>If you use a specific argument configuration often it is best to create a new launch file, on top of <a href="launch/full_sim.launch.py"><em>full_sim.launch.py</em></a>. It can have the correct default values for all arguments and then just call on <a href="launch/full_sim.launch.py"><em>full_sim.launch.py</em></a>.</p>
+<p>If you use a specific argument configuration often, it is best to create a new launch file, on top of <a href="launch/full_sim.launch.py"><em>full_sim.launch.py</em></a>. It can have the correct default values for all arguments and then just call on <a href="launch/full_sim.launch.py"><em>full_sim.launch.py</em></a>.</p>
 <h2 id="diagram-of-launch-structure">Diagram of launch structure</h2>
-<p>This diagram is made in DrawIO and the png contains the xml code. Drop it into <a href="https://app.diagrams.net/">drawio</a> to make changes and add back to this readme.
+<p>This diagram is made in DrawIO and the PNG contains the XML code. Drop it into <a href="https://app.diagrams.net/">draw.io</a> to make changes and add back to this readme.
 <img alt="launch_structure" src="images/SMILE_IV_Jackal-Simlan_bringup%20launch.drawio.png" /></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../bt_failsafe/" class="btn btn-neutral float-left" title="Failsafe"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../pallet_truck/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../static_agent_launcher/" class="btn btn-neutral float-right" title="GPSS cameras">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -204,10 +191,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../bt_failsafe/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../pallet_truck/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../static_agent_launcher/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

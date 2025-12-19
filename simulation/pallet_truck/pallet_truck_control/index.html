@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,7 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,51 +71,37 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Pallet Truck</a>
-    <ul class="current">
-                <li class="toctree-l2"><a class="reference internal" href="../">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Control</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Pallet Truck</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck_description/urdf/">URDF</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Control</a>
     <ul class="current">
     </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck_navigation/">Navigation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_robot/">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_support_moveit_config/">Humanoid Moveit</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -125,8 +111,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -146,7 +130,6 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Simulation</li>
-          <li class="breadcrumb-item">Pallet Truck</li>
       <li class="breadcrumb-item active">Control</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/pallet_truck/pallet_truck_control/README.md">Edit on infotiv-research/SIMLAN</a>
@@ -160,7 +143,6 @@
                 <h1 id="pallet-truck-control">Pallet Truck Control</h1>
 <p>The <code>pallet_pallet_truck_control</code> package includes all nodes necessary for the control of the robots. These include the following:</p>
 <ul>
-<li><strong>node</strong>: description</li>
 <li><strong>twist_mux</strong>: Takes in velocity topics and orders them in order of relevance. from highest to lowest: /key_vel, /safety_vel, / scenario_vel, /nav_vel, /cmd_vel</li>
 <li><strong>twist_stamper</strong>: As of ros2 jazzy the ros2_controllers need the twist messages to be stamped, therefore the stamper was introduced</li>
 <li><strong>ros2_control_node</strong>: Main node which uses the control.yaml file and maps "hardware" to controller actions. </li>

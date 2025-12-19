@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,49 +71,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -123,8 +109,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -155,11 +139,11 @@
               
                 <h2 id="preparing-data">Preparing Data</h2>
 <h3 id="first-build-the-package">First build the package</h3>
-<p>for example with:</p>
+<p>For example with:</p>
 <pre><code class="language-bash">colcon build --merge-install --symlink-install --packages-select visualize_real_data
 </code></pre>
 <p>After that, you can add the required data into the <code>share/</code> folder that is created during the build process.</p>
-<p>If everything has been built correctly you should find the following folder-structure:</p>
+<p>If everything has been built correctly, you should find the following folder-structure:</p>
 <pre><code class="language-bash">install/
 └── share/
     └── visualize_real_data/
@@ -168,14 +152,12 @@
             │   └── images
             └── data
 </code></pre>
-<p>The empty <code>data</code> and <code>images</code> placeholder files ensure that ROS 2 recognizes and preserves the folder structure during the build
-and should <strong>not</strong> be removed.</p>
-<p>If you have already built the package before there might be another directory inside the <code>data/</code>  folder called <code>rosbags</code>.
+<p>The empty <code>data</code> and <code>images</code> placeholder files ensure that ROS 2 recognizes and preserves the folder structure during the build, and should <strong>not</strong> be removed.</p>
+<p>If you have already built the package before, there might be another directory inside the <code>data/</code> folder called <code>rosbags</code>.
 More on that folder later.</p>
 <h3 id="add-the-data-after-building">Add the data after building</h3>
 <p>After the build completes, you can add your data files to the generated <code>share/</code> folder inside your package.</p>
-<p>By default the package expects to find the trajectory data inside the <code>data/</code> folder as <code>.json</code>
-and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like this:</p>
+<p>By default, the package expects to find the trajectory data inside the <code>data/</code> folder as <code>.json</code>, and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like this:</p>
 <pre><code class="language-bash">install/
 └── share/
     └── visualize_real_data/
@@ -187,7 +169,9 @@ and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like
 </code></pre>
 <p>Notes:</p>
 <ul>
-<li>The <strong>folder-names are configurable</strong>, as long as the settings in <code>params.yaml</code> match.</li>
+<li>
+<p>The <strong>folder-names are configurable</strong>, as long as the settings in <code>params.yaml</code> match.</p>
+</li>
 <li>
 <p>You can:</p>
 </li>
@@ -205,16 +189,14 @@ and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like
 <h3 id="important-notes">Important Notes</h3>
 <ul>
 <li>You do <em>not</em> need to rebuild the package after adding or modifying data in <code>share/</code>.</li>
-<li>In fact, <strong>rebuilding the package could overwrite or remove any manually added files</strong> in the <code>share/</code> folder,
-  so avoid rebuilding once your data is in place.</li>
+<li>In fact, <strong>rebuilding the package could overwrite or remove any manually added files</strong> in the <code>share/</code> folder, so avoid rebuilding once your data is in place.</li>
 </ul>
 <h2 id="config-file">Config file</h2>
 <p>When your data is in place, you may want to review the config parameters in <code>params.yaml</code>. This step is often optional, as default settings typically work well.</p>
 <h3 id="paramsyaml-overview"><code>params.yaml</code> Overview</h3>
 <h4 id="prepare_data-section"><code>prepare_data</code> section:</h4>
 <ul>
-<li>The Parameters here have to be set before <code>prepare.launch.py</code> is run. Changes made afterwards will not
-  effect the preparation process (image-&gt;PointCloud2).</li>
+<li>The Parameters here have to be set before <code>prepare.launch.py</code> is run. Changes made afterwards will not affect the preparation process (image-&gt;PointCloud2).</li>
 </ul>
 <table>
 <thead>
@@ -315,7 +297,7 @@ and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like
 </tr>
 <tr>
 <td><code>use_cmd_vel</code></td>
-<td>If <code>true</code>, robots are driven with velocity commands; otherwise, teleportation is used to reenact the scenario. When set to <code>true</code> it is important the simulation runs close to 100% real-time.</td>
+<td>If <code>true</code>, robots are driven with velocity commands; otherwise, teleportation is used to reenact the scenario. When set to <code>true</code>, it is important the simulation runs close to 100% real-time.</td>
 <td><code>true</code></td>
 </tr>
 </tbody>
@@ -370,9 +352,9 @@ and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like
 <p>Once configured, run:</p>
 <pre><code class="language-bash">ros2 launch visualize_real_data prepare.launch.py
 </code></pre>
-<p>This will first start the <code>orientation_fixer</code> node which adds an orientation to the data based on the angle between points in the trajectory. Afterwards the data processing is started and generates a rosbag file stored in a <code>rosbags/</code> folder inside the package's <code>share/</code> directory.</p>
+<p>This will first start the <code>orientation_fixer</code> node, which adds an orientation to the data based on the angle between points in the trajectory. Afterwards, the data processing is started and generates a rosbag file stored in a <code>rosbags/</code> folder inside the package's <code>share/</code> directory.</p>
 <blockquote>
-<p><strong>NOTE:</strong> If orientation is already given, change </p>
+<p><strong>NOTE:</strong> If orientation is already given, change:</p>
 </blockquote>
 <ul>
 <li>Rosbags are named using the name of the JSON file used and timestamps (e.g., <code>my_recording_20250722_153045</code> if the JSON file is named <code>my_recording.json</code>).</li>
@@ -380,7 +362,7 @@ and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like
 <li>You can delete old rosbags manually from the <code>rosbags/</code> folder if needed.</li>
 </ul>
 <h2 id="sending-data">Sending Data</h2>
-<p>After processing the data you can send it to RViz:</p>
+<p>After processing the data, you can send it to RViz:</p>
 <ol>
 <li>
 <p>Make sure you’ve added the following displays to RViz:</p>
@@ -409,8 +391,9 @@ and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like
 </ul>
 <h3 id="fixing-rviz">Fixing RViz</h3>
 <ul>
-<li>Usually the displays in RViz have to be configured to subscribe to the correct topics,
-  and the PointCloud2 displays size have to match the image_scale defined in the <code>params.yaml</code> config file to look right.</li>
+<li>
+<p>Usually the displays in RViz have to be configured to subscribe to the correct topics, and the PointCloud2 display's size has to match the image_scale defined in the <code>params.yaml</code> config file to look right.</p>
+</li>
 <li>
 <p>You can also change <code>Alpha</code> in the PointCloud display to see through the image.</p>
 </li>

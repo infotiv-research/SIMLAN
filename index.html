@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -44,9 +44,9 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href=".">SIMLAN, Simulation for Multi-Camera Robotics</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#simlan-features-simlan-demo">SIMLAN Features   [ SIMLAN demo]</a>
+    <li class="toctree-l2"><a class="reference internal" href="#simlan-features">SIMLAN Features</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#installation-demo">Installation [ Demo]</a>
+    <li class="toctree-l2"><a class="reference internal" href="#installation-demo">Installation [📹 Demo]</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a>
     </li>
@@ -54,15 +54,17 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#gpss-controls-pallet-trucks-aruco-demo">GPSS controls (pallet trucks, aruco) [ Demo]</a>
+    <li class="toctree-l2"><a class="reference internal" href="#gpss-controls-pallet-trucks-aruco-demo">GPSS controls (pallet trucks, aruco) [📹 Demo]</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#rita-controls-humanoid-robotic-arm-demo">RITA controls (humanoid, robotic arm) [ Demo]</a>
+    <li class="toctree-l2"><a class="reference internal" href="#rita-controls-humanoid-robotic-arm-demo">RITA controls (humanoid, robotic arm) [📹 Demo]</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#arm-controls">Arm controls</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scenarios">Scenarios</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#advanced-options">Advanced options</a>
         <ul>
@@ -99,7 +101,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -109,49 +111,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="simulation/pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="simulation/humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -161,8 +149,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="resources/diagrams/">Diagrams</a>
                   </li>
@@ -191,10 +177,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="simlan-simulation-for-multi-camera-robotics-300">SIMLAN, Simulation for Multi-Camera Robotics (3.0.0)</h1>
-<p>This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by <a href="https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html">GPSS (Generic photo-based sensor system)</a> that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
-[<a href="https://www.youtube.com/watch?v=DA7lKiCdkCc"><img alt="" src="/resources/logos/youtube.png" /> GPSS demo</a>]</p>
-<h2 id="simlan-features-simlan-demo">SIMLAN Features   [<a href="https://www.youtube.com/watch?v=mhA51PPdABc"><img alt="" src="/resources/logos/youtube.png" /> SIMLAN demo</a>]</h2>
+                <h1 id="simlan-simulation-for-multi-camera-robotics-401">SIMLAN, Simulation for Multi-Camera Robotics (4.0.1)</h1>
+<p>This simulation environment, based on the Ignition Gazebo simulator and ROS 2, resembles a Volvo Trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on a multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by <a href="https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html">GPSS (Generic photo-based sensor system)</a> that utilizes ceiling-mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
+[<a href="https://www.youtube.com/watch?v=DA7lKiCdkCc">📹 GPSS demo</a>]</p>
+<ul>
+<li>🔗 <a href="https://infotiv-research.github.io/SIMLAN/">Online Documentation</a></li>
+<li>📃 <a href="SIMLAN.pdf">PDF Documentation</a></li>
+</ul>
+<h2 id="simlan-features">SIMLAN Features</h2>
 <ul>
 <li>Ignition Gazebo</li>
 <li>Library of assets</li>
@@ -204,54 +194,43 @@
 <li>Simple GPSS (Generic Photo-based Sensor System) navigation</li>
 <li>Multi-Robot localization and navigation using Nav2</li>
 <li>Bird's-Eye view projection</li>
-<li>Multi-Sensor Support (LiDAR, RGB camera, semantic segmentation, Depth etc.)</li>
-<li>Geofencing for safe zones and safestop on collision</li>
+<li>Multi-Sensor Support (LiDAR, RGB camera, semantic segmentation, depth, etc.)</li>
+<li>Geofencing for safe zones and safe stop on collision</li>
 <li>Motion capture for Human-Robot Collaboration/Interaction (HRC/HRI)</li>
 </ul>
-<p>Please click the youTube link below to view the SIMLAN demo video:</p>
-<p><img alt="SIMLAN, Simulation for Indoor Multi-Camera Localization and Navigation" src="resources/demo.png" /></p>
-<p>Here are list of advantages of using SIMLAN Multi-Camera system</p>
-<ul>
-<li>Rapid prototyping and iteration of ML based algorithm. (e.g. reinforcement learning)</li>
-<li>Enhanced monitoring and coordination using bird eye view</li>
-<li>Simplified robot design and maintenance.</li>
-<li>Extendible with additional ML based vision systems</li>
-<li>Safety testing without physical risk or privacy concerns</li>
-<li>Scalable and reproducible testing (CI/CD)</li>
-<li>Cost-effective development</li>
-</ul>
-<h2 id="installation-demo">Installation [<a href="https://www.youtube.com/watch?v=DgJXlsXUa-w"><img alt="" src="/resources/logos/youtube.png" /> Demo</a>]</h2>
+<p>📹 Click the YouTube link below to view the SIMLAN demo video:</p>
+<p><a href="https://www.youtube.com/watch?v=FJcsVDP3DHg"><img alt="SIMLAN demo" src="https://img.youtube.com/vi/FJcsVDP3DHg/0.jpg" /></a></p>
+<h2 id="installation-demo">Installation [<a href="https://www.youtube.com/watch?v=DgJXlsXUa-w">📹 Demo</a>]</h2>
 <h3 id="dependencies">Dependencies</h3>
-<p><strong>Ubuntu 24.04:</strong> use instruction in <a href="dependencies/#linux-dependencies">dependencies.md#linux-dependencies</a> to install docker and ensure that your linux user account has <code>docker</code> access.
-<em>Attention</em>: Make sure to restart the computer (for the changes in group membership to take effect.) before proceeding to the next step.</p>
-<p><strong>Windows 11:</strong> use instruction in <a href="dependencies/#windows-dependencies">dependencies.md#windows-dependencies</a> to install dependencies.</p>
+<p><strong>Ubuntu 24.04:</strong> use the instructions in <a href="dependencies/#linux-dependencies">dependencies.md#linux-dependencies</a> to install Docker and ensure that your Linux user account has <code>docker</code> access.
+<em>Attention</em>: Make sure to restart the computer (for the changes in group membership to take effect) before proceeding to the next step.</p>
+<p><strong>Windows 11:</strong> use the instructions in <a href="dependencies/#windows-dependencies">dependencies.md#windows-dependencies</a> to install dependencies.</p>
 <p><strong>Production environment</strong>: follow installation procedure used in <a href=".devcontainer/Dockerfile">.devcontainer/Dockerfile</a> to install dependencies.</p>
-<p><strong>Development environment</strong>: to improve collaboration we use vscode and docker as explained in <a href="https://www.allisonthackston.com/articles/docker-development.html">this instruction</a> and <a href="https://github.com/athackst/dockerfiles">docker files</a>.
+<p><strong>Development environment</strong>: To improve collaboration we use VS Code and Docker as explained in <a href="https://www.allisonthackston.com/articles/docker-development.html">this instruction</a> and <a href="https://github.com/athackst/dockerfiles">docker files</a>.
 Install Visual Studio Code (VS Code) and open the project folder. VS Code will prompt you to install the required extension dependencies.
-Make sure the <code>Dev containers</code> extension is installed. Reopen the project in VS Code, and you will be prompted to rebuild the container. Accept the prompt, this process may take a few minutes.
+Make sure the <code>Dev containers</code> extension is installed. Reopen the project in VS Code, and you will be prompted to rebuild the container. Accept the prompt; this process may take a few minutes.
 Once VS Code is connected to Docker (as shown in the image below), open the terminal and run the following commands:</p>
 <p><img alt="dev container in vscode" src="resources/vscode.png" /></p>
-<p>(if you don't see this try to build manually in vscode by pressing <code>Ctrl + Shift + P</code> and select <code>Dev containers: Rebuild and Reopen in container</code>.
-)</p>
+<p>(if you don't see this try to build manually in VS Code by pressing <code>Ctrl + Shift + P</code> and select <code>Dev Containers: Rebuild and Reopen in Container</code>.)</p>
 <h3 id="quick-start">Quick Start</h3>
 <p>The best place to learn about the various features, start different components, and understand the project structure is <a href="control.sh"><code>./control.sh</code></a>.</p>
-<p><em>Attention</em>: The following commands (using <code>./control.sh</code>) are executed in a separate terminal tab inside <em>vscode</em>.</p>
-<p>To kill all the relevant process (related to gazebo, ros2), delete build files, delete recorded images and rosbag files using the following command:</p>
+<p><em>Attention</em>: The following commands (using <code>./control.sh</code>) are executed in a separate terminal tab inside VS Code.</p>
+<p>To kill all the relevant processes (related to Gazebo and ROS 2), delete build files, delete recorded images and rosbag files using the following command:</p>
 <pre><code class="language-bash">./control.sh clean
 </code></pre>
-<p>To clean up and build the ros2 simulation</p>
+<p>To clean up and build the ROS 2 simulation</p>
 <pre><code class="language-bash">./control.sh build
 </code></pre>
-<p>(optionally, in vscode you can click on Terminal-&gt; Run Task/Run build Task or use <code>Ctrl + Shift + B</code>)</p>
-<h2 id="gpss-controls-pallet-trucks-aruco-demo">GPSS controls (pallet trucks, aruco) [<a href="https://www.youtube.com/watch?v=_UhRFR-L9iQ"><img alt="" src="/resources/logos/youtube.png" /> Demo</a>]</h2>
-<p>It is possible for the cameras to detect ArUco markers on the floor and publish their location to TF, both relative to the camera, and the ArUcos transform from origin. The package <a href="./camera_utility/aruco_localization">./camera_utility/aruco_localization</a> contain the code for handling ArUco detection.</p>
-<p>You can also use nav2 to make a robot_agent (that can be either robot/pallet_truck) navigate by itself to a goal position. You can find the code in <a href="simulation/pallet_truck/pallet_truck_navigation">simulation/pallet_truck/pallet_truck_navigation</a></p>
+<p>(optionally, in VS Code you can click on Terminal-&gt; Run Task/Run Build Task or use <code>Ctrl + Shift + B</code>)</p>
+<h2 id="gpss-controls-pallet-trucks-aruco-demo">GPSS controls (pallet trucks, aruco) [<a href="https://www.youtube.com/watch?v=_UhRFR-L9iQ">📹 Demo</a>]</h2>
+<p>It is possible for the cameras to detect ArUco markers on the floor and publish their location to TF, both relative to the camera, and the ArUcos transform from origin. The package <a href="./camera_utility/aruco_localization">./camera_utility/aruco_localization</a> contains the code for handling ArUco detection.</p>
+<p>You can also use Nav2 to make a robot_agent (that can be either robot/pallet_truck) navigate by itself to a goal position. You can find the code in <a href="simulation/pallet_truck/pallet_truck_navigation">simulation/pallet_truck/pallet_truck_navigation</a></p>
 <p><strong>Run these three in separate terminals</strong></p>
 <pre><code class="language-bash">./control.sh gpss # spawn the simulation, robot_agents and GPSS ArUco detection
 ./control.sh nav  # spawn map server, and separate nav2 stack in a separate namespace for each robot_agent
 ./control.sh send_goal # send navigation goals to nav2 stack for each robot_agent
 </code></pre>
-<p>If you want to control any robot (pallet truck, humanoid, etc) manually you can run the following command. Remember to specify what robot you want to control by adding its namespace as argument, i.e. <code>./control.sh teleop pallet_truck_1</code></p>
+<p>If you want to control any robot (pallet truck, humanoid, etc.) manually you can run the following command. Remember to specify what robot you want to control by adding its namespace as argument, i.e. <code>./control.sh teleop pallet_truck_1</code></p>
 <pre><code class="language-bash">./control.sh teleop ${YOUR_ROBOT_NAMESPACE}
 </code></pre>
 <p>If you want to record any of your topics during the tests you can run the following command. Change the topic in the control.sh script: <code>ros2 bag record /topic</code> to whatever topic you want to record.</p>
@@ -263,25 +242,25 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 <p>If you want to do a camera dump and save the image from each camera as a .png run the following command. The images will appear at <code>/src/camera_utility/camera_number</code>.</p>
 <pre><code class="language-bash">./control.sh camera_dump
 </code></pre>
-<p><img alt="" src="/resources/different-views.png" /></p>
-<p>If you want to take a screenshot of one of the cameras view, run the following command. Replace <code>###</code> with the camera you want to take a screenshot of. (163, 164, 165 or 166)</p>
+<p><img alt="" src="resources/different-views.png" /></p>
+<p>If you want to take a screenshot of one of the camera views, run the following command. Replace <code>###</code> with the camera you want to take a screenshot of. (163, 164, 165 or 166)</p>
 <pre><code class="language-bash">./control.sh screenshot ###
 </code></pre>
 <pre><code class="language-bash">./control.sh birdeye
 </code></pre>
-<p><img alt="" src="/resources/stitched.png" /></p>
-<p>If you want to add the tf links between the cameras and the ArUco markers without running the <code>gpss</code> command you can run the following command. This is not that usable as the <code>gpss</code> run this as well, but it can be good for debugging.</p>
+<p><img alt="" src="resources/stitched.png" /></p>
+<p>If you want to add the TF links between the cameras and the ArUco markers without running the <code>gpss</code> command, you can run the following command. This is primarily useful for debugging, as <code>gpss</code> runs this as well.</p>
 <pre><code class="language-bash">./control.sh aruco_detection
 </code></pre>
-<p>Finally, to view the bird's-eye perspective from each camera, run the following command and open <code>rviz</code> Then, navigate to the scroll menu to the left, and under "Camera" change the Topic <code>/static_agents/camera_XXX/image_projected</code> topic to visualize the corresponding camera feed:</p>
-<p><img alt="" src="/resources/aruco_localisation.png" /></p>
-<h2 id="rita-controls-humanoid-robotic-arm-demo">RITA controls (humanoid, robotic arm) [<a href="https://www.youtube.com/watch?v=EiCNiPeifPk"><img alt="" src="/resources/logos/youtube.png" /> Demo</a>]</h2>
+<p>Finally, to view the bird's-eye perspective from each camera, run the following command and open <code>rviz</code>. Then, navigate to the left panel and under "Camera" change the Topic <code>/static_agents/camera_XXX/image_projected</code> to visualize the corresponding camera feed:</p>
+<p><img alt="" src="resources/aruco_localisation.png" /></p>
+<h2 id="rita-controls-humanoid-robotic-arm-demo">RITA controls (humanoid, robotic arm) [<a href="https://www.youtube.com/watch?v=EiCNiPeifPk">📹 Demo</a>]</h2>
 <pre><code class="language-bash">./control.sh humanoid
 </code></pre>
-<p>To move humanoid around in the simulator</p>
+<p>To move the humanoid around in the simulator</p>
 <pre><code class="language-bash">./control.sh teleop ${YOUR_HUMANOID_NAMESPACE}
 </code></pre>
-<p><img alt="" src="/resources/arm-humanoid.png" /></p>
+<p><img alt="" src="resources/arm-humanoid.png" /></p>
 <h4 id="arm-controls">Arm controls</h4>
 <p>Spawn the Panda arm inside SIMLAN and instruct it to pick and place a box around with the following commands:</p>
 <pre><code>./control panda
@@ -289,11 +268,23 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 ./control pick
 </code></pre>
 <h2 id="testing">Testing</h2>
-<p>Integration tests can be found inside of the <a href="./integration_tests/test/">test</a> package. Running the tests help maintain the project's quality. For more information about how the tests are setup, checkout the package <a href="integration_tests/">README</a> To run all tests, run the following command:</p>
+<p>Integration tests can be found inside of the <a href="./integration_tests/test/">integration_tests/test/</a> package. Running the tests helps maintain the project's quality. For more information about how the tests are set up, check out the package <a href="integration_tests/">README</a>. To run all tests, run the following command:</p>
 <pre><code>./control.sh test
 </code></pre>
+<h2 id="scenarios">Scenarios</h2>
+<p>In <a href="scenarios.sh">scenarios.sh</a> you can run predefined scenarios of the project. At the bottom of the file, commands are shown how to run it; otherwise each scenario is referenced by a number.
+Currently there are 3 scenarios and to run them, run this command in the shell</p>
+<p>Before running scenario 1 that uses GPSS cameras, make sure that <code>CAMERA_ENABLED_IDS</code> in <code>config.sh</code> has the list of GPSS cameras.</p>
+<pre><code>./control.sh build
+./scenarios.sh 1 # navigation using GPSS cameras (real time factor need to be updated)
+./scenarios.sh 2 # Humanoid and robotic arm
+./scenarios.sh 3 # Humanoid navigation without GPSS cameras (navigate_w_replanning_and_recovery_robot_agent_X.xml need to be updated )
+./scenarios.sh 4 # Record the video demo
+</code></pre>
+<p>If you want to see the planning route for all agents, load <code>scenario_3_planning.rviz</code> in Rviz.</p>
+<p>Keep in mind to change <code>real_time_factor</code> in <a href="/simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro"><code>simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro</code></a> to small values to slow down the simulator (e.g. 0.05-0.1) before building the project. <code>./control.sh build</code></p>
 <h2 id="advanced-options">Advanced options</h2>
-<p>See <a href="resources/ISSUES/">resources/ISSUES.md</a> to learn about additional advanced options and to check known issues before reporting any issue or requesting new features. To start the project <strong>without NVIDIA GPU</strong> please comment out these lines in <code>docker-compose.yaml</code> as shown below:</p>
+<p>See <a href="resources/ISSUES/">resources/ISSUES.md</a> to learn about additional advanced options and to check known issues before reporting any issue or requesting new features. To start the project <strong>without NVIDIA GPU</strong>, please comment out these lines in <code>docker-compose.yaml</code> as shown below:</p>
 <pre><code class="language-bash">  #   runtime: nvidia
   #
   # factory_simulation_nvidia:
@@ -308,9 +299,9 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
   #            count: &quot;all&quot;
   #            capabilities: [compute,utility,graphics,display]
 </code></pre>
-<p><code>camera_enabled_ids</code> specifies which cameras are enabled in the scene for ArUco code detection and birdeye view.</p>
+<p><code>camera_enabled_ids</code> specifies which cameras are enabled in the scene for ArUco code detection and bird's-eye view.</p>
 <h3 id="customized-startup">Customized startup</h3>
-<p>In <code>config.sh</code> it is possible to customize your scenarios. From there you can edit what world you want to run, how many cameras you want enabled, and also edit Humanoid related properties. Modifying these variables are preferred, rather than modifying the <code>control.sh</code> file.</p>
+<p>In <code>config.sh</code> it is possible to customize your scenarios. From there you can edit what world you want to run, how many cameras you want enabled, and also edit Humanoid-related properties. Modifying these variables is preferred, rather than modifying the <code>control.sh</code> file.</p>
 <h3 id="world-fidelity">World fidelity</h3>
 <p>in the <code>config.sh</code> script, you can adjust the world fidelity</p>
 <p>The active worlds are:</p>
@@ -341,23 +332,30 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 </tbody>
 </table>
 <h3 id="filtering-log-output">Filtering log output</h3>
-<p>In <code>config.sh</code> you can set the level of logs you want outputted into the terminal. Per default it is set to "info" to allow all logs. Possible values are: "debug", "info", "warn", and "error". Setting it to "warn" filters out all debug and info messages. Additionally, to filter out specific lines you can add the phrase you want filtered, inside of <code>log_blacklist.txt</code> and setting the <code>log_level</code> flag to "warn" or "error" will start filtering out all phrases found in the blacklist.</p>
+<p>In <code>config.sh</code> you can set the level of logs you want outputted into the terminal. By default it is set to "info" to allow all logs. Possible values are: "debug", "info", "warn", and "error". Setting it to "warn" filters out all debug and info messages. Additionally, to filter out specific lines you can add the phrase you want filtered inside <code>log_blacklist.txt</code> and setting the <code>log_level</code> flag to "warn" or "error" will start filtering out all phrases found in the blacklist.</p>
 <h3 id="older-versions">Older versions</h3>
 <ul>
-<li><a href="https://github.com/infotiv-research/SIMLAN/tree/gz_classic_humble"><code>gz_classic_humble</code></a> branch contain code for  <strong>Gazebo Classic (Gazebo11)</strong> that has reached end-of-life (EOL).</li>
-<li><a href="https://github.com/infotiv-research/SIMLAN/tree/ign_humble"><code>ign_humble</code></a> branch contain code for  <strong>ROS2 humble &amp; Gazebo ignition</strong>, an earlier version of this repository.</li>
+<li><a href="https://github.com/infotiv-research/SIMLAN/tree/gz_classic_humble"><code>gz_classic_humble</code></a> branch contains code for  <strong>Gazebo Classic (Gazebo11)</strong> that has reached end-of-life (EOL).</li>
+<li><a href="https://github.com/infotiv-research/SIMLAN/tree/ign_humble"><code>ign_humble</code></a> branch contains code for  <strong>ROS 2 Humble &amp; Ignition Gazebo</strong>, an earlier version of this repository.</li>
 </ul>
 <h2 id="documentation">Documentation</h2>
-<p>Learn more about the project by reading these documents:</p>
+<p>Learn about the project by reading 📃 <a href="https://infotiv-research.github.io/SIMLAN">online documentation page</a></p>
+<p>You can build the online documentation page or a PDF file by running scripts in <a href="resources/build-documentation/"><code>resources/build-documentation</code></a>.</p>
 <ul>
 <li>
 <p><a href="control.sh"><code>control.sh</code> script</a> is  a shortcut to run different launch scripts, please also see <a href="resources/diagrams/">these diagram</a>.</p>
 </li>
 <li>
-<p><a href="config.sh"><code>config.sh</code></a> contains information about, which world is loaded, which cameras are active, what and where the robots are spawned.</p>
+<p><a href="config.sh"><code>config.sh</code></a> contains information about which world is loaded, which cameras are active, and what and where the robots are spawned.</p>
 </li>
 <li>
-<p><a href="PRESENTATION.md">Marp Markdown Presentation</a></p>
+<p><a href="presentation/">Marp Markdown Presentation</a></p>
+</li>
+<li>
+<p><a href="config_generation/">Configuration Generation</a></p>
+</li>
+<li>
+<p><a href="resources/diagrams/launch_bringup.drawio.png">Bringup and launch files</a></p>
 </li>
 <li>
 <p><a href="simulation/pallet_truck/pallet_truck_navigation/">Pallet Truck Navigation Documentation</a></p>
@@ -367,9 +365,6 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 </li>
 <li>
 <p><a href="humanoid_utility/">Humanoid Utilities (pose2motion)</a></p>
-</li>
-<li>
-<p><a href="config_generation/">Configuration Generation</a></p>
 </li>
 <li>
 <p><a href="simulation/"><code>simulation/</code></a>: ROS2 packages</p>
@@ -426,7 +421,7 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 </tr>
 </tbody>
 </table>
-<p><a href="https://github.com/infotiv-research/SIMLAN">SIMLAN</a> project is started and is currently maintained by <a href="https://github.com/ebadi">Hamid Ebadi</a>. To see a complete list of contributors see  the <a href="CHANGELOG/">changelog</a>.</p>
+<p><a href="https://github.com/infotiv-research/SIMLAN">SIMLAN</a> project was started and is currently maintained by <a href="https://github.com/ebadi">Hamid Ebadi</a>. To see a complete list of contributors see the <a href="CHANGELOG/">changelog</a>.</p>
               
             </div>
           </div><footer>
@@ -475,5 +470,5 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2025-11-14 08:15:46.213786+00:00
+Build Date UTC : 2025-12-19 19:18:44.625010+00:00
 -->

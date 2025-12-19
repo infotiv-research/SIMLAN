@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -58,10 +58,10 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../../simulation/">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../simulation/static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,51 +71,37 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../simulation/bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../../simulation/pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../../simulation/humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Pose to Motion AutoGluon model</a>
     <ul class="current">
     </ul>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../simulation/raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../simulation/raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -125,8 +111,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -145,7 +129,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Humanoid Motion Capture Utility</li>
+          <li class="breadcrumb-item">Simulation</li>
       <li class="breadcrumb-item active">Pose to Motion AutoGluon model</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/humanoid_utility/pose_to_motion/autogluon/README.md">Edit on infotiv-research/SIMLAN</a>
@@ -156,36 +140,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="autogluon-model-configuration">Autogluon Model configuration</h1>
+                <h2 id="autogluon-model-configuration">Autogluon Model configuration</h2>
 <p>This section describes how AutoGluon is configured for a multi-label regression problem in our current setup.</p>
-<p>To use AutoGluon for multi-label regression problem, first we need to create a MultilabelPredictor by setting
--   <strong>labels</strong>: the labels that we want to predict.
--   <strong>problem_types</strong>: the problem type for each TabularPredictor.
--   <strong>path</strong>: path to directory where models and intermediate outputs should be saved.
--   <strong>consider_labels_correlation</strong>: Whether the predictions of multiple labels should account for label correlations or predict each label independently of the others.</p>
-<p>For <strong>consider_labels_correlation</strong>, we set it to FALSE in order to disable using one label as feature for another. The reasons for this is:
-- Each joint has its own degree of freedom and control and it is independent from the rest of joints
-- Training stability without error propagation
-- When set to False, the training will be faster
-- more general and simple model</p>
-<p>For training the model, we should take into consideration the following hyperparameters related to :
-- Stacking: which is an ensemble technique where multiple models are trained and then a "meta-model" learns how to combine their predictions. If we use dynamic Stacking, it will automatically determines the optimal number of stacking layers and which models to include.
-- Bagging: multiple training versions of the same model on different subsets of data and combining their predictions.
-- preset: which condense the complex hyperparameter setups. For example, We can use a small model size by using medium_quality which will lead to a faster training but with less prediction quality. Or we can use large model by setting preset to best_quality which will lead to a better performance but much longer training time.</p>
-<p>The current autogluon uses the following hyperparameters:
-- <strong>dynamic_stacking=False</strong>: Disables the automatic stacking optimization.
-- <strong>num_stack_levels=0</strong>: no stacking level.
-- <strong>auto_stack=False</strong>: Disables automatic ensemble stacking.
-- <strong>num_bag_folds = 0</strong> and num_bag_sets = 1 which meaning no bagging.</p>
-<p>So here is the current training flow for each joint :
-- Train NN_TORCH, GBM and XGB models
-- No bagging: Each model trains on full dataset once, no multiple training versions of the same model on different subsets of data and combining their predictions.
-- No stacking: No meta-models combining predictions
-- Best model selection: Choose best performing model per joint</p>
-<p><strong>Eliminating Dynamic stacking and multi-level stacking will lead to 50% to 70% time saving.</strong></p>
+<p>To use AutoGluon for a multi-label regression problem, first we need to create a MultilabelPredictor by setting</p>
+<ul>
+<li><strong>labels</strong>: the labels that we want to predict.</li>
+<li><strong>problem_types</strong>: the problem type for each TabularPredictor.</li>
+<li><strong>path</strong>: path to the directory where models and intermediate outputs should be saved.</li>
+<li><strong>consider_labels_correlation</strong>: Whether the predictions of multiple labels should account for label correlations or predict each label independently of the others.</li>
+</ul>
+<p>For <strong>consider_labels_correlation</strong>, we set it to FALSE in order to disable using one label as a feature for another. The reasons for this are:</p>
+<ul>
+<li>Each joint has its own degree of freedom and control, and it is independent from the rest of the joints.</li>
+<li>Training stability without error propagation.</li>
+<li>When set to False, the training will be faster.</li>
+<li>More general and simple model.</li>
+</ul>
+<p>For training the model, we should take into consideration the following hyperparameters related to:</p>
+<ul>
+<li>Stacking: which is an ensemble technique where multiple models are trained and then a "meta-model" learns how to combine their predictions. If we use dynamic Stacking, it will automatically determine the optimal number of stacking layers and which models to include.</li>
+<li>Bagging: multiple training versions of the same model on different subsets of data and combining their predictions.</li>
+<li>preset: which condenses the complex hyperparameter setups. For example, we can use a small model size by using medium_quality, which will lead to faster training but with less prediction quality. Or we can use a large model by setting preset to best_quality, which will lead to better performance but much longer training time.</li>
+</ul>
+<p>The current AutoGluon uses the following hyperparameters:</p>
+<ul>
+<li><strong>dynamic_stacking=False</strong>: Disables the automatic stacking optimization.</li>
+<li><strong>num_stack_levels=0</strong>: no stacking level.</li>
+<li><strong>auto_stack=False</strong>: Disables automatic ensemble stacking.</li>
+<li><strong>num_bag_folds=0</strong> and <strong>num_bag_sets=1</strong>, which means no bagging.</li>
+</ul>
+<p>So here is the current training flow for each joint:</p>
+<ul>
+<li>Train NN_TORCH, GBM, and XGB models.</li>
+<li>No bagging: Each model trains on the full dataset once, no multiple training versions of the same model on different subsets of data and combining their predictions.</li>
+<li>No stacking: No meta-models combining predictions.</li>
+<li>Best model selection: Choose the best performing model per joint.</li>
+</ul>
+<p><strong>Eliminating dynamic stacking and multi-level stacking will lead to 50% to 70% time savings.</strong></p>
 <p>Overall, this configuration prioritizes training speed and stability over ensemble complexity, making it suitable for fast iteration and independent joint predictions.</p>
-<h1 id="hyperparameter-tuning">Hyperparameter Tuning</h1>
-<p>In The current AutoGluon model, we are training NN_TORCH, GBM and XGB models by using their default built-in hyperparameter settings.
+<h2 id="hyperparameter-tuning">Hyperparameter Tuning</h2>
+<p>In the current AutoGluon model, we are training NN_TORCH, GBM, and XGB models by using their default built-in hyperparameter settings.
 The next step for performance improvement is to add the <strong>hyperparameter_tune_kwargs argument</strong> to enable AutoGluon’s internal hyperparameter optimization.
 This will allow AutoGluon to automatically search for the best hyperparameters for each model type, balancing training time and prediction quality.</p>
               
@@ -193,7 +187,7 @@ This will allow AutoGluon to automatically search for the best hyperparameters f
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../../simulation/raw_models/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../../simulation/moveit2/" class="btn btn-neutral float-right" title="Panda MoveIt2">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -219,7 +213,7 @@ This will allow AutoGluon to automatically search for the best hyperparameters f
       <span><a href="../../" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../../simulation/raw_models/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../../simulation/moveit2/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

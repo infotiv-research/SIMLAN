@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/humanoid_utility/DEBUG/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>DEBUG - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "DEBUG";
+        var mkdocs_page_input_path = "humanoid_utility/DEBUG.md";
+        var mkdocs_page_url = "/SIMLAN/humanoid_utility/DEBUG/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/">Pallet Truck</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_control/">Control</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">DEBUG</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/humanoid_utility/DEBUG.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="preprocessing">Preprocessing</h2>
+<p><img alt="pose_landmarks_index.png" src="resources/pose_landmarks_index.png" /></p>
+<p>https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker</p>
+<p>Three steps of normalization (feature engineering) of MediaPipe landmarks:</p>
+<ul>
+<li>Position normalization</li>
+<li>Scale normalization</li>
+<li>Rotation normalization</li>
+</ul>
+<p><img alt="normalization.png" src="resources/Normalisation.drawio.png" /></p>
+<h2 id="dataset-preprocessing">Dataset preprocessing</h2>
+<p>The diagram below shows the overall workflow of this project. Pose and motion data are first collected from JSON files and combined into a single CSV file. These processed CSV files are ready to be fed into a model of your choice, AutoGluon or PyTorch. See below to find more information about the dataset or more about the <a href="#models">models</a>.</p>
+<blockquote>
+<p>The dataset, inputs, and outputs are in <code>humanoid_utility/DATASET/</code> directory.</p>
+</blockquote>
+<p>The resulting files are stored as parallel <code>.json</code> files in multi-camera folders <code>camera_*/pose_data</code>, <code>camera_*/motion_data</code>, <code>camera_*/pose_images</code>.
+To avoid creation of <code>pose_images</code> that are only used as the ground truth and debugging purposes (especially if you are building your training data), comment out the call to <code>self.save_pose_image()</code> in <code>camera_viewer.py</code>.</p>
+<p>Finally, to merge them all into a tabular <code>.csv</code> file, run the following command. The argument $dataset_dir is the directory containing the JSON files and must be located as a subdirectory of DATASET/. Additionally, in <code>config.sh</code> you need to set the variable <code>dataset_cameras</code> to the cameras you want to take into consideration. i.e., if you use all cameras, the value is "500 501 502 503". The resulting CSV file will then be saved as <code>dataset_dir/flattened_data.csv</code>.</p>
+<pre><code>./control.sh convert2csv $dataset_dir
+</code></pre>
+<p>Example by running the command below results in the following csv files being created:</p>
+<pre><code>./control.sh convert2csv TRAIN
+./control.sh convert2csv EVAL
+</code></pre>
+<p>Results in merging:</p>
+<ul>
+<li><code>DATASET/TRAIN/**</code> to <code>DATASET/TRAIN/flattened_data.csv</code></li>
+<li><code>DATASET/EVAL/**</code> to <code>DATASET/EVAL/flattened_data.csv</code></li>
+</ul>
+<blockquote>
+<p>Note: The TRAIN/** refers to the folders <code>motion_data/</code> and <code>camera_5XX/pose_data</code>.</p>
+</blockquote>
+<p>The resulting CSV file will contain these columns:</p>
+<pre><code>cam500_0_x,cam501_0_x,cam502_0_x,cam503_0_x,...,cam503_32_z, JOINTS...
+</code></pre>
+<p>You can replay each motion data file separately: <code>./control.sh replay_motion DATASET/EVAL/motion_data/AAAAAAA_motion.json</code></p>
+<h3 id="current-performance-metrics">Current Performance Metrics</h3>
+<p>The upgraded multi-camera system demonstrates the following evaluation results:</p>
+<ul>
+<li><strong>Mean Squared Error (MSE)</strong>: 0.206</li>
+<li><strong>Root Mean Squared Error (RMSE)</strong>: 0.454</li>
+</ul>
+<h4 id="optuna">Optuna</h4>
+<p>Optuna is a hyperparameter optimization framework available as a Python library. It acts as a wrapper around an existing training framework where it uses the same setup of dataset, train_loop and hyperparameters, so it has the same context as when you would run it yourself. Optuna starts by defining an objective function. The goal of the objective function is either to minimize or maximize a value. You specify this value yourself; for this setup we have typically used the validation MSE as the objective to minimize. We also need to define the scope of values for the hyperparameters. We define for every hyperparameter a range of values which Optuna is allowed to select from, e.g., BATCHSIZE being in range(4,128). When we have done this for every param we want to find the optimal value for, we start Optuna by running a "study". Optuna runs N number of training sessions, each independent, and uses internal algorithms to find the best set of values for the list of hyperparameters. In the end we get the training session that scored the best and can use its hyperparameters.</p>
+<p>Note: We only use this for PyTorch since AutoGluon has its own hyperparameter optimization. This is why we only see studies inside <code>pytorch/optuna_studies/</code>.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

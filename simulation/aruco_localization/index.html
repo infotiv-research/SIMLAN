@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,7 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -69,7 +69,7 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Aruco Localization</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#important-points-to-pay-attention-to">Important  points to pay attention to:</a>
+    <li class="toctree-l2"><a class="reference internal" href="#important-points-to-pay-attention-to">Important points to pay attention to:</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#important-launch-files">Important launch files</a>
     </li>
@@ -79,49 +79,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -131,8 +117,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -163,11 +147,11 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="aruco-localization-package">Aruco Localization Package</h1>
-<p>This is the <code>aruco_localization</code> package, which runs a ros2 node that takes images from camera topics <code>CAMERA_X/camera_info</code> and <code>CAMERA_X/image_raw</code>, process the aruco code, and publishes the result in the <code>/TF</code> of the detected ArUco marker, mimicking Volvo's logic for tracking robot positions and generating navigation routes. A launch file is provided to run multiple nodes, with each node dedicated and assigned to a single camera.
-<code>camera_enabled_ids</code> variable found in <code>config.sh</code> is used to control which cameras are enabled.</p>
+<p>This is the <code>aruco_localization</code> package, which runs a ROS2 node that takes images from camera topics <code>CAMERA_X/camera_info</code> and <code>CAMERA_X/image_raw</code>, processes the ArUco code, and publishes the result in the <code>/TF</code> of the detected ArUco marker, mimicking Volvo's logic for tracking robot positions and generating navigation routes. A launch file is provided to run multiple nodes, with each node dedicated and assigned to a single camera.
+The <code>camera_enabled_ids</code> variable found in <code>config.sh</code> is used to control which cameras are enabled.</p>
 <p><strong>Note:</strong> The marker link is named based on the camera. For example, if camera <code>164</code> detects an ArUco marker with ID of <code>12</code>, the marker link in <code>/tf</code> is named <code>camera_164_marker_12</code>. This is not the final link that is used. The result from different cameras are accumulated and merged as a single frame with parent as <code>robot_agent_12/odom</code> and child <code>robot_agent_12/baselink</code>.</p>
-<p><strong>Note:</strong>  The marker ID is tightly linked with the name for the robots, meaning an aruco with marker_ID=1 will detect the robot with name: {namespace}/{marker_ID}. For example 'robot_agent_1'.</p>
-<h2 id="important-points-to-pay-attention-to">Important  points to pay attention to:</h2>
+<p><strong>Note:</strong> The marker ID is tightly linked with the name for the robots, meaning an ArUco with marker_ID=1 will detect the robot with name: {namespace}/{marker_ID}. For example 'robot_agent_1'.</p>
+<h2 id="important-points-to-pay-attention-to">Important points to pay attention to:</h2>
 <ul>
 <li>If two cameras are pointed at the same ArUco code, the system does not alternate between them, but instead shows the midpoint between the two detections.</li>
 <li>Inside the aruco_node, a callback logs the relative position of the newly created <code>aruco_link</code> from the <code>base_link</code>.</li>
@@ -175,22 +159,16 @@
 </ul>
 <h2 id="important-launch-files">Important launch files</h2>
 <ul>
-<li>
-<p><code>aruco_detection_node.py</code>: Handles ArUco detection and publishes the TF between the camera and marker. (e.g. <code>camera_164_marker_12</code>)</p>
-</li>
-<li>
-<p><code>aruco_pose_pub.py</code>: A new node that listens to all transforms of <code>camera_164_marker_12</code> as input, and outputs the transform to either TF or ODOM as  <code>robot_agent_12/odom</code> and child <code>robot_agent_12/baselink</code>.</p>
-</li>
-<li>
-<p><code>multi_detection.launch.py</code>: Launch file for the new node.</p>
-</li>
+<li><code>aruco_detection_node.py</code>: Handles ArUco detection and publishes the TF between the camera and marker. (e.g. <code>camera_164_marker_12</code>)</li>
+<li><code>aruco_pose_pub.py</code>: A new node that listens to all transforms of <code>camera_164_marker_12</code> as input, and outputs the transform to either TF or ODOM as <code>robot_agent_12/odom</code> and child <code>robot_agent_12/baselink</code>.</li>
+<li><code>multi_detection.launch.py</code>: Launch file for the new node.</li>
 </ul>
 <h2 id="odom">Odom</h2>
-<p>These has to be valid for both humanoid and pallet trucks</p>
+<p>These have to be valid for both humanoid and pallet trucks</p>
 <ul>
-<li>world : is the origin (0,0,0)</li>
-<li>odom : is in the initial pose of robot</li>
-<li>base_link: tracks the movement of the robots relative to the odom</li>
+<li>world: is the origin (0,0,0)</li>
+<li>odom: is in the initial pose of the robot</li>
+<li>base_link: tracks the movement of the robot relative to the odom</li>
 </ul>
 <p><img alt="Coordinate" src="/resources/coordsystems_img.png" /></p>
               

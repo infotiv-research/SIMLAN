@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/resources/plots/Experiments/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>RTF tests for paper - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "RTF tests for paper";
+        var mkdocs_page_input_path = "resources/plots/Experiments.md";
+        var mkdocs_page_url = "/SIMLAN/resources/plots/Experiments/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/">Pallet Truck</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_control/">Control</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/raw_models/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../simulation/object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">RTF tests for paper</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/resources/plots/Experiments.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="rtf-tests-for-paper">RTF tests for paper</h1>
+<p>The following tests were performed on the PC Research2 with the following specs:</p>
+<ul>
+<li>Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz</li>
+<li>NVIDIA GeForce RTX 2070 SUPER</li>
+<li>Corsair Vengeance LPX 32GB kit (2 × 16GB), 3000 MHz, CL16. running at 2133 MT/s</li>
+<li>MSI MEG Z490 UNIFY (MS-7C71)</li>
+<li>KINGSTON SA2000M8 1TB NVMe SSD</li>
+<li>Ubuntu 24.04.3 LTS</li>
+</ul>
+<p>every instance in the tables below are referenced in %
+with camera feed update rates as</p>
+<ul>
+<li>image 20 Hz</li>
+<li>depth 6 Hz</li>
+<li>semantic 10 Hz</li>
+</ul>
+<p>number_of_agents=0 world=empty:</p>
+<table>
+<thead>
+<tr>
+<th>number of cameras</th>
+<th>image</th>
+<th>image depth semantic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n=1</td>
+<td>99</td>
+<td>44</td>
+</tr>
+<tr>
+<td>n=2</td>
+<td>56</td>
+<td>22</td>
+</tr>
+<tr>
+<td>n=3</td>
+<td>46</td>
+<td>14</td>
+</tr>
+<tr>
+<td>n=4</td>
+<td>34</td>
+<td>9</td>
+</tr>
+<tr>
+<td>n=5</td>
+<td>32</td>
+<td>9</td>
+</tr>
+<tr>
+<td>n=6</td>
+<td>23</td>
+<td>7</td>
+</tr>
+<tr>
+<td>n=7</td>
+<td>21</td>
+<td>5</td>
+</tr>
+<tr>
+<td>n=8</td>
+<td>19</td>
+<td>4</td>
+</tr>
+<tr>
+<td>n=9</td>
+<td>17</td>
+<td>5</td>
+</tr>
+<tr>
+<td>n=10</td>
+<td>15</td>
+<td>3</td>
+</tr>
+<tr>
+<td>n=11</td>
+<td>8</td>
+<td>3</td>
+</tr>
+<tr>
+<td>n=12</td>
+<td>7</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>camera_feed=image, worth noting the default world took ~30s to render in gazebo GUI no robots:</p>
+<table>
+<thead>
+<tr>
+<th>world</th>
+<th>0 cameras</th>
+<th>6 cameras</th>
+<th>12 cameras</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty</td>
+<td>99</td>
+<td>24</td>
+<td>7</td>
+</tr>
+<tr>
+<td>light</td>
+<td>99</td>
+<td>22</td>
+<td>7</td>
+</tr>
+<tr>
+<td>medium</td>
+<td>85</td>
+<td>17</td>
+<td>7</td>
+</tr>
+<tr>
+<td>default</td>
+<td>84</td>
+<td>17</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<p>world=empty camera_feed=image:</p>
+<table>
+<thead>
+<tr>
+<th>robots</th>
+<th>0 cameras</th>
+<th>6 cameras</th>
+<th>12 cameras</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>robot_agentx1</td>
+<td>99</td>
+<td>11</td>
+<td>5</td>
+</tr>
+<tr>
+<td>robot_agentx2</td>
+<td>99</td>
+<td>11</td>
+<td>4</td>
+</tr>
+<tr>
+<td>robot_agentx3</td>
+<td>99</td>
+<td>9</td>
+<td>4</td>
+</tr>
+<tr>
+<td>robot_agentx4</td>
+<td>99</td>
+<td>9</td>
+<td>4</td>
+</tr>
+<tr>
+<td>humanoidx1</td>
+<td>99</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>humanoidx2</td>
+<td>99</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>panda_armx1</td>
+<td>99</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>robot_agentx4+humanoidx1</td>
+<td>99</td>
+<td>9</td>
+<td>4</td>
+</tr>
+<tr>
+<td>robot_agentx4+humanoidx2</td>
+<td>99</td>
+<td>8</td>
+<td>4</td>
+</tr>
+<tr>
+<td>robot_agentx4+humanoidx2+panda_armx1</td>
+<td>99</td>
+<td>9</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>navigation world=light camera_feed=image:</p>
+<table>
+<thead>
+<tr>
+<th>robots</th>
+<th>0 cams</th>
+<th>9 cams</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>humanoidsx2</td>
+<td>99</td>
+<td>13</td>
+</tr>
+<tr>
+<td>humanoidsx4</td>
+<td>90</td>
+<td>10</td>
+</tr>
+<tr>
+<td>robot_agentsx4</td>
+<td>-</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

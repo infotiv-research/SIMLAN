@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -58,10 +58,10 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,44 +71,28 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Object Modeling</a>
@@ -116,6 +100,8 @@
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -125,8 +111,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -145,7 +129,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Models</li>
+          <li class="breadcrumb-item">Simulation</li>
       <li class="breadcrumb-item active">Object Modeling</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/raw_models/objects/README.md">Edit on infotiv-research/SIMLAN</a>
@@ -157,7 +141,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="blueprint">Blueprint</h2>
-<p>This document contains explanations and motivations for the measurements as well as names for variables that should be used when designing the objects. The categories are mostly self explanatory, the one that might need more of an explanation is the color red. This refers to loose objects such as pallets, barrels, boxes and things that will be placed directly on the ground.</p>
+<p>This document contains explanations and motivations for the measurements as well as names for variables that should be used when designing the objects. The categories are mostly self-explanatory; the one that might need more of an explanation is the color red. This refers to loose objects such as pallets, barrels, boxes, and things that will be placed directly on the ground.</p>
 <p><strong>Measurements:</strong></p>
 <table>
 <thead>
@@ -431,15 +415,14 @@
 </table>
 <h2 id="amr">AMR</h2>
 <p><img alt="AMR" src="resources/AMR.png" /></p>
-<p>It is defined in XY plane and the center of the AMR is on x,y=0,0 and the bottom of the robot is on z=0.</p>
-<p>Define <strong>scale</strong> , <strong>pos</strong> and collision in these files:</p>
-<p>We write our AMR description in <code>simlan_gazebo_environment/urdf</code> and use <code>xacro</code> to create a <code>urdf</code> file with gazebo tags (so not a pure urdf file) that can be used both by <code>state_publisher</code> and <code>gazebo</code> (unlike 2 separate files  <code>model.sdf</code> that is used for Gazebo and <code>turtlebot.urf</code> that is used for state_publisher in original Turtlebot_simulation git project.</p>
-<p>There are two actual diffdrive wheels that are named <code>left</code> and <code>right</code> and four supporting wheel to balance the robot that are named <code>front_left</code>, <code>front_right</code> and <code>back_left</code> and <code>back_right</code> (they have no friction and can be moved to different position) with the radius of 0.98 of the main wheels.</p>
-<p><strong>Note</strong>: The reason for the shake is difference between the radius of the real wheels and caster wheels</p>
-<h3 id="infobot-amr-specification">Infobot AMR specification</h3>
+<p>It is defined in the XY plane, and the center of the AMR is on x,y=0,0, and the bottom of the robot is on z=0.</p>
+<p>Define <strong>scale</strong>, <strong>pos</strong>, and collision in these files:</p>
+<p>We write our AMR description in <code>simlan_gazebo_environment/urdf</code> and use <code>xacro</code> to create a <code>urdf</code> file with gazebo tags (so not a pure urdf file) that can be used both by <code>state_publisher</code> and <code>gazebo</code> (unlike 2 separate files: <code>model.sdf</code> that is used for Gazebo and <code>turtlebot.urf</code> that is used for state_publisher in the original Turtlebot_simulation git project).</p>
+<p>There are two actual diffdrive wheels that are named <code>left</code> and <code>right</code> and four supporting wheels to balance the robot that are named <code>front_left</code>, <code>front_right</code>, <code>back_left</code>, and <code>back_right</code> (they have no friction and can be moved to different positions) with the radius of 0.98 of the main wheels.</p>
+<p><strong>Note</strong>: The reason for the shake is the difference between the radius of the real wheels and caster wheels.</p>
 <p>Orientation:</p>
 <ul>
-<li>x : forward</li>
+<li>x: forward</li>
 <li>y: left</li>
 <li>z: up</li>
 </ul>
@@ -448,7 +431,7 @@
 <ul>
 <li>EUR-pallet</li>
 <li>Shelf</li>
-<li>Modular Shelf - a stackable shelf part that can create shelves of varying size</li>
+<li>Modular Shelf - a stackable shelf part that can create shelves of varying sizes</li>
 <li>Steel Drum</li>
 <li>Traffic Cone</li>
 <li>Support Pole</li>
@@ -469,8 +452,8 @@
 </ul>
 <h2 id="amr-camera">AMR camera</h2>
 <p><img alt="Camera" src="resources/camera.png" /></p>
-<p>Inspired by  <a href="https://sz-camera.en.made-in-china.com/productimage/OxfRauwdhIcY-2f1j00jPcbKhZkSIoC/China-3G-SDI-HDMI-Simultaneous-Output-1080-60-50-30-25p-1080-60-50I-HD-Digital-Camera-6-12mm-Manual-Lens-Live-Broadcast-Camera.html">CCTV Camera 3G-SDI</a></p>
-<p>In the model: camera base height(70mm) + camera lense height(50mm) = 120mm</p>
+<p>Inspired by <a href="https://sz-camera.en.made-in-china.com/productimage/OxfRauwdhIcY-2f1j00jPcbKhZkSIoC/China-3G-SDI-HDMI-Simultaneous-Output-108-60-50-30-25p-1080-60-50I-HD-Digital-Camera-6-12mm-Manual-Lens-Live-Broadcast-Camera.html">CCTV Camera 3G-SDI</a></p>
+<p>In the model: camera base height (70mm) + camera lens height (50mm) = 120mm</p>
 <h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://www.cisco-eagle.com/category/3051/selective-rack-configuration">Pallet Rack Specification &amp; Configuration Guide</a></li>

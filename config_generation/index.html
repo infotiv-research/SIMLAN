@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -63,7 +63,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -73,49 +73,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -125,8 +111,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resources/diagrams/">Diagrams</a>
                   </li>
@@ -156,15 +140,18 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="config-generation">Config Generation</h1>
-<p>When building the workspaces, the generation-scripts found in the scripts/ directory are run. These automatically generate the <code>bt.xml</code>, <code>control.yaml</code>, <code>gz_bridge.yaml</code>, <code>nav2_params.yaml</code>, as well as validates the setup of the <code>ROBOTS</code> list in the <code>config.sh</code> script. This is done to automatically set up the ros2 controllers, navigation stack parameters and other /topics depending on what robots and namespaces are spawned.</p>
-<p>Every time the workspace is built, the <code>generate_XXX</code> files prints that they were generated and at the top of each generated file, a comment specifies from where the auto-generation occurred. As of now the parameter files are saved in the package in which they're used in instead of directly in the share/ directory to increase code readability to new users.</p>
+<p>When building the workspaces, the generation scripts found in the scripts/ directory are run. These automatically generate the <code>bt.xml</code>, <code>control.yaml</code>, <code>gz_bridge.yaml</code>, <code>nav2_params.yaml</code>, as well as validate the setup of the <code>ROBOTS</code> list in the <code>config.sh</code> script. This is done to automatically set up the ROS2 controllers, navigation stack parameters, and other /topics depending on what robots and namespaces are spawned.</p>
+<p>Every time the workspace is built, the <code>generate_XXX</code> files print that they were generated, and at the top of each generated file, a comment specifies from where the auto-generation occurred. As of now, the parameter files are saved in the package in which they're used instead of directly in the share/ directory to increase code readability for new users.</p>
 <p>Explanation of the different generate_XXX files:</p>
 <ul>
-<li><code>generate_bt_xml.py</code>         : The bt_navigator needs to know which robot it is checking conditions for, therefore the namespace of the robot is needed</li>
-<li><code>generate_control_yaml.py</code>   : The ros2_controller maps /cmd_vel topics to wheel_joint movements. Therefore the correct namespace and frame_id are needed</li>
-<li><code>generate_gz_bridge_yaml.py</code> : Some gz_topics need to be mapped to ros2 topics. Therefore the corresponding namespaces are needed</li>
-<li><code>generate_nav2_params_yaml.py</code>: The individual frame ids and some ros2 topics are needed to define robots and their corresponding maps</li>
-<li><code>validate_robots.py</code>         : A converter from string to list of dicts including a sanity check to throw errors if the ROBOTS variable is wrongly configured</li>
+<li><a href="scripts/generate_bt_xml.py">generate_bt_xml.py</a>: The bt_navigator needs the namespace of the robot it is checking conditions for.</li>
+<li><a href="scripts/generate_control_yaml.py">generate_control_yaml.py</a>: The ros2_controller maps namespaced /cmd_vel topics to wheel_joint movements.</li>
+<li><a href="scripts/generate_gz_bridge_yaml.py">generate_gz_bridge_yaml.py</a>: Some gz_topics need to be mapped to ROS2 topics.</li>
+<li><a href="scripts/generate_humanoid_control_yaml.py">generate_humanoid_control_yaml.py</a>: The ros2_controller maps namespaced /cmd_vel topics to wheel_joint movements for humanoids.</li>
+<li><a href="scripts/generate_humanoid_nav2_params_yaml.py">generate_humanoid_nav2_params_yaml.py</a>: The individual frame IDs and some ROS2 topics are needed to define humanoids and their corresponding maps.</li>
+<li><a href="scripts/generate_nav2_params_yaml.py">generate_nav2_params_yaml.py</a>: The individual frame IDs and some ROS2 topics are needed to define robots and their corresponding maps.</li>
+<li><a href="scripts/validate_humanoids.py">validate_humanoids.py</a>: A converter from string to list of dicts including a sanity check to throw errors if the HUMANOIDS variable is wrongly configured.</li>
+<li><a href="scripts/validate_robots.py">validate_robots.py</a>: A converter from string to list of dicts including a sanity check to throw errors if the ROBOTS variable is wrongly configured.</li>
 </ul>
               
             </div>

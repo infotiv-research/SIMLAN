@@ -1,0 +1,119 @@
+site_name: SIMLAN, Simulation for Multi-Camera Robotics
+site_description: This simulation environment, based on the Gazebo Ignition simulator and ROS2, resembles a Volvo trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by GPSS (Generic photo-based sensor system) that utilizes ceiling mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
+site_author: Hamid Ebadi
+
+site_url: https://infotiv-research.github.io/SIMLAN/
+repo_name: infotiv-research/SIMLAN
+repo_url: https://github.com/infotiv-research/SIMLAN
+docs_dir: /docvolume
+nav:
+  - SIMLAN, Simulation for Multi-Camera Robotics: README.md
+  - Dependencies: dependencies.md
+  - Contributing: contributing.md
+  - Config Generation: config_generation/README.md
+  - Simulation:
+      - Overview: simulation/README.md
+      - SIMLAN Bringup: simulation/simlan_bringup/README.md
+      - GPSS cameras: simulation/static_agent_launcher/README.md
+      - Camera Bird Eye View: simulation/camera_bird_eye_view/README.md
+      - Aruco Localization: simulation/aruco_localization/README.md
+      - Failsafe: simulation/bt_failsafe/README.md
+      - Bringup: simulation/pallet_truck/pallet_truck_bringup/README.md
+      - Pallet Truck: simulation/pallet_truck/README.md  # Pallet Truck
+      - URDF: simulation/pallet_truck/pallet_truck_description/urdf/README.md
+      - Control: simulation/pallet_truck/pallet_truck_control/README.md
+      - Navigation: simulation/pallet_truck/pallet_truck_navigation/README.md
+      - Overview: simulation/humanoid_robot/README.md # Humanoid Robot
+      - Humanoid Moveit: simulation/humanoid_support_moveit_config/README.md
+      - Overview: humanoid_utility/README.md
+      - Pose to Motion AutoGluon model: humanoid_utility/pose_to_motion/autogluon/README.md
+      - Panda MoveIt2: simulation/moveit2/README.md # Panda
+      - Gazebo Worlds: simulation/simlan_gazebo_environment/worlds/README.md
+      - Overview: simulation/raw_models/README.md # Models
+      - Object Modeling: simulation/raw_models/objects/README.md
+      - Warehouse Specification: simulation/raw_models/warehouse/README.md
+      - Object Mover: simulation/object_mover/README.md
+  - Credits: credits.md
+  - Appendix:
+      - Changelog: CHANGELOG.md
+      - Diagrams: resources/diagrams/README.md
+theme:
+  name: readthedocs
+  locale: en
+  highlightjs: true
+  hljs_languages:
+    - bash
+    - python
+plugins:
+  - search:
+      lang: en
+
+exclude_docs: |
+  # Exclude Python cache and binary files
+  **/__pycache__/**/*
+  **/*.pyc
+
+  # Exclude large datasets and zips
+  humanoid_utility/*.zip
+  **/*.zip
+
+  # Exclude large datasets and zips
+  **/*.py
+  **/*.xacro
+  **/*.yaml
+  **/*.ipynb
+  **/TRAIN/**
+  **/EVAL/**
+  **/TEST/**
+  **/DATASET/**
+  **/DATASET**/**
+  **/internal/**
+  **/meshes/**
+  **/textures/**
+  **/materials/**
+  **/camera_**/**
+  **/output/**
+  **/fonts/**
+  **/recordings/**
+  **/*.xacro
+  **/*.sh
+  **/*.txt
+  **/*.html
+  **/*.sdf
+  **/*.config
+  **/*.dae
+  **/*.stl
+  **/*.proto
+  **/*.xml
+  **/*.material
+  **/*.mtl
+  **/*.obj
+  **/*.FCStd
+  **/*.cfg
+  **/*.pgm
+  **/*.msg
+  **/*.srv
+  **/*.rst
+  **/*.srdf
+  **/*.rviz
+  **/*.ini
+  **/*.urdf
+  **/*.ttf
+  **/*.woff
+  **/*.woff2
+  **/*.eot
+  **/*.js
+  **/*.json
+  **/*.log
+  **/*.lua
+  **/*.osc
+  **/*.action
+  **/*.world
+  **/LICENSE
+  **/*.css
+  **/*.ico
+  **/*.cpp
+  **/*.h
+  **/*.xcf
+  **/*.wbt
+

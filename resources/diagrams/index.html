@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,49 +71,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../simulation/pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../simulation/humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -123,8 +109,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Diagrams</a>
     <ul class="current">
@@ -157,38 +141,20 @@
             <div class="section" itemprop="articleBody">
               
                 <h3 id="high-level_diagram_simlandrawio">high-level_diagram_SIMLAN.drawio</h3>
-<p><img alt="&quot;high-level_diagram_SIMLAN.drawio.png&quot;" src="high-level_diagram_SIMLAN.drawio.png" /></p>
+<p><img alt="high-level_diagram_SIMLAN.drawio.png" src="high-level_diagram_SIMLAN.drawio.png" /></p>
 <h3 id="humanoid_mocap_flowdrawio">Humanoid_mocap_flow.drawio</h3>
-<p><img alt="&quot;Humanoid_mocap_flow.drawio.png&quot;" src="Humanoid_mocap_flow.drawio.png" /></p>
-<h3 id="legenddrawio">legend.drawio</h3>
-<p><img alt="&quot;legend.drawio.png&quot;" src="legend.drawio.png" /></p>
-<h3 id="ros2-launch-aruco_localization-multi_detectionlaunchpydrawio">ros2 launch aruco_localization multi_detection.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch aruco_localization multi_detection.launch.py.drawio.png&quot;" src="ros2 launch aruco_localization multi_detection.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-camera_bird_eye_view-bird_eye_viewlaunchpydrawio">ros2 launch camera_bird_eye_view bird_eye_view.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch camera_bird_eye_view bird_eye_view.launch.py.drawio.png&quot;" src="ros2 launch camera_bird_eye_view bird_eye_view.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-humanoid_robot-multiple_humanoid_spawnlaunchpydrawio">ros2 launch humanoid_robot multiple_humanoid_spawn.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch humanoid_robot multiple_humanoid_spawn.launch.py.drawio.png&quot;" src="ros2 launch humanoid_robot multiple_humanoid_spawn.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-moveit_resources_panda_moveit_config-demolaunchpydrawio">ros2 launch moveit_resources_panda_moveit_config demo.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch moveit_resources_panda_moveit_config demo.launch.py.drawio.png&quot;" src="ros2 launch moveit_resources_panda_moveit_config demo.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-pallet_truck_bringup-multiple_robot_spawnlaunchpydrawio">ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py.drawio.png&quot;" src="ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-pallet_truck_navigation-map_serverlaunchpydrawio">ros2 launch pallet_truck_navigation map_server.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch pallet_truck_navigation map_server.launch.py.drawio.png&quot;" src="ros2 launch pallet_truck_navigation map_server.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-pallet_truck_navigation-nav2launchpydrawio">ros2 launch pallet_truck_navigation nav2.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch pallet_truck_navigation nav2.launch.py.drawio.png&quot;" src="ros2 launch pallet_truck_navigation nav2.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-simlan_bringup-simlaunchpydrawio">ros2 launch simlan_bringup sim.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch simlan_bringup sim.launch.py.drawio.png&quot;" src="ros2 launch simlan_bringup sim.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-static_agent_launcher-static-agentlaunchpydrawio">ros2 launch static_agent_launcher static-agent.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch static_agent_launcher static-agent.launch.py.drawio.png&quot;" src="ros2 launch static_agent_launcher static-agent.launch.py.drawio.png" /></p>
-<h3 id="ros2-launch-visualize_real_data-scenario_replayerlaunchpydrawio">ros2 launch visualize_real_data scenario_replayer.launch.py.drawio</h3>
-<p><img alt="&quot;ros2 launch visualize_real_data scenario_replayer.launch.py.drawio.png&quot;" src="ros2 launch visualize_real_data scenario_replayer.launch.py.drawio.png" /></p>
+<p><img alt="Humanoid_mocap_flow.drawio.png" src="Humanoid_mocap_flow.drawio.png" /></p>
+<h3 id="humanoid_mocap_pipelinedrawio">humanoid_mocap_pipeline.drawio</h3>
+<p><img alt="humanoid_mocap_pipeline.drawio.png" src="humanoid_mocap_pipeline.drawio.png" /></p>
+<h3 id="launch_bringupdrawio">launch_bringup.drawio</h3>
+<p><img alt="launch_bringup.drawio.png" src="launch_bringup.drawio.png" /></p>
 <h3 id="simlan_diagramdrawio">SIMLAN_DIAGRAM.drawio</h3>
-<p><img alt="&quot;SIMLAN_DIAGRAM.drawio.png&quot;" src="SIMLAN_DIAGRAM.drawio.png" /></p>
+<p><img alt="SIMLAN_DIAGRAM.drawio.png" src="SIMLAN_DIAGRAM.drawio.png" /></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../ISSUES/" class="btn btn-neutral float-left" title="Issues"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../CHANGELOG/" class="btn btn-neutral float-left" title="Changelog"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -211,7 +177,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../ISSUES/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../CHANGELOG/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

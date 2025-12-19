@@ -1,2 +1,0 @@
-include scenarios/*.osc
-recursive-include example_library *

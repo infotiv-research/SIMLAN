@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -50,7 +50,7 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#linux-dependencies">Linux Dependencies</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#nvidia-driver">nvidia Driver</a>
+    <li class="toctree-l2"><a class="reference internal" href="#nvidia-driver">NVIDIA Driver</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#docker">Docker</a>
     </li>
@@ -81,7 +81,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -91,49 +91,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -143,8 +129,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resources/diagrams/">Diagrams</a>
                   </li>
@@ -175,9 +159,9 @@
               
                 <h1 id="dependencies">Dependencies</h1>
 <h2 id="linux-dependencies">Linux Dependencies</h2>
-<h2 id="nvidia-driver">nvidia Driver</h2>
-<p>Use 'nvidia-smi' to ensure that the right nvidia driver is installed.
-If you have not installed <strong>Additional Drivers</strong> when installing Ubuntu, you need to manually install nvidia drivers.</p>
+<h2 id="nvidia-driver">NVIDIA Driver</h2>
+<p>Use 'nvidia-smi' to ensure that the right NVIDIA driver is installed.
+If you have not installed <strong>Additional Drivers</strong> when installing Ubuntu, you need to manually install NVIDIA drivers.</p>
 <h2 id="docker">Docker</h2>
 <pre><code>sudo apt install curl git
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -187,7 +171,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 </code></pre>
 <h2 id="nvidia-container-toolkit">nvidia-container-toolkit</h2>
-<p>To install docker and <code>nvidia-container-toolkit</code> use the following commands:</p>
+<p>To install Docker and <code>nvidia-container-toolkit</code>, use the following commands:</p>
 <pre><code>curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
   &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
     sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
@@ -216,19 +200,19 @@ INFO[0000] Wrote updated config to /etc/containerd/config.toml
 INFO[0000] It is recommended that containerd daemon be restarted.
 </code></pre>
 <p>Restart the computer to apply the group and user changes.</p>
-<p>To check for correct installation docker's nvidia runtime:</p>
+<p>To check for correct installation of Docker's NVIDIA runtime:</p>
 <pre><code>docker info|grep -i runtime
  Runtimes: nvidia runc
  Default Runtime: runc
 </code></pre>
-<p>Otherwise you get the following error message in vscode: <code>Error response from daemon: unknown or invalid runtime name: nvidia</code></p>
+<p>Otherwise you get the following error message in VS Code: <code>Error response from daemon: unknown or invalid runtime name: nvidia</code></p>
 <p>On a <strong>host</strong> machine's terminal (<strong>not</strong> inside Visual Studio Code terminal): <code>xhost +local:docker</code>.</p>
 <h2 id="windows-dependencies">Windows Dependencies</h2>
-<p>These instruction is tested on Windows 11, docker desktop for windows-ARM64 and VScode.</p>
-<p>To get the docker container up and running, download and install Docker Desktop for your system: https://www.docker.com/products/docker-desktop/</p>
-<p>When this is done, clone the repo and open the folder in VScode. Then you should automatically be prompted to download and install VScode extensions which are needed and recommended for the project.</p>
-<p>Once that is completed, make sure Docker Desktop ir running and then you should be able to start the container environment in VScode by pressing Ctrl+Shift+p and searching for Dev Containers: Rebuild and Reopen in Container.</p>
-<p>To make Gazebo's and Rviz's GUI be visible from the docker container to your screen, download and install the following program: https://sourceforge.net/projects/vcxsrv/</p>
+<p>These instructions are tested on Windows 11, Docker Desktop for Windows ARM64 and VS Code.</p>
+<p>To get the Docker container up and running, download and install Docker Desktop for your system: https://www.docker.com/products/docker-desktop/</p>
+<p>When this is done, clone the repo and open the folder in VS Code. Then you should automatically be prompted to download and install VS Code extensions that are needed and recommended for the project.</p>
+<p>Once that is completed, make sure Docker Desktop is running and then you should be able to start the container environment in VS Code by pressing Ctrl+Shift+P and searching for Dev Containers: Rebuild and Reopen in Container.</p>
+<p>To make Gazebo's and RViz's GUIs visible from the Docker container on your screen, download and install the following program: https://sourceforge.net/projects/vcxsrv/</p>
 <p>When this is done, start the XLaunch program and configure it with these settings:</p>
 <h4 id="select-display-settings">Select display settings</h4>
 <pre><code>◉ Multiple windows
@@ -248,7 +232,7 @@ Display number: -1
 <h4 id="extra-settings">Extra settings</h4>
 <pre><code>☑ Clipboard (optional)
 ☑ Primary Selection (optional)
-☐ Native opengl
+☐ Native OpenGL
 ☑ Disable access control
 </code></pre>
 <hr />

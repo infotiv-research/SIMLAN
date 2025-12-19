@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -71,49 +71,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul class="current">
@@ -125,8 +111,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resources/diagrams/">Diagrams</a>
                   </li>
@@ -209,6 +193,7 @@ We also got inspired and used the skeleton code from these open source project a
 <li><a href="https://iliad-project.eu/">ILIAD Project</a></li>
 <li><a href="https://www.mobile-robots.de/87/fahrerlose-transportsysteme/amr-fuer-palettentransport?&amp;wslanguage=en">GoPal</a></li>
 <li><a href="https://github.com/aeksiri/forklift">navigation_oru navigation stack by Örebro University</a></li>
+<li>https://alignproductionsystems.com/equipment-category/navigation/#</li>
 </ul>
 <p>Specification of items:</p>
 <ul>
@@ -242,6 +227,16 @@ We also got inspired and used the skeleton code from these open source project a
 <li>To improve collaboration in development environment we use vscode and docker as explained in <a href="https://www.allisonthackston.com/articles/docker-development.html">this instruction</a> using these <a href="https://github.com/athackst/dockerfiles">docker files</a>. For production environment follow installation procedure used in <a href="../.devcontainer/Dockerfile">.devcontainer/Dockerfile</a> to install dependencies.</li>
 <li>The Docker setup is added by Christoffer Johanesson (Dyno Robotics), based on Dyno experience working with Docker.</li>
 </ul>
+<p>Panda Arm:
+- https://github.com/cpezzato/panda_simulation
+- https://www.researchgate.net/figure/Panda-robot-with-labeled-joints_fig1_361659008
+- https://www.kuka.com/it-it/settori/banca-dati-di-soluzioni/2025/05/5-kuka-robots-optimize-pet-food-handling-in-74-sqm
+- https://arxiv.org/pdf/2506.12089</p>
+<p>AI/ML:
+- https://www.calibraint.com/blog/beginners-guide-to-diffusion-models</p>
+<p>Humanoid:
+- https://gazebosim.org/docs/latest/actors/
+- https://research.google/blog/on-device-real-time-body-pose-tracking-with-mediapipe-blazepose/</p>
 <h2 id="licenses">Licenses</h2>
 <p>Imu_tools is the one with several licenses, using BSD-3, GPLv3, GNU v3, but as we don't change the code so we believe there is no license conflict with the current project license.
 The dependency wireless (https://github.com/clearpathrobotics/wireless.git) from Clearpath robotics is the without a separate license file. There are license names within files, referencing BSD so we believe there is no license conflict with the current project license.</p>
@@ -253,7 +248,7 @@ The dependency wireless (https://github.com/clearpathrobotics/wireless.git) from
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../simulation/raw_models/warehouse/" class="btn btn-neutral float-left" title="Warehouse Specification"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../simulation/object_mover/" class="btn btn-neutral float-left" title="Object Mover"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../CHANGELOG/" class="btn btn-neutral float-right" title="Changelog">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -277,7 +272,7 @@ The dependency wireless (https://github.com/clearpathrobotics/wireless.git) from
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../simulation/raw_models/warehouse/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../simulation/object_mover/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../CHANGELOG/" style="color: #fcfcfc">Next &raquo;</a></span>

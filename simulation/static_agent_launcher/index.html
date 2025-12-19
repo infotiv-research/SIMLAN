@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -61,7 +61,7 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">GPSS cameras</a>
     <ul class="current">
@@ -75,49 +75,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -127,8 +113,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
                   </li>
@@ -159,12 +143,12 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="launching-gpss-cameras">Launching GPSS cameras</h1>
-<p>This package launches all the static agents i.e. the cameras in the simulation.</p>
-<p>When the workspace is built, the <code>camera_config.xacro</code> file is updated with camera_ids and their corresponding intrinsic and extrinsic values. This can be seen in the <code>build</code>function in <code>control.sh</code>.</p>
-<p>The <code>camera_config.xacro</code> is then sent to the robot_state_publisher node and published to the /static_agent/robot_description topic. Then the ros_gz_sim package with the "create" executable spawns the static_agents by subscribing to the /static_agent/robot_description topic and spawning each agent.</p>
+<p>This package launches all the static agents, i.e., the cameras in the simulation.</p>
+<p>When the workspace is built, the <code>camera_config.xacro</code> file is updated with camera_ids and their corresponding intrinsic and extrinsic values. This can be seen in the <code>build</code> function in <code>control.sh</code>.</p>
+<p>The <code>camera_config.xacro</code> is then sent to the robot_state_publisher node and published to the /static_agent/robot_description topic. The ros_gz_sim package with the "create" executable then spawns the static_agents by subscribing to the /static_agent/robot_description topic and spawning each agent.</p>
 <hr />
 <h3 id="gz_bridge-for-cameras">gz_bridge for cameras</h3>
-<p>different configurations of the gz_bridge node were tested  and evaluated against the simulated RTF (real time factor). In the earlier setups, a gz_bridge node was setup for each camera_stream (image, depth ,semantic) for each camera_id. 3 configurations were tested where different amount of nodes were setup and their corresponding RTF was captured and averaged over 5 tries.</p>
+<p>Different configurations of the gz_bridge node were tested and evaluated against the simulated RTF (real time factor). In the earlier setups, a gz_bridge node was set up for each camera_stream (image, depth, semantic) for each camera_id. Three configurations were tested where different numbers of nodes were set up and their corresponding RTFs were captured and averaged over five tries.</p>
 <p>SN=single node for all cameras, 1NPC=1 node per camera_id, 1NPSPC = 1 node per stream per camera_id</p>
 <table>
 <thead>
@@ -214,13 +198,13 @@
 </tr>
 </tbody>
 </table>
-<p>doesn't seem like a big difference so will stick with one node i.e. SN.</p>
-<p>In the future it can be decided whether to keep the gz_bridge node as is or to create a generate gz_brige_camera.yaml file as the other generation scripts <code>config_generation</code></p>
+<p>It doesn't seem like a big difference, so we will stick with one node, i.e., SN.</p>
+<p>In the future it can be decided whether to keep the gz_bridge node as is or to generate a gz_bridge_camera.yaml file like the other generation scripts (<code>config_generation</code>).</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../simlan_gazebo_environment/worlds/" class="btn btn-neutral float-left" title="Gazebo Worlds"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../simlan_bringup/" class="btn btn-neutral float-left" title="SIMLAN Bringup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../camera_bird_eye_view/" class="btn btn-neutral float-right" title="Camera Bird Eye View">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -244,7 +228,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../simlan_gazebo_environment/worlds/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../simlan_bringup/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../camera_bird_eye_view/" style="color: #fcfcfc">Next &raquo;</a></span>

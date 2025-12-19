@@ -22,7 +22,7 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
       <script>hljs.highlightAll();</script> 
 </head>
 
@@ -73,7 +73,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/">Overview</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/static_agent_launcher/">GPSS cameras</a>
                   </li>
@@ -83,49 +83,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/bt_failsafe/">Failsafe</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Pallet Truck</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/">Pallet Truck</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Humanoid Robot</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Humanoid Motion Capture Utility</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Models</span></p>
-              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/">Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/objects/">Object Modeling</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
                   </li>
               </ul>
               <ul>
@@ -135,8 +121,6 @@
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../resources/ISSUES/">Issues</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resources/diagrams/">Diagrams</a>
                   </li>
@@ -166,15 +150,15 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="contributing">Contributing</h1>
-<p>Legal Notice: When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content and that the content you contribute may be provided under the project license.</p>
+<p>Legal Notice: When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content, and that the content you contribute may be provided under the project license.</p>
 <p>We try to use:</p>
 <ul>
-<li><a href="https://code.visualstudio.com/docs/devcontainers/containers">Docker, vscode + dev-container extension</a> to developer inside a Container</li>
+<li><a href="https://code.visualstudio.com/docs/devcontainers/containers">Docker, vscode + dev-container extension</a> to develop inside a container</li>
 <li><a href="https://www.markdownguide.org/tools/vscode/">Markdown</a> for documentation</li>
 <li><a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits</a> for commit messages</li>
 <li><a href="https://pre-commit.com/">pre-commit</a> for git pre-commit hooks and basic QA</li>
 <li><a href="https://semver.org/">Semantic Versioning</a> for versioning</li>
-<li><a href="https://github.com/jgraph/drawio-desktop">Draw.io</a> for drawing diagram for documentation</li>
+<li><a href="https://github.com/jgraph/drawio-desktop">Draw.io</a> for drawing diagrams for documentation</li>
 </ul>
 <h2 id="technical">Technical</h2>
 <ul>
@@ -192,15 +176,15 @@
 <p>If the implementation is hard to explain, it's a bad idea.</p>
 </li>
 <li>
-<p>Please be generous in giving credit when using an image or a piece of code created by others. Add a link to the original author in <a href="../credits/">credits.md</a></p>
+<p>Please be generous in giving credit when using an image or a piece of code created by others. Add a link to the original author in <a href="../credits/">credits.md</a>.</p>
 </li>
 <li>
-<p>Avoid pushing binary files such as images, models, etc (use .gitignore) specially if they are constantly changing.</p>
+<p>Avoid pushing binary files such as images, models, etc. (use .gitignore), especially if they are constantly changing.</p>
 </li>
 </ul>
 <h3 id="git">git</h3>
 <ul>
-<li>Try avoid breaking the <code>main</code> branch but don't be obseesed with having a perfect merge request. We can always revert back to the working version or fix the issues. That is why we are using <code>git</code>.</li>
+<li>Try to avoid breaking the <code>main</code> branch, but don't be obsessed with having a perfect merge request. We can always revert back to the working version or fix the issues. That is why we are using <code>git</code>.</li>
 <li>Follow this simple git process:</li>
 </ul>
 <pre><code>git checkout main
@@ -211,18 +195,18 @@ git commit -m &quot;conventional_commit_type: conventional_commit_message&quot;
 git push
 # Create a pull request.
 </code></pre>
-<p>common commit_type:</p>
+<p>Common commit types:</p>
 <ul>
 <li>feat: Introduces a new feature.</li>
 <li>fix: Patches a bug or issue.</li>
 <li>chore: Routine maintenance or changes that don't affect the app's functionality.</li>
 <li>docs: Documentation changes.</li>
 </ul>
-<p>conventional_commit_message:</p>
+<p>Conventional commit message:</p>
 <ul>
 <li>A conventional commit message uses the imperative mood in the subject line</li>
 </ul>
-<p>example of</p>
+<p>Example of</p>
 <ul>
 <li>feat(auth): add login functionality</li>
 <li>fix(ui): resolve button color issue</li>
@@ -230,17 +214,17 @@ git push
 <p><a href="https://www.conventionalcommits.org">https://www.conventionalcommits.org</a></p>
 <h3 id="misc">Misc</h3>
 <ul>
-<li>Don't use absolute path. Your code should run correctly both inside the VS Code Dev Container and independently outside of it.If you need to modify a configuration file at build time, use relative paths from the project root directory (avoid using ".." as it becomes hard to see which scripts are using a specific directory).For ROS2 resources, use <code>get_package_share_directory(project_name)</code> to locate package files.</li>
+<li>Don't use absolute paths. Your code should run correctly both inside the VS Code Dev Container and independently outside of it. If you need to modify a configuration file at build time, use relative paths from the project root directory (avoid using ".." as it becomes hard to see which scripts are using a specific directory). For ROS2 resources, use <code>get_package_share_directory(project_name)</code> to locate package files.</li>
 <li>When adding a new feature, add it to control.sh. Otherwise, <code>control.sh</code> should remain unchanged.</li>
-<li>Any configuration that requires modification should be defined in <code>config.sh</code></li>
+<li>Any configuration that requires modification should be defined in <code>config.sh</code>.</li>
 </ul>
 <h3 id="documentation">Documentation</h3>
 <p>Documentation is done in a markdown file. Try to keep our documentation close to your code. Keep the documentation short and clear.</p>
 <ul>
-<li><code>#</code> : Only used once for the tile of the project</li>
-<li><code>##</code> : usually once in each markdown file and usually share semantic with the markdown filename.</li>
-<li><code>###</code> : Different topics, try to split your documentation into at least 4 topics</li>
-<li><code>####</code> : sub topics. Try to avoid when you can use simple paragraphs</li>
+<li><code>#</code> : Only used once for the title of the project.</li>
+<li><code>##</code> : usually once in each markdown file and usually shares semantics with the markdown filename.</li>
+<li><code>###</code> : Different topics, try to split your documentation into at least 4 topics.</li>
+<li><code>####</code> : subtopics. Try to avoid when you can use simple paragraphs.</li>
 </ul>
 <p>Follow this subset of <a href="https://www.markdownguide.org/tools/vscode/">Markdown</a> tags.</p>
               
