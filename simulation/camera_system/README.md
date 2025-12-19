@@ -1,12 +1,12 @@
 # Camera_system
 
-This is a package that views the output of the cameras for the humanoid project. At the moment it is hardcoded to listen to the camera id's 500-503 in the camera_viewer.py script.
+This is a package that views the output of the cameras for the humanoid project. At the moment, it is hardcoded to listen to the camera IDs 500-503 in the camera_viewer.py script.
 
-The pkg is a legacy component from when the humanoid was its separate project and it is probably wise to merge its content with another pkg.
+The pkg is a legacy component from when the humanoid was its separate project, and it is probably wise to merge its content with another pkg.
 
-The launch file should probably be removed but since im leaving this project soon i don't want to create any issues if thats not the case.
+The launch file should probably be removed, but since I'm leaving this project soon, I don't want to create any issues if that's not the case.
 
-However it is important to understand that the camera_viewer.py is run in the dataset function in control.sh
+However, it is important to understand that the camera_viewer.py is run in the dataset function in control.sh
 
 ```bash
 camera () {

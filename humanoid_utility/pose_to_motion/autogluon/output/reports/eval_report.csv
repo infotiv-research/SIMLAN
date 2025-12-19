@@ -1,5 +1,2 @@
-MODEL_INSTANCE,DATE,MODEL_TYPE,EVAL_DATASET,AVG_MSE,AVG_MAE,HYPERPARAMETERS
-/home/ros/src/humanoid_utility/pose_to_motion/autogluon/output/saved_model_states/autogluon_multi_no_normalization,2025-11-07 15:53:18.246009,autogluon,/home/ros/src/humanoid_utility/DATASET_PREPROCESSED/EVAL/multi_eval.csv,0.2057917766378961,0.3465988846965981,
-/home/ros/src/humanoid_utility/pose_to_motion/autogluon/output/saved_model_states/autogluon_single_cam_without_normalization,2025-11-10 08:35:20.278677,autogluon,/home/ros/src/humanoid_utility/DATASET_PREPROCESSED/EVAL/single_eval_cam500.csv,0.2076716306086378,0.3485788934635117,
-/home/ros/src/humanoid_utility/pose_to_motion/autogluon/output/saved_model_states/autogluon_single_cam_normalization,2025-11-10 09:35:45.071158,autogluon,/home/ros/src/humanoid_utility/DATASET_PREPROCESSED/EVAL/single_eval_cam500.csv,0.2121316387315742,0.3545498946424273,
-/home/ros/src/humanoid_utility/pose_to_motion/autogluon/output/saved_model_states/autogluon_multi_normalization,2025-11-10 09:43:31.218390,autogluon,/home/ros/src/humanoid_utility/DATASET_PREPROCESSED/EVAL/multi_eval.csv,0.20800880935049254,0.35044373290354486,
+MODEL_INSTANCE,DATE,MODEL_TYPE,EVAL_DATASET,CAMERAS_USED,AVG_MSE,AVG_MAE,HYPERPARAMETERS
+autogluon_is_now_class_500,2025-12-09 16:09:11.954849,autogluon,/home/ros/src/humanoid_utility/DATASET/PAR_DATA,['500'],0.14000285808072566,0.24652470667919563,

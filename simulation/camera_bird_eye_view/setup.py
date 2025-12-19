@@ -24,6 +24,7 @@ setup(
             "camera_bird_eye_view_publisher = camera_bird_eye_view.camera_bird_eye_view_publisher:main",
             "camera_bird_eye_view_stitcher = camera_bird_eye_view.camera_bird_eye_view_stitcher:main",
             "camera_save = camera_bird_eye_view.camera_save:main",
+            "record_camera_stream = camera_bird_eye_view.record_camera_stream:main",
         ],
     },
 )

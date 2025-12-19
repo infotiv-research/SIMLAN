@@ -6,7 +6,7 @@ SIMLAN_GAZEBO_ENVIRONMENT_PKG_PATH = os.path.expanduser(
 )
 
 
-def generate_gz_bridge(robots, humanoids):
+def generate_gz_bridge():
     bridges = [
         {
             "ros_topic_name": "clock",
@@ -30,43 +30,6 @@ def generate_gz_bridge(robots, humanoids):
             "direction": "GZ_TO_ROS",
         },
     ]
-
-    for robot in robots:
-        namespace = robot["namespace"]
-        robot_type = robot["robot_type"]
-        if robot_type == "pallet_truck":
-            bridges.append(
-                {
-                    "ros_topic_name": f"{namespace}/contact",
-                    "gz_topic_name": f"/world/default/model/{namespace}/link/{namespace}/base_link/sensor/{namespace}/contact_sensor/contact",
-                    "ros_type_name": "ros_gz_interfaces/msg/Contacts",
-                    "gz_type_name": "gz.msgs.Contacts",
-                    "direction": "GZ_TO_ROS",
-                }
-            )
-
-    for robot in robots:
-        namespace = robot["namespace"]
-        bridges.append(
-            {
-                "ros_topic_name": f"{namespace}/pose",
-                "gz_topic_name": f"/model/{namespace}/pose",
-                "ros_type_name": "geometry_msgs/msg/Pose",
-                "gz_type_name": "gz.msgs.Pose",
-                "direction": "GZ_TO_ROS",
-            }
-        )
-    for humanoid in humanoids:
-        namespace = humanoid["namespace"]
-        bridges.append(
-            {
-                "ros_topic_name": f"{namespace}/pose",
-                "gz_topic_name": f"/model/{namespace}/pose",
-                "ros_type_name": "geometry_msgs/msg/Pose",
-                "gz_type_name": "gz.msgs.Pose",
-                "direction": "GZ_TO_ROS",
-            }
-        )
 
     file = "gz_bridge.yaml"
     config_dir = os.path.join(SIMLAN_GAZEBO_ENVIRONMENT_PKG_PATH, "config")

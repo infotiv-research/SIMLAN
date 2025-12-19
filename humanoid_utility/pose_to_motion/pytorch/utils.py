@@ -1,26 +1,18 @@
 import sys
-import argparse
 from typing import List, TypedDict
-import json
 
 from humanoid_utility import humanoid_config
 
 sys.path.append(".")
-import pandas as pd
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import torch.nn as nn
-import optuna
-from optuna.trial import TrialState
-import torch.optim as optim
-from sklearn.metrics import mean_squared_error
-from tqdm import tqdm
 from pathlib import Path
-import os
 import random
 
 
-MODEL_STATES_DIR = Path(__file__).parent / "output/saved_model_states"
+MODEL_STATES_DIR = "humanoid_utility/pose_to_motion/pytorch/output/saved_model_states"
+
 
 class HyperparameterDict(TypedDict):
     # TRAIN LOOP SPECIFIC
@@ -35,29 +27,41 @@ class HyperparameterDict(TypedDict):
     in_features: int
     out_features: int
 
-def get_hyperparameters() -> HyperparameterDict:
-    return HyperparameterDict({   
+
+def get_hyperparameters(num_cameras) -> HyperparameterDict:
+    return HyperparameterDict(
+        {
             # TRAIN LOOP SPECIFIC
-            "N_EPOCHS": 5,
+            "N_EPOCHS": 160,
             "BATCHSIZE": 22,
             "optimizer_name": "Adam",
-            "lr":7.088648070427078e-05,
+            "lr": 7.088648070427078e-05,
             "n_layers": 3,
             # MODEL SPECIFIC
             "size_per_layer": [504, 476, 479],
-            "dropout_per_layer": [0.13201141925241577, 0.20817940982863983, 0.14885002648956877],
-            "in_features": humanoid_config.NUM_MARKERS * 3,
-            "out_features": humanoid_config.NUM_JOINTS
-        })
+            "dropout_per_layer": [
+                0.13201141925241577,
+                0.20817940982863983,
+                0.14885002648956877,
+            ],
+            "in_features": humanoid_config.NUM_MARKERS * 3 * num_cameras,
+            "out_features": humanoid_config.NUM_JOINTS,
+        }
+    )
+
 
 class MultiLabelRegressionDataset(Dataset):
-    def __init__(self, csv_file, num_features):
-        data = pd.read_csv(csv_file)
+    def __init__(self, dataset_df, cameras):
+        cam_pose_cols = [
+            f"cam{camera}_{pose_col}"
+            for camera in cameras
+            for pose_col in humanoid_config.pose_names
+        ]
         self.features = torch.tensor(
-            data.iloc[:, 0 : num_features ].values, dtype=torch.float32
+            dataset_df[cam_pose_cols].values, dtype=torch.float32
         )  # first column is index, then features
         self.labels = torch.tensor(
-            data.iloc[:, num_features  :].values, dtype=torch.float32
+            dataset_df[humanoid_config.movable_joint_names].values, dtype=torch.float32
         )  # Last num_feat columns as labels
 
     def __len__(self):
@@ -67,12 +71,10 @@ class MultiLabelRegressionDataset(Dataset):
         return self.features[idx], self.labels[idx]
 
 
-
-
-def define_torch_model(hyperparameters:HyperparameterDict):
+def define_torch_model(hyperparameters: HyperparameterDict):
     # We optimize the number of layers, hidden units and dropout ratio in each layer.
     layers = []
-    n_layers = hyperparameters["n_layers"] 
+    n_layers = hyperparameters["n_layers"]
     size_per_layer = hyperparameters["size_per_layer"]
     dropout_per_layer = hyperparameters["dropout_per_layer"]
     IN_FEATURES = hyperparameters["in_features"]
@@ -90,38 +92,38 @@ def define_torch_model(hyperparameters:HyperparameterDict):
     layers.append(nn.Linear(out_features, OUT_CLASSES))
     return nn.Sequential(*layers)
 
+
 def save_model(model, model_instance):
     # if we run an optuna session, we just move on.
-    if(model_instance == "optuna"):
+    if model_instance == "optuna":
         return
-    # If model exists already we add a random identifier to it so we never overwrite models.
-    if(model_exist(model_instance)):
-        random_identifier = int(random.random()*100)
-        model_instance = model_instance + f"_copy_{random_identifier}"
-        print("model already exists, saving a new copy")
     print(f"Saving model: {model_instance}")
-    
+
     torch.save(model.state_dict(), f"{MODEL_STATES_DIR}/{model_instance}.pth")
     return model_instance
 
+
 def load_model(model_instance, hyperparameters):
-    
+
     # We define the model
     model = define_torch_model(hyperparameters)
     # If model exist we load it. Else return new model
-    if model_exist(model_instance):    
-        print(f"model found. Using saved model {model_instance}")    
+    if model_exist(model_instance):
+        print(f"model found. Using saved model {model_instance}")
         try:
             model.load_state_dict(
                 torch.load(f"{MODEL_STATES_DIR}/{model_instance}.pth")
             )
         except Exception as e:
-            print(f"Unable to load model with name {model_instance}. Most probably the hyperparameters missmatch.")
+            print(
+                f"Unable to load model with name {model_instance}. Most probably the hyperparameters miss match."
+            )
             print(e)
 
     else:
         print("No model with this name found. Using new model")
     return model
+
 
 def model_exist(model_instance):
     # We check if file exist.

@@ -19,15 +19,3 @@
   ros_type_name: sensor_msgs/msg/JointState
   gz_type_name: gz.msgs.Model
   direction: GZ_TO_ROS
-
-- ros_topic_name: robot_agent_1/contact
-  gz_topic_name: /world/default/model/robot_agent_1/link/robot_agent_1/base_link/sensor/robot_agent_1/contact_sensor/contact
-  ros_type_name: ros_gz_interfaces/msg/Contacts
-  gz_type_name: gz.msgs.Contacts
-  direction: GZ_TO_ROS
-
-- ros_topic_name: robot_agent_2/contact
-  gz_topic_name: /world/default/model/robot_agent_2/link/robot_agent_2/base_link/sensor/robot_agent_2/contact_sensor/contact
-  ros_type_name: ros_gz_interfaces/msg/Contacts
-  gz_type_name: gz.msgs.Contacts
-  direction: GZ_TO_ROS

@@ -2,9 +2,6 @@
  
 In addition to the change_log, this description is added to give vital information that may help other developers in the future to debug or update features faster.
 
----
-
-## Additions:
 
 Here additions to the urdf.xacro files are mentioned
 
@@ -19,15 +16,9 @@ The topic publishes information about the position, torque and which models are 
 
 The topic name is defined by the automatically generated gz_bridge() which can be found in /home/ros/src/simulation/pallet_truck/pallet_truck_bringup/launch/generate_gz_bridge.py
 
----
 
-## Old Bugs
 
-Here is some information of old bugs which may be useful to know for future development
-
----
-
-### xacro/urdf/sdf files
+### xacro/urdf/sdf files Bugs
  
 Gazebo only reads sdf files and if .xacro or .urdf files are used, they are later parsed to .sdf's before being used by Gazebo.
  
