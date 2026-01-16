@@ -14,12 +14,12 @@ sys.path.append(".")
 from humanoid_utility import humanoid_config
 from humanoid_utility.pose_to_motion.autogluon.framework import AutogluonFramework
 from humanoid_utility.pose_to_motion.pytorch.framework import PytorchFramework
-from humanoid_utility.pre_processing.process_input_data import (
+from humanoid_utility.pre_processing.media_to_pose_landmark import (
     process_images,
     process_video,
 )
 
-from humanoid_utility.pre_processing.dataframe_converter import (
+from humanoid_utility.pre_processing.dataframe_json_bridge import (
     generate_df_from_json,
     generate_pose_df_from_json_by_ids,
 )

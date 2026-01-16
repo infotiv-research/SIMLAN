@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-
 import launch_pytest
 import launch_testing
 import pytest
@@ -9,6 +8,7 @@ import rclpy
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess
 from test_node import MakeTestNode
+import subprocess
 
 sys.path.append(".")
 
@@ -20,7 +20,6 @@ def launch_description():
     log_level = "error"
     robots = '[{ "namespace": "robot_agent_1", "initial_pose_x":"10.0", "initial_pose_y":"1.0", "robot_type":"pallet_truck", "aruco_id":"1" }]'
     ######## Launch-files / Processes ########
-    os.environ["ROS_DOMAIN_ID"] = str(os.getpid() % 232)
 
     sim_proc = ExecuteProcess(
         cmd=[
@@ -30,6 +29,7 @@ def launch_description():
             "sim.launch.py",
             f"log_level:={log_level}",
             f"world_setup:={world_setup}",
+            f"headless_gazebo:=true",
         ],
         output="screen",
     )
@@ -52,7 +52,6 @@ def launch_description():
         [
             sim_proc,
             multiple_robot_proc,
-            launch_testing.util.KeepAliveProc(),
             launch_testing.actions.ReadyToTest(),
         ]
     )
@@ -121,6 +120,9 @@ async def test_sim_and_multiple_robots_bringup_Startup_Nodes_and_topics_should_b
 
 @pytest.mark.launch(fixture=launch_description, shutdown=True)
 async def test_after_shutdown(launch_service, launch_description):
-    # --- Cleanup command ---
-    print("Testing after shutdown command.")
+    print("Killing remaining processes.")
+    subprocess.run(["pkill", "-9", "-f", "gzserver"])
+    subprocess.run(["pkill", "-9", "-f", "ruby"])
+    subprocess.run(["pkill", "-9", "-f", "gzclient"])
+    subprocess.run(["pkill", "-9", "-f", "gazebo"])
     pass

@@ -1,12 +1,5 @@
 # Dependencies
 
-## Linux Dependencies
-
-## NVIDIA Driver
-
-Use 'nvidia-smi' to ensure that the right NVIDIA driver is installed.
-If you have not installed **Additional Drivers** when installing Ubuntu, you need to manually install NVIDIA drivers.
-
 ## Docker
 
 ```
@@ -18,7 +11,16 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-## nvidia-container-toolkit
+## Nvidia GPU
+
+see [resources/ISSUES.md](resources/ISSUES.md) if you faced any problem after running the commands below:
+
+### NVIDIA Driver
+
+Use 'nvidia-smi' to ensure that the right NVIDIA driver is installed.
+If you have not installed **Additional Drivers** when installing Ubuntu, you need to manually install NVIDIA drivers.
+
+### nvidia-container-toolkit
 
 To install Docker and `nvidia-container-toolkit`, use the following commands:
 
@@ -64,6 +66,26 @@ docker info|grep -i runtime
 Otherwise you get the following error message in VS Code: `Error response from daemon: unknown or invalid runtime name: nvidia`
 
 On a **host** machine's terminal (**not** inside Visual Studio Code terminal): `xhost +local:docker`.
+
+### No Nvidia GPU
+
+To start the project **without NVIDIA GPU**, please comment out these lines in `docker-compose.yaml` as shown below:
+
+```bash
+  #   runtime: nvidia
+  #
+  # factory_simulation_nvidia:
+  #  <<: *research-base
+  #  container_name: factory_simulation_nvidia
+  #  runtime: nvidia
+  #  deploy:
+  #    resources:
+  #      reservations:
+  #        devices:
+  #          - driver: nvidia
+  #            count: "all"
+  #            capabilities: [compute,utility,graphics,display]
+```
 
 ## Windows Dependencies
 

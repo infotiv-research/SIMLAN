@@ -21,14 +21,18 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from launch.actions import OpaqueFunction
 
+
 def launch_setup(context, *args, **kwargs):
     # Launch args
     log_level = LaunchConfiguration("log_level").perform(context)
     world_setup = LaunchConfiguration("world_setup").perform(context)
+    headless_gazebo = LaunchConfiguration("headless_gazebo").perform(context)
     use_sim_time = LaunchConfiguration("use_sim_time", default=True)
     launch_rviz = LaunchConfiguration("rviz")
 
-    pkg_simlan_gazebo_environment = get_package_share_directory("simlan_gazebo_environment")
+    pkg_simlan_gazebo_environment = get_package_share_directory(
+        "simlan_gazebo_environment"
+    )
     pkg_static_agent_launcher = get_package_share_directory("static_agent_launcher")
 
     rviz_config_file = PathJoinSubstitution(
@@ -45,21 +49,19 @@ def launch_setup(context, *args, **kwargs):
                 pkg_simlan_gazebo_environment, "launch", "simlan_factory.launch.py"
             )
         ),
-        launch_arguments={"use_sim_time":use_sim_time,
-                          "world_setup":world_setup,
-                          "log_level":log_level
-                          }.items(),
+        launch_arguments={
+            "use_sim_time": use_sim_time,
+            "world_setup": world_setup,
+            "headless_gazebo": headless_gazebo,
+            "log_level": log_level,
+        }.items(),
     )
 
     rviz2 = Node(
         package="rviz2",
         executable="rviz2",
         name="rviz",
-        arguments=[
-            "-d", 
-            rviz_config_file,
-            "--ros-args", "--log-level", log_level
-            ],
+        arguments=["-d", rviz_config_file, "--ros-args", "--log-level", log_level],
         output="screen",
         condition=IfCondition(launch_rviz),
     )

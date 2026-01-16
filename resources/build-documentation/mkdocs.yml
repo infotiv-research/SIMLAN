@@ -7,34 +7,37 @@ repo_name: infotiv-research/SIMLAN
 repo_url: https://github.com/infotiv-research/SIMLAN
 docs_dir: /docvolume
 nav:
-  - SIMLAN, Simulation for Multi-Camera Robotics: README.md
+  - SIMLAN, Vision-Based Multi-Camera Robotics Simulation: README.md
   - Dependencies: dependencies.md
   - Contributing: contributing.md
   - Config Generation: config_generation/README.md
   - Simulation:
-      - Overview: simulation/README.md
+      - Simulation: simulation/README.md
+      - Gazebo Worlds: simulation/simlan_gazebo_environment/worlds/README.md
+      - Models: simulation/raw_models/README.md # Models
+      - Object Modeling: simulation/raw_models/objects/README.md
+      - Warehouse Specification: simulation/raw_models/warehouse/README.md
       - SIMLAN Bringup: simulation/simlan_bringup/README.md
       - GPSS cameras: simulation/static_agent_launcher/README.md
       - Camera Bird Eye View: simulation/camera_bird_eye_view/README.md
       - Aruco Localization: simulation/aruco_localization/README.md
-      - Failsafe: simulation/bt_failsafe/README.md
       - Bringup: simulation/pallet_truck/pallet_truck_bringup/README.md
       - Pallet Truck: simulation/pallet_truck/README.md  # Pallet Truck
-      - URDF: simulation/pallet_truck/pallet_truck_description/urdf/README.md
       - Control: simulation/pallet_truck/pallet_truck_control/README.md
       - Navigation: simulation/pallet_truck/pallet_truck_navigation/README.md
-      - Overview: simulation/humanoid_robot/README.md # Humanoid Robot
+      - Failsafe: simulation/bt_failsafe/README.md
+      - Humanoid Robot: simulation/humanoid_robot/README.md # Humanoid Robot
       - Humanoid Moveit: simulation/humanoid_support_moveit_config/README.md
-      - Overview: humanoid_utility/README.md
+      - Humanoid Motion Capture: humanoid_utility/README.md
+      - Humanoid Preprocessing: humanoid_utility/pre_processing/README.md
+      - Humanoid internal: humanoid_utility/DEBUG.md
+      - Humanoid motion planner : simulation/motion_planner/README.md
       - Pose to Motion AutoGluon model: humanoid_utility/pose_to_motion/autogluon/README.md
       - Panda MoveIt2: simulation/moveit2/README.md # Panda
-      - Gazebo Worlds: simulation/simlan_gazebo_environment/worlds/README.md
-      - Overview: simulation/raw_models/README.md # Models
-      - Object Modeling: simulation/raw_models/objects/README.md
-      - Warehouse Specification: simulation/raw_models/warehouse/README.md
       - Object Mover: simulation/object_mover/README.md
   - Credits: credits.md
   - Appendix:
+      - Issues: ISSUES.md
       - Changelog: CHANGELOG.md
       - Diagrams: resources/diagrams/README.md
 theme:
@@ -78,7 +81,6 @@ exclude_docs: |
   **/*.xacro
   **/*.sh
   **/*.txt
-  **/*.html
   **/*.sdf
   **/*.config
   **/*.dae
@@ -102,7 +104,6 @@ exclude_docs: |
   **/*.woff
   **/*.woff2
   **/*.eot
-  **/*.js
   **/*.json
   **/*.log
   **/*.lua
@@ -110,7 +111,6 @@ exclude_docs: |
   **/*.action
   **/*.world
   **/LICENSE
-  **/*.css
   **/*.ico
   **/*.cpp
   **/*.h

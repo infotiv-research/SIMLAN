@@ -8,7 +8,7 @@ CAMERA_ENABLED_IDS='164 165 166 167 168'
 CAMERA_STREAMS='image'
 ```
 
-### Bird eye view
+## Bird eye view
 
 This package features the ability to select areas of your choosing and create a bird-eye view of that area by using available cameras, viewing that area.
 
@@ -24,7 +24,7 @@ Ro run birdeye launch file in separate terminals run the following commands:
 ![bird eye view](/resources/bird_eye_view.png)
 ![bird eye view gazebo](/resources/bird_eye_view_gazebo.png)
 
-### Different sensors (Depth, Semantic Segmentation, Color)
+## Different sensors (Depth, Semantic Segmentation, Color)
 
 The package also includes a camera save node. This node saves raw, depth, and semantic segmentation images for all the enabled camera IDs in config.sh. To take a single image from different cameras, run the following command:
 

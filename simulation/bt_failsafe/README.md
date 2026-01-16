@@ -6,15 +6,15 @@ In this approach for a new Behavior Tree, the **condition node** named [`StopRob
 
 Currently, this safety controller triggers `StopRobotCondition`:
 
-### Activation of collision sensor
+## Activation of collision sensor
 
 When a collision is detected by the simulator, the collision's physical properties (such as the force and the object that the pallet truck collided with) are published to the pallet trucks' `/contact` topic.
 
-### Loss of Observability
+## Loss of Observability
 
 To implement geofencing and the safety situation in which a pallet truck is not observable in any camera, the `aruco_localization` pkg under `aruco_localization/aruco_pose_pub.py` continuously publishes the list of pallet trucks that are observable in the `/aruco_marker_seen` topic. Then, if one stops being observable, the BT condition passes.
 
-### Behavior tree and direct implementation in aruco_localization pkg
+## Behavior tree and direct implementation in aruco_localization pkg
 
 At first, we define a custom `behavior_tree.xml` in `simulation/pallet_truck/pallet_truck_navigation/config/navigate_w_replanning_and_recovery_robot_agent_X.xml`. This XML file defines which BT plugins we want to use during the navigation and which run continuously during the navigation. In this XML file, the `StopRobotCondition` and `CancelControl` plugins are defined in a fallback function. A fallback function works as it runs the first stated plugin, and when that plugin fails, it moves over to the second one and executes that plugin. So in this case, we first run the `StopRobotCondition` plugin until the robot is out of bounds. Once the plugin fails, the `CancelControl` plugin executes and stops the pallet truck.
 
@@ -24,7 +24,7 @@ The same goes for the collision sensor. It publishes to the topic `/robot_agent_
 
 Step two in the failsafe is to stop the pallet truck when it gets out of bounds or collides with something. This is done by a custom-made behavior tree plugin called StopRobotCondition, which is found in `simulation/bt_failsafe/src/stop_robot.cpp`. This plugin listens to the `/aruco_marker_lost` and `/robot_agent_X/contact` topics. As soon as a contact is detected or a robot's namespace is lost, it fails, and the `CancelControl` behavior tree starts. This, in turn, stops the pallet truck. The `CancelControl` plugin is an existing built-in plugin in Nav2.
 
-### Why Nav2 behavior tree plugins were not suitable
+## Why Nav2 behavior tree plugins were not suitable
 
 We tried to use only built-in plugins, which most likely is the most robust and secure way to do it as the plugins are updated accordingly to ROS2 and Nav2.
 

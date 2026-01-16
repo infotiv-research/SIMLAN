@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<robot name="pallet_truck" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="pallet_truck"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:arg name="is_sim" default="true" />
   <xacro:arg name="prefix" default="pallet_truck" />
   <xacro:arg name="namespace" default="pallet_truck" />
@@ -27,10 +28,18 @@
 
   <xacro:property name="mount_spacing" value="0.120" />
 
-  <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
-  <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
-  <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
-  <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+  <material name="dark_grey">
+    <color rgba="0.2 0.2 0.2 1.0" />
+  </material>
+  <material name="light_grey">
+    <color rgba="0.4 0.4 0.4 1.0" />
+  </material>
+  <material name="yellow">
+    <color rgba="0.8 0.8 0.0 1.0" />
+  </material>
+  <material name="black">
+    <color rgba="0.15 0.15 0.15 1.0" />
+  </material>
 
   <xacro:include filename="$(find pallet_truck_description)/urdf/aruco.xacro"/>
 
@@ -55,10 +64,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="0.477"/>
-        <inertia
-          ixx="0.0013" ixy="0" ixz="0"
-          iyy="0.0024" iyz="0"
-          izz="0.0013"/>
+        <inertia ixx="0.0013" ixy="0" ixz="0" iyy="0.0024" iyz="0" izz="0.0013"/>
       </inertial>
     </link>
 
@@ -73,7 +79,7 @@
     </gazebo>
 
     <joint name="${wheel_prefix}_wheel_joint" type="continuous">
-      <parent link="$(arg prefix)/chassis_link"/>
+      <parent link="chassis_link"/>
       <child link="${wheel_prefix}_wheel_link" />
       <xacro:insert_block name="joint_pose" />
       <axis xyz="0 1 0" />
@@ -92,92 +98,89 @@
     </transmission>
   </xacro:macro>
 
-  <xacro:wheel wheel_prefix="$(arg prefix)/front_left">
+  <xacro:wheel wheel_prefix="front_left">
     <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="$(arg prefix)/front_right">
+  <xacro:wheel wheel_prefix="front_right">
     <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="$(arg prefix)/rear_left">
+  <xacro:wheel wheel_prefix="rear_left">
     <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel wheel_prefix="$(arg prefix)/rear_right">
+  <xacro:wheel wheel_prefix="rear_right">
     <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
 
   <joint name="scan_joint" type="fixed">
     <origin xyz="0 0 1.5" rpy="0 0 0"/>
-    <parent link="$(arg prefix)/base_link"/>
-    <child link="$(arg prefix)/scan_link"/>
+    <parent link="base_link"/>
+    <child link="scan_link"/>
   </joint>
 
 
   <!-- LIDAR -->
-  <link name="$(arg prefix)/scan_link">
-      <visual>
+  <link name="scan_link">
+    <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-          <box size="0.1 0.1 0.1"/>
+        <box size="0.1 0.1 0.1"/>
       </geometry>
     </visual>
   </link>
 
-  <link name="$(arg prefix)/base_link"></link>
+  <link name="base_link"></link>
 
 
-  <joint name="$(arg prefix)/base_link_joint" type="fixed">
+  <joint name="base_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="$(arg prefix)/base_link"/>
-    <child link="$(arg prefix)/chassis_link" />
+    <parent link="base_link"/>
+    <child link="chassis_link" />
   </joint>
 
-  <link name="$(arg prefix)/chassis_link">
+  <link name="chassis_link">
 
 
-  <xacro:if value="${robot_type == 'pallet_truck'}">
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="0.6 0.6 0.6" />
-      </geometry>
+    <xacro:if value="${robot_type == 'pallet_truck'}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find pallet_truck_description)/meshes/VOLVO_AVG.dae" scale="0.6 0.6 0.6" />
+        </geometry>
         <material name="black" />
-    </visual>
-    <collision>
-      <origin xyz="0 0 0.2" rpy="0 0 0"/>
-      <geometry>
-        <box size="${chassis_length/1.5} ${chassis_width} ${chassis_height*2}"/>
-      </geometry>
-    </collision>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <geometry>
+          <box size="${chassis_length/1.5} ${chassis_width} ${chassis_height*2}"/>
+        </geometry>
+      </collision>
 
-    <inertial>
-      <!-- Center of mass -->
-      <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
-      <mass value="16.523"/>
-      <inertia
-        ixx="0.3136" ixy="-0.0008" ixz="0.0164"
-        iyy="0.3922" iyz="-0.0009"
-        izz="0.4485"/>
-    </inertial>
-  </xacro:if>
+      <inertial>
+        <!-- Center of mass -->
+        <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
+        <mass value="16.523"/>
+        <inertia ixx="0.3136" ixy="-0.0008" ixz="0.0164" iyy="0.3922" iyz="-0.0009" izz="0.4485"/>
+      </inertial>
+    </xacro:if>
 
 
 
 
-  <xacro:if value="${robot_type == 'forklift'}">
-    <visual>
-      <origin xyz="-0.5 -0.25 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae" scale="0.6 0.6 0.6" />
-      </geometry>
+    <xacro:if value="${robot_type == 'forklift'}">
+      <visual>
+        <origin xyz="-0.5 -0.25 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find simlan_gazebo_environment)/models/forklift_robot/forklift_robot_description/meshes/base_link.dae" scale="0.6 0.6 0.6" />
+        </geometry>
         <material name="black" />
-    </visual>
-    <collision>
-      <origin xyz="0.15 0.075 0.65" rpy="0 0 0"/>
-      <geometry>
-            <box size="1.3 0.65 1.2"/>
-      </geometry>
-    </collision>
-    <!--
+      </visual>
+      <collision>
+        <origin xyz="0.15 0.075 0.65" rpy="0 0 0"/>
+        <geometry>
+          <box size="1.3 0.65 1.2"/>
+        </geometry>
+      </collision>
+      <!--
     <collision>
       <origin xyz="0 0 ${chassis_height/2}"/>
       <geometry>
@@ -186,16 +189,13 @@
     </collision>
     -->
 
-    <inertial>
-      <!-- Center of mass -->
-      <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
-      <mass value="16.523"/>
-      <inertia
-        ixx="0.3136" ixy="-0.0008" ixz="0.0164"
-        iyy="0.3922" iyz="-0.0009"
-        izz="0.4485"/>
-    </inertial>
-  </xacro:if>
+      <inertial>
+        <!-- Center of mass -->
+        <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
+        <mass value="16.523"/>
+        <inertia ixx="0.3136" ixy="-0.0008" ixz="0.0164" iyy="0.3922" iyz="-0.0009" izz="0.4485"/>
+      </inertial>
+    </xacro:if>
 
   </link>
 
@@ -204,21 +204,21 @@
        to supply the joint between it and imu_link. This is important so that imu_link
        always points to the "active" IMU. When an upgrade IMU is connected, the
        internal_imu_link should remain, but imu_link should point to the upgrade one. -->
-  <link name="$(arg prefix)/imu_link">
+  <link name="imu_link">
     <inertial>
       <mass value="0.001"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
     </inertial>
   </link>
-  <joint name="$(arg prefix)/imu_joint" type="fixed">
-    <parent link="$(arg prefix)/chassis_link" />
-    <child link="$(arg prefix)/imu_link" />
+  <joint name="imu_joint" type="fixed">
+    <parent link="chassis_link" />
+    <child link="imu_link" />
   </joint>
 
   <!-- TODO Same note as applies to imu_link -->
   <!--
-  <link name="$(arg prefix)/navsat_link">
+  <link name="navsat_link">
     <visual>
       <geometry>
         <cylinder radius="0.026" length="0.016" />
@@ -227,30 +227,30 @@
       <material name="black" />
     </visual>
   </link>
-  <joint name="$(arg prefix)/navsat_joint" type="fixed">
-    <parent link="$(arg prefix)/chassis_link" />
-    <child link="$(arg prefix)/navsat_link" />
+  <joint name="navsat_joint" type="fixed">
+    <parent link="chassis_link" />
+    <child link="navsat_link" />
     <origin xyz="-0.180 0.126 0.1815" />
   </joint>
 
-  <link name="$(arg prefix)/mid_mount"></link>
-  <joint name="$(arg prefix)/mid_mount_joint" type="fixed">
-    <parent link="$(arg prefix)/chassis_link" />
-    <child link="$(arg prefix)/mid_mount" />
+  <link name="mid_mount"></link>
+  <joint name="mid_mount_joint" type="fixed">
+    <parent link="chassis_link" />
+    <child link="mid_mount" />
     <origin xyz="0 0 ${chassis_height}" />
   </joint>
 
-  <link name="$(arg prefix)/rear_mount"></link>
-  <joint name="$(arg prefix)/rear_mount_joint" type="fixed">
-    <parent link="$(arg prefix)/mid_mount" />
-    <child link="$(arg prefix)/rear_mount" />
+  <link name="rear_mount"></link>
+  <joint name="rear_mount_joint" type="fixed">
+    <parent link="mid_mount" />
+    <child link="rear_mount" />
     <origin xyz="${-mount_spacing} 0 0" />
   </joint>
 
-  <link name="$(arg prefix)/front_mount"></link>
-  <joint name="$(arg prefix)/front_mount_joint" type="fixed">
-    <parent link="$(arg prefix)/mid_mount" />
-    <child link="$(arg prefix)/front_mount" />
+  <link name="front_mount"></link>
+  <joint name="front_mount_joint" type="fixed">
+    <parent link="mid_mount" />
+    <child link="front_mount" />
     <origin xyz="${mount_spacing} 0 0" />
   </joint>
   -->
@@ -265,22 +265,22 @@
         <plugin>fake_components/GenericSystem</plugin>
       </xacro:unless>
     </hardware>
-    <joint name="$(arg prefix)/front_left_wheel_joint">
+    <joint name="front_left_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)/rear_left_wheel_joint">
+    <joint name="rear_left_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)/front_right_wheel_joint">
+    <joint name="front_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)/rear_right_wheel_joint">
+    <joint name="rear_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>

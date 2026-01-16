@@ -7,7 +7,7 @@
 
     <xacro:macro name="aruco_link" params="number">
 
-        <link name="$(arg prefix)/aruco_${number}_link">
+        <link name="aruco_${number}_link">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
                 <geometry>
@@ -19,13 +19,13 @@
 
         <joint name="aruco_${number}_joint" type="fixed">
             <origin xyz="-0.8 0 1.30" rpy="0 0 0"/>
-            <parent link="$(arg prefix)/base_link"/>
-            <child link="$(arg prefix)/aruco_${number}_link"/>
+            <parent link="base_link"/>
+            <child link="aruco_${number}_link"/>
 
 
         </joint>
 
-        <gazebo reference="$(arg prefix)/aruco_${number}_link">
+        <gazebo reference="aruco_${number}_link">
             <static>true</static>
             <visual name="aruco_front_face">
                 <pose>0.00005 0 0 0 0 0</pose>

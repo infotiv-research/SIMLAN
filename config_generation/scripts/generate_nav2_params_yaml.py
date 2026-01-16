@@ -94,6 +94,7 @@ def generate_nav2_params(robots):
                             "global_frame": f"{namespace}/map",
                             "map_topic": f"/{namespace}/map",
                             "use_sim_time": True,
+                            "controller_frequency": 20.0,
                             "debug_trajectory_details": True,
                             "controller_plugins": FlowStyleList(
                                 [QuotedString("FollowPath")]

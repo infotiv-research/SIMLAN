@@ -18,7 +18,7 @@
 Two solvers:
 world step gives an accurate solution if it is able to solve the problem, while quick step depends on the number of iterations to reach an accurate enough solution.
 
-### contact/collision parameters
+## contact/collision parameters
 
 dampingFactor 	double 	Exponential velocity decay of the link velocity - takes the value and multiplies the previous link velocity by (1-dampingFactor).
 maxVel 	double 	maximum contact correction velocity truncation term.
@@ -34,12 +34,12 @@ contact_surface_layer : contact_surface_layer This is the same parameter as the 
 min_step_size The minimum time duration which advances with each time step of a variable time step solver.
 iters The number of iterations for the solver to run for each time step.
 
-### objects:
+## objects:
 
 As of now there are many objects in the world file nad if you want to move them all it's quite cumbersome. Therefore the move_objects.py was added to be able to increment the poses by x amount if needed.
 See move_objects.py
 
-### reference:
+## reference:
 
 - [Physics Parameters](https://classic.gazebosim.org/tutorials?tut=physics_params&cat=physics)
 - [SDF format](http://sdformat.org/spec)
