@@ -61,6 +61,6 @@ run_command_docker "mkdocs build --config-file /mkdocs.yml --site-dir /output --
 run_command_docker "mkdocs serve --config-file /mkdocs.yml --dev-addr=0.0.0.0:8000"
 
 # THIS HAS TO BE EXECUTED IN THE GITHUB REPO (NOT INTERNAL GITLAB)
-# run_command_docker "git config --global --add safe.directory /pandoc ; mkdocs  gh-deploy --config-file /mkdocs.yml --site-dir /output --verbose"
+#run_command_docker "git config --global --add safe.directory /docvolume ; mkdocs  gh-deploy --config-file /mkdocs.yml --site-dir /output --verbose"
 
 

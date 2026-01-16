@@ -126,3 +126,9 @@ Two robots that are approaching each other (from left and right) don't know wher
 Possible solution: block future path on every other robots map!
 
 
+### DEBUG
+
+Getting this warning below is a sign that the nav2 does not work as intended. If this appears repeatedly, you can check the TF tree to see if there is a connection between the `robot_agent` link and `world` link. If there is no connection, it probably means that no camera is viewing the robot. If so then either move the robot into a camera's view or add more cameras to the simulation.  
+```bash
+[update_map_node-6] [WARN] [robot_agent_1.update_map] [1767949972.586691493]: Transform not available yet: Could not find a connection between 'world' and 'robot_agent_2/base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+```

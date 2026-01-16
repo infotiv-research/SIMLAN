@@ -11,7 +11,6 @@ git checkout ....
 # In three separate terminals:
 ./control.sh clean ; ./control.sh build ; ./control.sh sim
 ./control.sh move_object
-./control.sh camera_dump
 ```
 
 ## Random, In Distribution Objects Movement (normal mode)
@@ -44,4 +43,3 @@ Data collection from cameras according to [requirements](resources/20240610-req.
 
 ./control.sh sim
 ./control.sh move_object
-./control.sh camera_dump

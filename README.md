@@ -1,10 +1,10 @@
-# SIMLAN, Simulation for Multi-Camera Robotics (4.0.1)
+# SIMLAN, Simulation for Multi-Camera Robotics (5.1.0)
 
 This simulation environment, based on the Ignition Gazebo simulator and ROS 2, resembles a Volvo Trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on a multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html) that utilizes ceiling-mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 \[[📹 GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)\]
 
 - 🔗 [Online Documentation](https://infotiv-research.github.io/SIMLAN/)
-- 📃 [PDF Documentation](SIMLAN.pdf)
+- 📃 [PDF Documentation](https://infotiv-research.github.io/SIMLAN/SIMLAN.pdf)
 
 ## SIMLAN Features
 
@@ -12,13 +12,15 @@ This simulation environment, based on the Ignition Gazebo simulator and ROS 2, r
 - Library of assets
 - Real-World environment inspired design (camera position and warehouse layout)
 - ROS 2 interfaces (Humble and Jazzy)
-- ArUco marker localization
 - Simple GPSS (Generic Photo-based Sensor System) navigation
 - Multi-Robot localization and navigation using Nav2
+- ArUco marker localization
 - Bird's-Eye view projection
 - Multi-Sensor Support (LiDAR, RGB camera, semantic segmentation, depth, etc.)
 - Geofencing for safe zones and safe stop on collision
-- Motion capture for Human-Robot Collaboration/Interaction (HRC/HRI)
+- Humanoid worker model
+- Panda arm robotic arm
+- Deep-learning-based human pose capture and replay,
 
 📹 Click the YouTube link below to view the SIMLAN demo video:
 
@@ -56,7 +58,7 @@ To kill all the relevant processes (related to Gazebo and ROS 2), delete build f
 ./control.sh clean
 ```
 
-To clean up and build the ROS 2 simulation
+To clean up and build the project:
 
 ```bash
 ./control.sh build
@@ -78,37 +80,9 @@ You can also use Nav2 to make a robot_agent (that can be either robot/pallet_tru
 ./control.sh send_goal # send navigation goals to nav2 stack for each robot_agent
 ```
 
-If you want to control any robot (pallet truck, humanoid, etc.) manually you can run the following command. Remember to specify what robot you want to control by adding its namespace as argument, i.e. `./control.sh teleop pallet_truck_1`
+![](resources/aruco_localisation.png)
 
-```bash
-./control.sh teleop ${YOUR_ROBOT_NAMESPACE}
-```
-
-If you want to record any of your topics during the tests you can run the following command. Change the topic in the control.sh script: `ros2 bag record /topic` to whatever topic you want to record.
-
-```bash
-./control.sh ros_record
-```
-
-To replay your latest recorded rosbag run the following command:
-
-```bash
-./control.sh ros_replay
-```
-
-If you want to do a camera dump and save the image from each camera as a .png run the following command. The images will appear at `/src/camera_utility/camera_number`.
-
-```bash
-./control.sh camera_dump
-```
-
-![](resources/different-views.png)
-
-If you want to take a screenshot of one of the camera views, run the following command. Replace `###` with the camera you want to take a screenshot of. (163, 164, 165 or 166)
-
-```bash
-./control.sh screenshot ###
-```
+`camera_enabled_ids` in [`config.sh`](config.sh) specifies which cameras are enabled in the GPSS system for ArUco code detection and bird's-eye view.
 
 ```bash
 ./control.sh birdeye
@@ -116,29 +90,16 @@ If you want to take a screenshot of one of the camera views, run the following c
 
 ![](resources/stitched.png)
 
-If you want to add the TF links between the cameras and the ArUco markers without running the `gpss` command, you can run the following command. This is primarily useful for debugging, as `gpss` runs this as well.
-
-```bash
-./control.sh aruco_detection
-```
-
-Finally, to view the bird's-eye perspective from each camera, run the following command and open `rviz`. Then, navigate to the left panel and under "Camera" change the Topic `/static_agents/camera_XXX/image_projected` to visualize the corresponding camera feed:
-
-![](resources/aruco_localisation.png)
-
 ## RITA controls (humanoid, robotic arm) \[[📹 Demo](https://www.youtube.com/watch?v=EiCNiPeifPk)\]
 
+To spawn a human worker run the following command
+
 ```bash
+./control.sh sim
 ./control.sh humanoid
 ```
 
-To move the humanoid around in the simulator
-
-```bash
-./control.sh teleop ${YOUR_HUMANOID_NAMESPACE}
-```
-
-![](resources/arm-humanoid.png)
+We employ a deep neural network to learn the mapping between human pose and humanoid robot motion. The model takes 33 MediaPipe pose landmarks as input and predicts corresponding robot joint positions. Read more about it [Humanoid Utilities](humanoid_utility/README.md)
 
 #### Arm controls
 
@@ -150,75 +111,33 @@ Spawn the Panda arm inside SIMLAN and instruct it to pick and place a box around
 ./control pick
 ```
 
+![](resources/arm-humanoid.png)
+
 ## Testing
 
 Integration tests can be found inside of the [integration_tests/test/](./integration_tests/test/) package. Running the tests helps maintain the project's quality. For more information about how the tests are set up, check out the package [README](./integration_tests/README.md). To run all tests, run the following command:
 
 ```
+./control.sh build
 ./control.sh test
 ```
 
-## Scenarios
-
-In [scenarios.sh](scenarios.sh) you can run predefined scenarios of the project. At the bottom of the file, commands are shown how to run it; otherwise each scenario is referenced by a number.
-Currently there are 3 scenarios and to run them, run this command in the shell
-
-Before running scenario 1 that uses GPSS cameras, make sure that `CAMERA_ENABLED_IDS` in `config.sh` has the list of GPSS cameras.
-
-```
-./control.sh build
-./scenarios.sh 1 # navigation using GPSS cameras (real time factor need to be updated)
-./scenarios.sh 2 # Humanoid and robotic arm
-./scenarios.sh 3 # Humanoid navigation without GPSS cameras (navigate_w_replanning_and_recovery_robot_agent_X.xml need to be updated )
-./scenarios.sh 4 # Record the video demo
-```
-
-If you want to see the planning route for all agents, load `scenario_3_planning.rviz` in Rviz.
-
-Keep in mind to change `real_time_factor` in [`simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro`](/simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro) to small values to slow down the simulator (e.g. 0.05-0.1) before building the project. `./control.sh build`
-
-## Advanced options
-
-See [resources/ISSUES.md](resources/ISSUES.md) to learn about additional advanced options and to check known issues before reporting any issue or requesting new features. To start the project **without NVIDIA GPU**, please comment out these lines in `docker-compose.yaml` as shown below:
-
-```bash
-  #   runtime: nvidia
-  #
-  # factory_simulation_nvidia:
-  #  <<: *research-base
-  #  container_name: factory_simulation_nvidia
-  #  runtime: nvidia
-  #  deploy:
-  #    resources:
-  #      reservations:
-  #        devices:
-  #          - driver: nvidia
-  #            count: "all"
-  #            capabilities: [compute,utility,graphics,display]
-```
-
-`camera_enabled_ids` specifies which cameras are enabled in the scene for ArUco code detection and bird's-eye view.
-
-### Customized startup
+## Customized startup
 
 In `config.sh` it is possible to customize your scenarios. From there you can edit what world you want to run, how many cameras you want enabled, and also edit Humanoid-related properties. Modifying these variables is preferred, rather than modifying the `control.sh` file.
+
+### Headless gazebo
+
+In `config.sh` there is a variable `headless_gazebo` that you can set to "true" or "false". Setting it to true means will run without a window though the simulation will still run as normal. This can be uselfull when visualization is redundant. Setting it to false means the gazebo window will be visible.
 
 ### World fidelity
 
 in the `config.sh` script, you can adjust the world fidelity
 
-The active worlds are:
-
-| arguments | configuration                                   |
-| --------- | ----------------------------------------------- |
-| `default` | Contains the default world with maximum objects |
-| `medium`  | Based on default but boxes are removed          |
-| `light`   | Based on medium but shelves are removed         |
-| `empty`   | Everything except the ground is removed         |
-
-### Filtering log output
-
-In `config.sh` you can set the level of logs you want outputted into the terminal. By default it is set to "info" to allow all logs. Possible values are: "debug", "info", "warn", and "error". Setting it to "warn" filters out all debug and info messages. Additionally, to filter out specific lines you can add the phrase you want filtered inside `log_blacklist.txt` and setting the `log_level` flag to "warn" or "error" will start filtering out all phrases found in the blacklist.
+- `default`: Contains the default world with maximum objects
+- `medium`: Based on default but boxes are removed
+- `light`: Based on medium but shelves are removed
+- `empty`: Everything except the ground is removed
 
 ### Older versions
 
@@ -227,45 +146,34 @@ In `config.sh` you can set the level of logs you want outputted into the termina
 
 ## Documentation
 
-Learn about the project by reading 📃 [online documentation page](https://infotiv-research.github.io/SIMLAN)
-
 You can build the online documentation page or a PDF file by running scripts in [`resources/build-documentation`](resources/build-documentation/).
 
 - [`control.sh` script](control.sh) is  a shortcut to run different launch scripts, please also see [these diagram](resources/diagrams/).
-
 - [`config.sh`](config.sh) contains information about which world is loaded, which cameras are active, and what and where the robots are spawned.
-
 - [Marp Markdown Presentation](presentation.md)
-
 - [Configuration Generation](config_generation/README.md)
-
 - [Bringup and launch files](resources/diagrams/launch_bringup.drawio.png)
-
 - [Pallet Truck Navigation Documentation](simulation/pallet_truck/pallet_truck_navigation/README.md)
-
 - [Camera Utilities and notebooks](camera_utility/):  ([Extrinsic/Intrinsic calibrations](camera_utility/camera_calib.ipynb) and [Projection](camera_utility/projection.ipynb) )
-
 - [Humanoid Utilities (pose2motion)](humanoid_utility/README.md)
-
+- [`CHANGELOG.md`](CHANGELOG.md)
+- [`credits.md`](credits.md)
+- [`LICENSE` (apache 2)](LICENSE)
+- [`contributing.md`](contributing.md)
+- [`ISSUES.md`](ISSUES.md) : known issues and advanced features
 - [`simulation/`](simulation/): ROS2 packages
-
   - [Simulation and Warehouse Specification (fidelity)](simulation/README.md)
+  - [Camera and Birdeye Configuration](simulation/camera_bird_eye_view/README.md)
   - [Building Gazebo models (Blender/Phobos)](simulation/raw_models/README.md)
   - [Objects Specifications](simulation/raw_models/objects/README.md)
   - [Warehouse Specification](simulation/raw_models/warehouse/README.md)
+  - [Pallet truck bringup](simulation/pallet_truck/pallet_truck_bringup/README.md)
   - [Aruco Localization Documentation](simulation/aruco_localization/README.md)
-  - [humanoid_robot Simulation](simulation/humanoid_robot/)
   - [Geofencing and Collision safe stop](simulation/bt_failsafe/README.md)
   - [Visualize Real Data](simulation/visualize_real_data/README.md) **requires data from Volvo**
+  - [Humanoid bringup](simulation/humanoid_robot/README.md)
+  - [humanoid_robot simulation](simulation/humanoid_robot/)
   - [Humanoid Control](simulation/humanoid_support_moveit_config/README.md)
-
-- [`CHANGELOG.md`](CHANGELOG.md)
-
-- [`credits.md`](credits.md)
-
-- [`LICENSE` (apache 2)](LICENSE)
-
-- [`contributing.md`](contributing.md)
 
 ## Research Funding
 

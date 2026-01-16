@@ -5,7 +5,7 @@ In addition to the change_log, this description is added to give vital informati
 
 Here additions to the urdf.xacro files are mentioned
 
-### Collision sensor
+## Collision sensor
 
 
 A collision_sensor was added and linked to the mesh tag of the pallet_trucks. This is integrated in the pallet_truck.urdf.xacro.
@@ -18,7 +18,7 @@ The topic name is defined by the automatically generated gz_bridge() which can b
 
 
 
-### xacro/urdf/sdf files Bugs
+## xacro/urdf/sdf files Bugs
  
 Gazebo only reads sdf files and if .xacro or .urdf files are used, they are later parsed to .sdf's before being used by Gazebo.
  
@@ -35,3 +35,4 @@ hard coded: "\${prefix}_base_link_fixed_joint_lump__collision_collision"
 ---
 
 When adding sensors in the xacro file, make sure the plugins are also loaded. There are different world and robot plugins so if system  plugins are used they should most likely be added to the .world file
+

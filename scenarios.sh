@@ -18,8 +18,7 @@ HUMANOIDS='[
         {
             "namespace": "humanoid_1",
             "initial_pose_x":26,
-            "initial_pose_y":-7.0,
-            "cam_ns": "camera0"
+            "initial_pose_y":-7.0
         }
     ]'
 ROBOTS='[
@@ -56,8 +55,7 @@ ROBOTS_AND_HUMANOIDS='[
         {
             "namespace": "humanoid_1",
             "initial_pose_x":26,
-            "initial_pose_y":-7.0,
-            "cam_ns": "camera0"
+            "initial_pose_y":-7.0
         }
     ]'
 #endregion
@@ -125,11 +123,11 @@ scenario_2 () {
 
     #send goal to humanoid_1 panda_arm
     #this where all the actions should go, it is possible to add pids and make the actions wait for each other to send more goals.
-    sleep 10; ros2 action send_goal /humanoid_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'humanoid_1/map'}, pose: {position: {x: 13, y: 8, z: 0.0}, orientation: {z: 1.0}}}}" &
-    sleep 2; ros2 topic pub --once $replay_motion_namespace/execute_motion std_msgs/String "{data: '/home/ros/src/humanoid_utility/input/humanoid_scenario/random_motion_1.json'"} &
-    sleep 2; ros2 topic pub --once $replay_motion_namespace/execute_motion std_msgs/String "{data: '/home/ros/src/humanoid_utility/input/humanoid_scenario/default_motion.json'"} &
-    sleep 2; ros2 topic pub --once $replay_motion_namespace/execute_motion std_msgs/String "{data: '/home/ros/src/humanoid_utility/input/humanoid_scenario/random_motion_2.json'"} &
-    sleep 2; ros2 topic pub --once $replay_motion_namespace/execute_motion std_msgs/String "{data: '/home/ros/src/humanoid_utility/input/humanoid_scenario/default_motion.json'"} &
+    sleep 10; ros2 action send_goal /humanoid_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'humanoid_1/map'}, pose: {position: {x: 13, y: 8.5, z: 0.0}, orientation: {z: 1.0}}}}" &
+    sleep 2; execute_motion simulation/motion_planner/motions/random_motion_1.json &
+    sleep 2; execute_motion simulation/motion_planner/motions/default_motion.json  &
+    sleep 2; execute_motion simulation/motion_planner/motions/random_motion_2.json &
+    sleep 2; execute_motion simulation/motion_planner/motions/default_motion.json  &
 
     sleep 5; ros2 launch motion_planning_python_api motion_planning_python_api_tutorial.launch.py "log_level:=${log_level}" &
 }
@@ -168,6 +166,7 @@ scenario_3 () {
     sleep 5; ros2 launch motion_planning_python_api motion_planning_python_api_tutorial.launch.py "log_level:=${log_level}" &
 }
 #endregion
+#region video demo scenario
 scenario_video_demo () {
 ###########################################################################################################################
 ## to use no cameras dont forget to update all the robot_agent_X's                                                        ##
@@ -178,6 +177,9 @@ scenario_video_demo () {
 ## simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro       ##
 ## to about 0.05-0.1                                                                ##
 ###########################################################################################################################
+    replay_motion_namespace="humanoid_1"
+
+
     sim &
     static_agent &
     sleep 10 &
@@ -195,15 +197,77 @@ scenario_video_demo () {
 
     #send goal humanoid_1 robot_agents_1 robot_agents_2 panda_arm
     #this where all the actions should go, it is possible to add pids and make the actions wait for each other to send more goals.
-    sleep 20; ros2 action send_goal /robot_agent_2/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_2/map'}, pose: {position: {x: 23, y: 0, z: 0.0}, orientation: {w: 1.0}}}}" &
-    sleep 100; ros2 action send_goal /robot_agent_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_1/map'}, pose: {position: {x: 30, y: 8.50, z: 0.0}, orientation: {w: 1.0}}}}" &
-    sleep 100; ros2 action send_goal /humanoid_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'humanoid_1/map'}, pose: {position: {x: 13, y: 9, z: 0.0}, orientation: {z: 1.0}}}}" &
+    sleep 30; ros2 action send_goal /robot_agent_2/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_2/map'}, pose: {position: {x: 23, y: 0, z: 0.0}, orientation: {w: 1.0}}}}" &
+    sleep 40; ros2 action send_goal /robot_agent_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_1/map'}, pose: {position: {x: 30, y: 8.50, z: 0.0}, orientation: {w: 1.0}}}}" &
+    sleep 40; ros2 action send_goal /humanoid_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'humanoid_1/map'}, pose: {position: {x: 20, y: 4.5, z: 0.0}, orientation: {z: 1.0}}}}" &
 
-    sleep 15; ros2 topic pub --once $replay_motion_namespace/execute_motion std_msgs/String "{data: '/home/ros/src/humanoid_utility/input/humanoid_scenario/random_motion_1.json'"} &
-    sleep 15; ros2 topic pub --once $replay_motion_namespace/execute_motion std_msgs/String "{data: '/home/ros/src/humanoid_utility/input/humanoid_scenario/default_motion.json'"} &
+    sleep 40; execute_motion simulation/motion_planner/motions/random_motion_1.json  &
+    sleep 40; execute_motion simulation/motion_planner/motions/default_motion.json
 
 }
+#endregion
+#region scenario 5
+scenario_5 () {
+##########################################################################################################################
+## Scenario 2 - Running nav2 on 4 robots.                                                                               ##
+## - Brings up environment, cameras, aruco detection                                                                    ##
+## - Spawns 4 robot_agents                                                                                              ##
+## - Runs nav2 on all robots                                                                                            ##
+## NOTE: Don't forget to change real time factor in                                                                     ##
+## simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro                                           ##
+## to about 0.05-0.1                                                                                                    ##
+##########################################################################################################################
+    ROBOTS='[
+            {
+                "namespace": "robot_agent_1",
+                "initial_pose_x":"20.0",
+                "initial_pose_y":"4.5",
+                "robot_type":"pallet_truck",
+                "aruco_id":"1"
+            },
+            {
+                "namespace": "robot_agent_2",
+                "initial_pose_x":"24.0",
+                "initial_pose_y":"1.0",
+                "robot_type":"pallet_truck",
+                "aruco_id":"2"
+            },
+            {
+                "namespace": "robot_agent_3",
+                "initial_pose_x":"24.0",
+                "initial_pose_y":"2.5",
+                "robot_type":"forklift",
+                "aruco_id":"3"
+            },
+            {
+                "namespace": "robot_agent_4",
+                "initial_pose_x":"20.0",
+                "initial_pose_y":"1.0",
+                "robot_type":"forklift",
+                "aruco_id":"4"
+            }
+        ]'
 
+    sim &
+    static_agent &
+    sleep 10 &
+    sleep 10 ; ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true "camera_enabled_ids:=${CAMERA_ENABLED_IDS}" "robots:=${ROBOTS}" "log_level:=${log_level}" &
+
+    #spawn robot_agents
+    sleep 10 ; ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}" &
+
+    #start navigation stack
+    #for the navigation stack it is important that both robots and humanoids are passed as a single list of dicts, otherwise they will not detect each other as obstacles on the map.
+    sleep 10; ros2 launch pallet_truck_navigation map_server.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}" &
+    sleep 5; ros2 launch pallet_truck_navigation nav2.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}" &
+
+    #send goal robot_agents_1 robot_agents_2, robot_agents_3, robot_agents_4
+    #this where all the actions should go, it is possible to add pids and make the actions wait for each other to send more goals.
+    sleep 60; ros2 action send_goal /robot_agent_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_1/map'}, pose: {position: {x: 30, y: 8.50, z: 0.0}, orientation: {w: 1.0}}}}" &
+    sleep 60; ros2 action send_goal /robot_agent_2/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_2/map'}, pose: {position: {x: 25, y: -2, z: 0.0}, orientation: {w: 1.0}}}}" &
+    sleep 60; ros2 action send_goal /robot_agent_3/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_3/map'}, pose: {position: {x: 23, y: 8.5, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 1.0, w: 0.0}}}}" &
+    sleep 60; ros2 action send_goal /robot_agent_4/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_4/map'}, pose: {position: {x: 8, y: 4.5, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 1.0, w: 0.0}}}}" &
+}
   ######################################
  ##                                  ##
 ##     Commands and execution       ##
@@ -220,13 +284,17 @@ then
     scenario_2
 elif [[ "$1" == *"3"* ]]
 then
-    echo "###### Executing scenario 2 ######"
+    echo "###### Executing scenario 3 ######"
     scenario_3
-
 elif [[ "$1" == *"4"* ]]
 then
-    echo "###### Executing scenario_video_demo ######"
+    echo "###### Executing scenario_video_demo (4) ######"
     scenario_video_demo
+elif [[ "$1" == *"5"* ]]
+then
+    echo "###### Executing scenario 5 ######"
+    scenario_5
+
 fi
 
 #endregion

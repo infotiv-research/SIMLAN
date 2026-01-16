@@ -11,7 +11,7 @@
 
     <physics name='default_physics' default='0' type='ode'>
 <!--  this factor actually is computed by multiplying the other two -->
-      <real_time_factor>1</real_time_factor>
+      <real_time_factor>0.1</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
 

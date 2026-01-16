@@ -1,16 +1,21 @@
 # Changelog
 
+### 5.1.0: Cleanup and Documentation (Jan 2025) - Team/Tech Lead: Hamid Ebadi
+
+- headless gazebo: Pär Aronsson
+- major cleanup and documentation: Hamid Ebadi
+- Improve ml prediction pipeline: Pär Aronsson
+
 ### 5.0.0: Refactor MoCap pipeline and sensors (Dec 2025) - Team/Tech Lead: Hamid Ebadi
 
 - Working demo video scenario: Hamid Ebadi, Pär Aronsson
 - Refactor and improve prediction pipeline: Pär Aronsson
 - Review and update the mocap architecture: Pär Aronsson, Hamid Ebadi
-- Pipeline for Prediction on real data, images, and videos: Pär Aronsson
+- Pipeline for prediction on real data, images, and videos: Pär Aronsson
 - Improve motion player: Pär Aronsson
 - New demo scenario: Pär Aronsson
 - Unify "single" and "multi" pipeline: Pär Aronsson, Hamid Ebadi
 - Documentation and presentation (mkdocs, pandas): Hamid Ebadi
--
 
 ### 4.0.0: Improvements (Nov 2025) - Team/Tech Lead: Hamid Ebadi
 

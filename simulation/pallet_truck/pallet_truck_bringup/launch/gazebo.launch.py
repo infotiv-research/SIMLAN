@@ -5,6 +5,7 @@ from launch.substitutions import (
     FindExecutable,
     LaunchConfiguration,
     PathJoinSubstitution,
+    TextSubstitution
 )
 from launch_ros.actions import Node
 from launch_ros.descriptions import ParameterValue
@@ -18,7 +19,7 @@ def generate_launch_description():
     initial_pose_y = LaunchConfiguration("initial_pose_y")
     aruco_id = LaunchConfiguration("aruco_id")
     robot_type = LaunchConfiguration("robot_type")
-    log_level = LaunchConfiguration("log_level")
+    log_level = LaunchConfiguration("log_level")    
 
     pkg_pallet_truck_description = get_package_share_directory(
         "pallet_truck_description"
@@ -45,8 +46,6 @@ def generate_launch_description():
             " ",
             "name:=", namespace,
             " ",
-            "prefix:=", namespace,
-            " ",
             "is_sim:=true",
             " ",
             "namespace:=", namespace,
@@ -67,6 +66,9 @@ def generate_launch_description():
         namespace=namespace,
         parameters=[
             {"use_sim_time": True},
+            {  
+                "frame_prefix": [ namespace, TextSubstitution(text="/") ]
+            },
             robot_description
         ]
     )

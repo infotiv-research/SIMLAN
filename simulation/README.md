@@ -173,3 +173,10 @@ Box and warehouse floor are using images from Volvo as a base.
 
 - Keep your links/joints paired, and use the suffix \_link and \_joint (e.g. arm_link and arm_joint) and maybe follow [REP 120 naming conventions](https://www.ros.org/reps/rep-0120.html).
 - Define visual, collision, inertial and Gazebo material (and maybe friction) for all objects
+
+### cartography, localization, navigation
+
+```
+ros2 launch pallet_truck_navigation cartography.launch.py
+ros2 run nav2_map_server map_saver_cli -f simulation/mapname
+```
