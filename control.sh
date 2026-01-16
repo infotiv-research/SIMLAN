@@ -51,6 +51,7 @@ then
 fi
 echo "---[ WORLD_SETUP = ${WORLD_SETUP} ]---"
 echo "---[ CAMERA_STREAMS = ${CAMERA_STREAMS} ]---"
+echo "SPAWN_JACKAL = ${SPAWN_JACKAL}"
 
 #endregion
 
@@ -110,7 +111,7 @@ build () {
 }
 sim () {
     echo "---[ launching gazebo ]---"
-    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo"
+    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo" "spawn_jackal:=${SPAWN_JACKAL}"
 
 }
 static_agent() {

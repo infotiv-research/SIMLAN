@@ -84,3 +84,5 @@ ROBOTS='[
              "aruco_id":"4"
          }
     ]'
+
+SPAWN_JACKAL=true
