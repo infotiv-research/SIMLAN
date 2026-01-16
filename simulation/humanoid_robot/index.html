@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/humanoid_robot/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Overview - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <title>Humanoid Robot - SIMLAN, Simulation for Multi-Camera Robotics</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Overview";
+        var mkdocs_page_name = "Humanoid Robot";
         var mkdocs_page_input_path = "simulation/humanoid_robot/README.md";
         var mkdocs_page_url = "/SIMLAN/simulation/humanoid_robot/";
       </script>
@@ -42,7 +42,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Vision-Based Multi-Camera Robotics Simulation</a>
                 </li>
               </ul>
               <ul>
@@ -59,7 +59,15 @@
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
               <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Simulation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
@@ -69,37 +77,37 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../aruco_localization/">Aruco Localization</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
-                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Humanoid Robot</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#configuring-and-spawning-humanoids-inside-the-sim">Configuring and spawning humanoids inside the sim</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#model-and-urdf">model and URDF</a>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Humanoid Motion Capture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pre_processing/">Humanoid Preprocessing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/DEBUG/">Humanoid internal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
@@ -110,6 +118,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES/">Issues</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
@@ -130,7 +140,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Simulation</li>
-      <li class="breadcrumb-item active">Overview</li>
+      <li class="breadcrumb-item active">Humanoid Robot</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/humanoid_robot/README.md">Edit on infotiv-research/SIMLAN</a>
     </li>
@@ -142,16 +152,26 @@
               
                 <h1 id="humanoid-robot">Humanoid Robot</h1>
 <p>There needs to be better documentation of the difference between this pkg and the humanoid_support_moveit_config pkg. Is this supposed to be the bring-up of that pkg? Why is the humanoid model in this pkg and the URDF that spawns the robot in humanoid_support_moveit_config? Are the humanSubject01-08 used, or is only humanSubjectWithMeshes used? Clarification is needed. All in all, a restructure of the entire humanoid_robot and humanoid_support_moveit_config should be done.</p>
+<h2 id="configuring-and-spawning-humanoids-inside-the-sim">Configuring and spawning humanoids inside the sim</h2>
+<p>Humanoids are configured in <code>config.sh</code> as a string in the HUMANOIDS variable. It is possible to add more humanoids and they are defined as:</p>
+<pre><code>{
+    &quot;namespace&quot;: &quot;humanoid_1&quot;,
+    &quot;initial_pose_x&quot;:5.5,
+    &quot;initial_pose_y&quot;:-10.0
+},
+</code></pre>
+<h2 id="model-and-urdf">model and URDF</h2>
 <p>Package created based on this <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">tutorial</a>\
 Note that only the human with mesh model is installed in the package; see /model/CMakeLists.txt for how to install the non-mesh models.</p>
 <p>In the URDF, the fixed links and joints are (mostly) named [muscle name]_[location], for example, BicBrac_RUA = biceps brachii_right upper arm. In humanSubjectWithMesh_simplified.urdf, all fixed joints have been removed; only the skeleton joints remain.</p>
 <p>To open Rviz with the human model:</p>
 <p><code>ros2 launch urdf_tutorial display.launch.py model:=/home/ros/src/simulation/humanoid_robot/model/human-gazebo/humanSubjectWithMeshes/humanSubjectWithMesh_simplified.urdf</code></p>
+<p>TODO: Explain what are the parameters (<code>config.sh</code>). Add this to resources/build-documentation</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../pallet_truck/pallet_truck_navigation/" class="btn btn-neutral float-left" title="Navigation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../bt_failsafe/" class="btn btn-neutral float-left" title="Failsafe"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../humanoid_support_moveit_config/" class="btn btn-neutral float-right" title="Humanoid Moveit">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -175,7 +195,7 @@ Note that only the human with mesh model is installed in the package; see /model
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../pallet_truck/pallet_truck_navigation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../bt_failsafe/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../humanoid_support_moveit_config/" style="color: #fcfcfc">Next &raquo;</a></span>

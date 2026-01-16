@@ -42,7 +42,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Vision-Based Multi-Camera Robotics Simulation</a>
                 </li>
               </ul>
               <ul>
@@ -59,7 +59,15 @@
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
               <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Simulation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
@@ -69,35 +77,31 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../aruco_localization/">Aruco Localization</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
-                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Humanoid Robot</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Humanoid Motion Capture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pre_processing/">Humanoid Preprocessing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/DEBUG/">Humanoid internal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Object Mover</a>
     <ul class="current">
@@ -118,6 +122,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES/">Issues</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
@@ -156,7 +162,6 @@
 # In three separate terminals:
 ./control.sh clean ; ./control.sh build ; ./control.sh sim
 ./control.sh move_object
-./control.sh camera_dump
 </code></pre>
 <h2 id="random-in-distribution-objects-movement-normal-mode">Random, In Distribution Objects Movement (normal mode)</h2>
 <p>Data collection from cameras according to <a href="resources/20240522-req.png">requirements</a></p>
@@ -185,13 +190,12 @@
 <li>256x256 RGB non compression</li>
 </ul>
 <p>./control.sh sim
-./control.sh move_object
-./control.sh camera_dump</p>
+./control.sh move_object</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../raw_models/warehouse/" class="btn btn-neutral float-left" title="Warehouse Specification"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../moveit2/" class="btn btn-neutral float-left" title="Panda MoveIt2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../../credits/" class="btn btn-neutral float-right" title="Credits">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -215,7 +219,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../raw_models/warehouse/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../moveit2/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../../credits/" style="color: #fcfcfc">Next &raquo;</a></span>

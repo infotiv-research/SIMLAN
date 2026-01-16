@@ -12,7 +12,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "SIMLAN, Simulation for Multi-Camera Robotics";
+        var mkdocs_page_name = "SIMLAN, Vision-Based Multi-Camera Robotics Simulation";
         var mkdocs_page_input_path = "README.md";
         var mkdocs_page_url = "/SIMLAN/";
       </script>
@@ -42,7 +42,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href=".">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">SIMLAN, Vision-Based Multi-Camera Robotics Simulation</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#simlan-features">SIMLAN Features</a>
     </li>
@@ -64,15 +64,11 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#scenarios">Scenarios</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#advanced-options">Advanced options</a>
+    <li class="toctree-l2"><a class="reference internal" href="#customized-startup">Customized startup</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#customized-startup">Customized startup</a>
+    <li class="toctree-l3"><a class="reference internal" href="#headless-gazebo">Headless gazebo</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#world-fidelity">World fidelity</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#filtering-log-output">Filtering log output</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#older-versions">Older versions</a>
     </li>
@@ -99,7 +95,15 @@
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/">Simulation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
@@ -109,35 +113,31 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/aruco_localization/">Aruco Localization</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/bt_failsafe/">Failsafe</a>
-                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/">Pallet Truck</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/humanoid_robot/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/humanoid_robot/">Humanoid Robot</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/">Humanoid Motion Capture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/pre_processing/">Humanoid Preprocessing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/DEBUG/">Humanoid internal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/moveit2/">Panda MoveIt2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/">Overview</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/objects/">Object Modeling</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/object_mover/">Object Mover</a>
                   </li>
@@ -148,6 +148,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="ISSUES/">Issues</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="CHANGELOG/">Changelog</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="resources/diagrams/">Diagrams</a>
@@ -167,7 +169,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">SIMLAN, Simulation for Multi-Camera Robotics</li>
+      <li class="breadcrumb-item active">SIMLAN, Vision-Based Multi-Camera Robotics Simulation</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/README.md">Edit on infotiv-research/SIMLAN</a>
     </li>
@@ -177,12 +179,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="simlan-simulation-for-multi-camera-robotics-401">SIMLAN, Simulation for Multi-Camera Robotics (4.0.1)</h1>
+                <h1 id="simlan-simulation-for-multi-camera-robotics-510">SIMLAN, Simulation for Multi-Camera Robotics (5.1.0)</h1>
 <p>This simulation environment, based on the Ignition Gazebo simulator and ROS 2, resembles a Volvo Trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on a multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by <a href="https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html">GPSS (Generic photo-based sensor system)</a> that utilizes ceiling-mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 [<a href="https://www.youtube.com/watch?v=DA7lKiCdkCc">📹 GPSS demo</a>]</p>
 <ul>
 <li>🔗 <a href="https://infotiv-research.github.io/SIMLAN/">Online Documentation</a></li>
-<li>📃 <a href="SIMLAN.pdf">PDF Documentation</a></li>
+<li>📃 <a href="https://infotiv-research.github.io/SIMLAN/SIMLAN.pdf">PDF Documentation</a></li>
 </ul>
 <h2 id="simlan-features">SIMLAN Features</h2>
 <ul>
@@ -190,13 +192,15 @@
 <li>Library of assets</li>
 <li>Real-World environment inspired design (camera position and warehouse layout)</li>
 <li>ROS 2 interfaces (Humble and Jazzy)</li>
-<li>ArUco marker localization</li>
 <li>Simple GPSS (Generic Photo-based Sensor System) navigation</li>
 <li>Multi-Robot localization and navigation using Nav2</li>
+<li>ArUco marker localization</li>
 <li>Bird's-Eye view projection</li>
 <li>Multi-Sensor Support (LiDAR, RGB camera, semantic segmentation, depth, etc.)</li>
 <li>Geofencing for safe zones and safe stop on collision</li>
-<li>Motion capture for Human-Robot Collaboration/Interaction (HRC/HRI)</li>
+<li>Humanoid worker model</li>
+<li>Panda arm robotic arm</li>
+<li>Deep-learning-based human pose capture and replay,</li>
 </ul>
 <p>📹 Click the YouTube link below to view the SIMLAN demo video:</p>
 <p><a href="https://www.youtube.com/watch?v=FJcsVDP3DHg"><img alt="SIMLAN demo" src="https://img.youtube.com/vi/FJcsVDP3DHg/0.jpg" /></a></p>
@@ -218,7 +222,7 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 <p>To kill all the relevant processes (related to Gazebo and ROS 2), delete build files, delete recorded images and rosbag files using the following command:</p>
 <pre><code class="language-bash">./control.sh clean
 </code></pre>
-<p>To clean up and build the ROS 2 simulation</p>
+<p>To clean up and build the project:</p>
 <pre><code class="language-bash">./control.sh build
 </code></pre>
 <p>(optionally, in VS Code you can click on Terminal-&gt; Run Task/Run Build Task or use <code>Ctrl + Shift + B</code>)</p>
@@ -230,170 +234,75 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 ./control.sh nav  # spawn map server, and separate nav2 stack in a separate namespace for each robot_agent
 ./control.sh send_goal # send navigation goals to nav2 stack for each robot_agent
 </code></pre>
-<p>If you want to control any robot (pallet truck, humanoid, etc.) manually you can run the following command. Remember to specify what robot you want to control by adding its namespace as argument, i.e. <code>./control.sh teleop pallet_truck_1</code></p>
-<pre><code class="language-bash">./control.sh teleop ${YOUR_ROBOT_NAMESPACE}
-</code></pre>
-<p>If you want to record any of your topics during the tests you can run the following command. Change the topic in the control.sh script: <code>ros2 bag record /topic</code> to whatever topic you want to record.</p>
-<pre><code class="language-bash">./control.sh ros_record
-</code></pre>
-<p>To replay your latest recorded rosbag run the following command:</p>
-<pre><code class="language-bash">./control.sh ros_replay
-</code></pre>
-<p>If you want to do a camera dump and save the image from each camera as a .png run the following command. The images will appear at <code>/src/camera_utility/camera_number</code>.</p>
-<pre><code class="language-bash">./control.sh camera_dump
-</code></pre>
-<p><img alt="" src="resources/different-views.png" /></p>
-<p>If you want to take a screenshot of one of the camera views, run the following command. Replace <code>###</code> with the camera you want to take a screenshot of. (163, 164, 165 or 166)</p>
-<pre><code class="language-bash">./control.sh screenshot ###
-</code></pre>
+<p><img alt="" src="resources/aruco_localisation.png" /></p>
+<p><code>camera_enabled_ids</code> in <a href="config.sh"><code>config.sh</code></a> specifies which cameras are enabled in the GPSS system for ArUco code detection and bird's-eye view.</p>
 <pre><code class="language-bash">./control.sh birdeye
 </code></pre>
 <p><img alt="" src="resources/stitched.png" /></p>
-<p>If you want to add the TF links between the cameras and the ArUco markers without running the <code>gpss</code> command, you can run the following command. This is primarily useful for debugging, as <code>gpss</code> runs this as well.</p>
-<pre><code class="language-bash">./control.sh aruco_detection
-</code></pre>
-<p>Finally, to view the bird's-eye perspective from each camera, run the following command and open <code>rviz</code>. Then, navigate to the left panel and under "Camera" change the Topic <code>/static_agents/camera_XXX/image_projected</code> to visualize the corresponding camera feed:</p>
-<p><img alt="" src="resources/aruco_localisation.png" /></p>
 <h2 id="rita-controls-humanoid-robotic-arm-demo">RITA controls (humanoid, robotic arm) [<a href="https://www.youtube.com/watch?v=EiCNiPeifPk">📹 Demo</a>]</h2>
-<pre><code class="language-bash">./control.sh humanoid
+<p>To spawn a human worker run the following command</p>
+<pre><code class="language-bash">./control.sh sim
+./control.sh humanoid
 </code></pre>
-<p>To move the humanoid around in the simulator</p>
-<pre><code class="language-bash">./control.sh teleop ${YOUR_HUMANOID_NAMESPACE}
-</code></pre>
-<p><img alt="" src="resources/arm-humanoid.png" /></p>
+<p>We employ a deep neural network to learn the mapping between human pose and humanoid robot motion. The model takes 33 MediaPipe pose landmarks as input and predicts corresponding robot joint positions. Read more about it <a href="humanoid_utility/">Humanoid Utilities</a></p>
 <h4 id="arm-controls">Arm controls</h4>
 <p>Spawn the Panda arm inside SIMLAN and instruct it to pick and place a box around with the following commands:</p>
 <pre><code>./control panda
 ./control plan_motion
 ./control pick
 </code></pre>
+<p><img alt="" src="resources/arm-humanoid.png" /></p>
 <h2 id="testing">Testing</h2>
 <p>Integration tests can be found inside of the <a href="./integration_tests/test/">integration_tests/test/</a> package. Running the tests helps maintain the project's quality. For more information about how the tests are set up, check out the package <a href="integration_tests/">README</a>. To run all tests, run the following command:</p>
-<pre><code>./control.sh test
-</code></pre>
-<h2 id="scenarios">Scenarios</h2>
-<p>In <a href="scenarios.sh">scenarios.sh</a> you can run predefined scenarios of the project. At the bottom of the file, commands are shown how to run it; otherwise each scenario is referenced by a number.
-Currently there are 3 scenarios and to run them, run this command in the shell</p>
-<p>Before running scenario 1 that uses GPSS cameras, make sure that <code>CAMERA_ENABLED_IDS</code> in <code>config.sh</code> has the list of GPSS cameras.</p>
 <pre><code>./control.sh build
-./scenarios.sh 1 # navigation using GPSS cameras (real time factor need to be updated)
-./scenarios.sh 2 # Humanoid and robotic arm
-./scenarios.sh 3 # Humanoid navigation without GPSS cameras (navigate_w_replanning_and_recovery_robot_agent_X.xml need to be updated )
-./scenarios.sh 4 # Record the video demo
+./control.sh test
 </code></pre>
-<p>If you want to see the planning route for all agents, load <code>scenario_3_planning.rviz</code> in Rviz.</p>
-<p>Keep in mind to change <code>real_time_factor</code> in <a href="/simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro"><code>simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro</code></a> to small values to slow down the simulator (e.g. 0.05-0.1) before building the project. <code>./control.sh build</code></p>
-<h2 id="advanced-options">Advanced options</h2>
-<p>See <a href="resources/ISSUES/">resources/ISSUES.md</a> to learn about additional advanced options and to check known issues before reporting any issue or requesting new features. To start the project <strong>without NVIDIA GPU</strong>, please comment out these lines in <code>docker-compose.yaml</code> as shown below:</p>
-<pre><code class="language-bash">  #   runtime: nvidia
-  #
-  # factory_simulation_nvidia:
-  #  &lt;&lt;: *research-base
-  #  container_name: factory_simulation_nvidia
-  #  runtime: nvidia
-  #  deploy:
-  #    resources:
-  #      reservations:
-  #        devices:
-  #          - driver: nvidia
-  #            count: &quot;all&quot;
-  #            capabilities: [compute,utility,graphics,display]
-</code></pre>
-<p><code>camera_enabled_ids</code> specifies which cameras are enabled in the scene for ArUco code detection and bird's-eye view.</p>
-<h3 id="customized-startup">Customized startup</h3>
+<h2 id="customized-startup">Customized startup</h2>
 <p>In <code>config.sh</code> it is possible to customize your scenarios. From there you can edit what world you want to run, how many cameras you want enabled, and also edit Humanoid-related properties. Modifying these variables is preferred, rather than modifying the <code>control.sh</code> file.</p>
+<h3 id="headless-gazebo">Headless gazebo</h3>
+<p>In <code>config.sh</code> there is a variable <code>headless_gazebo</code> that you can set to "true" or "false". Setting it to true means will run without a window though the simulation will still run as normal. This can be uselfull when visualization is redundant. Setting it to false means the gazebo window will be visible.</p>
 <h3 id="world-fidelity">World fidelity</h3>
 <p>in the <code>config.sh</code> script, you can adjust the world fidelity</p>
-<p>The active worlds are:</p>
-<table>
-<thead>
-<tr>
-<th>arguments</th>
-<th>configuration</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>default</code></td>
-<td>Contains the default world with maximum objects</td>
-</tr>
-<tr>
-<td><code>medium</code></td>
-<td>Based on default but boxes are removed</td>
-</tr>
-<tr>
-<td><code>light</code></td>
-<td>Based on medium but shelves are removed</td>
-</tr>
-<tr>
-<td><code>empty</code></td>
-<td>Everything except the ground is removed</td>
-</tr>
-</tbody>
-</table>
-<h3 id="filtering-log-output">Filtering log output</h3>
-<p>In <code>config.sh</code> you can set the level of logs you want outputted into the terminal. By default it is set to "info" to allow all logs. Possible values are: "debug", "info", "warn", and "error". Setting it to "warn" filters out all debug and info messages. Additionally, to filter out specific lines you can add the phrase you want filtered inside <code>log_blacklist.txt</code> and setting the <code>log_level</code> flag to "warn" or "error" will start filtering out all phrases found in the blacklist.</p>
+<ul>
+<li><code>default</code>: Contains the default world with maximum objects</li>
+<li><code>medium</code>: Based on default but boxes are removed</li>
+<li><code>light</code>: Based on medium but shelves are removed</li>
+<li><code>empty</code>: Everything except the ground is removed</li>
+</ul>
 <h3 id="older-versions">Older versions</h3>
 <ul>
 <li><a href="https://github.com/infotiv-research/SIMLAN/tree/gz_classic_humble"><code>gz_classic_humble</code></a> branch contains code for  <strong>Gazebo Classic (Gazebo11)</strong> that has reached end-of-life (EOL).</li>
 <li><a href="https://github.com/infotiv-research/SIMLAN/tree/ign_humble"><code>ign_humble</code></a> branch contains code for  <strong>ROS 2 Humble &amp; Ignition Gazebo</strong>, an earlier version of this repository.</li>
 </ul>
 <h2 id="documentation">Documentation</h2>
-<p>Learn about the project by reading 📃 <a href="https://infotiv-research.github.io/SIMLAN">online documentation page</a></p>
 <p>You can build the online documentation page or a PDF file by running scripts in <a href="resources/build-documentation/"><code>resources/build-documentation</code></a>.</p>
 <ul>
-<li>
-<p><a href="control.sh"><code>control.sh</code> script</a> is  a shortcut to run different launch scripts, please also see <a href="resources/diagrams/">these diagram</a>.</p>
-</li>
-<li>
-<p><a href="config.sh"><code>config.sh</code></a> contains information about which world is loaded, which cameras are active, and what and where the robots are spawned.</p>
-</li>
-<li>
-<p><a href="presentation/">Marp Markdown Presentation</a></p>
-</li>
-<li>
-<p><a href="config_generation/">Configuration Generation</a></p>
-</li>
-<li>
-<p><a href="resources/diagrams/launch_bringup.drawio.png">Bringup and launch files</a></p>
-</li>
-<li>
-<p><a href="simulation/pallet_truck/pallet_truck_navigation/">Pallet Truck Navigation Documentation</a></p>
-</li>
-<li>
-<p><a href="camera_utility/">Camera Utilities and notebooks</a>:  (<a href="camera_utility/camera_calib.ipynb">Extrinsic/Intrinsic calibrations</a> and <a href="camera_utility/projection.ipynb">Projection</a> )</p>
-</li>
-<li>
-<p><a href="humanoid_utility/">Humanoid Utilities (pose2motion)</a></p>
-</li>
-<li>
-<p><a href="simulation/"><code>simulation/</code></a>: ROS2 packages</p>
-</li>
-<li>
-<p><a href="simulation/">Simulation and Warehouse Specification (fidelity)</a></p>
-</li>
+<li><a href="control.sh"><code>control.sh</code> script</a> is  a shortcut to run different launch scripts, please also see <a href="resources/diagrams/">these diagram</a>.</li>
+<li><a href="config.sh"><code>config.sh</code></a> contains information about which world is loaded, which cameras are active, and what and where the robots are spawned.</li>
+<li><a href="presentation/">Marp Markdown Presentation</a></li>
+<li><a href="config_generation/">Configuration Generation</a></li>
+<li><a href="resources/diagrams/launch_bringup.drawio.png">Bringup and launch files</a></li>
+<li><a href="simulation/pallet_truck/pallet_truck_navigation/">Pallet Truck Navigation Documentation</a></li>
+<li><a href="camera_utility/">Camera Utilities and notebooks</a>:  (<a href="camera_utility/camera_calib.ipynb">Extrinsic/Intrinsic calibrations</a> and <a href="camera_utility/projection.ipynb">Projection</a> )</li>
+<li><a href="humanoid_utility/">Humanoid Utilities (pose2motion)</a></li>
+<li><a href="CHANGELOG/"><code>CHANGELOG.md</code></a></li>
+<li><a href="credits/"><code>credits.md</code></a></li>
+<li><a href="LICENSE"><code>LICENSE</code> (apache 2)</a></li>
+<li><a href="contributing/"><code>contributing.md</code></a></li>
+<li><a href="ISSUES/"><code>ISSUES.md</code></a> : known issues and advanced features</li>
+<li><a href="simulation/"><code>simulation/</code></a>: ROS2 packages</li>
+<li><a href="simulation/">Simulation and Warehouse Specification (fidelity)</a></li>
+<li><a href="simulation/camera_bird_eye_view/">Camera and Birdeye Configuration</a></li>
 <li><a href="simulation/raw_models/">Building Gazebo models (Blender/Phobos)</a></li>
 <li><a href="simulation/raw_models/objects/">Objects Specifications</a></li>
 <li><a href="simulation/raw_models/warehouse/">Warehouse Specification</a></li>
+<li><a href="simulation/pallet_truck/pallet_truck_bringup/">Pallet truck bringup</a></li>
 <li><a href="simulation/aruco_localization/">Aruco Localization Documentation</a></li>
-<li><a href="simulation/humanoid_robot/">humanoid_robot Simulation</a></li>
 <li><a href="simulation/bt_failsafe/">Geofencing and Collision safe stop</a></li>
 <li><a href="simulation/visualize_real_data/">Visualize Real Data</a> <strong>requires data from Volvo</strong></li>
-<li>
-<p><a href="simulation/humanoid_support_moveit_config/">Humanoid Control</a></p>
-</li>
-<li>
-<p><a href="CHANGELOG/"><code>CHANGELOG.md</code></a></p>
-</li>
-<li>
-<p><a href="credits/"><code>credits.md</code></a></p>
-</li>
-<li>
-<p><a href="LICENSE"><code>LICENSE</code> (apache 2)</a></p>
-</li>
-<li>
-<p><a href="contributing/"><code>contributing.md</code></a></p>
-</li>
+<li><a href="simulation/humanoid_robot/">Humanoid bringup</a></li>
+<li><a href="simulation/humanoid_robot/">humanoid_robot simulation</a></li>
+<li><a href="simulation/humanoid_support_moveit_config/">Humanoid Control</a></li>
 </ul>
 <h2 id="research-funding">Research Funding</h2>
 <p>This work was carried out within these research projects:</p>
@@ -470,5 +379,5 @@ Currently there are 3 scenarios and to run them, run this command in the shell</
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2025-12-19 19:25:00.279471+00:00
+Build Date UTC : 2026-01-16 14:09:24.209556+00:00
 -->

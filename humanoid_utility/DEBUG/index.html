@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/humanoid_utility/DEBUG/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>DEBUG - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <title>Humanoid internal - SIMLAN, Simulation for Multi-Camera Robotics</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "DEBUG";
+        var mkdocs_page_name = "Humanoid internal";
         var mkdocs_page_input_path = "humanoid_utility/DEBUG.md";
         var mkdocs_page_url = "/SIMLAN/humanoid_utility/DEBUG/";
       </script>
@@ -42,7 +42,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Vision-Based Multi-Camera Robotics Simulation</a>
                 </li>
               </ul>
               <ul>
@@ -58,8 +58,16 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/">Overview</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/">Simulation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
@@ -69,35 +77,35 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/aruco_localization/">Aruco Localization</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/bt_failsafe/">Failsafe</a>
-                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/">Pallet Truck</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_robot/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_robot/">Humanoid Robot</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Humanoid Motion Capture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pre_processing/">Humanoid Preprocessing</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Humanoid internal</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#preprocessing">Preprocessing</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/moveit2/">Panda MoveIt2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/">Overview</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/objects/">Object Modeling</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../simulation/object_mover/">Object Mover</a>
                   </li>
@@ -108,6 +116,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES/">Issues</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
@@ -127,7 +137,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">DEBUG</li>
+          <li class="breadcrumb-item">Simulation</li>
+      <li class="breadcrumb-item active">Humanoid internal</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/humanoid_utility/DEBUG.md">Edit on infotiv-research/SIMLAN</a>
     </li>
@@ -137,54 +148,48 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="preprocessing">Preprocessing</h2>
-<p><img alt="pose_landmarks_index.png" src="resources/pose_landmarks_index.png" /></p>
-<p>https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker</p>
-<p>Three steps of normalization (feature engineering) of MediaPipe landmarks:</p>
+                <h2 id="model-structure">Model structure</h2>
+<p><code>model.py</code> is responsible for routing the training and prediction to the right model. When running <code>model.py train modelX=pytorch_model cams=[500,501]</code> from <code>./control.sh</code>, the pseudocode below in <code>model.py</code> loads the right model and passes the needed information for training and prediction to the model.</p>
+<pre><code>import modelX
+modelX.train(pose_NP, motion_NP, cams)
+motion = modelX.train(pose_NP, cams)
+pred= modelX.train(pose_NP, cams)
+</code></pre>
+<p>modelX can now have all information that it needs for training or prediction. Each model has to define at least the following interfaces:</p>
+<pre><code>modelX.py:
+
+def modelX.train():
+    FL_POSE  = FLATTEN_POSE_BY_SCENARIO(pose_NP, cams)
+    // 1, [LDATA_a], [LDATA_b]
+    x = join(FL_POSE, motion_NP)
+    // [LDATA_a], [LDATA_b], [JDATA_a]
+    train with the data above
+    SAVE_MODEL_AS(str(cams))
+
+def modelX.predict(pose_NP, cams):
+    FL_POSE  = FLATTEN_POSE_BY_SCENARIO(pose_NP, cams)
+    LOAD_MODEL(str(cams), FL_POSE)
+    WHATEVER
+    return motion_np
+</code></pre>
+<p><img alt="" src="/resources/diagrams/humanoid_mocap_pipeline.drawio.png" /></p>
+<h3 id="preprocessing">Preprocessing</h3>
+<p>Pose landmark detected by <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker">Mediapipe</a>:</p>
+<p><img alt="pose_landmarks_index.png" src="../resources/pose_landmarks_index.png" /></p>
+<p>These landmarks can be normalised in many ways. Three potential steps of normalization (feature engineering) of MediaPipe landmarks:</p>
 <ul>
 <li>Position normalization</li>
 <li>Scale normalization</li>
 <li>Rotation normalization</li>
 </ul>
-<p><img alt="normalization.png" src="resources/Normalisation.drawio.png" /></p>
-<h2 id="dataset-preprocessing">Dataset preprocessing</h2>
-<p>The diagram below shows the overall workflow of this project. Pose and motion data are first collected from JSON files and combined into a single CSV file. These processed CSV files are ready to be fed into a model of your choice, AutoGluon or PyTorch. See below to find more information about the dataset or more about the <a href="#models">models</a>.</p>
-<blockquote>
-<p>The dataset, inputs, and outputs are in <code>humanoid_utility/DATASET/</code> directory.</p>
-</blockquote>
-<p>The resulting files are stored as parallel <code>.json</code> files in multi-camera folders <code>camera_*/pose_data</code>, <code>camera_*/motion_data</code>, <code>camera_*/pose_images</code>.
-To avoid creation of <code>pose_images</code> that are only used as the ground truth and debugging purposes (especially if you are building your training data), comment out the call to <code>self.save_pose_image()</code> in <code>camera_viewer.py</code>.</p>
-<p>Finally, to merge them all into a tabular <code>.csv</code> file, run the following command. The argument $dataset_dir is the directory containing the JSON files and must be located as a subdirectory of DATASET/. Additionally, in <code>config.sh</code> you need to set the variable <code>dataset_cameras</code> to the cameras you want to take into consideration. i.e., if you use all cameras, the value is "500 501 502 503". The resulting CSV file will then be saved as <code>dataset_dir/flattened_data.csv</code>.</p>
-<pre><code>./control.sh convert2csv $dataset_dir
-</code></pre>
-<p>Example by running the command below results in the following csv files being created:</p>
-<pre><code>./control.sh convert2csv TRAIN
-./control.sh convert2csv EVAL
-</code></pre>
-<p>Results in merging:</p>
-<ul>
-<li><code>DATASET/TRAIN/**</code> to <code>DATASET/TRAIN/flattened_data.csv</code></li>
-<li><code>DATASET/EVAL/**</code> to <code>DATASET/EVAL/flattened_data.csv</code></li>
-</ul>
-<blockquote>
-<p>Note: The TRAIN/** refers to the folders <code>motion_data/</code> and <code>camera_5XX/pose_data</code>.</p>
-</blockquote>
-<p>The resulting CSV file will contain these columns:</p>
-<pre><code>cam500_0_x,cam501_0_x,cam502_0_x,cam503_0_x,...,cam503_32_z, JOINTS...
-</code></pre>
-<p>You can replay each motion data file separately: <code>./control.sh replay_motion DATASET/EVAL/motion_data/AAAAAAA_motion.json</code></p>
-<h3 id="current-performance-metrics">Current Performance Metrics</h3>
-<p>The upgraded multi-camera system demonstrates the following evaluation results:</p>
-<ul>
-<li><strong>Mean Squared Error (MSE)</strong>: 0.206</li>
-<li><strong>Root Mean Squared Error (RMSE)</strong>: 0.454</li>
-</ul>
-<h4 id="optuna">Optuna</h4>
-<p>Optuna is a hyperparameter optimization framework available as a Python library. It acts as a wrapper around an existing training framework where it uses the same setup of dataset, train_loop and hyperparameters, so it has the same context as when you would run it yourself. Optuna starts by defining an objective function. The goal of the objective function is either to minimize or maximize a value. You specify this value yourself; for this setup we have typically used the validation MSE as the objective to minimize. We also need to define the scope of values for the hyperparameters. We define for every hyperparameter a range of values which Optuna is allowed to select from, e.g., BATCHSIZE being in range(4,128). When we have done this for every param we want to find the optimal value for, we start Optuna by running a "study". Optuna runs N number of training sessions, each independent, and uses internal algorithms to find the best set of values for the list of hyperparameters. In the end we get the training session that scored the best and can use its hyperparameters.</p>
-<p>Note: We only use this for PyTorch since AutoGluon has its own hyperparameter optimization. This is why we only see studies inside <code>pytorch/optuna_studies/</code>.</p>
+<p><img alt="normalization.png" src="../resources/Normalisation.drawio.png" /></p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../pre_processing/" class="btn btn-neutral float-left" title="Humanoid Preprocessing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../simulation/motion_planner/" class="btn btn-neutral float-right" title="Humanoid motion planner">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -206,6 +211,10 @@ To avoid creation of <code>pose_images</code> that are only used as the ground t
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../pre_processing/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../simulation/motion_planner/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

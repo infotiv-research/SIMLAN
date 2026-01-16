@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<robot>
+
+  <gazebo>
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
+      <ros>
+        <namespace>$(arg namespace)</namespace>
+        <remapping>~/tf:=/tf</remapping>
+        <remapping>~/tf_static:=tf_static</remapping>
+      </ros>
+      <parameters>$(find pallet_truck_control)/config/control.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+
+  <gazebo reference="imu_link">
+    <!--
+  <sensor name="/imu_sensor" type="imu">
+    <always_on>true</always_on>
+    <update_rate>100</update_rate>
+
+    <imu>
+      <angular_velocity>
+        <x>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>2e-4</stddev>
+          </noise>
+        </x>
+        <y>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>2e-4</stddev>
+          </noise>
+        </y>
+        <z>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>2e-4</stddev>
+          </noise>
+        </z>
+      </angular_velocity>
+
+      <linear_acceleration>
+        <x>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>1.7e-2</stddev>
+          </noise>
+        </x>
+        <y>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>1.7e-2</stddev>
+          </noise>
+        </y>
+        <z>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>1.7e-2</stddev>
+          </noise>
+        </z>
+      </linear_acceleration>
+    </imu>
+
+    <visualize>true</visualize>
+    <pose>0 0 0 0 0 0</pose>
+    <topic>/imu/data</topic>
+    <gz_frame_id>/imu_link</gz_frame_id>
+  </sensor>
+  -->
+  </gazebo>
+
+
+  <gazebo reference="scan_link">
+    <material>Gazebo/Orange</material>
+    <!--
+      <sensor name="laser" type="gpu_lidar">
+          <pose> 0 0 0 0 0 0 </pose>
+          <visualize>false</visualize>
+          <update_rate>120</update_rate>
+          <lidar>
+              <scan>
+                  <horizontal>
+                      <samples>360</samples>
+                      <min_angle>-3.14</min_angle>
+                      <max_angle>3.14</max_angle>
+                  </horizontal>
+              </scan>
+              <range>
+                  <min>0.3</min>
+                  <max>100</max>
+              </range>
+          </lidar>
+          <ros>
+            <namespace>$(arg namespace)</namespace>
+            <remapping>~/scan:=//scan</remapping>
+          </ros>
+          <topic>/scan</topic>
+          <gz_frame_id>/scan_link</gz_frame_id>
+      </sensor>
+      -->
+  </gazebo>
+
+
+  <gazebo reference="gps_link">
+    <sensor name="gps_sensor" type="gps">
+      <plugin filename="libgazebo_ros_gps_sensor.so" name="gps_plugin">
+        <ros>
+          <namespace>$(arg namespace)</namespace>
+          <remapping>~/out:=gps/data</remapping>
+        </ros>
+      </plugin>
+      <always_on>true</always_on>
+      <update_rate>10</update_rate>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="chassis_link">
+    <material>Gazebo/DarkGrey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <gazebo reference="imu_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="navsat_link">
+    <material>Gazebo/DarkGrey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+
+</robot>

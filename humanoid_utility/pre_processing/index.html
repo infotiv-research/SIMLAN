@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/humanoid_utility/pre_processing/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Humanoid Preprocessing - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Humanoid Preprocessing";
+        var mkdocs_page_input_path = "humanoid_utility/pre_processing/README.md";
+        var mkdocs_page_url = "/SIMLAN/humanoid_utility/pre_processing/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> SIMLAN, Simulation for Multi-Camera Robotics
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Vision-Based Multi-Camera Robotics Simulation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../dependencies/">Dependencies</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../config_generation/">Config Generation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Simulation</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/">Simulation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/raw_models/warehouse/">Warehouse Specification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/simlan_bringup/">SIMLAN Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/static_agent_launcher/">GPSS cameras</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/camera_bird_eye_view/">Camera Bird Eye View</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/">Pallet Truck</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_control/">Control</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_robot/">Humanoid Robot</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Humanoid Motion Capture</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Humanoid Preprocessing</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DEBUG/">Humanoid internal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/motion_planner/">Humanoid motion planner</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/moveit2/">Panda MoveIt2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../simulation/object_mover/">Object Mover</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../credits/">Credits</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES/">Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Simulation</li>
+      <li class="breadcrumb-item active">Humanoid Preprocessing</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/humanoid_utility/pre_processing/README.md">Edit on infotiv-research/SIMLAN</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="dataset-preprocessing">Dataset preprocessing</h2>
+<ul>
+<li><code>media_to_pose_landmark.py</code> : To convert media file to pose landmarks using mediapipe.</li>
+<li><code>dataframe_json_bridge.py</code> : to load poses and motions into a tabulated dataframe.</li>
+</ul>
+<p>Models MUST use <code>dataframe_json_bridge.py</code> standard interface to load their data.
+This tools also has a cli interface to see the intermediate results that can be accessed by <code>./control.sh convert2csv ...</code> .</p>
+<p>Pose and motion data are first collected from JSON files and combined into a single CSV file. These processed CSV files are ready to be fed into a model of your choice, AutoGluon or PyTorch. See below to find more information about the dataset or more about the <a href="#models">models</a>.</p>
+<blockquote>
+<p>The dataset, inputs, and outputs are in <code>humanoid_utility/DATASET/</code> directory.</p>
+</blockquote>
+<p>The resulting files are stored as parallel <code>.json</code> files in multi-camera folders <code>camera_*/pose_data</code>, <code>camera_*/motion_data</code>, <code>camera_*/pose_images</code>.
+To avoid creation of <code>pose_images</code> that are only used as the ground truth and debugging purposes (especially if you are building your training data), comment out the call to <code>self.save_pose_image()</code> in <code>camera_viewer.py</code>.</p>
+<p>Finally, to merge them all into a tabular <code>.csv</code> file, run the following command. The argument <code>dataset_dir</code> is the directory containing the JSON files and must be located as a subdirectory of <code>DATASET/</code>. Additionally, in <code>config.sh</code> you need to set the variable <code>dataset_cameras</code> to the cameras you want to take into consideration. i.e., if you use all cameras, the value is "500 501 502 503". The resulting CSV file will then be saved as <code>dataset_dir/flattened_data.csv</code>.</p>
+<p>By running the command below results in the following csv files being created:</p>
+<pre><code>./control.sh convert2csv TRAIN
+./control.sh convert2csv EVAL
+</code></pre>
+<p>Results in merging:</p>
+<ul>
+<li><code>DATASET/TRAIN/**</code> to <code>DATASET/TRAIN/flattened_data.csv</code></li>
+<li><code>DATASET/EVAL/**</code> to <code>DATASET/EVAL/flattened_data.csv</code></li>
+</ul>
+<blockquote>
+<p>Note: The TRAIN/** refers to the contents of folders <code>motion_data/</code> and <code>camera_5XX/pose_data</code>.</p>
+</blockquote>
+<p>The resulting CSV file will contain these columns:</p>
+<pre><code>cam500_0_x,cam501_0_x,cam502_0_x,cam503_0_x,...,cam503_32_z, JOINTS...
+</code></pre>
+<p>When the data is transformed into numpy/tabular format, each row in the CSV file represents <strong>multiple pose</strong> samples <strong>from each camera</strong> and its corresponding robot motion. The number of columns depends on the number of cameras, and it's possible to select what camera inputs you want to use; i.e., just one camera input or up to four camera inputs.</p>
+<ul>
+<li>The first columns are the 3D coordinates (x, y, z) for each of the 33 MediaPipe pose landmarks and <strong>for each camera</strong>, named like <code>cam500_0_x, cam501_0_x, cam502_0_x, cam503_0_x, cam500_0_y, cam501_0_y, cam502_0_y, cam503_0_y, cam500_0_z, cam501_0_z, cam502_0_z, cam503_0_z...</code>.</li>
+<li>The remaining columns are the robot joint positions (motion targets) for that sample, with names like jRightShoulder_rotx, jLeftElbow_roty, etc.</li>
+</ul>
+<h2 id="loading-dataset">Loading Dataset</h2>
+<p>For training and prediction, we have a helper library, <code>dataframe_json_bridge.py</code>, that loads the data into a pandas dataframe with the column size of  <code>num_pose_landmarks * num_cameras * 3 + num_humanoid_joints</code></p>
+<h3 id="media-to-pose">Media to pose</h3>
+<pre><code>python3 $humanoid_utility_dir/pre_processing/media_to_pose_landmark.py \
+        --mode $2 \ # image or video \
+        --data_dir $3 \ # input dataset directory name \
+        --camera_ids &quot;$dataset_cameras&quot; \
+        --input_dir $humanoid_input_dir \
+        --output_dir $humanoid_output_dir
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Humanoid Motion Capture"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../DEBUG/" class="btn btn-neutral float-right" title="Humanoid internal">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../DEBUG/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

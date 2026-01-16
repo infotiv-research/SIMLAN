@@ -2,187 +2,242 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/CHANGELOG/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/ISSUES/</loc>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/contributing/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/credits/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/dependencies/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/presentation/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/config_generation/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/humanoid_utility/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/humanoid_utility/DEBUG/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/humanoid_utility/pose_to_motion/autogluon/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/humanoid_utility/pre_processing/</loc>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/integration_tests/</loc>
-         <lastmod>2025-12-19</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://infotiv-research.github.io/SIMLAN/resources/ISSUES/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/resources/build-documentation/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/resources/diagrams/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/resources/plots/Experiments/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/aruco_localization/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/bt_failsafe/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/humanoid_camera_system/</loc>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/humanoid_odom_pub/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/humanoid_robot/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/humanoid_robot/model/human-gazebo/</loc>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/humanoid_robot/model/human-gazebo/humanSubjectWithMeshes/</loc>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/humanoid_robot/model/human-gazebo/legacy/control/</loc>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/humanoid_support_moveit_config/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/motion_planner/</loc>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/moveit2/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/moveit2/moveit_resources/</loc>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/moveit2/moveit_resources/panda_description/</loc>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/moveit2/moveit_resources/panda_moveit_config/</loc>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/object_mover/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/pallet_truck/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/pallet_truck/pallet_truck_bringup/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/pallet_truck/pallet_truck_control/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/pallet_truck/pallet_truck_description/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/pallet_truck/pallet_truck_description/urdf/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/pallet_truck/pallet_truck_navigation/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/raw_models/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/raw_models/objects/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/raw_models/warehouse/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/scenario_manager/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/simlan_bringup/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/simlan_gazebo_environment/models/forklift_robot/</loc>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/simlan_gazebo_environment/worlds/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/static_agent_launcher/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/visualize_real_data/</loc>
-         <lastmod>2025-12-19</lastmod>
+         <lastmod>2026-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/trajectories/</loc>
+         <lastmod>2026-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

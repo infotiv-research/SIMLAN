@@ -42,7 +42,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                <li class="toctree-l1"><a class="reference internal" href="../..">SIMLAN, Vision-Based Multi-Camera Robotics Simulation</a>
                 </li>
               </ul>
               <ul>
@@ -59,7 +59,15 @@
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
               <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Simulation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simlan_bringup/">SIMLAN Bringup</a>
                   </li>
@@ -68,6 +76,14 @@
                   <li class="toctree-l1"><a class="reference internal" href="../camera_bird_eye_view/">Camera Bird Eye View</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../aruco_localization/">Aruco Localization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Failsafe</a>
     <ul class="current">
@@ -81,33 +97,21 @@
     </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_bringup/">Bringup</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/">Pallet Truck</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_description/urdf/">URDF</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_control/">Control</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pallet_truck/pallet_truck_navigation/">Navigation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_robot/">Humanoid Robot</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_support_moveit_config/">Humanoid Moveit</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/">Humanoid Motion Capture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pre_processing/">Humanoid Preprocessing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/DEBUG/">Humanoid internal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/">Overview</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/objects/">Object Modeling</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
@@ -118,6 +122,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES/">Issues</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../resources/diagrams/">Diagrams</a>
@@ -152,16 +158,16 @@
 <p>The SIMLAN systems support a failsafe and geo-fencing mechanism for the pallet trucks' navigation. The main idea is that the pallet trucks should stop the navigation as soon as a dangerous situation below is detected:</p>
 <p>In this approach for a new Behavior Tree, the <strong>condition node</strong> named <a href="simulation/bt_failsafe/include/bt_failsafe/stop_robot.hpp"><code>StopRobotCondition</code></a> is defined and can be triggered when a safety issue occurs. We then added a <a href="simulation/bt_failsafe/bt_failsafe_plugins.xml">Behavior Tree plugin</a> that calls an action called <a href="https://docs.nav2.org/configuration/packages/bt-plugins/actions/CancelControl.html">CancelControl</a> when the given condition is triggered.</p>
 <p>Currently, this safety controller triggers <code>StopRobotCondition</code>:</p>
-<h3 id="activation-of-collision-sensor">Activation of collision sensor</h3>
+<h2 id="activation-of-collision-sensor">Activation of collision sensor</h2>
 <p>When a collision is detected by the simulator, the collision's physical properties (such as the force and the object that the pallet truck collided with) are published to the pallet trucks' <code>/contact</code> topic.</p>
-<h3 id="loss-of-observability">Loss of Observability</h3>
+<h2 id="loss-of-observability">Loss of Observability</h2>
 <p>To implement geofencing and the safety situation in which a pallet truck is not observable in any camera, the <code>aruco_localization</code> pkg under <code>aruco_localization/aruco_pose_pub.py</code> continuously publishes the list of pallet trucks that are observable in the <code>/aruco_marker_seen</code> topic. Then, if one stops being observable, the BT condition passes.</p>
-<h3 id="behavior-tree-and-direct-implementation-in-aruco_localization-pkg">Behavior tree and direct implementation in aruco_localization pkg</h3>
+<h2 id="behavior-tree-and-direct-implementation-in-aruco_localization-pkg">Behavior tree and direct implementation in aruco_localization pkg</h2>
 <p>At first, we define a custom <code>behavior_tree.xml</code> in <code>simulation/pallet_truck/pallet_truck_navigation/config/navigate_w_replanning_and_recovery_robot_agent_X.xml</code>. This XML file defines which BT plugins we want to use during the navigation and which run continuously during the navigation. In this XML file, the <code>StopRobotCondition</code> and <code>CancelControl</code> plugins are defined in a fallback function. A fallback function works as it runs the first stated plugin, and when that plugin fails, it moves over to the second one and executes that plugin. So in this case, we first run the <code>StopRobotCondition</code> plugin until the robot is out of bounds. Once the plugin fails, the <code>CancelControl</code> plugin executes and stops the pallet truck.</p>
 <p>In order to know whether a pallet truck is out of bounds or not, it is determined by looking at the aruco marker on the pallet truck and deciding if it's seen by any of the cameras. This is implemented in the <code>aruco_localization</code> pkg under <code>aruco_localization/aruco_pose_pub.py</code>. As long as the aruco marker on the pallet truck is seen by any of the cameras, the node publishes the robot namespace in a list to the topic <code>/aruco_marker_seen</code>.</p>
 <p>The same goes for the collision sensor. It publishes to the topic <code>/robot_agent_X/contact</code> when the pallet trucks collide with something.</p>
 <p>Step two in the failsafe is to stop the pallet truck when it gets out of bounds or collides with something. This is done by a custom-made behavior tree plugin called StopRobotCondition, which is found in <code>simulation/bt_failsafe/src/stop_robot.cpp</code>. This plugin listens to the <code>/aruco_marker_lost</code> and <code>/robot_agent_X/contact</code> topics. As soon as a contact is detected or a robot's namespace is lost, it fails, and the <code>CancelControl</code> behavior tree starts. This, in turn, stops the pallet truck. The <code>CancelControl</code> plugin is an existing built-in plugin in Nav2.</p>
-<h3 id="why-nav2-behavior-tree-plugins-were-not-suitable">Why Nav2 behavior tree plugins were not suitable</h3>
+<h2 id="why-nav2-behavior-tree-plugins-were-not-suitable">Why Nav2 behavior tree plugins were not suitable</h2>
 <p>We tried to use only built-in plugins, which most likely is the most robust and secure way to do it as the plugins are updated accordingly to ROS2 and Nav2.</p>
 <p>We tried to use several plugins to detect if the pallet trucks are out of bounds, but none of them really suited this purpose of this project.</p>
 <p>The first one we tried to use is the <a href="https://github.com/ros-navigation/navigation2/blob/main/nav2_behavior_tree/plugins/condition/transform_available_condition.cpp"><code>TransformAvailable</code> plugin</a>. This plugin checks if a certain TF exists. If the TF is missing, the plugin returns <code>FAILURE</code>. So in this case, we thought we could look at the TFs between the cameras and the aruco marker, and if none of them exists, it should fail and stop the pallet truck. Unfortunately, we couldn't use this plugin because it only looks at the TF from the very beginning of the navigation. And if it exists from the beginning, it will always succeed and will never return <code>FAILURE</code>. Therefore, it cannot be used in our case because we have TF from the beginning, and our TF disappears after some time during the navigation. You could probably modify the plugin to work for our case as well, but if modifications are needed, it could be implemented in a better way instead.</p>
@@ -170,8 +176,8 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../aruco_localization/" class="btn btn-neutral float-left" title="Aruco Localization"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../pallet_truck/pallet_truck_bringup/" class="btn btn-neutral float-right" title="Bringup">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../pallet_truck/pallet_truck_navigation/" class="btn btn-neutral float-left" title="Navigation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../humanoid_robot/" class="btn btn-neutral float-right" title="Humanoid Robot">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -194,10 +200,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../aruco_localization/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../pallet_truck/pallet_truck_navigation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../pallet_truck/pallet_truck_bringup/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../humanoid_robot/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

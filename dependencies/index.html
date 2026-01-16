@@ -42,19 +42,23 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">SIMLAN, Simulation for Multi-Camera Robotics</a>
+                <li class="toctree-l1"><a class="reference internal" href="..">SIMLAN, Vision-Based Multi-Camera Robotics Simulation</a>
                 </li>
               </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">Dependencies</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#linux-dependencies">Linux Dependencies</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#nvidia-driver">NVIDIA Driver</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#docker">Docker</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#nvidia-container-toolkit">nvidia-container-toolkit</a>
+    <li class="toctree-l2"><a class="reference internal" href="#nvidia-gpu">Nvidia GPU</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#nvidia-driver">NVIDIA Driver</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nvidia-container-toolkit">nvidia-container-toolkit</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#no-nvidia-gpu">No Nvidia GPU</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#windows-dependencies">Windows Dependencies</a>
         <ul>
@@ -79,7 +83,15 @@
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/">Simulation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/objects/">Object Modeling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_bringup/">SIMLAN Bringup</a>
                   </li>
@@ -89,35 +101,31 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/aruco_localization/">Aruco Localization</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/bt_failsafe/">Failsafe</a>
-                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_bringup/">Bringup</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/">Pallet Truck</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_description/urdf/">URDF</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_control/">Control</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/pallet_truck/pallet_truck_navigation/">Navigation</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_robot/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/bt_failsafe/">Failsafe</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_robot/">Humanoid Robot</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/humanoid_support_moveit_config/">Humanoid Moveit</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/">Humanoid Motion Capture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/pre_processing/">Humanoid Preprocessing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/DEBUG/">Humanoid internal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simulation/motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/moveit2/">Panda MoveIt2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/">Overview</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/objects/">Object Modeling</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../simulation/raw_models/warehouse/">Warehouse Specification</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simulation/object_mover/">Object Mover</a>
                   </li>
@@ -128,6 +136,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ISSUES/">Issues</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resources/diagrams/">Diagrams</a>
@@ -158,10 +168,6 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="dependencies">Dependencies</h1>
-<h2 id="linux-dependencies">Linux Dependencies</h2>
-<h2 id="nvidia-driver">NVIDIA Driver</h2>
-<p>Use 'nvidia-smi' to ensure that the right NVIDIA driver is installed.
-If you have not installed <strong>Additional Drivers</strong> when installing Ubuntu, you need to manually install NVIDIA drivers.</p>
 <h2 id="docker">Docker</h2>
 <pre><code>sudo apt install curl git
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -170,7 +176,12 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
 </code></pre>
-<h2 id="nvidia-container-toolkit">nvidia-container-toolkit</h2>
+<h2 id="nvidia-gpu">Nvidia GPU</h2>
+<p>see <a href="resources/ISSUES.md">resources/ISSUES.md</a> if you faced any problem after running the commands below:</p>
+<h3 id="nvidia-driver">NVIDIA Driver</h3>
+<p>Use 'nvidia-smi' to ensure that the right NVIDIA driver is installed.
+If you have not installed <strong>Additional Drivers</strong> when installing Ubuntu, you need to manually install NVIDIA drivers.</p>
+<h3 id="nvidia-container-toolkit">nvidia-container-toolkit</h3>
 <p>To install Docker and <code>nvidia-container-toolkit</code>, use the following commands:</p>
 <pre><code>curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
   &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
@@ -207,6 +218,22 @@ INFO[0000] It is recommended that containerd daemon be restarted.
 </code></pre>
 <p>Otherwise you get the following error message in VS Code: <code>Error response from daemon: unknown or invalid runtime name: nvidia</code></p>
 <p>On a <strong>host</strong> machine's terminal (<strong>not</strong> inside Visual Studio Code terminal): <code>xhost +local:docker</code>.</p>
+<h3 id="no-nvidia-gpu">No Nvidia GPU</h3>
+<p>To start the project <strong>without NVIDIA GPU</strong>, please comment out these lines in <code>docker-compose.yaml</code> as shown below:</p>
+<pre><code class="language-bash">  #   runtime: nvidia
+  #
+  # factory_simulation_nvidia:
+  #  &lt;&lt;: *research-base
+  #  container_name: factory_simulation_nvidia
+  #  runtime: nvidia
+  #  deploy:
+  #    resources:
+  #      reservations:
+  #        devices:
+  #          - driver: nvidia
+  #            count: &quot;all&quot;
+  #            capabilities: [compute,utility,graphics,display]
+</code></pre>
 <h2 id="windows-dependencies">Windows Dependencies</h2>
 <p>These instructions are tested on Windows 11, Docker Desktop for Windows ARM64 and VS Code.</p>
 <p>To get the Docker container up and running, download and install Docker Desktop for your system: https://www.docker.com/products/docker-desktop/</p>
@@ -241,7 +268,7 @@ Display number: -1
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="SIMLAN, Simulation for Multi-Camera Robotics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral float-left" title="SIMLAN, Vision-Based Multi-Camera Robotics Simulation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../contributing/" class="btn btn-neutral float-right" title="Contributing">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
