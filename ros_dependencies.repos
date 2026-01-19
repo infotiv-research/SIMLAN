@@ -21,6 +21,7 @@ repositories:
     #url: https://github.com/DynoRobotics/jackal
     #version: dyno_humble
 
+  # This repo has been moved/deleted it seems?
   #scenario_execution:
   #  type: git
   #  url: https://github.com/IntelLabs/scenario_execution

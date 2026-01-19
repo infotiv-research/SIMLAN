@@ -51,7 +51,7 @@ then
 fi
 echo "---[ WORLD_SETUP = ${WORLD_SETUP} ]---"
 echo "---[ CAMERA_STREAMS = ${CAMERA_STREAMS} ]---"
-echo "SPAWN_JACKAL = ${SPAWN_JACKAL}"
+echo "---[ SPAWN_JACKAL = ${SPAWN_JACKAL} ]---"
 
 #endregion
 
