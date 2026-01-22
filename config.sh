@@ -18,6 +18,8 @@ CAMERA_UPDATE_RATE=5
 log_level="error"
 ## DEFAULT: False. So that gazebo window runs.
 headless_gazebo=False
+SPAWN_JACKAL=false
+
 #endregion
 #################################################################
 #         HUMANOID CONFIG                                       #
@@ -84,5 +86,3 @@ ROBOTS='[
              "aruco_id":"4"
          }
     ]'
-
-SPAWN_JACKAL=true

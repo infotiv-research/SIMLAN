@@ -1,7 +1,7 @@
 import os
 import launch
 from ament_index_python.packages import get_package_share_directory
-import launch_ros.actions
+from launch_ros.actions import Node
 
 
 def generate_launch_description():
@@ -13,21 +13,21 @@ def generate_launch_description():
     namespace = "scenario_manager"
     return launch.LaunchDescription(
         [
-            launch_ros.actions.Node(
+            Node(
                 package="scenario_manager",
                 executable="teleport_action_server",
                 namespace=namespace,
                 name="teleport_action_server",
                 output="screen",
             ),
-            launch_ros.actions.Node(
+            Node(
                 package="scenario_manager",
                 executable="set_speed_action_server",
                 namespace=namespace,
                 name="set_speed_action_server",
                 output="screen",
             ),
-            launch_ros.actions.Node(
+            Node(
                 package="scenario_manager",
                 executable="collision_action_server",
                 namespace=namespace,
@@ -35,7 +35,7 @@ def generate_launch_description():
                 output="screen",
                 parameters=[params],
             ),
-            launch_ros.actions.Node(
+            Node(
                 package="scenario_manager",
                 executable="ttc",
                 namespace=namespace,
@@ -43,7 +43,7 @@ def generate_launch_description():
                 output="screen",
                 parameters=[params],
             ),
-            launch_ros.actions.Node(
+            Node(
                 package="scenario_manager",
                 executable="safety_stop",
                 namespace=namespace,

@@ -102,6 +102,20 @@
       -->
   </gazebo>
 
+  <!-- Odometry publisher for ground truth pose and velocity data -->
+  <gazebo>
+    <plugin name="gz::sim::systems::OdometryPublisher"
+            filename="gz-sim-odometry-publisher-system">
+      <odom_publish_frequency>50.0</odom_publish_frequency>
+      <odom_topic>/model/$(arg namespace)/odom_ground_truth</odom_topic>
+      <odom_frame>$(arg namespace)/odom</odom_frame>
+      <robot_base_frame>$(arg namespace)/base_link</robot_base_frame>
+      <xyz_offset>0 0 0</xyz_offset>
+      <rpy_offset>0 0 0</rpy_offset>
+      <gaussian_noise>0</gaussian_noise>
+    </plugin>
+  </gazebo>
+
 
   <gazebo reference="gps_link">
     <sensor name="gps_sensor" type="gps">

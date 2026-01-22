@@ -52,6 +52,7 @@ fi
 echo "---[ WORLD_SETUP = ${WORLD_SETUP} ]---"
 echo "---[ CAMERA_STREAMS = ${CAMERA_STREAMS} ]---"
 echo "---[ SPAWN_JACKAL = ${SPAWN_JACKAL} ]---"
+echo "---[ SCENARIO_MANAGER = ${SCENARIO_MANAGER} ]---"
 
 #endregion
 
@@ -80,6 +81,11 @@ kill (){
     pkill -9 -f aruco_detection_node
     pkill -9 -f humanoid_odom_pub
     pkill -9 -f aruco_pose_pub_node
+}
+drop_nuke () {
+    # More aggressive kill to drop all ros2 nodes
+    # Not the happiest with the placement of the script, but oh well
+    python3 ./drop_nuke.py
 }
 clean () {
     echo "---[ removing build files ]---"
@@ -118,9 +124,18 @@ static_agent() {
     echo "---[ launching cameras (static agents) ]---"
     ros2 launch static_agent_launcher static-agent.launch.py "camera_enabled_ids:=${CAMERA_ENABLED_IDS}" "camera_streams:=${CAMERA_STREAMS}" "camera_update_rate":=${CAMERA_UPDATE_RATE} "log_level:=${log_level}"
 }
+scenario_manager(){
+    echo "---[ launching scenario manager ]---"
+    ros2 launch scenario_manager scenario_manager.launch.py
+}
+spawn_jackal(){
+    echo "---[ spawning jackal robot ]---"
+    ros2 launch dyno_jackal_bringup sim.launch.py
+}
+
 #endregion
 #################################################################
-#                       HUMANDOID FUNCTIONS                     #
+#                       HUMANOID FUNCTIONS                     #
 #################################################################
 #region humanoid functions
 camera () {
@@ -196,6 +211,7 @@ then
 elif [[ "$1" == "kill" ]]
 then
     kill
+    drop_nuke
 elif [[ "$1" == "build" ]]
 then
     build
@@ -255,6 +271,34 @@ then
     wait $pid1
 
 #endregion
+
+########################## JACKAL ###############################
+#region jackal related operations
+elif [[ "$1" == *"jackal"* ]]
+then
+    spawn_jackal
+#endregion
+
+##################### SCENARIO EXECUTION ########################
+#region collision scenario execution related operations
+elif [[ "$1" == *"scenario_manager"* ]]
+then
+    scenario_manager
+
+elif [[ "$1" == *"scenario_execution"* ]]
+then
+    scenario_manager &
+    sleep 2 &&
+    if [[ "$2" == *""* ]]
+    then
+        # Default scenario file if no argument is passed
+        ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/case1.osc
+    else
+        # $2 is the scenario file name located in simulation/scenario_manager/scenarios/
+        ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/$2
+    fi
+#endregion
+
 ######################## PANDA MOVEIT2 ##########################
 #region panda robot_arm_moveit2 related operations
 elif [[ "$1" == "panda" ]]
