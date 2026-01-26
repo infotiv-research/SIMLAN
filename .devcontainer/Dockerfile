@@ -142,7 +142,7 @@ COPY ./scenario_utility/scenario_execution ./src/scenario_execution
 RUN apt-get update && \
     rosdep update && \
     rosdep install -q -y --from-paths src --ignore-src && \
-    rm -rf /var/likb/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 
 # building dependencies
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release

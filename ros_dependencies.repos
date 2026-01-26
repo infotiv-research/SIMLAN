@@ -16,10 +16,10 @@ repositories:
     url: https://github.com/ros-controls/gz_ros2_control.git
     version: jazzy
 
-  #jackal:
-   # type: git
-    #url: https://github.com/DynoRobotics/jackal
-    #version: dyno_humble
+  jackal:
+    type: git
+    url: https://github.com/DynoRobotics/jackal
+    version: dyno_jazzy
 
   # This repo has been moved/deleted it seems?
   #scenario_execution:
