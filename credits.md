@@ -55,7 +55,6 @@ Other solutions:
 - [navigation_oru navigation stack by Örebro University](https://github.com/aeksiri/forklift)
 - https://alignproductionsystems.com/equipment-category/navigation/#
 
-
 Specification of items:
 
 - [SLAM Navigation Compact Pallet Mover Nature Navigation Mini Forklift with Payload 1000KG](https://saintechrobotics.com/product/slam-navigation-compact-pallet-mover-nature-navigation-mini-forklift-with-payload-1000kg/)
@@ -88,17 +87,19 @@ Jackal Robot: The Clearpath Jackal Robot code is forked by Dyno Robotics from Cl
 - To improve collaboration in development environment we use vscode and docker as explained in [this instruction](https://www.allisonthackston.com/articles/docker-development.html) using these [docker files](https://github.com/athackst/dockerfiles). For production environment follow installation procedure used in [.devcontainer/Dockerfile](.devcontainer/Dockerfile) to install dependencies.
 - The Docker setup is added by Christoffer Johanesson (Dyno Robotics), based on Dyno experience working with Docker.
 
-Panda Arm:
+Panda Arm: links
+
 - https://github.com/cpezzato/panda_simulation
 - https://www.researchgate.net/figure/Panda-robot-with-labeled-joints_fig1_361659008
 - https://www.kuka.com/it-it/settori/banca-dati-di-soluzioni/2025/05/5-kuka-robots-optimize-pet-food-handling-in-74-sqm
 - https://arxiv.org/pdf/2506.12089
 
-AI/ML:
+AI/ML: links
+
 - https://www.calibraint.com/blog/beginners-guide-to-diffusion-models
 
+Humanoid: links
 
-Humanoid:
 - https://gazebosim.org/docs/latest/actors/
 - https://research.google/blog/on-device-real-time-body-pose-tracking-with-mediapipe-blazepose/
 

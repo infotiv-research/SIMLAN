@@ -1,4 +1,4 @@
-# SIMLAN, Simulation for Multi-Camera Robotics (5.1.0)
+# SIMLAN, Simulation for Multi-Camera Robotics (5.1.1)
 
 This simulation environment, based on the Ignition Gazebo simulator and ROS 2, resembles a Volvo Trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on a multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html) that utilizes ceiling-mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 \[[📹 GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)\]
@@ -76,13 +76,14 @@ You can also use Nav2 to make a robot_agent (that can be either robot/pallet_tru
 
 ```bash
 ./control.sh gpss # spawn the simulation, robot_agents and GPSS ArUco detection
-./control.sh nav  # spawn map server, and separate nav2 stack in a separate namespace for each robot_agent
-./control.sh send_goal # send navigation goals to nav2 stack for each robot_agent
+./control.sh nav ROBOTS  # spawn map server, and separate nav2 stack in a separate namespace for each robot_agent
+./control.sh send_goal robot_agent_1 2.0 1.0 # send navigation goal x=2.0 y=1.0 to nav2 stack for robot_agent_1
 ```
 
 ![](resources/aruco_localisation.png)
 
 `camera_enabled_ids` in [`config.sh`](config.sh) specifies which cameras are enabled in the GPSS system for ArUco code detection and bird's-eye view.
+% HAMID_NOTE: I think this needs some clarification on how to get the image from birdeye in rviz and also maybe add what needs to be running for birdeye to work.
 
 ```bash
 ./control.sh birdeye
@@ -106,9 +107,9 @@ We employ a deep neural network to learn the mapping between human pose and huma
 Spawn the Panda arm inside SIMLAN and instruct it to pick and place a box around with the following commands:
 
 ```
+./control sim
 ./control panda
-./control plan_motion
-./control pick
+./control plan_panda_motion
 ```
 
 ![](resources/arm-humanoid.png)
@@ -128,7 +129,7 @@ In `config.sh` it is possible to customize your scenarios. From there you can ed
 
 ### Headless gazebo
 
-In `config.sh` there is a variable `headless_gazebo` that you can set to "true" or "false". Setting it to true means will run without a window though the simulation will still run as normal. This can be uselfull when visualization is redundant. Setting it to false means the gazebo window will be visible.
+In `config.sh` there is a variable `headless_gazebo` that you can set to "true" or "false". Setting it to true means will run without a window though the simulation will still run as normal. This can be useful when visualization is redundant. Setting it to false means the gazebo window will be visible.
 
 ### World fidelity
 

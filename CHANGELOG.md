@@ -1,9 +1,9 @@
 # Changelog
 
-### 5.1.0: Cleanup and Documentation (Jan 2025) - Team/Tech Lead: Hamid Ebadi
+### 5.1.1: Cleanup and Documentation (Jan 2025) - Team/Tech Lead: Hamid Ebadi
 
-- headless gazebo: Pär Aronsson
-- major cleanup and documentation: Hamid Ebadi
+- Headless gazebo: Pär Aronsson
+- Major cleanup, restructuring and documentation: Hamid Ebadi
 - Improve ml prediction pipeline: Pär Aronsson
 
 ### 5.0.0: Refactor MoCap pipeline and sensors (Dec 2025) - Team/Tech Lead: Hamid Ebadi

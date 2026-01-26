@@ -2,7 +2,7 @@ from setuptools import setup
 from glob import glob
 import os
 
-package_name = "motion_planner"
+package_name = "humanoid_motion_planner"
 
 setup(
     name=package_name,
@@ -24,7 +24,7 @@ setup(
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
-            "motion_planner = motion_planner.motion_planner:main",
+            "motion_planner = humanoid_motion_planner.motion_planner:main",
         ],
     },
 )

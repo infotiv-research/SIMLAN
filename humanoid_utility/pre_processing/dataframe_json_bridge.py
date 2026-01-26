@@ -6,6 +6,10 @@ import sys
 import argparse
 from pathlib import Path
 
+from os import listdir
+from os.path import isfile, join
+
+
 sys.path.append(".")
 import humanoid_utility.humanoid_config as humanoid_config
 
@@ -32,8 +36,28 @@ def flatten_dataframe(default_df):
     # Sort and drop motion_id for output
     result_all = result_all.sort_values("motion_id").drop("motion_id", axis=1)
 
+    result_all = result_all.fillna(result_all.mean())
+
     # Return the combined dataframe
     return result_all
+
+
+def flatten_pose_dataframe(default_df):
+    # Combined wide CSV for all cameras
+    multi_pose_df = default_df.pivot(
+        index="motion_id", columns="camera_id", values=humanoid_config.pose_names
+    )
+    multi_pose_df.columns = [
+        f"cam{cam}_{feat}" for feat, cam in multi_pose_df.columns.to_flat_index()
+    ]
+    multi_pose_df = multi_pose_df.reset_index()
+    cols_to_fill = multi_pose_df.columns[
+        1:
+    ]  # First col is motion id. So we dont consider it.
+    multi_pose_df = multi_pose_df.fillna(multi_pose_df[cols_to_fill].mean())
+
+    # Return the combined dataframe
+    return multi_pose_df
 
 
 def collect_motion_id(motion_dir):
@@ -163,42 +187,31 @@ def generate_df_from_json(dataset_dir="TRAIN", cameras_to_use=[500, 501, 502, 50
 
     default_structure_df = load_json_data(dataset_dir, cameras_to_use)
     flattened_df = flatten_dataframe(default_structure_df)
-    # flattened_df.replace(np.nan, 0, inplace=True)
-    print("Number of columns:", len(flattened_df.columns))
     return flattened_df
 
 
 # Inputs dataset dir of json files, motion id, and cameras, and returns the poses of that ID and cameras merged into one row.
-def generate_pose_df_from_json_by_ids(dataset_dir, cameras_to_use, ids):
+def generate_pose_df_from_json(dataset_dir, cameras_to_use):
 
-    all_poses = []
-    for id in ids:
-        pose_values = []
-        for cam in cameras_to_use:
-            pose_dir = Path(
-                dataset_dir, f"camera_{cam}", "pose_data", f"{id}_pose.json"
-            )
-            if not pose_dir.is_file():
-                print("Missing pose file:", pose_dir)
-                new_pose = [np.nan] * (len(humanoid_config.pose_names))
-                pose_values += new_pose
-                continue
-            new_pose, _ = load_pose_from_json(pose_dir)
-            pose_values += new_pose.tolist()
-        all_poses.append([id] + pose_values)
-    cam_pose_cols = [
-        f"cam{camera}_{pose_col}"
-        for camera in cameras_to_use
-        for pose_col in humanoid_config.pose_names
-    ]
-    poses_by_id_df = pd.DataFrame(all_poses, columns=["motion_id"] + cam_pose_cols)
-
-    poses_df = poses_by_id_df.reindex(
-        columns=["motion_id"] + cam_pose_cols, fill_value=np.nan
+    poses_df = pd.DataFrame(
+        columns=["motion_id", "camera_id"] + humanoid_config.pose_names
     )
-    # poses_df = flattened_df[cam_pose_cols]
+    for cam_id in cameras_to_use:
 
-    # poses_df.replace(np.nan, 0, inplace=True)
+        pose_file_dir = os.path.join(
+            dataset_dir,
+            f"camera_{cam_id}",
+            "pose_data",
+        )
+        pose_files = [
+            f for f in listdir(pose_file_dir) if isfile(join(pose_file_dir, f))
+        ]
+        for filename in pose_files:
+            motion_id = filename.split("_")[0]
+            new_pose_landmarks, _ = load_pose_from_json(Path(pose_file_dir, filename))
+            pose_to_add = [motion_id, cam_id] + new_pose_landmarks.tolist()
+            poses_df.loc[len(poses_df)] = pose_to_add
+
     return poses_df
 
 

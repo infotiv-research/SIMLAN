@@ -142,7 +142,6 @@ class PytorchFramework:
         )
 
     def predict(self, poses_df):
-        print("Pytorch predict")
         poses_df = poses_df.drop("motion_id", axis=1, errors="ignore")
         predicted_motions = []
         for i in poses_df.index:

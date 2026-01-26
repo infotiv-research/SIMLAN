@@ -1,8 +1,8 @@
-# Converting meshes to SDF models
+## Converting meshes to SDF models
 
 Here are the steps to convert FreeCAD meshes to SDF models (for Gazebo):
 
-## Script step-by-step
+### Script step-by-step
 
 - Install FreeCAD `sudo apt-get install freecad=0.19.2+dfsg1-3ubuntu1` (Tested with version 0.19)
 - Install Blender v3.3 LTS
@@ -28,7 +28,7 @@ cd ..
 ./build.sh
 ```
 
-## In GUI
+### In GUI
 
 - Import `.dae` file
 - Set phobostype to `visual`

@@ -73,8 +73,6 @@ There is one major difference between the navigation of the humanoids and the ro
 
 The obstacle detection is based on a static map which is dynamically updated with all other robot agents except itself. Therefore every robot_agent has its own map to not map itself. To not depend on the orientation of the robots, the obstacle is depicted as a circle. With this setup the map_server is gets an action call that updates the moving obstacles
 
----
-
 The `/map_updater/update_map_node.py` node works as following:
 
 First it makes a copy of the `warehouse.pgm` map which is a long array of pixel values ranging from (0-255). Since the map nav2 needs has a different setup than the `.pgm` file, a conversion is needed.

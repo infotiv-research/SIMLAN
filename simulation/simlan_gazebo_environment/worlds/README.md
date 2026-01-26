@@ -20,13 +20,12 @@ world step gives an accurate solution if it is able to solve the problem, while 
 
 ## contact/collision parameters
 
-dampingFactor 	double 	Exponential velocity decay of the link velocity - takes the value and multiplies the previous link velocity by (1-dampingFactor).
-maxVel 	double 	maximum contact correction velocity truncation term.
-minDepth 	double 	minimum allowable depth before contact correction impulse is applied
-maxContacts 	int 	Maximum number of contacts allowed between two entities. This value overrides the max_contacts element defined in physics.
-
-contact_max_correcting_vel : contact_max_correcting_vel This is the same parameter as the max_vel under collision->surface->contact. contact_max_correcting_vel sets max_vel globally.
-contact_surface_layer : contact_surface_layer This is the same parameter as the min_depth under collision->surface->contact.
+- dampingFactor 	double 	Exponential velocity decay of the link velocity - takes the value and multiplies the - previous link velocity by (1-dampingFactor).
+- maxVel 	double 	maximum contact correction velocity truncation term.
+- minDepth 	double 	minimum allowable depth before contact correction impulse is applied
+- maxContacts 	int 	Maximum number of contacts allowed between two entities. This value overrides the max_contacts element defined in physics.
+- contact_max_correcting_vel : contact_max_correcting_vel This is the same parameter as the max_vel under collision->surface->contact. contact_max_correcting_vel sets max_vel globally.
+  contact_surface_layer : contact_surface_layer This is the same parameter as the min_depth under collision->surface->contact.
 
 *Note*: We had issue getting global settings (`contact_max_correcting_vel` and `contact_surface_layer`) working. We therefore define object level `minDepth` and `maxVel` for each object
 

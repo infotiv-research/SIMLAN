@@ -20,8 +20,9 @@ from humanoid_utility.pre_processing.media_to_pose_landmark import (
 )
 
 from humanoid_utility.pre_processing.dataframe_json_bridge import (
+    flatten_pose_dataframe,
     generate_df_from_json,
-    generate_pose_df_from_json_by_ids,
+    generate_pose_df_from_json,
 )
 
 
@@ -51,79 +52,79 @@ def evaluate(input_dir, model_framework, camera_ids):
     model_framework.evaluate(input_dir, dataset_df)
 
 
-def predict(
-    target_dir, model_framework, camera_ids, replay_motions, humanoid_namespace
-):
+def predict(target_dir, model_framework, camera_ids, humanoid_namespace, save_output):
     input_dir = Path("humanoid_utility", "input")
     output_dir = Path("humanoid_utility", "output")
     full_output_target_dir = Path(output_dir, target_dir)
+    full_input_target_dir = Path(input_dir, target_dir)
 
     # Ensure the predicted motion dir exist.
-    Path(full_output_target_dir, "predicted_motion").mkdir(parents=True, exist_ok=True)
-    input_type = get_directory_filetype(
-        str(Path(input_dir, target_dir, f"camera_{camera_ids[0]}"))
-    )
+    if save_output:
+        Path(full_output_target_dir, "predicted_motion").mkdir(parents=True, exist_ok=True)
+    input_type = get_directory_filetype(str(Path(input_dir, target_dir, f"camera_{camera_ids[0]}")))
+    poses_df = None  # Dataframe of the mediapiped poses all toggled cameras
 
     if input_type in ["jpg", "png"]:
         print("Starting to process images...")
-        process_images(
-            target_dir, camera_ids, input_dir, output_dir, save_output_data=True
-        )
+        # non-flattened df, new row for each image
+        poses_df = process_images(target_dir, camera_ids, input_dir, output_dir, save_output)
     elif input_type in ["mp4"]:
         print("Starting to process videos...")
-        process_video(
-            target_dir, camera_ids, input_dir, output_dir, save_output_data=True
-        )
+        poses_df = process_video(target_dir, camera_ids, input_dir, output_dir, save_output)
     elif input_type in ["json"]:
         print("JSON input mode selected, skipping pose extraction...")
-        shutil.copytree(
-            str(Path(input_dir, target_dir)), full_output_target_dir, dirs_exist_ok=True
-        )
+
+        poses_df = generate_pose_df_from_json(full_input_target_dir, camera_ids)
+        if save_output:
+            shutil.copytree(
+                str(Path(input_dir, target_dir)),
+                full_output_target_dir,
+                dirs_exist_ok=True,
+            )
     else:
         raise ValueError(f"Unknown input type: {input_type}")
 
-    # all_ids contains all unique ids which we need to predict motion for.
-    all_ids = [
-        os.path.splitext(f)[0].replace("_pose", "")
-        for cam_id in camera_ids
-        for f in os.listdir(
-            Path(full_output_target_dir, f"camera_{cam_id}", "pose_data")
-        )
-        if os.path.isfile(
-            os.path.join(
-                Path(full_output_target_dir, f"camera_{cam_id}", "pose_data"), f
-            )
-        )
-    ]
-    all_ids = sorted(list(set(all_ids)))
-    print(f"Total {len(all_ids)} unique motion ids found.")
+    # Flattened df, each camera row is merged
+    poses_flattened_df = flatten_pose_dataframe(poses_df)
+    # Predict using pre-trained model
+    predicted_motions = model_framework.predict(poses_flattened_df)
 
-    # We go over all ids and build the input for the model. This using the cameras specified.
-    poses_df = generate_pose_df_from_json_by_ids(
-        full_output_target_dir, camera_ids, all_ids
-    )
-    predicted_motions = model_framework.predict(poses_df)
-    if len(predicted_motions) != len(poses_df):
-        raise IndexError(
-            "Number of elements are not the same for predicted motions and input poses"
-        )
+    if len(predicted_motions) != len(poses_flattened_df):
+        raise IndexError("Number of elements are not the same for predicted motions and input poses")
     # We iterate over all motions we predicted
-    for i in poses_df.index:
-        motion_id = poses_df["motion_id"][i]  # TODO look over
-        with open(
-            Path(
-                full_output_target_dir, "predicted_motion", f"{motion_id}_motion.json"
-            ),
-            "w",
-        ) as f:
-            motion_dict = dict(
-                zip(humanoid_config.movable_joint_names, predicted_motions[i])
-            )
-            print(motion_dict)
-            json.dump(motion_dict, f, indent=2)
+    for i in poses_flattened_df.index:
+        motion_id = poses_flattened_df["motion_id"][i]  # TODO look over
+        complete_motion_dict = dict(zip(humanoid_config.movable_joint_names, predicted_motions[i]))
+        # Send predicted motion to humanoid_x/execute_motion topic
+        json_str = json.dumps(complete_motion_dict)
+        cmd = [
+            "ros2",
+            "topic",
+            "pub",
+            "--once",
+            f"{humanoid_namespace}/execute_motion",
+            "std_msgs/msg/String",
+            f"{{data: '{json_str}'}}",
+        ]
+        subprocess.run(cmd, check=True)
+        print("topic:", f"{humanoid_namespace}/execute_motion")
 
-        if replay_motions:
-            # We display the image.
+        # Saves predicted motion to output/dataset/predicted_motions/motion.json
+        # Displays image on screen.
+        if save_output:
+            # Save predicted motion
+            with open(
+                Path(
+                    full_output_target_dir,
+                    "predicted_motion",
+                    f"{motion_id}_motion.json",
+                ),
+                "w",
+            ) as f:
+
+                json.dump(complete_motion_dict, f, indent=2)
+
+            # Display reference image on screen
             images_to_show = [
                 Path(
                     full_output_target_dir,
@@ -140,26 +141,13 @@ def predict(
                 # Display the image
                 cv2.imshow(f"Image {camera_ids[i]}", imS)
 
-            # Lastly we now run motion_viewer to replay all the predicted motions.
-            print("topic:", f"{humanoid_namespace}/execute_motion")
-
-            json_str = json.dumps(motion_dict)
-            cmd = [
-                "ros2",
-                "topic",
-                "pub",
-                "--once",
-                f"{humanoid_namespace}/execute_motion",
-                "std_msgs/msg/String",
-                f"{{data: '{json_str}'}}",
-            ]
-            subprocess.run(cmd, check=True)
             cv2.waitKey(15 * 1000)  # this acts as our sleep
             cv2.destroyAllWindows()
 
 
 def main(args):
     camera_ids = args.camera_ids.split()
+    save_output = (args.save_output or "false").strip().lower() == "true"
 
     if args.model_type == "pytorch":
         model_framework = PytorchFramework(args.model_instance, camera_ids)
@@ -177,8 +165,8 @@ def main(args):
             args.input_dir,
             model_framework,
             camera_ids,
-            args.replay_motions,
             args.humanoid_namespace,
+            save_output,
         )
 
 
@@ -216,9 +204,10 @@ if __name__ == "__main__":
         help="List of id as strings, what cameras to use",
     )
     parser.add_argument(
-        "--replay_motions",
-        action="store_true",
-        help="Whether to replay motions",
+        "--save_output",
+        type=str,
+        help="Whether to save the output data: poses, predicted_motions, images",
+        default="false",
     )
     parser.add_argument(
         "--humanoid_namespace",

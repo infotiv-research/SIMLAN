@@ -83,7 +83,7 @@ Script structure:
 Environment (world)
 
 - An in-door factory warehouse
-- An out door street/sidewalk (side walk or street) (FUTURE WORK)
+- An out door street/sidewalk (side walk or street)
 
 Objects
 
@@ -93,8 +93,8 @@ Objects
 - [pallet racks](https://www.iqsdirectory.com/articles/storage-rack/pallet-racks.html)
 - traffic cone
 - Boxes
-- [differential-drive AMR (Autonomous Mobile Robot)](https://www.mobile-industrial-robots.com/insights/get-started-with-amrs/agv-vs-amr-whats-the-difference/) (FUTURE WORK)
-- forklift (FUTURE WORK)
+- [differential-drive AMR (Autonomous Mobile Robot)](https://www.mobile-industrial-robots.com/insights/get-started-with-amrs/agv-vs-amr-whats-the-difference/)
+- forklift
 
 Textures
 
@@ -105,14 +105,14 @@ Textures
 Placement of sensors
 
 - camera (depth) on ceiling
-- 2D Lidar/camera on AMR (FUTURE WORK)
+- 2D Lidar/camera on AMR
 
 Physics
 
 - mass
 - moment of inertia
 - collision
-- friction (FUTURE WORK)
+- friction
 - damping
 
 Lighting
@@ -120,8 +120,8 @@ Lighting
 Agents movements:
 
 - deterministically following waypoints trajectories (in curve or in form of A-B-C...Z)
-- AMR differential-drive using nav2 with obstacle avoidance (FUTURE WORK)
-- replaying scenario using rosbag​ (FUTURE WORK)
+- AMR differential-drive using nav2 with obstacle avoidance
+- replaying scenario using rosbag
 
 Additionally, these are expected from the simulator:
 

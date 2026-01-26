@@ -15,7 +15,7 @@ replay_motion_namespace="humanoid_1"
 
 ./control.sh sim # run simulation
 ./control.sh humanoid # spawn humanoid
-./control.sh moveit # allow humanoid to run motions
+./control.sh humanoid_moveit # allow humanoid to run motions
 ```
 
 ### file mode
@@ -23,7 +23,7 @@ replay_motion_namespace="humanoid_1"
 You can replay each motion data file separately:
 
 ```
-./control.sh execute_motion simulation/motion_planner/motions/default_motion.json
+./control.sh execute_motion simulation/humanoid_motion_planner/motions/default_motion.json
 ```
 
 > If you don't have any motions available, there are ready ones inside the `motions/` folder.
@@ -52,7 +52,7 @@ subprocess.run(cmd, check=True)
 To send random motion to the humanoid use the command below
 
 ```
-ros2 launch motion_planner random_motion.launch.py run_random_generate:=true output_dir:=$1 "log_level:=${log_level}"
+ros2 launch humanoid_motion_planner random_motion.launch.py run_random_generate:=true output_dir:=$1 "log_level:=${log_level}"
 ```
 
 or alternatively:

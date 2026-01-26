@@ -13,6 +13,7 @@ from ament_index_python.packages import get_package_share_directory
 from moveit_configs_utils import MoveItConfigsBuilder
 from launch.actions import TimerAction
 
+
 def generate_launch_description():
     # Command-line arguments
     rviz_config_arg = DeclareLaunchArgument(
@@ -24,10 +25,8 @@ def generate_launch_description():
         "db", default_value="False", description="Database flag."
     )
 
-     # Logging level 
-    log_level = LaunchConfiguration('log_level')
-
-
+    # Logging level
+    log_level = LaunchConfiguration("log_level")
 
     use_sim_time_arg = DeclareLaunchArgument(
         "use_sim_time",
@@ -81,8 +80,10 @@ def generate_launch_description():
         parameters=[
             moveit_config.to_dict(),
             {"use_sim_time": LaunchConfiguration("use_sim_time")},
-            {"moveit_controller_manager": "moveit_simple_controller_manager/MoveItSimpleControllerManager"},
-            {"controller_manager_name": "/panda/controller_manager"}
+            {
+                "moveit_controller_manager": "moveit_simple_controller_manager/MoveItSimpleControllerManager"
+            },
+            {"controller_manager_name": "/panda/controller_manager"},
         ],
         remappings=[("/joint_states", "/panda/joint_states")],
         arguments=["--ros-args", "--log-level", log_level],
@@ -117,7 +118,6 @@ def generate_launch_description():
         ],
     )
 
-
     # Static TF
     static_tf_node = Node(
         package="tf2_ros",
@@ -138,7 +138,6 @@ def generate_launch_description():
             moveit_config.robot_description,
             {"use_sim_time": LaunchConfiguration("use_sim_time")},
         ],
-        
     )
 
     spawn_robot = Node(
@@ -155,7 +154,9 @@ def generate_launch_description():
             "0.5",
             "-z",
             "1.2",
-            "--ros-args", "--log-level", log_level
+            "--ros-args",
+            "--log-level",
+            log_level,
         ],
         output="screen",
         condition=IfCondition(
