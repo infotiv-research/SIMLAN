@@ -31,6 +31,7 @@ shared:
   frame_id: real_data
   namespace: visualize_real_data
   entity_topic: entity_topic
+  #json_file_name has to be set to an existing file in replay_data folder
   json_file_name:
   # Calculated during preparation
   extracted_fps: 10.0

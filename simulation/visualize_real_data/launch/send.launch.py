@@ -32,7 +32,7 @@ def generate_launch_description():
     # -----------------------------------------------------------
     _read_config_file()
 
-    base_path = "/home/ros/src"
+    base_path = "./"
     saved_bags_path = Path(base_path, "replay_data", "rosbags")
 
     if params["bag_name"] is not None:

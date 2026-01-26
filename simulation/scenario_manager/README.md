@@ -53,8 +53,13 @@ Replace `<scenario_file>` with a specific scenario file, such as:
 ```bash
 ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/case1.osc
 ```
+or scenario 6 can be run from the scenarios.sh file like so:
+```bash
+./scenarios.sh 6
+```
 
 This runs a collision action client, executing multiple collision simulations with varying angles and speeds.
+> Note: If the robots are not moving or something feels like it is not working, there can be ghost processes from an earlier run. Stop the program and run `./control.sh kill` and try running again.
 
 ## ⏳ Time to Collision (TTC) Calculation
 The package includes a **TTC node** that logs the **Time to Collision (TTC)** and **Closest Point of Arrival (CPA)** for two robots, assuming constant speed and direction.

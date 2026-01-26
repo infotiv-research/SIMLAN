@@ -308,13 +308,13 @@ then
     SPAWN_JACKAL=true
     sim &
     sleep 5; multi_robot_spawn
-elif [[ "$1" == *"replay"* ]]
+elif [[ "$1" == "replay" ]]
 then
     ros2 launch visualize_real_data scenario_replayer.launch.py
 elif [[ "$1" == *"prepare"* ]]
 then
     ros2 launch visualize_real_data prepare.launch.py
-elif [[ "$1" == *"replay_rviz"* ]]
+elif [[ "$1" == "replay_rviz" ]]
 then
     ros2 launch visualize_real_data send.launch.py
 #endregion

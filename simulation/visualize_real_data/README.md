@@ -107,13 +107,27 @@ ______________________________________________________________________
 
 ### Launching the Processing Step
 
-Once configured, run:
+Once configured, first run:
+
+```bash
+./control.sh replay_sim
+```
+
+This starts the simulation with the correct rviz config.
+
+The run either:
 
 ```bash
 ros2 launch visualize_real_data prepare.launch.py
 ```
 
-This will first start the `orientation_faker` node, which adds an orientation to the data based on the angle between points in the trajectory. Afterwards, the data processing is started and generates a rosbag file stored in a `rosbags/` folder inside the `replay_data` directory.
+or
+
+```bash
+./control.sh prepare
+```
+
+This will first start the `orientation_faker` node, which adds an orientation to the data based on the angle between points in the trajectory (this step can be ignored by changing the `fake_orientation` parameter). Afterwards, the data processing is started and generates a rosbag file stored in a `rosbags/` folder inside the `replay_data` directory.
 
 > __NOTE:__ If orientation is already given, change the `fake_orientation` parameter inside the config to prevent it from overwriting the data.
 
@@ -134,6 +148,12 @@ After processing the data, you can send it to RViz:
 
 ```bash
 ros2 launch visualize_real_data send.launch.py
+```
+
+or
+
+```bash
+./control.sh replay_rviz
 ```
 
 This command sends the most **recently created rosbag** to the topics defined in `params.yaml`.

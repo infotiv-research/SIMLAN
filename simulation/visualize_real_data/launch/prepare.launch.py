@@ -118,14 +118,20 @@ def _read_config_file():
     prepare_params = data.get("prepare_data", {})
 
     prepare_params["images_folder"] = str(
-        Path("/home/ros/src", "replay_data", prepare_params["images_folder"])
+        Path(".", "replay_data", prepare_params["images_folder"])
     )
 
     shared_params = data.get("shared", {})
 
-    shared_params["json_file_name"] = str(
-        Path("/home/ros/src", "replay_data", shared_params["json_file_name"])
-    )
+    try:
+        shared_params["json_file_name"] = str(
+            Path(".", "replay_data", shared_params["json_file_name"])
+        )
+    except Exception as e:
+        print(
+            f"Unexpected error when setting 'json_file_name': {shared_params['json_file_name']}. Error: {e}"
+        )
+        raise
 
     prepare_params["config_file_path"] = str(yaml_file_path)
 
@@ -138,7 +144,8 @@ def _prepare_data_folder(namespace):
     and concatenate output folder path.
     Assumes that parent directories exist.
     """
-    output_directory = Path("/home/ros/src", "replay_data", "rosbags")
+
+    output_directory = Path(".", "replay_data", "rosbags")
     output_directory.mkdir(exist_ok=True)
 
     return f"{output_directory}"
