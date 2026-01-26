@@ -86,7 +86,7 @@ def main():
         node_name="moveit_py_planning_scene",
         name_space="/panda",
         config_dict=None,  # or your config dictionary
-        provide_planning_service=True
+        provide_planning_service=True,
     )
     panda_arm = panda.get_planning_component("panda_arm")
     planning_scene_monitor = panda.get_planning_scene_monitor()

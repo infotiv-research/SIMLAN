@@ -5,14 +5,26 @@ import cv2
 import mediapipe as mp
 import argparse
 import os
+import pandas as pd
+import numpy as np
 
 os.environ["MEDIAPIPE_MODEL_PATH"] = str(Path.home() / ".mediapipe/models")
 os.makedirs(os.environ["MEDIAPIPE_MODEL_PATH"], exist_ok=True)
+import sys
+
+sys.path.append(".")
+from humanoid_utility import humanoid_config
 
 
 # Inputs an image file and outputs a dictionary of detected landmarks.
 # Optionally possible to save a reference image with detected landmarks.
 def process_images(data_dir, camera_ids, input_dir, output_dir, save_output_data=True):
+
+    pose_landmarks_df_columns = [
+        "motion_id",
+        "camera_id",
+    ] + humanoid_config.pose_names
+    pose_landmarks_df = pd.DataFrame(columns=pose_landmarks_df_columns)
 
     # Mediapipe setup
     mp_pose = mp.solutions.pose
@@ -28,6 +40,11 @@ def process_images(data_dir, camera_ids, input_dir, output_dir, save_output_data
     first_cam_dir = Path(input_dir, data_dir, f"camera_{camera_ids[0]}")
     all_images = [
         os.path.splitext(f)[0]
+        for f in os.listdir(first_cam_dir)
+        if os.path.isfile(os.path.join(first_cam_dir, f))
+    ]
+    all_images = [
+        f
         for f in os.listdir(first_cam_dir)
         if os.path.isfile(os.path.join(first_cam_dir, f))
     ]
@@ -49,8 +66,9 @@ def process_images(data_dir, camera_ids, input_dir, output_dir, save_output_data
     # For every image we found we want to apply mediapipe and get the landmarks. This is done for each camera as well.
     for image_id, image_name in enumerate(all_images):
         for camera_id in camera_ids:
+            new_pose_landmark_row = []
             input_image_filename = Path(
-                input_dir, data_dir, f"camera_{camera_id}", f"{image_name}.png"
+                input_dir, data_dir, f"camera_{camera_id}", f"{image_name}"
             )
             output_image_filename = Path(
                 output_dir, data_dir, f"camera_{camera_id}", "pose_images"
@@ -70,6 +88,7 @@ def process_images(data_dir, camera_ids, input_dir, output_dir, save_output_data
 
             results = pose.process(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
+            # Saves images to output/ dir
             if results.pose_landmarks:
                 display_image = frame.copy()
                 mp_drawing.draw_landmarks(
@@ -86,13 +105,31 @@ def process_images(data_dir, camera_ids, input_dir, output_dir, save_output_data
                     )
                     save_pose_data(results.pose_landmarks, output_pose_filename)
 
+                # image id, camera id, pose landmarks.
+                # Fill the new row with landmark data
+                new_pose_landmark_row += [f"{image_id:08d}", camera_id]
+                for landmark in results.pose_landmarks.landmark:
+                    new_pose_landmark_row += [landmark.x, landmark.y, landmark.z]
+
+            # No pose found, filling new row with blank data
+            else:
+                print("No landmarks detected")
+                new_pose_landmark_row = [f"{image_id:08d}", camera_id] + [np.nan] * len(
+                    humanoid_config.pose_names
+                )
+            pose_landmarks_df.loc[len(pose_landmarks_df)] = new_pose_landmark_row
+
+    return pose_landmarks_df
+
 
 # Inputs a video feed and outputs a dictionary of (frame_id, pose_landmarks)
 # Optionally you can choose to save reference images with landmarks.
 def process_video(data_dir, camera_ids, input_dir, output_dir, save_output_data=True):
 
+    pose_landmarks_df_columns = ["motion_id", "camera_id"] + humanoid_config.pose_names
+    pose_landmarks_df = pd.DataFrame(columns=pose_landmarks_df_columns)
+
     # Mediapipe setup
-    pose_landmarks_dict = {}
     mp_pose = mp.solutions.pose
     mp_drawing = mp.solutions.drawing_utils
     pose = mp_pose.Pose(
@@ -143,6 +180,7 @@ def process_video(data_dir, camera_ids, input_dir, output_dir, save_output_data=
             frequency = 50
 
             while cap.isOpened():
+                new_pose_landmark_row = []
                 ret, frame = cap.read()
                 if not ret:
                     print("finished")
@@ -161,6 +199,7 @@ def process_video(data_dir, camera_ids, input_dir, output_dir, save_output_data=
                     )
 
                     frame_id = f"{frame_count:07}"
+                    # Save images to output folder
                     if save_output_data:
                         cv2.imwrite(
                             str(output_image_filename) + f"/{frame_id}_display.jpg",
@@ -170,12 +209,26 @@ def process_video(data_dir, camera_ids, input_dir, output_dir, save_output_data=
                             str(output_image_filename) + f"/{frame_id}_original.jpg",
                             frame,
                         )
-                    pose_landmarks_dict[frame_id] = results.pose_landmarks
-            if save_output_data:
-                for frame_id, landmark in pose_landmarks_dict.items():
-                    save_pose_data(
-                        landmark, str(output_pose_filename) + f"/{frame_id}_pose.json"
+                        # Save landmarks to output folder
+                        save_pose_data(
+                            results.pose_landmarks,
+                            str(output_pose_filename) + f"/{frame_id}_pose.json",
+                        )
+
+                    # image id, camera id, pose landmarks
+                    # Fill new row with landmark data.
+                    new_pose_landmark_row += [f"{frame_id}", camera_id]
+                    for landmark in results.pose_landmarks.landmark:
+                        new_pose_landmark_row += [landmark.x, landmark.y, landmark.z]
+                # No pose found, filling new row with NaN data
+                else:
+                    print("No landmarks detected")
+                    new_pose_landmark_row = [f"{frame_id}", camera_id] + [np.nan] * len(
+                        humanoid_config.pose_names
                     )
+
+                pose_landmarks_df.loc[len(pose_landmarks_df)] = new_pose_landmark_row
+    return pose_landmarks_df
 
 
 def save_pose_data(pose_landmarks, pose_filename):
@@ -195,7 +248,6 @@ def save_pose_data(pose_landmarks, pose_filename):
 
     with open(pose_filename, "w") as f:
         json.dump(landmarks_data, f, indent=2)
-    print(f"Saved pose data to {pose_filename}")
 
 
 # Running this runs landmark detection on an input and saves json and display images to chosen output directory.

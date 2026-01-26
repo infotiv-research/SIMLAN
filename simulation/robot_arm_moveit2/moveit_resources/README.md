@@ -1,5 +1,4 @@
-MoveIt Resources
-================
+# MoveIt Resources
 
 This repository includes various resources (URDFs, meshes, moveit_config packages) needed for MoveIt testing.
 

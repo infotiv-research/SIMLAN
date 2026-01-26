@@ -69,7 +69,7 @@ kill (){
     pkill -9 -f ign
     pkill -9 -f gz
     pkill -9 -f humanoid_camera_system
-    pkill -9 -f motion_planner
+    pkill -9 -f humanoid_motion_planner
     pkill -9 -f humble
     pkill -9 -f move_
     pkill -9 -f ros2
@@ -83,7 +83,7 @@ kill (){
 clean () {
     echo "---[ removing build files ]---"
     kill
-    rm -rf ./build ./install ./log
+    rm -rf ./build ./install ./log ./output
     rm -rf rosbag* ; rm -rf camera_utility/camera_data/* ; touch camera_utility/camera_data/empty.txt
     sed -i -E "s/^ROS_DOMAIN_ID=.*/ROS_DOMAIN_ID=/" "$CONFIG_FILE"
 
@@ -103,7 +103,6 @@ build () {
     sed -i -E "s/^ROS_DOMAIN_ID=.*/ROS_DOMAIN_ID=$ROS_DOMAIN_ID/" "$CONFIG_FILE"
     export ROS_DOMAIN_ID=$ROS_DOMAIN_ID
     mkdir -p camera_utility/camera_data/ ; touch camera_utility/camera_data/empty.txt
-    # Generate camera_config.xacro from camera_config.yaml
     (cd camera_utility/; ./camconf2xacro.sh ${CAMERA_ENABLED_IDS} > ../simulation/static_agent_launcher/description/camera_config.xacro )
     generate_configs
     colcon build --merge-install --symlink-install --cmake-args " -Wno-dev "
@@ -125,7 +124,7 @@ static_agent() {
 #region humanoid functions
 camera () {
     echo "---[ CAMERA ]---"
-    source install/setup.bash ; ros2 run humanoid_camera_system camera_viewer.py  --ros-args -p output_dir:=$1 -p camera_ids:="${dataset_cameras}"
+    source install/setup.bash ; ros2 run humanoid_camera_system camera_viewer.py  --ros-args -p output_dir:=$1 -p camera_ids:="'${dataset_cameras}'"
 }
 humanoid () {
     echo "---[ launching humanoids ]---"
@@ -135,7 +134,7 @@ humanoid () {
 
 random_motion () {
     echo "---[ random motion]---"
-    ros2 launch motion_planner random_motion.launch.py run_random_generate:=true output_dir:=$1 "log_level:=${log_level}"
+    ros2 launch humanoid_motion_planner random_motion.launch.py run_random_generate:=true output_dir:=$1 "log_level:=${log_level}"
 }
 
 dataset () {
@@ -162,9 +161,9 @@ mlenv () {
     deactivate
 }
 
-moveit () {
-    echo "---[ moveit ]---"
-    ros2 launch motion_planner random_motion.launch.py namespace:=$replay_motion_namespace run_random_generate:=false "log_level:=${log_level}"
+humanoid_moveit () {
+    echo "---[ humanoid moveit ]---"
+    ros2 launch humanoid_motion_planner random_motion.launch.py namespace:=$replay_motion_namespace run_random_generate:=false "log_level:=${log_level}"
 }
 
 execute_motion () {
@@ -190,47 +189,47 @@ save_depth_seg_images(){
 #region all operations
 ########################  CORE ###################################
 #region core and GPSS related operations
-if [[ "$1" == *"clean"* ]]
+if [[ "$1" == "clean" ]]
 then
     clean
-elif [[ "$1" == *"kill"* ]]
+elif [[ "$1" == "kill" ]]
 then
     kill
-elif [[ "$1" == *"build"* ]]
+elif [[ "$1" == "build" ]]
 then
     build
-elif [[ "$1" == *"static_agent"* ]]
+elif [[ "$1" == "static_agent" ]]
 then
     static_agent
-elif [[ "$1" == *"cmd"* ]]
+elif [[ "$1" == "cmd" ]]
 then
     shift 1
     echo "running ::: $@"
     exec "$@"
 
-elif [[ "$1" == *"sim"* ]]
+elif [[ "$1" == "sim" ]]
 then
     sim
 
 ## Teleop, Input argument: the namespace specifying what robot you want to control. i.e. to run humanoid run: ./control.sh teleop humanoid
-elif [[ "$1" == *"teleop"* ]]
+elif [[ "$1" == "teleop" ]]
 then
     ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/$2 -r cmd_vel:=key_vel
 
-elif [[ "$1" == *"birdeye"* ]]
+elif [[ "$1" == "birdeye" ]]
 then
     # input_img: choose between image_raw (regular camera image), labels_map (the segmentation without color) or colored_map (colored segmentation)
     ros2 launch camera_bird_eye_view bird_eye_view.launch.py "camera_ids:=${CAMERA_ENABLED_IDS}" point_start:="-8 -10" point_end:="34 10" input_img:="image_raw" "log_level:=${log_level}"
 
 ## Run this command to save the segmentation and depth images from the simulation ####
-elif [[ "$1" == *"save_depth_seg_images"* ]]
+elif [[ "$1" == "save_depth_seg_images" ]]
 then
     save_depth_seg_images
 
-elif [[ "$1" == *"save_depth_seg_videos"* ]]
+elif [[ "$1" == "save_depth_seg_videos" ]]
 then
     save_depth_seg_videos
-elif [[ "$1" == *"gpss"* ]]
+elif [[ "$1" == "gpss" ]]
 then
     sim &
     static_agent &
@@ -239,14 +238,14 @@ then
 #endregion
 ######################## NAV2 ###################################
 #region nav2 related operations
-elif [[ "$1" == *"nav"* ]]
+elif [[ "$1" == "nav" ]]
 then
     # navigate: ./control.sh nav HUMANOIDS or ROBOTS
     ros2 launch pallet_truck_navigation map_server.launch.py "robots:=${!2}" "log_level:=${log_level}" &
     sleep 3
     ros2 launch pallet_truck_navigation nav2.launch.py "robots:=${!2}" "log_level:=${log_level}"
 
-elif [[ "$1" == *"send_goal"* ]]
+elif [[ "$1" == "send_goal" ]]
 then
 
     #send goal humanoids or pallet truck
@@ -256,33 +255,33 @@ then
 
 #endregion
 ######################## PANDA MOVEIT2 ##########################
-#region panda moveit2 related operations
-elif [[ "$1" == *"panda"* ]]
+#region panda robot_arm_moveit2 related operations
+elif [[ "$1" == "panda" ]]
 then
     ros2 launch moveit_resources_panda_moveit_config demo.launch.py "log_level:=${log_level}"
 
-elif [[ "$1" == *"plan_panda_motion"* ]]
+elif [[ "$1" == "plan_panda_motion" ]]
 then
     ros2 launch motion_planning_python_api motion_planning_python_api_tutorial.launch.py "log_level:=${log_level}"
 #endregion
 ######################## HUMANOID ##############################
 #region humanoid
-elif [[ "$1" == *"dataset"* ]]
+elif [[ "$1" == "dataset" ]]
 then
     dataset $humanoid_dataset/$2
-elif [[ "$1" == *"humanoid"* ]]
+elif [[ "$1" == "humanoid" ]]
 then
     humanoid
-elif [[ "$1" == *"random_motion"* ]]
+elif [[ "$1" == "random_motion" ]]
 then
     random_motion $2
-elif [[ "$1" == *"mlenv"* ]]
+elif [[ "$1" == "mlenv" ]]
 then
     mlenv
-elif [[ "$1" == *"moveit"* ]]
+elif [[ "$1" == "humanoid_moveit" ]]
 then
-    moveit
-elif [[ "$1" == *"train"* ]]
+    humanoid_moveit
+elif [[ "$1" == "train" ]]
 then
     echo "---[ Available camera IDs for machine learning: ${dataset_cameras}]---"
     source ~/mlenv/bin/activate
@@ -295,7 +294,7 @@ then
          2>&1 | tee training.log
 
 
-elif [[ "$1" == *"eval"* ]]
+elif [[ "$1" == "eval" ]]
 then
     source ~/mlenv/bin/activate
     python3 $humanoid_utility_dir/pose_to_motion/model.py \
@@ -305,27 +304,27 @@ then
         --model_type $model_type \
         --camera_ids "$dataset_cameras"
 
-elif [[ "$1" == *"predict"* ]]
+elif [[ "$1" == "predict" ]]
 then
     kill
     sim &
     sleep 5 ; humanoid &
-    sleep 8 ; moveit &
+    sleep 8 ; humanoid_moveit &
 
     source ~/mlenv/bin/activate
-    sleep 15 ; python3 $humanoid_utility_dir/pose_to_motion/model.py \
+    sleep 11; python3 $humanoid_utility_dir/pose_to_motion/model.py \
             --mode predict \
             --input_dir "$2" \
             --camera_ids "$dataset_cameras" \
             --model_type "$model_type" \
             --model_instance "$model_instance"\
             --humanoid_namespace $replay_motion_namespace\
-            --replay_motions
+            --save_output $save_prediction_output
 
-elif [[ "$1" == *"execute_motion"* ]]
+elif [[ "$1" == "execute_motion" ]]
 then
     execute_motion $2
-elif [[ "$1" == *"convert2csv"* ]]
+elif [[ "$1" == "convert2csv" ]]
 then
     echo "---[ Convert dataset to CSV, please wait ]---"
     python3 $humanoid_utility_dir/pre_processing/dataframe_json_bridge.py \
@@ -335,12 +334,12 @@ then
 #endregion
 ######################## TESTS ##################################
 #region tests
-elif [[ "$1" == *"test"* ]]
+elif [[ "$1" == "test" ]]
 then
     colcon test --packages-select integration_tests --event-handlers console_direct+ --merge-install --pytest-args "-s"
 
 #################### dyno
-elif [[ "$1" == *"visualize"* ]]
+elif [[ "$1" == "visualize" ]]
 then
     	ros2 launch visualize_real_data scenario_replayer.launch.py
 #endregion

@@ -18,7 +18,7 @@ This project employs a deep neural network to learn the mapping between human po
 
 - [Debug](DEBUG.md) : for debugging purposes and development
 - [Preprocessing](pre_processing/README.md) : details about pre processing of datasets
-- [motion_planner](/simulation/motion_planner/README.md) - To execute motions in the sim from a motion.json file.
+- [humanoid_motion_planner](/simulation/humanoid_motion_planner/README.md) - To execute motions in the sim from a motion.json file.
 
 ## Dataset generation
 
@@ -132,7 +132,9 @@ The prediction pipeline uses these variables in the `config.sh`:
 - `model_instance`: What trained model instance to use.
 - `replay_motion_namespace`: What humanoid you want to replay motions on. Default "humanoid_2".
 
-It is possible to predict on three different types of data: images, videos, and raw JSON data.
+It is possible to predict on three different types of data: images, videos, and raw JSON data. Set "save_prediction_output='true'" in `config.sh`. If false then no data will be saved and only prediction is run.
+
+You can choose if you want to store any motion, pose, image data when predicting, which is stored in the `output/` folder.
 
 Run the command below to predict on different types of datasets:
 

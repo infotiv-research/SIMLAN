@@ -1,16 +1,27 @@
 #!/bin/bash
-
+./control.sh kill
+./control.sh build
 
 #################################################################
 #          SOURCING AND SETTING ENVIRONMENT VARIABLES           #
 #################################################################
 #region environment variables
 CONFIG_FILE="$(dirname "$0")/config.sh"
+# Making sure that needed cameras are enabled (this overwrites overwrite config.sh setting)
+
+
+
+
 source $CONFIG_FILE
 CONTROL_FILE="$(dirname "$0")/control.sh"
 source $CONTROL_FILE
 
-kill
+if [[ "$CAMERA_ENABLED_IDS" != '160 161 162 163 164 165 166 167 168 169 170' ]]; then
+    echo "Error: CAMERA_ENABLED_IDS must be set to '160 161 162 163 164 165 166 167 168 169 170' for the scenarios to work."
+    exit 1
+fi
+
+
 #endregion
 
 #region robot and humanoid setup (if you want to launch from config setup remove these but be sure to merge humanoids and robots somehow)
@@ -114,7 +125,7 @@ scenario_2 () {
     sleep 10 &
 
     #spawn humanoids, panda_arm
-    sleep 10 ; humanoid & moveit &
+    sleep 10 ; humanoid & humanoid_moveit &
     sleep 20; ros2 launch moveit_resources_panda_moveit_config demo.launch.py "log_level:=${log_level}" &
 
     #start navigation stack for humanoid
@@ -124,12 +135,12 @@ scenario_2 () {
     #send goal to humanoid_1 panda_arm
     #this where all the actions should go, it is possible to add pids and make the actions wait for each other to send more goals.
     sleep 10; ros2 action send_goal /humanoid_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'humanoid_1/map'}, pose: {position: {x: 13, y: 8.5, z: 0.0}, orientation: {z: 1.0}}}}" &
-    sleep 2; execute_motion simulation/motion_planner/motions/random_motion_1.json &
-    sleep 2; execute_motion simulation/motion_planner/motions/default_motion.json  &
-    sleep 2; execute_motion simulation/motion_planner/motions/random_motion_2.json &
-    sleep 2; execute_motion simulation/motion_planner/motions/default_motion.json  &
+    sleep 2; execute_motion simulation/humanoid_motion_planner/motions/random_motion_1.json &
+    sleep 2; execute_motion simulation/humanoid_motion_planner/motions/default_motion.json  &
+    sleep 2; execute_motion simulation/humanoid_motion_planner/motions/random_motion_2.json &
+    sleep 2; execute_motion simulation/humanoid_motion_planner/motions/default_motion.json  &
 
-    sleep 5; ros2 launch motion_planning_python_api motion_planning_python_api_tutorial.launch.py "log_level:=${log_level}" &
+    sleep 5; ros2 launch motion_planning_python_api motion_planning_python_api_tutorial.launch.py "log_level:=${log_level}"
 }
 #endregion
 ###########################################################################################################################
@@ -187,8 +198,8 @@ scenario_video_demo () {
 
     #spawn robot_agents, humanoids, panda_arm
     sleep 10 ; ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}" &
-    sleep 10 ; humanoid & moveit &
-    # sleep 20; ros2 launch moveit_resources_panda_moveit_config demo.launch.py "log_level:=${log_level}" &
+    sleep 10 ; humanoid & humanoid_moveit &
+    sleep 20; ros2 launch moveit_resources_panda_moveit_config demo.launch.py "log_level:=${log_level}" &
 
     #start navigation stack
     #for the navigation stack it is important that both robots and humanoids are passed as a single list of dicts, otherwise they will not detect each other as obstacles on the map.
@@ -201,8 +212,8 @@ scenario_video_demo () {
     sleep 40; ros2 action send_goal /robot_agent_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_1/map'}, pose: {position: {x: 30, y: 8.50, z: 0.0}, orientation: {w: 1.0}}}}" &
     sleep 40; ros2 action send_goal /humanoid_1/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'humanoid_1/map'}, pose: {position: {x: 20, y: 4.5, z: 0.0}, orientation: {z: 1.0}}}}" &
 
-    sleep 40; execute_motion simulation/motion_planner/motions/random_motion_1.json  &
-    sleep 40; execute_motion simulation/motion_planner/motions/default_motion.json
+    sleep 40; execute_motion simulation/humanoid_motion_planner/motions/random_motion_1.json  &
+    sleep 40; execute_motion simulation/humanoid_motion_planner/motions/default_motion.json
 
 }
 #endregion
@@ -274,23 +285,23 @@ scenario_5 () {
  ##                                  ##
   ######################################
 #region commands
-if [[ "$1" == *"1"* ]]
+if [[ "$1" == "1" ]]
 then
     echo "###### Executing scenario 1 ######"
     scenario_1
-elif [[ "$1" == *"2"* ]]
+elif [[ "$1" == "2" ]]
 then
     echo "###### Executing scenario 2 ######"
     scenario_2
-elif [[ "$1" == *"3"* ]]
+elif [[ "$1" == "3" ]]
 then
     echo "###### Executing scenario 3 ######"
     scenario_3
-elif [[ "$1" == *"4"* ]]
+elif [[ "$1" == "4" ]]
 then
     echo "###### Executing scenario_video_demo (4) ######"
     scenario_video_demo
-elif [[ "$1" == *"5"* ]]
+elif [[ "$1" == "5" ]]
 then
     echo "###### Executing scenario 5 ######"
     scenario_5

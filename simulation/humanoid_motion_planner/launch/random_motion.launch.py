@@ -23,7 +23,7 @@ def generate_launch_description():
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .moveit_cpp(
             file_path=os.path.join(
-                get_package_share_directory("motion_planner"),
+                get_package_share_directory("humanoid_motion_planner"),
                 "config",
                 "motion_planner.yaml",
             )
@@ -33,7 +33,7 @@ def generate_launch_description():
 
     moveit_py_node = Node(
         name="moveit_py",
-        package="motion_planner",
+        package="humanoid_motion_planner",
         executable="motion_planner",
         output="screen",
         emulate_tty=True,

@@ -1,6 +1,6 @@
 # Bird Eye View package
 
-As preparation, make sure that the right cameras are selected in the `config.sh`
+As preparation, make sure that the right cameras are selected in the `config.sh` % HAMID_NOTE: This README is not shown in https://infotiv-research.github.io/SIMLAN/simulation/camera_bird_eye_view/
 
 ```bash
 ## CAMERA_ENABLED_IDS can be set as a string of camera_ids separated by space ' '. valid camera ids are 160-171
@@ -12,7 +12,7 @@ CAMERA_STREAMS='image'
 
 This package features the ability to select areas of your choosing and create a bird-eye view of that area by using available cameras, viewing that area.
 
-Ro run birdeye launch file in separate terminals run the following commands:
+To run birdeye launch file in separate terminals run the following commands:
 
 ```bash
 ./control.sh build
@@ -20,6 +20,8 @@ Ro run birdeye launch file in separate terminals run the following commands:
 ./control.sh static_agents
 ./control.sh birdeye
 ```
+
+To view the birdeye view, enable camera in Rviz, then select topic: /projected_images_stitched.
 
 ![bird eye view](/resources/bird_eye_view.png)
 ![bird eye view gazebo](/resources/bird_eye_view_gazebo.png)
@@ -46,7 +48,8 @@ to record a camera streams as a sequence of images or a video run the following 
 ./control.sh save_depth_seg_videos
 ```
 
-The resulting videos are stored in [`/simulation/camera_bird_eye_view/recordings/`](/simulation/camera_bird_eye_view/recordings/)
+The resulting images are stored in [`/simulation/camera_bird_eye_view/camera_images/`](/simulation/camera_bird_eye_view/camera_images/)
+And the resulting videos are stored in [`/simulation/camera_bird_eye_view/recordings/`](/simulation/camera_bird_eye_view/recordings/)
 
 ![color](/resources/sensors/color.png)
 

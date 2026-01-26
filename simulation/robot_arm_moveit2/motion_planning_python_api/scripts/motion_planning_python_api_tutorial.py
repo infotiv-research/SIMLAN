@@ -63,7 +63,7 @@ def main():
         node_name="moveit_py",
         name_space="/panda",
         config_dict=None,  # or your config dictionary
-        provide_planning_service=True
+        provide_planning_service=True,
     )
     panda_arm = panda.get_planning_component("panda_arm")
     logger.info("MoveItPy instance created")

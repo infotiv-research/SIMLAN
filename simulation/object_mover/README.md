@@ -41,5 +41,7 @@ Data collection from cameras according to [requirements](resources/20240610-req.
 - Annotation: Position and rotation of the forklift. Annotation in filename.
 - 256x256 RGB non compression
 
+```bash
 ./control.sh sim
 ./control.sh move_object
+```

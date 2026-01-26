@@ -1,6 +1,6 @@
 #!/bin/bash
 HOST_DIR=$(dirname $(dirname "$(pwd)"))
-CONTAINER_DIR="/docvolume"
+CONTAINER_DIR="/docvolume/"
 DOCKER_IMAGE="pandoc/extra:latest"
 docker build -t "$DOCKER_IMAGE" .
 MD_FILES=$(grep -oE '[^:[:space:]]+\.md' "mkdocs.yml" |  tr '\n' ' ')
@@ -44,9 +44,15 @@ run_command_docker() {
         $COMMAND
         "
 }
+# --resource-path is where pandoc looks for images and resource files
 
-run_command_docker "pandoc --verbose --log=pandoc-log.txt -f markdown-implicit_figures \
-        --resource-path=.:resources:resources/build-documentation \
+run_command_docker "pandoc \
+        --lua-filter=$CONTAINER_DIR/resources/build-documentation/strip-abs-path.lua \
+        --verbose --log=pandoc-log.txt -f markdown-implicit_figures \
+        --resource-path=.:$CONTAINER_DIR:$CONTAINER_DIR/resources/:$CONTAINER_DIR/humanoid_utility/:$CONTAINER_DIR/resources/diagrams/:$CONTAINER_DIR/resources/build-documentation/:$CONTAINER_DIR/resources/build-documentation/diagrams/:$CONTAINER_DIR/simulation/raw_models/warehouse/resources/:$CONTAINER_DIR/simulation/raw_models/objects/resources/ \
+        -V mainfont=\"DejaVu Serif\" \
+        -V sansfont=\"DejaVu Sans\" \
+        -V monofont=\"DejaVu Sans Mono\" \
         -V geometry:margin=0.5in \
         --table-of-contents \
         --number-sections \
@@ -61,6 +67,6 @@ run_command_docker "mkdocs build --config-file /mkdocs.yml --site-dir /output --
 run_command_docker "mkdocs serve --config-file /mkdocs.yml --dev-addr=0.0.0.0:8000"
 
 # THIS HAS TO BE EXECUTED IN THE GITHUB REPO (NOT INTERNAL GITLAB)
-#run_command_docker "git config --global --add safe.directory /docvolume ; mkdocs  gh-deploy --config-file /mkdocs.yml --site-dir /output --verbose"
+# run_command_docker "git config --global --add safe.directory /docvolume ; mkdocs  gh-deploy --config-file /mkdocs.yml --site-dir /output --verbose"
 
 

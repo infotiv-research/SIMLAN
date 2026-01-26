@@ -22,9 +22,9 @@ repositories:
     #version: dyno_humble
 
   #scenario_execution:
-    type: git
-    url: https://github.com/IntelLabs/scenario_execution
-    version: jazzy
+  #  type: git
+  #  url: https://github.com/IntelLabs/scenario_execution
+  #  version: jazzy
 
   # pytrees
   #py_trees:
