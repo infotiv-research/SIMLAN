@@ -133,11 +133,11 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/DEBUG/">Humanoid internal</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/motion_planner/">Humanoid motion planner</a>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/humanoid_motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="simulation/moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="simulation/robot_arm_moveit2/">Panda MoveIt2</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="simulation/object_mover/">Object Mover</a>
                   </li>
@@ -179,7 +179,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="simlan-simulation-for-multi-camera-robotics-510">SIMLAN, Simulation for Multi-Camera Robotics (5.1.0)</h1>
+                <h1 id="simlan-simulation-for-multi-camera-robotics-511">SIMLAN, Simulation for Multi-Camera Robotics (5.1.1)</h1>
 <p>This simulation environment, based on the Ignition Gazebo simulator and ROS 2, resembles a Volvo Trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on a multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by <a href="https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html">GPSS (Generic photo-based sensor system)</a> that utilizes ceiling-mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 [<a href="https://www.youtube.com/watch?v=DA7lKiCdkCc">📹 GPSS demo</a>]</p>
 <ul>
@@ -231,11 +231,12 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 <p>You can also use Nav2 to make a robot_agent (that can be either robot/pallet_truck) navigate by itself to a goal position. You can find the code in <a href="simulation/pallet_truck/pallet_truck_navigation">simulation/pallet_truck/pallet_truck_navigation</a></p>
 <p><strong>Run these three in separate terminals</strong></p>
 <pre><code class="language-bash">./control.sh gpss # spawn the simulation, robot_agents and GPSS ArUco detection
-./control.sh nav  # spawn map server, and separate nav2 stack in a separate namespace for each robot_agent
-./control.sh send_goal # send navigation goals to nav2 stack for each robot_agent
+./control.sh nav ROBOTS  # spawn map server, and separate nav2 stack in a separate namespace for each robot_agent
+./control.sh send_goal robot_agent_1 2.0 1.0 # send navigation goal x=2.0 y=1.0 to nav2 stack for robot_agent_1
 </code></pre>
 <p><img alt="" src="resources/aruco_localisation.png" /></p>
-<p><code>camera_enabled_ids</code> in <a href="config.sh"><code>config.sh</code></a> specifies which cameras are enabled in the GPSS system for ArUco code detection and bird's-eye view.</p>
+<p><code>camera_enabled_ids</code> in <a href="config.sh"><code>config.sh</code></a> specifies which cameras are enabled in the GPSS system for ArUco code detection and bird's-eye view.
+% HAMID_NOTE: I think this needs some clarification on how to get the image from birdeye in rviz and also maybe add what needs to be running for birdeye to work.</p>
 <pre><code class="language-bash">./control.sh birdeye
 </code></pre>
 <p><img alt="" src="resources/stitched.png" /></p>
@@ -247,9 +248,9 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 <p>We employ a deep neural network to learn the mapping between human pose and humanoid robot motion. The model takes 33 MediaPipe pose landmarks as input and predicts corresponding robot joint positions. Read more about it <a href="humanoid_utility/">Humanoid Utilities</a></p>
 <h4 id="arm-controls">Arm controls</h4>
 <p>Spawn the Panda arm inside SIMLAN and instruct it to pick and place a box around with the following commands:</p>
-<pre><code>./control panda
-./control plan_motion
-./control pick
+<pre><code>./control sim
+./control panda
+./control plan_panda_motion
 </code></pre>
 <p><img alt="" src="resources/arm-humanoid.png" /></p>
 <h2 id="testing">Testing</h2>
@@ -260,7 +261,7 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 <h2 id="customized-startup">Customized startup</h2>
 <p>In <code>config.sh</code> it is possible to customize your scenarios. From there you can edit what world you want to run, how many cameras you want enabled, and also edit Humanoid-related properties. Modifying these variables is preferred, rather than modifying the <code>control.sh</code> file.</p>
 <h3 id="headless-gazebo">Headless gazebo</h3>
-<p>In <code>config.sh</code> there is a variable <code>headless_gazebo</code> that you can set to "true" or "false". Setting it to true means will run without a window though the simulation will still run as normal. This can be uselfull when visualization is redundant. Setting it to false means the gazebo window will be visible.</p>
+<p>In <code>config.sh</code> there is a variable <code>headless_gazebo</code> that you can set to "true" or "false". Setting it to true means will run without a window though the simulation will still run as normal. This can be useful when visualization is redundant. Setting it to false means the gazebo window will be visible.</p>
 <h3 id="world-fidelity">World fidelity</h3>
 <p>in the <code>config.sh</code> script, you can adjust the world fidelity</p>
 <ul>
@@ -379,5 +380,5 @@ Once VS Code is connected to Docker (as shown in the image below), open the term
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2026-01-16 14:09:24.209556+00:00
+Build Date UTC : 2026-01-26 19:47:49.647663+00:00
 -->

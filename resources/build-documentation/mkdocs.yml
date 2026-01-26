@@ -31,9 +31,9 @@ nav:
       - Humanoid Motion Capture: humanoid_utility/README.md
       - Humanoid Preprocessing: humanoid_utility/pre_processing/README.md
       - Humanoid internal: humanoid_utility/DEBUG.md
-      - Humanoid motion planner : simulation/motion_planner/README.md
+      - Humanoid motion planner : simulation/humanoid_motion_planner/README.md
       - Pose to Motion AutoGluon model: humanoid_utility/pose_to_motion/autogluon/README.md
-      - Panda MoveIt2: simulation/moveit2/README.md # Panda
+      - Panda MoveIt2: simulation/robot_arm_moveit2/README.md # Panda
       - Object Mover: simulation/object_mover/README.md
   - Credits: credits.md
   - Appendix:
@@ -52,15 +52,11 @@ plugins:
       lang: en
 
 exclude_docs: |
-  # Exclude Python cache and binary files
   **/__pycache__/**/*
   **/*.pyc
-
-  # Exclude large datasets and zips
-  humanoid_utility/*.zip
+  humanoid_utility/**/*.mp4
   **/*.zip
-
-  # Exclude large datasets and zips
+  **/*.tar.gz
   **/*.py
   **/*.xacro
   **/*.yaml

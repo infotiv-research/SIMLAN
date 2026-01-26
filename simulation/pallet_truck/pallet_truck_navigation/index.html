@@ -113,11 +113,11 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/DEBUG/">Humanoid internal</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../motion_planner/">Humanoid motion planner</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../humanoid_motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../robot_arm_moveit2/">Panda MoveIt2</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../object_mover/">Object Mover</a>
                   </li>
@@ -209,7 +209,6 @@ To start mapping (otherwise known as cartography), you can use <code>cartography
 <p>There is one major difference between the navigation of the humanoids and the robot_agents. The robot _agents get their <code>odom</code> frame from the aruco_localization pkg which find aruco_markers and publishes their orientation and position. The humanoids on the other hand get their <code>odom</code> frame from the humanoid_odom_pub node which subscribes to the ground truth of the humanoids pose from gazebo and creates a dynamic transform between the <code>namespace/odom</code> -&gt; <code>namespace/base_link</code> frames. This means the robot_agents get their odom frame from what the cameras can see and the humanoids get their odom frame from the actual pose in the simulation.</p>
 <h2 id="obstacles-detection-update_map_node">Obstacles detection (update_map_node)</h2>
 <p>The obstacle detection is based on a static map which is dynamically updated with all other robot agents except itself. Therefore every robot_agent has its own map to not map itself. To not depend on the orientation of the robots, the obstacle is depicted as a circle. With this setup the map_server is gets an action call that updates the moving obstacles</p>
-<hr />
 <p>The <code>/map_updater/update_map_node.py</code> node works as following:</p>
 <p>First it makes a copy of the <code>warehouse.pgm</code> map which is a long array of pixel values ranging from (0-255). Since the map nav2 needs has a different setup than the <code>.pgm</code> file, a conversion is needed.</p>
 <p>The .pgm file has these pixels ranges</p>

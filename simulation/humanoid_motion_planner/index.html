@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/motion_planner/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/humanoid_motion_planner/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
     <title>Humanoid motion planner - SIMLAN, Simulation for Multi-Camera Robotics</title>
     <link rel="stylesheet" href="../../css/theme.css" />
@@ -13,8 +13,8 @@
       <script>
         // Current page data
         var mkdocs_page_name = "Humanoid motion planner";
-        var mkdocs_page_input_path = "simulation/motion_planner/README.md";
-        var mkdocs_page_url = "/SIMLAN/simulation/motion_planner/";
+        var mkdocs_page_input_path = "simulation/humanoid_motion_planner/README.md";
+        var mkdocs_page_url = "/SIMLAN/simulation/humanoid_motion_planner/";
       </script>
     
     <!--[if lt IE 9]>
@@ -109,7 +109,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../moveit2/">Panda MoveIt2</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../robot_arm_moveit2/">Panda MoveIt2</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
@@ -144,7 +144,7 @@
           <li class="breadcrumb-item">Simulation</li>
       <li class="breadcrumb-item active">Humanoid motion planner</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/motion_planner/README.md">Edit on infotiv-research/SIMLAN</a>
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/humanoid_motion_planner/README.md">Edit on infotiv-research/SIMLAN</a>
     </li>
   </ul>
   <hr/>
@@ -165,11 +165,11 @@
 
 ./control.sh sim # run simulation
 ./control.sh humanoid # spawn humanoid
-./control.sh moveit # allow humanoid to run motions
+./control.sh humanoid_moveit # allow humanoid to run motions
 </code></pre>
 <h3 id="file-mode">file mode</h3>
 <p>You can replay each motion data file separately:</p>
-<pre><code>./control.sh execute_motion simulation/motion_planner/motions/default_motion.json
+<pre><code>./control.sh execute_motion simulation/humanoid_motion_planner/motions/default_motion.json
 </code></pre>
 <blockquote>
 <p>If you don't have any motions available, there are ready ones inside the <code>motions/</code> folder.</p>
@@ -191,7 +191,7 @@ subprocess.run(cmd, check=True)
 </code></pre>
 <h3 id="random-mode">random mode</h3>
 <p>To send random motion to the humanoid use the command below</p>
-<pre><code>ros2 launch motion_planner random_motion.launch.py run_random_generate:=true output_dir:=$1 &quot;log_level:=${log_level}&quot;
+<pre><code>ros2 launch humanoid_motion_planner random_motion.launch.py run_random_generate:=true output_dir:=$1 &quot;log_level:=${log_level}&quot;
 </code></pre>
 <p>or alternatively:</p>
 <pre><code>./control.sh random_motion

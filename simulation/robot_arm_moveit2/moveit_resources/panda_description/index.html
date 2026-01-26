@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/moveit2/moveit_resources/panda_moveit_config/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/robot_arm_moveit2/moveit_resources/panda_description/" />
       <link rel="shortcut icon" href="../../../../img/favicon.ico" />
-    <title>Index - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <title>panda_description - SIMLAN, Simulation for Multi-Camera Robotics</title>
     <link rel="stylesheet" href="../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Index";
-        var mkdocs_page_input_path = "simulation/moveit2/moveit_resources/panda_moveit_config/README.md";
-        var mkdocs_page_url = "/SIMLAN/simulation/moveit2/moveit_resources/panda_moveit_config/";
+        var mkdocs_page_name = "panda_description";
+        var mkdocs_page_input_path = "simulation/robot_arm_moveit2/moveit_resources/panda_description/README.md";
+        var mkdocs_page_url = "/SIMLAN/simulation/robot_arm_moveit2/moveit_resources/panda_description/";
       </script>
     
     <!--[if lt IE 9]>
@@ -97,7 +97,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../humanoid_utility/DEBUG/">Humanoid internal</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../motion_planner/">Humanoid motion planner</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../humanoid_motion_planner/">Humanoid motion planner</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../humanoid_utility/pose_to_motion/autogluon/">Pose to Motion AutoGluon model</a>
                   </li>
@@ -133,9 +133,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Index</li>
+      <li class="breadcrumb-item active">panda_description</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/moveit2/moveit_resources/panda_moveit_config/README.md">Edit on infotiv-research/SIMLAN</a>
+          <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/robot_arm_moveit2/moveit_resources/panda_description/README.md">Edit on infotiv-research/SIMLAN</a>
     </li>
   </ul>
   <hr/>
@@ -143,9 +143,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="moveit-resources-for-testing-franka-emika-panda">MoveIt Resources for testing: Franka Emika Panda</h2>
-<p>A project-internal moveit configuration for testing in MoveIt.</p>
-<p>Use the official panda_moveit_config if you actually want to work with the robot!</p>
+                <h1 id="panda_description">panda_description</h1>
+<blockquote>
+<p>Note: This package contains a panda.urdf and a newer panda.urdf.xacro.
+The XACRO has been created to support finding package resource files dynamically which is needed for Gazebo.
+The URDF is still needed by <a href="https://github.com/ros-planning/moveit2/blob/main/moveit_core/utils/src/robot_model_test_utils.cpp#L75">RobotModelTestUtils</a> which doesn't support xacro yet.</p>
+</blockquote>
+<p>The URDF model and meshes contained in this package were copied from the frankaemika <code>franka_ros</code> package and adapted for use with <code>moveit_resources</code>.</p>
+<p>All imported files were released under the Apache-2.0 license.</p>
               
             </div>
           </div><footer>
