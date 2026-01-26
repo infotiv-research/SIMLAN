@@ -96,6 +96,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://infotiv-research.github.io/SIMLAN/simulation/camera_bird_eye_view/</loc>
+         <lastmod>2026-01-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://infotiv-research.github.io/SIMLAN/simulation/humanoid_camera_system/</loc>
          <lastmod>2026-01-26</lastmod>
          <changefreq>daily</changefreq>

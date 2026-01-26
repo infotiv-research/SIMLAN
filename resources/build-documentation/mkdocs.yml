@@ -70,7 +70,6 @@ exclude_docs: |
   **/meshes/**
   **/textures/**
   **/materials/**
-  **/camera_**/**
   **/output/**
   **/fonts/**
   **/recordings/**
