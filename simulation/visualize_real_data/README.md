@@ -1,50 +1,35 @@
 ## Preparing Data
 
-### First build the package
+### Add the data
 
-For example with:
+Add your data files beneath the `replay_data` directory. Your structure should look like this:
 
 ```bash
-colcon build --merge-install --symlink-install --packages-select visualize_real_data
+replay_data/
+├── images/
+│   └── images
+└── data
 ```
 
-After that, you can add the required data into the `share/` folder that is created during the build process.
+By default, the package expects to find the trajectory data inside the `replay_data/` folder as `.json`, and the images inside the `images/` folder as `.jpg`. The .json trajectories are expected on this shape:
 
-If everything has been built correctly, you should find the following folder-structure:
-
-```bash
-install/
-└── share/
-    └── visualize_real_data/
-        └── data/
-            ├── images/
-            │   └── images
-            └── data
-```
-
-The empty `data` and `images` placeholder files ensure that ROS 2 recognizes and preserves the folder structure during the build, and should **not** be removed.
-
-If you have already built the package before, there might be another directory inside the `data/` folder called `rosbags`.
-More on that folder later.
-
-### Add the data after building
-
-After the build completes, you can add your data files to the generated `share/` folder inside your package.
-
-By default, the package expects to find the trajectory data inside the `data/` folder as `.json`, and the images inside the `images/` folder as `.jpg`. Like this:
-
-```bash
-install/
-└── share/
-    └── visualize_real_data/
-        └── data/
-            ├── images/
-            │   ├── image1.jpg
-            │   └── image2.jpg
-            └── window_2012_1746008869618_1746008890118.json
+```json
+{
+  "time_stamp": 1746009292618, // Unix timestamp in milliseconds
+  "object_list": [
+    [
+      0, // Tracking ID
+      1, // X
+      2, // Y
+      3 // Z (most often 0)
+    ]
+  ]
+}
 ```
 
 Notes:
+
+- The `replay_data` folder is gitignored, so you can safely save images there without uploading to git.
 
 - The **folder-names are configurable**, as long as the settings in `params.yaml` match.
 
@@ -55,12 +40,15 @@ Notes:
 
 - Just be sure to update the corresponding fields (`images_folder`, `json_file_name`) in `params.yaml`.
 
+### Build the package
+
+For example with:
+
+```bash
+colcon build --merge-install --symlink-install --packages-select visualize_real_data
+```
+
 ______________________________________________________________________
-
-### Important Notes
-
-- You do *not* need to rebuild the package after adding or modifying data in `share/`.
-- In fact, **rebuilding the package could overwrite or remove any manually added files** in the `share/` folder, so avoid rebuilding once your data is in place.
 
 ## Config file
 
@@ -90,7 +78,7 @@ When your data is in place, you may want to review the config parameters in `par
 | Parameter        | Description                                                                   | Default Value               |
 | ---------------- | ----------------------------------------------------------------------------- | --------------------------- |
 | `playback_rate`  | Controls playback speed. Default is `1` (real-time based on `extracted_fps`). | `1`                         |
-| `frame_position` | `x`,`y`,`z` coordinates for visualization frame.                              | `x: 15.35, y: 6.5, z: -0.2` |
+| `frame_position` | `x`,`y`,`z` coordinates for visualization frame.                              | `x: 15.35, y: 5.7, z: -0.2` |
 | `bag_name`       | Name of the rosbag to play. If empty, the most recent one is used.            | *(empty)*                   |
 
 #### `scenario_replayer` section:
@@ -99,7 +87,8 @@ When your data is in place, you may want to review the config parameters in `par
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | `gazebo_teleport_service` | Service name for teleporting robots in Gazebo.                                                                                                                                                  | `/world/default/set_pose` |
 | `frame_id`                | Frame in which entities are visualized.                                                                                                                                                         | `real_data`               |
-| `use_cmd_vel`             | If `true`, robots are driven with velocity commands; otherwise, teleportation is used to reenact the scenario. When set to `true`, it is important the simulation runs close to 100% real-time. | `true`                    |
+| `use_cmd_vel`             | If `true`, robots are driven with velocity commands; otherwise, teleportation is used to reenact the scenario. When set to `true`, it is important the simulation runs close to 100% real-time. | `false`                   |
+| `ignore_orientation`      | If `true`, robot orientation is reset to identity (no rotation) regardless of source data. Using with `cmd_vel` may cause unexpected movement behavior.                                         | `false`                   |
 
 #### `shared` section:
 
@@ -124,9 +113,9 @@ Once configured, run:
 ros2 launch visualize_real_data prepare.launch.py
 ```
 
-This will first start the `orientation_fixer` node, which adds an orientation to the data based on the angle between points in the trajectory. Afterwards, the data processing is started and generates a rosbag file stored in a `rosbags/` folder inside the package's `share/` directory.
+This will first start the `orientation_faker` node, which adds an orientation to the data based on the angle between points in the trajectory. Afterwards, the data processing is started and generates a rosbag file stored in a `rosbags/` folder inside the `replay_data` directory.
 
-> __NOTE:__ If orientation is already given, change:
+> __NOTE:__ If orientation is already given, change the `fake_orientation` parameter inside the config to prevent it from overwriting the data.
 
 - Rosbags are named using the name of the JSON file used and timestamps (e.g., `my_recording_20250722_153045` if the JSON file is named `my_recording.json`).
 - Existing rosbags **are never overwritten**.
@@ -173,7 +162,7 @@ ______________________________________________________________________
 ## Summary
 
 1. Build package using `CTRL + SHIFT + B` VS Code task.
-1. Add the data you want to show in RViz in the package's `share/` folder
+1. Add the data you want to show in RViz in the `replay_data` folder
 1. Configure parameters under 'prepare_data', 'shared', and/or 'scenario_replayer' *(optional)*
 1. Run `prepare.launch.py`
 1. Open RViz2 and add the displays `PointCloud2` and `MarkerArray`

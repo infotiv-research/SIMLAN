@@ -29,6 +29,7 @@ def launch_setup(context, *args, **kwargs):
     headless_gazebo = LaunchConfiguration("headless_gazebo").perform(context)
     spawn_jackal = LaunchConfiguration("spawn_jackal", default=False)
     use_sim_time = LaunchConfiguration("use_sim_time", default=True)
+    rviz_config = LaunchConfiguration("rviz_config", default="rviz_config.rviz")
     launch_rviz = LaunchConfiguration("rviz")
 
     pkg_simlan_gazebo_environment = get_package_share_directory(
@@ -38,7 +39,7 @@ def launch_setup(context, *args, **kwargs):
     pkg_dyno_jackal_bringup = get_package_share_directory("dyno_jackal_bringup")
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("simlan_bringup"), "rviz", "rviz_config.rviz"]
+        [FindPackageShare("simlan_bringup"), "rviz", rviz_config]
     )
 
     launch_rviz_launch_argument = DeclareLaunchArgument(
@@ -62,7 +63,8 @@ def launch_setup(context, *args, **kwargs):
     jackal = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_dyno_jackal_bringup, "launch", "sim.launch.py")
-        ), condition=IfCondition(spawn_jackal)
+        ),
+        condition=IfCondition(spawn_jackal),
     )
 
     rviz2 = Node(

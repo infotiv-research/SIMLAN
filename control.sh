@@ -52,7 +52,6 @@ fi
 echo "---[ WORLD_SETUP = ${WORLD_SETUP} ]---"
 echo "---[ CAMERA_STREAMS = ${CAMERA_STREAMS} ]---"
 echo "---[ SPAWN_JACKAL = ${SPAWN_JACKAL} ]---"
-echo "---[ SCENARIO_MANAGER = ${SCENARIO_MANAGER} ]---"
 
 #endregion
 
@@ -117,12 +116,15 @@ build () {
 }
 sim () {
     echo "---[ launching gazebo ]---"
-    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo" "spawn_jackal:=${SPAWN_JACKAL}"
-
+    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo" "spawn_jackal:=${SPAWN_JACKAL}" "rviz_config:=${rviz_config}"
 }
 static_agent() {
     echo "---[ launching cameras (static agents) ]---"
     ros2 launch static_agent_launcher static-agent.launch.py "camera_enabled_ids:=${CAMERA_ENABLED_IDS}" "camera_streams:=${CAMERA_STREAMS}" "camera_update_rate":=${CAMERA_UPDATE_RATE} "log_level:=${log_level}"
+}
+multi_robot_spawn(){
+    echo "---[ spawning multiple robots ]---"
+    ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}"
 }
 scenario_manager(){
     echo "---[ launching scenario manager ]---"
@@ -251,7 +253,7 @@ then
     sim &
     static_agent &
     sleep 10 ; ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true "camera_enabled_ids:=${CAMERA_ENABLED_IDS}" "robots:=${ROBOTS}" "log_level:=${log_level}" &
-    sleep 10 ; ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}"
+    sleep 10 ; multi_robot_spawn
 #endregion
 ######################## NAV2 ###################################
 #region nav2 related operations
@@ -297,6 +299,24 @@ then
         # $2 is the scenario file name located in simulation/scenario_manager/scenarios/
         ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/$2
     fi
+#endregion
+###################### VISUALIZING REAL DATA ####################
+#region visualize real data related operations. Config can be changed in params.yaml inside visualize_real_data package
+elif [[ "$1" == "replay_sim" ]]
+then
+    rviz_config="visualize_real_data.rviz"
+    SPAWN_JACKAL=true
+    sim &
+    sleep 5; multi_robot_spawn
+elif [[ "$1" == *"replay"* ]]
+then
+    ros2 launch visualize_real_data scenario_replayer.launch.py
+elif [[ "$1" == *"prepare"* ]]
+then
+    ros2 launch visualize_real_data prepare.launch.py
+elif [[ "$1" == *"replay_rviz"* ]]
+then
+    ros2 launch visualize_real_data send.launch.py
 #endregion
 
 ######################## PANDA MOVEIT2 ##########################
@@ -382,12 +402,5 @@ then
 elif [[ "$1" == "test" ]]
 then
     colcon test --packages-select integration_tests --event-handlers console_direct+ --merge-install --pytest-args "-s"
-
-#################### dyno
-elif [[ "$1" == "visualize" ]]
-then
-    	ros2 launch visualize_real_data scenario_replayer.launch.py
-#endregion
-
 #endregion
 fi

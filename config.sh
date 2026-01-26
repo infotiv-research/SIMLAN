@@ -18,6 +18,8 @@ CAMERA_UPDATE_RATE=5
 log_level="error"
 ## DEFAULT: False. So that gazebo window runs.
 headless_gazebo=False
+rviz_config="rviz_config.rviz"
+
 SPAWN_JACKAL=false
 
 #endregion
