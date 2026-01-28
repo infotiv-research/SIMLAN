@@ -11,6 +11,7 @@ prepare_data:
   frames_to_process: 1
   preprocess_all_data: true
   fake_orientation: true
+  list_json_files: false
 
 send_data:
   playback_rate: 1
@@ -33,6 +34,10 @@ shared:
   entity_topic: entity_topic
   #json_file_name has to be set to an existing file in replay_data folder
   json_file_name:
+  start_time:
+  end_time:
+  initial_heading: 0.0  # Initial heading/orientation in degrees (0 = pointing left). Positive heading is counter-clockwise, i.e. 90 deg = DOWN. Used by orientation_faker.py
+
   # Calculated during preparation
   extracted_fps: 10.0
 

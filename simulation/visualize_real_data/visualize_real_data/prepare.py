@@ -11,6 +11,7 @@ from std_msgs.msg import Header
 from pathlib import Path
 import cv2
 import yaml
+from datetime import datetime
 
 
 class PrepareRealData(Node):
@@ -31,6 +32,12 @@ class PrepareRealData(Node):
         self.declare_parameter("frame_id", "real_images")
         self.declare_parameter("config_file_path", "params.yaml")
         self.declare_parameter("preprocess_all_data", False)  # New parameter
+        self.declare_parameter(
+            "start_time", ""
+        )  # Start time filter (YYYY-MM-DD HH:MM:SS format)
+        self.declare_parameter(
+            "end_time", ""
+        )  # End time filter (YYYY-MM-DD HH:MM:SS format)
 
         # Get and assign parameters
         # - First 3 are needed for PointCloud2 creation
@@ -74,6 +81,35 @@ class PrepareRealData(Node):
             self.get_parameter("preprocess_all_data").get_parameter_value().bool_value
         )
 
+        self.start_time = (
+            self.get_parameter("start_time").get_parameter_value().string_value
+        )
+        self.end_time = (
+            self.get_parameter("end_time").get_parameter_value().string_value
+        )
+
+        # Convert start/end times to milliseconds if provided
+        self.start_timestamp_ms = None
+        self.end_timestamp_ms = None
+
+        if self.start_time:
+            self.start_timestamp_ms = self.parse_time_input(
+                self.start_time, "start_time"
+            )
+            if self.start_timestamp_ms:
+                readable_time = self.timestamp_to_readable(self.start_timestamp_ms)
+                self.get_logger().info(
+                    f"Start time filter: {readable_time} ({self.start_timestamp_ms} ms)"
+                )
+
+        if self.end_time:
+            self.end_timestamp_ms = self.parse_time_input(self.end_time, "end_time")
+            if self.end_timestamp_ms:
+                readable_time = self.timestamp_to_readable(self.end_timestamp_ms)
+                self.get_logger().info(
+                    f"End time filter: {readable_time} ({self.end_timestamp_ms} ms)"
+                )
+
         # Create publishers
         qos_profile = QoSProfile(
             depth=10,
@@ -97,6 +133,9 @@ class PrepareRealData(Node):
         # TODO: Handle File/Path not found error
         with open(self.json_file_path, "r") as file:
             data_dict = json.load(file)
+
+        # Filter data by timestamp if time filters are provided
+        data_dict = self.filter_data_by_time(data_dict)
 
         # Sort and collect image-paths
         # TODO: Handle File/Path not found error
@@ -221,6 +260,73 @@ class PrepareRealData(Node):
         self.get_logger().info(
             "All frames published. Rosbag will complete the recording, then shut down."
         )
+
+    def parse_time_input(self, time_input, param_name):
+        """Parse time input that can be either Unix timestamp (ms) or datetime string format"""
+        if not time_input:
+            return None
+
+        # Try to parse as Unix timestamp (milliseconds) first
+        try:
+            timestamp_ms = int(time_input)
+            # Validate that it's a reasonable timestamp (between 2000-2100)
+            if 946684800000 <= timestamp_ms <= 4102444800000:  # Year 2000 to 2100 in ms
+                return timestamp_ms
+        except ValueError:
+            pass  # Not a valid integer, try datetime format
+
+        # Try to parse as datetime string
+        try:
+            dt = datetime.strptime(time_input, "%Y-%m-%d %H:%M:%S")
+            timestamp_ms = int(dt.timestamp() * 1000)
+            return timestamp_ms
+        except ValueError:
+            self.get_logger().error(
+                f"Invalid {param_name} format: {time_input}. Use either Unix timestamp (ms) or YYYY-MM-DD HH:MM:SS format"
+            )
+            return None
+
+    def timestamp_to_readable(self, timestamp_ms):
+        """Convert Unix timestamp in milliseconds to readable datetime string"""
+        try:
+            dt = datetime.fromtimestamp(timestamp_ms / 1000)
+            return dt.strftime("%Y-%m-%d %H:%M:%S")
+        except (ValueError, OSError):
+            return f"Invalid timestamp: {timestamp_ms}"
+
+    def filter_data_by_time(self, data_dict):
+        """Filter data based on start and end timestamp parameters"""
+        if not self.start_timestamp_ms and not self.end_timestamp_ms:
+            self.get_logger().info("No time filters applied")
+            return data_dict
+
+        filtered_data = []
+        original_count = len(data_dict)
+
+        for frame_data in data_dict:
+            timestamp = frame_data.get("time_stamp", 0)
+
+            # Apply start time filter
+            if self.start_timestamp_ms and timestamp < self.start_timestamp_ms:
+                continue
+            # Apply end time filter
+            if self.end_timestamp_ms and timestamp > self.end_timestamp_ms:
+                continue
+
+            filtered_data.append(frame_data)
+
+        filtered_count = len(filtered_data)
+        self.get_logger().info(
+            f"Time filtering: {original_count} -> {filtered_count} frames "
+            f"({original_count - filtered_count} frames removed)"
+        )
+
+        if filtered_count == 0:
+            self.get_logger().warn(
+                "No data remains after time filtering! Check your time range."
+            )
+
+        return filtered_data
 
     # USED BY BOTH OR ALL ================================================
 

@@ -21,7 +21,8 @@ By default, the package expects to find the trajectory data inside the `replay_d
       0, // Tracking ID
       1, // X
       2, // Y
-      3 // Z (most often 0)
+      3, // Z (most often 0)
+      4 // Orientation (does not have to be included, this is what is added by orientation_faker)
     ]
   ]
 }
@@ -69,6 +70,7 @@ When your data is in place, you may want to review the config parameters in `par
 | `frames_to_process`   | Number of frames to process if `set_frames` is `true`.                                                          | `1`                |
 | `preprocess_all_data` | If `true`, preprocesses all available data before playback. May not work for extremely large recording windows. | `true`             |
 | `fake_orientation`    | If `true`, automatically fakes object orientations during data preparation (used by the scenario replayer).     | `true`             |
+| `list_json_files`     | If `true`, lists available JSON files in the replay_data directory during preparation.                          | `false`            |
 
 #### `send_data` section:
 
@@ -94,14 +96,17 @@ When your data is in place, you may want to review the config parameters in `par
 
 - Parameters here have to be set at the prepare-stage and can't be changed afterwards.
 
-| Parameter               | Description                                                                         | Default Value         |
-| ----------------------- | ----------------------------------------------------------------------------------- | --------------------- |
-| `frame_id`              | Name of the frame in which all data is displayed.                                   | `real_data`           |
-| `namespace`             | Namespace used for the node.                                                        | `visualize_real_data` |
-| `entity_topic`          | Topic to publish the `MarkerArray` (trajectory data).                               | `entity_topic`        |
-| `json_file_name`        | Name of the file containing trajectory data.                                        | (empty)               |
-| `extracted_fps`         | FPS of the extracted data for playback.                                             | `10.0`                |
-| `processing_time_limit` | Max time allowed per frame for consistent playback. If exceeded, a warning appears. | `0.8`                 |
+| Parameter               | Description                                                                            | Default Value         |
+| ----------------------- | -------------------------------------------------------------------------------------- | --------------------- |
+| `frame_id`              | Name of the frame in which all data is displayed.                                      | `real_data`           |
+| `namespace`             | Namespace used for the node.                                                           | `visualize_real_data` |
+| `entity_topic`          | Topic to publish the `MarkerArray` (trajectory data).                                  | `entity_topic`        |
+| `json_file_name`        | Name of the file containing trajectory data.                                           | (empty)               |
+| `start_time`            | Start time for data processing (optional filter).                                      | `""`                  |
+| `end_time`              | End time for data processing (optional filter).                                        | `""`                  |
+| `initial_heading`       | Initial heading/orientation in degrees (0 = pointing left). Used by orientation_faker. | `0.0`                 |
+| `extracted_fps`         | FPS of the extracted data for playback.                                                | `10.0`                |
+| `processing_time_limit` | Max time allowed per frame for consistent playback. If exceeded, a warning appears.    | `0.8`                 |
 
 ______________________________________________________________________
 
@@ -115,7 +120,7 @@ Once configured, first run:
 
 This starts the simulation with the correct rviz config.
 
-The run either:
+Then run either:
 
 ```bash
 ros2 launch visualize_real_data prepare.launch.py

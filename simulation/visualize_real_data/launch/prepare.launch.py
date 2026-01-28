@@ -41,6 +41,7 @@ def generate_launch_description():
             "ros2",
             "bag",
             "record",
+            "--topics",
             f"{parameters['namespace']}/{parameters['pointcloud_topic']}",
             f"{parameters['namespace']}/{parameters['entity_topic']}",
             "--include-hidden-topics",
@@ -122,6 +123,21 @@ def _read_config_file():
     )
 
     shared_params = data.get("shared", {})
+
+    # Handle None/empty values that can cause launch errors
+    if (
+        shared_params.get("json_file_name") is None
+        or shared_params.get("json_file_name") == ""
+    ):
+        raise ValueError(
+            "json_file_name must be set in params.yaml to an existing JSON file in replay_data folder"
+        )
+
+    if shared_params.get("start_time") is None:
+        shared_params["start_time"] = ""
+
+    if shared_params.get("end_time") is None:
+        shared_params["end_time"] = ""
 
     try:
         shared_params["json_file_name"] = str(
