@@ -1,4 +1,3 @@
-import osc.example
 import osc.helpers
 import osc.ros
 

@@ -21,22 +21,16 @@ repositories:
     url: https://github.com/DynoRobotics/jackal
     version: dyno_jazzy
 
-  # This repo has been moved/deleted it seems?
-  #scenario_execution:
-  #  type: git
-  #  url: https://github.com/IntelLabs/scenario_execution
-  #  version: jazzy
-
   # pytrees
   py_trees:
     type: git
     url: https://github.com/splintered-reality/py_trees.git
-    version: 2.2.1
+    version: release/2.3.x
 
   py_trees_ros:
     type: git
     url: https://github.com/splintered-reality/py_trees_ros.git
-    version: release/2.2.x
+    version: release/2.3.x
 
   py_trees_ros_interfaces:
     type: git

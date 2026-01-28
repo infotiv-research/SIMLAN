@@ -93,6 +93,7 @@ RUN apt-get update && apt-get install -y \
     ros-${ROS_DISTRO}-ros2-controllers \
     ros-${ROS_DISTRO}-behaviortree-cpp \
     ros-${ROS_DISTRO}-launch-pytest \
+    ros-${ROS_DISTRO}-scenario-execution* \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -138,7 +139,6 @@ RUN mkdir -p /opt/dependencies_ws/src
 WORKDIR /opt/dependencies_ws
 COPY ros_dependencies.repos ros_dependencies.repos
 RUN vcs import src < ros_dependencies.repos
-COPY ./scenario_utility/scenario_execution ./src/scenario_execution
 RUN apt-get update && \
     rosdep update && \
     rosdep install -q -y --from-paths src --ignore-src && \
