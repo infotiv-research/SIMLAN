@@ -51,6 +51,7 @@ then
 fi
 echo "---[ WORLD_SETUP = ${WORLD_SETUP} ]---"
 echo "---[ CAMERA_STREAMS = ${CAMERA_STREAMS} ]---"
+echo "---[ SPAWN_JACKAL = ${SPAWN_JACKAL} ]---"
 
 #endregion
 
@@ -79,6 +80,11 @@ kill (){
     pkill -9 -f aruco_detection_node
     pkill -9 -f humanoid_odom_pub
     pkill -9 -f aruco_pose_pub_node
+}
+drop_nuke () {
+    # More aggressive kill to drop all ros2 nodes
+    # Not the happiest with the placement of the script, but oh well
+    python3 ./drop_nuke.py
 }
 clean () {
     echo "---[ removing build files ]---"
@@ -110,16 +116,28 @@ build () {
 }
 sim () {
     echo "---[ launching gazebo ]---"
-    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo"
-
+    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo" "spawn_jackal:=${SPAWN_JACKAL}" "rviz_config:=${rviz_config}"
 }
 static_agent() {
     echo "---[ launching cameras (static agents) ]---"
     ros2 launch static_agent_launcher static-agent.launch.py "camera_enabled_ids:=${CAMERA_ENABLED_IDS}" "camera_streams:=${CAMERA_STREAMS}" "camera_update_rate":=${CAMERA_UPDATE_RATE} "log_level:=${log_level}"
 }
+multi_robot_spawn(){
+    echo "---[ spawning multiple robots ]---"
+    ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}"
+}
+scenario_manager(){
+    echo "---[ launching scenario manager ]---"
+    ros2 launch scenario_manager scenario_manager.launch.py
+}
+spawn_jackal(){
+    echo "---[ spawning jackal robot ]---"
+    ros2 launch dyno_jackal_bringup sim.launch.py
+}
+
 #endregion
 #################################################################
-#                       HUMANDOID FUNCTIONS                     #
+#                       HUMANOID FUNCTIONS                     #
 #################################################################
 #region humanoid functions
 camera () {
@@ -195,6 +213,7 @@ then
 elif [[ "$1" == "kill" ]]
 then
     kill
+    drop_nuke
 elif [[ "$1" == "build" ]]
 then
     build
@@ -234,7 +253,7 @@ then
     sim &
     static_agent &
     sleep 10 ; ros2 launch aruco_localization multi_detection.launch.py use_sim_time:=true "camera_enabled_ids:=${CAMERA_ENABLED_IDS}" "robots:=${ROBOTS}" "log_level:=${log_level}" &
-    sleep 10 ; ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}"
+    sleep 10 ; multi_robot_spawn
 #endregion
 ######################## NAV2 ###################################
 #region nav2 related operations
@@ -254,6 +273,52 @@ then
     wait $pid1
 
 #endregion
+
+########################## JACKAL ###############################
+#region jackal related operations
+elif [[ "$1" == *"jackal"* ]]
+then
+    spawn_jackal
+#endregion
+
+##################### SCENARIO EXECUTION ########################
+#region collision scenario execution related operations
+elif [[ "$1" == *"scenario_manager"* ]]
+then
+    scenario_manager
+
+elif [[ "$1" == *"scenario_execution"* ]]
+then
+    scenario_manager &
+    sleep 2 &&
+    if [[ "$2" == *""* ]]
+    then
+        # Default scenario file if no argument is passed
+        ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/case1.osc
+    else
+        # $2 is the scenario file name located in simulation/scenario_manager/scenarios/
+        ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/$2
+    fi
+#endregion
+###################### VISUALIZING REAL DATA ####################
+#region visualize real data related operations. Config can be changed in params.yaml inside visualize_real_data package
+elif [[ "$1" == "replay_sim" ]]
+then
+    rviz_config="visualize_real_data.rviz"
+    SPAWN_JACKAL=true
+    sim &
+    sleep 5; multi_robot_spawn
+elif [[ "$1" == "replay" ]]
+then
+    ros2 launch visualize_real_data scenario_replayer.launch.py
+elif [[ "$1" == *"prepare"* ]]
+then
+    ros2 launch visualize_real_data prepare.launch.py
+elif [[ "$1" == "replay_rviz" ]]
+then
+    ros2 launch visualize_real_data send.launch.py
+#endregion
+
 ######################## PANDA MOVEIT2 ##########################
 #region panda robot_arm_moveit2 related operations
 elif [[ "$1" == "panda" ]]
@@ -337,12 +402,5 @@ then
 elif [[ "$1" == "test" ]]
 then
     colcon test --packages-select integration_tests --event-handlers console_direct+ --merge-install --pytest-args "-s"
-
-#################### dyno
-elif [[ "$1" == "visualize" ]]
-then
-    	ros2 launch visualize_real_data scenario_replayer.launch.py
-#endregion
-
 #endregion
 fi

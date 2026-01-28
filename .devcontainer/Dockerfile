@@ -93,6 +93,7 @@ RUN apt-get update && apt-get install -y \
     ros-${ROS_DISTRO}-ros2-controllers \
     ros-${ROS_DISTRO}-behaviortree-cpp \
     ros-${ROS_DISTRO}-launch-pytest \
+    ros-${ROS_DISTRO}-scenario-execution* \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -141,7 +142,7 @@ RUN vcs import src < ros_dependencies.repos
 RUN apt-get update && \
     rosdep update && \
     rosdep install -q -y --from-paths src --ignore-src && \
-    rm -rf /var/likb/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 
 # building dependencies
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release

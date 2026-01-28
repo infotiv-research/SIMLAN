@@ -17,20 +17,22 @@ send_data:
   # Can be changed to move the frame
   frame_position:
     x: 15.35
-    y: 6.5
+    y: 5.7
     z: -0.2
-  bag_name: window_1894_1746008596818_1746008606518__20250926_152346
+  bag_name:
 
 scenario_replayer:
   gazebo_teleport_service: /world/default/set_pose
   frame_id: real_data
   use_cmd_vel: false
+  ignore_orientation: false
 
 shared:
   frame_id: real_data
   namespace: visualize_real_data
   entity_topic: entity_topic
-  json_file_name: window_145_1746007093718_1746007099918__20250926_152246
+  #json_file_name has to be set to an existing file in replay_data folder
+  json_file_name:
   # Calculated during preparation
   extracted_fps: 10.0
 

@@ -7,7 +7,7 @@ from rclpy.node import Node
 
 from simlan_custom_msg.srv import CalculateTTC  # Import your custom service
 
-
+### NOTE: CURRENTLY UNUSED - TTC CALCULATION IS IN ttc.py ###
 class calculateTTCService(Node):
     def __init__(self):
         super().__init__("calculate_ttc_server")

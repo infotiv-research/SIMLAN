@@ -69,3 +69,8 @@ simulation/humanoid_support_moveit_config/config/ros2_controllers.yaml
 simulation/simlan_gazebo_environment/config/gz_bridge.yaml
 camera_config.xacro
 input/
+
+# Replaying recorded data
+replay_data/**
+!replay_data/README.md
+!replay_data/images/images

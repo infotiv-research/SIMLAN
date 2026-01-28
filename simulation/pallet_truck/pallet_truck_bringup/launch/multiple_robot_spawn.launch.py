@@ -43,6 +43,11 @@ def launch_robots(context):
         gz_remappings.append((f"/model/{robot["namespace"]}/pose", f"{robot["namespace"]}/pose"))
         gz_parameters.append(f"/world/default/model/{robot['namespace']}/link/{robot['namespace']}/base_link/sensor/{robot['namespace']}/contact_sensor/contact@ros_gz_interfaces/msg/Contacts@gz.msgs.Contacts")
         gz_remappings.append((f"/world/default/model/{robot['namespace']}/link/{robot['namespace']}/base_link/sensor/{robot['namespace']}/contact_sensor/contact",f"{robot['namespace']}/contact"))
+        gz_parameters.append(f"/model/{robot['namespace']}/odom_ground_truth@nav_msgs/msg/Odometry@gz.msgs.Odometry")
+        gz_remappings.append((f"/model/{robot['namespace']}/odom_ground_truth", f"{robot['namespace']}/odom_ground_truth"))
+
+    gz_parameters.append(f"/model/jackal/pose@geometry_msgs/msg/Pose@gz.msgs.Pose")
+    gz_remappings.append((f"/model/jackal/pose", f"/jackal/pose"))
 
     ros_gz_images=Node(
         package="ros_gz_bridge",

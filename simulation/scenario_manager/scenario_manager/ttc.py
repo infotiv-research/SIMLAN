@@ -36,10 +36,10 @@ class TTCMinkowskiBroadcaster(Node):
         self.update_period = 1.0 / max(0.1, ttc_update_rate)
 
         self.robot1_sub = self.create_subscription(
-            Odometry, f"/{self.robot1_name}/pose_data", self.robot1_callback, 10
+            Odometry, f"/{self.robot1_name}/odom_ground_truth", self.robot1_callback, 10
         )
         self.robot2_sub = self.create_subscription(
-            Odometry, f"/{self.robot2_name}/pose_data", self.robot2_callback, 10
+            Odometry, f"/{self.robot2_name}/odom_ground_truth", self.robot2_callback, 10
         )
 
         self.ttc_pub = self.create_publisher(TTC, "/scenario_manager/ttc", 10)

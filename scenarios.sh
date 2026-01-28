@@ -279,6 +279,28 @@ scenario_5 () {
     sleep 60; ros2 action send_goal /robot_agent_3/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_3/map'}, pose: {position: {x: 23, y: 8.5, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 1.0, w: 0.0}}}}" &
     sleep 60; ros2 action send_goal /robot_agent_4/navigate_to_pose nav2_msgs/action/NavigateToPose "{pose: {header: {frame_id: 'robot_agent_4/map'}, pose: {position: {x: 8, y: 4.5, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 1.0, w: 0.0}}}}" &
 }
+
+scenario_6 () {
+    # Scenario 6 - Running scenario execution manager with one pallet_truck and the jackal.
+    # The scenario is run outside of the warehouse in the simulation.
+    ROBOTS='[
+            {
+                "namespace": "robot_agent_1",
+                "initial_pose_x":"20.0",
+                "initial_pose_y":"4.5",
+                "robot_type":"pallet_truck",
+                "aruco_id":"1"
+            },
+        ]'
+    SPAWN_JACKAL=true
+
+    sim &
+    scenario_manager &
+    ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}" &
+    sleep 20; ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/case1.osc
+
+}
+
   ######################################
  ##                                  ##
 ##     Commands and execution       ##
@@ -305,7 +327,10 @@ elif [[ "$1" == "5" ]]
 then
     echo "###### Executing scenario 5 ######"
     scenario_5
-
+elif [[ "$1" == *"6"* ]]
+then
+    echo "###### Executing scenario 6 ######"
+    scenario_6
 fi
 
 #endregion
