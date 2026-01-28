@@ -59,7 +59,7 @@ class ScenarioReplayTeleport(Node):
 
         # Use these to only allow certain marker IDs to be assigned to robots
         # For example if a robot gets teleported into a wall or shelf use this to exclude that robot, since it will absolutely kill the FPS of the simulation.
-        self.allowed_marker_ids = {}  # Empty set means allow all IDs
+        self.ALLOWED_MARKER_IDS = {}  # Empty set means allow all IDs
 
         self.parking_corner_x = -20.0
         self.parking_corner_y = -20.0
@@ -92,11 +92,11 @@ class ScenarioReplayTeleport(Node):
         self.get_logger().info(f"Ignore orientation: {self.ignore_orientation}")
 
         # Log allowed marker IDs filter
-        if not self.allowed_marker_ids:
+        if not self.ALLOWED_MARKER_IDS:
             self.get_logger().info("Allowed marker IDs: ALL (no filter)")
         else:
             self.get_logger().info(
-                f"Allowed marker IDs: {sorted(list(self.allowed_marker_ids))}"
+                f"Allowed marker IDs: {sorted(list(self.ALLOWED_MARKER_IDS))}"
             )
 
         if self.use_cmd_vel:
@@ -258,9 +258,9 @@ class ScenarioReplayTeleport(Node):
 
     def is_marker_id_allowed(self, marker_id: int) -> bool:
         """Check if a marker ID is allowed to be assigned to robots"""
-        if self.allowed_marker_ids == {}:
+        if self.ALLOWED_MARKER_IDS == {}:
             return True  # No filter, allow all
-        return marker_id in self.allowed_marker_ids
+        return marker_id in self.ALLOWED_MARKER_IDS
 
     def detect_bag_loop(self, current_timestamp_sec: float) -> bool:
         """Detect if the rosbag has looped by checking for timestamp jumps backwards"""
