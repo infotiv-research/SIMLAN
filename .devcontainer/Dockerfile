@@ -50,6 +50,10 @@ RUN apt-get update && apt-get install -y \
     eog \
     tig
 
+# Install ruamel.yaml for system Python (required for ROS nodes)
+# For some reason installing with requirements.txt does not work.
+RUN python3 -m pip install ruamel.yaml --break-system-packages
+
 
 ####################################################
 #              Python environment                  #
@@ -59,7 +63,8 @@ RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY requirements.txt /tmp/
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
+# Increase timeout time otherwise pytorch installation may fail
+RUN pip install --no-cache-dir -r /tmp/requirements.txt --timeout 1000 --retries 5
 
 RUN /opt/venv/bin/pip install catkin_pkg
 RUN /opt/venv/bin/pip install "numpy<2.0"

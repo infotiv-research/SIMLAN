@@ -1,4 +1,4 @@
-# SIMLAN, Simulation for Multi-Camera Robotics (5.1.1)
+# SIMLAN, Simulation for Multi-Camera Robotics (5.1.4)
 
 This simulation environment, based on the Ignition Gazebo simulator and ROS 2, resembles a Volvo Trucks warehouse and serves as a playground for rapid prototyping and testing of systems that rely on a multi-camera setup for perception, monitoring, localization or even navigation. This project is inspired by [GPSS (Generic photo-based sensor system)](https://www.volvogroup.com/en/news-and-media/news/2024/nov/ai-modern-manufacturing.html) that utilizes ceiling-mounted cameras, deep learning and computer vision algorithms, and very simple transport robots.
 \[[📹 GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)\]

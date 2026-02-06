@@ -4,7 +4,7 @@
 #region GENERAL GAZEBO AND ROS2 CONFIG
 
 ## ROS_DOMAIN_ID is an auto generated value, modified by control.sh BUILD command
-ROS_DOMAIN_ID=
+ROS_DOMAIN_ID=11
 ## WORLD_SETUP can be set to either "default", "medium", "light", "empty"
 WORLD_SETUP=medium
 ## CAMERA_ENABLED_IDS can be set as a string of camera_ids separated by space ' '.
@@ -19,8 +19,6 @@ log_level="error"
 ## DEFAULT: False. So that gazebo window runs.
 headless_gazebo=False
 rviz_config="rviz_config.rviz"
-
-SPAWN_JACKAL=false
 
 #endregion
 #################################################################

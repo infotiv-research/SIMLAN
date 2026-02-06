@@ -292,11 +292,11 @@ scenario_6 () {
                 "aruco_id":"1"
             },
         ]'
-    SPAWN_JACKAL=true
 
     sim &
+    spawn_jackal &
     scenario_manager &
-    ros2 launch pallet_truck_bringup multiple_robot_spawn.launch.py "robots:=${ROBOTS}" "log_level:=${log_level}" &
+    multi_robot_spawn &
     sleep 20; ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/case1.osc
 
 }

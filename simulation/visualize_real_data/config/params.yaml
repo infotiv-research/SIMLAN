@@ -15,11 +15,6 @@ prepare_data:
 
 send_data:
   playback_rate: 1
-  # Can be changed to move the frame
-  frame_position:
-    x: 15.35
-    y: 5.7
-    z: -0.2
   bag_name:
 
 scenario_replayer:
@@ -33,10 +28,16 @@ shared:
   namespace: visualize_real_data
   entity_topic: entity_topic
   #json_file_name has to be set to an existing file in replay_data folder
-  json_file_name:
-  start_time:
-  end_time:
+  json_file_name: example_trajectory.json
+  start_time: ""
+  end_time: ""
   initial_heading: 0.0  # Initial heading/orientation in degrees (0 = pointing left). Positive heading is counter-clockwise, i.e. 90 deg = DOWN. Used by orientation_faker.py
+
+  # Can be changed to move the frame
+  frame_position:
+    x: 15.35
+    y: 5.7
+    z: -0.2
 
   # Calculated during preparation
   extracted_fps: 10.0
