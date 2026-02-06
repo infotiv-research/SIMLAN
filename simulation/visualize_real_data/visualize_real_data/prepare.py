@@ -10,7 +10,7 @@ from sensor_msgs.msg import PointCloud2, PointField
 from std_msgs.msg import Header
 from pathlib import Path
 import cv2
-import yaml
+from ruamel.yaml import YAML
 from datetime import datetime
 
 
@@ -405,14 +405,18 @@ class PrepareRealData(Node):
             )
 
         # Write average fps to file
+        yaml = YAML()
+        yaml.preserve_quotes = True
+        yaml.width = 4096  # Prevent line wrapping
+
         with open(self.config_path, "r") as file:
-            doc = yaml.safe_load(file)
+            doc = yaml.load(file)
 
         if doc["shared"]["extracted_fps"] != self.dt_fps:
             doc["shared"]["extracted_fps"] = self.dt_fps
 
             with open(self.config_path, "w") as file:
-                yaml.safe_dump(doc, file)
+                yaml.dump(doc, file)
 
             self.get_logger().info(
                 (

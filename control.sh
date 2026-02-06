@@ -51,7 +51,6 @@ then
 fi
 echo "---[ WORLD_SETUP = ${WORLD_SETUP} ]---"
 echo "---[ CAMERA_STREAMS = ${CAMERA_STREAMS} ]---"
-echo "---[ SPAWN_JACKAL = ${SPAWN_JACKAL} ]---"
 
 #endregion
 
@@ -116,7 +115,7 @@ build () {
 }
 sim () {
     echo "---[ launching gazebo ]---"
-    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo" "spawn_jackal:=${SPAWN_JACKAL}" "rviz_config:=${rviz_config}"
+    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo" "rviz_config:=${rviz_config}"
 }
 static_agent() {
     echo "---[ launching cameras (static agents) ]---"
@@ -276,18 +275,16 @@ then
 
 ########################## JACKAL ###############################
 #region jackal related operations
-elif [[ "$1" == *"jackal"* ]]
+elif [[ "$1" == "jackal" ]]
 then
     spawn_jackal
 #endregion
 
 ##################### SCENARIO EXECUTION ########################
 #region collision scenario execution related operations
-elif [[ "$1" == *"scenario_manager"* ]]
-then
-    scenario_manager
-
-elif [[ "$1" == *"scenario_execution"* ]]
+# Example usage: ./control.sh scenario_execution case1.osc
+# Requires "./control.sh gpss" to be run beforehand
+elif [[ "$1" == "scenario_execution" ]]
 then
     scenario_manager &
     sleep 2 &&
@@ -302,21 +299,23 @@ then
 #endregion
 ###################### VISUALIZING REAL DATA ####################
 #region visualize real data related operations. Config can be changed in params.yaml inside visualize_real_data package
+# See the readme in visualize_real_data for more details and instructions.
 elif [[ "$1" == "replay_sim" ]]
 then
+    # Run this to start the simulation setup for replaying data. Then either run the prepare or replay command
     rviz_config="visualize_real_data.rviz"
-    SPAWN_JACKAL=true
     sim &
+    spawn_jackal &
     sleep 5; multi_robot_spawn
+elif [[ "$1" == "prepare" ]]
+then
+    # Preprocesses and records data for replaying. This can be done without running "replay_sim", but no visual representation of the data will be visible then.
+    # Must be done first before running "replay" command.
+    ros2 launch visualize_real_data prepare.launch.py
 elif [[ "$1" == "replay" ]]
 then
+    # Runs the replay. Requires "prepare" to be run first.
     ros2 launch visualize_real_data scenario_replayer.launch.py
-elif [[ "$1" == *"prepare"* ]]
-then
-    ros2 launch visualize_real_data prepare.launch.py
-elif [[ "$1" == "replay_rviz" ]]
-then
-    ros2 launch visualize_real_data send.launch.py
 #endregion
 
 ######################## PANDA MOVEIT2 ##########################

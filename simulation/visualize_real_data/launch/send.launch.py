@@ -32,8 +32,7 @@ def generate_launch_description():
     # -----------------------------------------------------------
     _read_config_file()
 
-    base_path = "./"
-    saved_bags_path = Path(base_path, "replay_data", "rosbags")
+    saved_bags_path = Path(".", "simulation", "replay_data", "rosbags")
 
     if params["bag_name"] is not None:
         latest_bag_path = Path(saved_bags_path, params["bag_name"])

@@ -160,7 +160,12 @@ class OrientationFaker(Node):
     def list_available_json_files(self):
         """List all available JSON files in the directory of json_file_path and show message counts"""
         # Use the directory of the json_file_path parameter
-        target_dir = os.path.dirname(os.path.abspath(self.json_file_path))
+
+        # If empty string is given as json, this needs special handling.
+        if self.json_file_path.split("/")[-1] == "replay_data":
+            target_dir = self.json_file_path
+        else:
+            target_dir = os.path.dirname(os.path.abspath(self.json_file_path))
         json_pattern = os.path.join(target_dir, "*.json")
         json_files = glob.glob(json_pattern)
 
@@ -337,7 +342,7 @@ class OrientationFaker(Node):
             while pubs < 3:
                 self.done_pub.publish(std_msgs.msg.Empty())
                 pubs += 1
-                time.sleep(0.1)
+                time.sleep(0.5)
 
         except FileNotFoundError:
             self.get_logger().error(f"JSON file not found: {self.json_file_path}")

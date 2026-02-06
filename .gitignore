@@ -71,6 +71,9 @@ camera_config.xacro
 input/
 
 # Replaying recorded data
-replay_data/**
-!replay_data/README.md
-!replay_data/images/images
+simulation/replay_data/*.json
+simulation/replay_data/**/*.jpg
+!simulation/replay_data/example_trajectory.json
+!simulation/replay_data/**/images
+!simulation/replay_data/**/1770030000000.jpg
+!simulation/replay_data/**/1770030001000.jpg

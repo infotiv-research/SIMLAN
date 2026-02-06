@@ -66,6 +66,26 @@ def generate_launch_description():
         output="screen",
     )
 
+    frame_position = parameters["frame_position"]
+    x = frame_position["x"]
+    y = frame_position["y"]
+    z = frame_position["z"]
+    static_tf_map_images = Node(  # Transform map->real_images
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name="static_map_to_real_images",
+        arguments=[
+            str(x),
+            str(y),
+            str(z),
+            "0",
+            "0",
+            "0",
+            "map",
+            parameters["frame_id"],
+        ],
+    )
+
     orientation_faker = Node(
         name="orientation_faker",
         namespace=parameters["namespace"],
@@ -94,7 +114,7 @@ def generate_launch_description():
                     ),
                 ),
             ],
-            actions=[rosbag, prepare_data, kill_rosbag],
+            actions=[rosbag, prepare_data, static_tf_map_images, kill_rosbag],
         )
     )
     return ld
@@ -119,16 +139,13 @@ def _read_config_file():
     prepare_params = data.get("prepare_data", {})
 
     prepare_params["images_folder"] = str(
-        Path(".", "replay_data", prepare_params["images_folder"])
+        Path(".", "simulation", "replay_data", prepare_params["images_folder"])
     )
 
     shared_params = data.get("shared", {})
 
     # Handle None/empty values that can cause launch errors
-    if (
-        shared_params.get("json_file_name") is None
-        or shared_params.get("json_file_name") == ""
-    ):
+    if shared_params.get("json_file_name") is None:
         raise ValueError(
             "json_file_name must be set in params.yaml to an existing JSON file in replay_data folder"
         )
@@ -141,7 +158,7 @@ def _read_config_file():
 
     try:
         shared_params["json_file_name"] = str(
-            Path(".", "replay_data", shared_params["json_file_name"])
+            Path(".", "simulation", "replay_data", shared_params["json_file_name"])
         )
     except Exception as e:
         print(
@@ -161,7 +178,7 @@ def _prepare_data_folder(namespace):
     Assumes that parent directories exist.
     """
 
-    output_directory = Path(".", "replay_data", "rosbags")
+    output_directory = Path(".", "simulation", "replay_data", "rosbags")
     output_directory.mkdir(exist_ok=True)
 
     return f"{output_directory}"

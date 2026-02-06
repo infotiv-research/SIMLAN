@@ -1,6 +1,37 @@
 # Changelog
 
-### 5.1.1: Cleanup and Documentation (Jan 2025) - Team/Tech Lead: Hamid Ebadi
+### 5.1.4: Code cleanup (Feb 2026) - Sebastian Olsson (Dyno Robotics)
+
+- Remove SPAWN_JACKAL variable. Use `./control.sh jackal` to spawn the jackal instead.
+- Move `replay_data` directory inside the `simulation/` folder.
+- Example trajectory and images inside `replay_data` to test the visualize_real_data package.
+- Add static transform for visualizing images and markers while running prepare.launch.py.
+- Integration test for scenario_manager.
+- Remove jackal dependency in pallet_truck.
+- Remove emojis and weird symbols from scenario_manager README.
+
+### 5.1.3: Time filtering and initial heading for replaying data (Jan 2026) - Sebastian Olsson (Dyno Robotics)
+
+- Retrieve code that was pushed on feature/scenario-replay.
+- Able to filter out timestamps to process in the .json files with start_time and end_time parameters.
+- Set initial heading for the orientation_faker.py with initial_heading parameter.
+- More clear listing of all .json files in replay_data/ as a table.
+
+### 5.1.2: Port Dyno Robotics features to Jazzy (Jan 2026) - Sebastian Olsson (Dyno Robotics)
+
+- Add SPAWN_JACKAL variable in config.sh to spawn jackal (can also be spawned with `./control.sh jackal`).
+- Re-add jackal to ros_dependencies.repos so it does not require to clone the repo inside the simulation folder.
+- Remove scenario_execution from ros_dependencies.repos, install with apt in Dockerfile instead.
+- Re-add pytrees in ros_dependencies.repos. Update version to 2.3.x.
+- Add command in control.sh to run scenario_manager and run a collision case.
+- Add `drop_nuke.py` file which runs on `./control.sh kill` due to kill command previously not killing all ros-related ghost processes.
+- Add ground_truth odom publisher to pallet_trucks (used by scenario_manager package to determine speed and position of pallet_trucks).
+- Add .gitignored replay_data folder so images and trajectories can be used more easily instead of saving inside the install/share directory which deleted all data if a rebuild was performed.
+- Add `ignore_orientation` parameter when replaying a scenario.
+- Add `rviz_config` variable in config.sh to easily change which rviz file the sim is started with.
+- Minor docs/README update to scenario_manager and visualize_real_data package.
+
+### 5.1.1: Cleanup and Documentation (Jan 2026) - Team/Tech Lead: Hamid Ebadi
 
 - Headless gazebo: Pär Aronsson
 - Major cleanup, restructuring and documentation: Hamid Ebadi
