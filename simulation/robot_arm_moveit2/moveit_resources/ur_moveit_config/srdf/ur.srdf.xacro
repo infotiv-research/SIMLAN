@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+
+  <!-- robot name parameter -->
+  <xacro:arg name="name" default="ur"/>
+
+  <xacro:include filename="$(find ur_moveit_config)/srdf/ur_macro.srdf.xacro"/>
+  <xacro:include filename="$(find ur_moveit_config)/srdf/robotiq_2f_140.srdf.xacro"/>
+
+  <xacro:ur_srdf/>
+  <xacro:robotiq_2f_140_srdf/>
+
+</robot>

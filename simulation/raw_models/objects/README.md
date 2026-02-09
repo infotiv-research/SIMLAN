@@ -4,49 +4,52 @@ This document contains explanations and motivations for the measurements as well
 
 **Measurements:**
 
-| Category     | Part / Object |       Variable Name       |   Value \[unit\] |
-| :----------- | :-----------: | :-----------------------: | ---------------: |
-| Shelf        |   Load Beam   |        beam_length        |        2.7 \[m\] |
-| Shelf        |   Load Beam   |        beam_depth         |       0.05 \[m\] |
-| Shelf        |   Load Beam   |        beam_height        |       0.14 \[m\] |
-| Shelf        |   Load Beam   |        beam_weight        |      15.2 \[kg\] |
-| Shelf        |   Footplate   |     footplate_length      |      0.111 \[m\] |
-| Shelf        |   Footplate   |      footplate_width      |        0.1 \[m\] |
-| Shelf        |   Footplate   |     footplate_height      |      0.004 \[m\] |
-| Shelf        | Stand / Pole  |       stand_length        |       0.07 \[m\] |
-| Shelf        | Stand / Pole  |        stand_width        |       0.08 \[m\] |
-| Shelf        | Stand / Pole  |       stand_height        |          3 \[m\] |
-| Shelf        | Stand / Pole  |       stand_weight        |       8.5 \[kg\] |
-| Shelf        |  Cross Brace  |       brace_length        |       0.96 \[m\] |
-| Shelf        |  Cross Brace  |        brace_width        |       0.01 \[m\] |
-| Shelf        |  Cross Brace  |       brace_height        |       0.02 \[m\] |
-| Shelf        |  Cross Brace  |       brace_weight        |         1 \[kg\] |
-| Loose Object |  EUR-Pallet   |     EUR_pallet_length     |        1.2 \[m\] |
-| Loose Object |  EUR-Pallet   |     EUR_pallet_width      |        0.8 \[m\] |
-| Loose Object |  EUR-Pallet   |     EUR_pallet_height     |      0.144 \[m\] |
-| Loose Object |  EUR-Pallet   |     EUR_pallet_weight     |        25 \[kg\] |
-| Loose Object |  Steel Drum   |     steel_drum_radius     |        0.3 \[m\] |
-| Loose Object |  Steel Drum   |     steel_drum_height     |        0.9 \[m\] |
-| Loose Object |  Steel Drum   |  full_steel_drum_weight   |       188 \[kg\] |
-| Loose Object |  Steel Drum   |  empty_steel_drum_weight  |        15 \[kg\] |
-| Loose Object | Traffic Cone  |    traffic_cone_radius    |       0.22 \[m\] |
-| Loose Object | Traffic Cone  |    traffic_cone_angle     |  -10 \[degrees\] |
-| Loose Object | Traffic Cone  | traffic_cone_total_height |          1 \[m\] |
-| Loose Object | Traffic Cone  | traffic_cone_base_length  |       0.52 \[m\] |
-| Loose Object | Traffic Cone  |  traffic_cone_base_width  |       0.52 \[m\] |
-| Loose Object | Traffic Cone  | traffic_cone_base_height  |       0.03 \[m\] |
-| Loose Object | Traffic Cone  |  traffic_cone_base_angle  |  -20 \[degrees\] |
-| Loose Object | Traffic Cone  |    traffic_cone_weight    |       6.5 \[kg\] |
-| Loose Object |      Box      |        box_length         |     Varies \[m\] |
-| Loose Object |      Box      |         box_width         |     Varies \[m\] |
-| Loose Object |      Box      |        box_height         |     Varies \[m\] |
-| Loose Object |      Box      |        box_weight         |     Varies \[m\] |
-| Warehouse    | Support Pole  |        pole_length        |        0.3 \[m\] |
-| Warehouse    | Support Pole  |        pole_width         |        0.3 \[m\] |
-| Warehouse    | Support Pole  |   pole_hole_side_length   |       0.27 \[m\] |
-| Warehouse    | Support Pole  |   pole_hole_side_width    |       0.13 \[m\] |
-| Warehouse    | Support Pole  |        pole_height        |          6 \[m\] |
-| Warehouse    | Support Pole  |        pole_weight        | Undefined \[kg\] |
+| Category     | Part / Object  |       Variable Name       |   Value \[unit\] |
+| :----------- | :------------: | :-----------------------: | ---------------: |
+| Shelf        |   Load Beam    |        beam_length        |        2.7 \[m\] |
+| Shelf        |   Load Beam    |        beam_depth         |       0.05 \[m\] |
+| Shelf        |   Load Beam    |        beam_height        |       0.14 \[m\] |
+| Shelf        |   Load Beam    |        beam_weight        |      15.2 \[kg\] |
+| Shelf        |   Footplate    |     footplate_length      |      0.111 \[m\] |
+| Shelf        |   Footplate    |      footplate_width      |        0.1 \[m\] |
+| Shelf        |   Footplate    |     footplate_height      |      0.004 \[m\] |
+| Shelf        |  Stand / Pole  |       stand_length        |       0.07 \[m\] |
+| Shelf        |  Stand / Pole  |        stand_width        |       0.08 \[m\] |
+| Shelf        |  Stand / Pole  |       stand_height        |          3 \[m\] |
+| Shelf        |  Stand / Pole  |       stand_weight        |       8.5 \[kg\] |
+| Shelf        |  Cross Brace   |       brace_length        |       0.96 \[m\] |
+| Shelf        |  Cross Brace   |        brace_width        |       0.01 \[m\] |
+| Shelf        |  Cross Brace   |       brace_height        |       0.02 \[m\] |
+| Shelf        |  Cross Brace   |       brace_weight        |         1 \[kg\] |
+| Beam         | Robot Arm Beam |   robot_arm_beam_height   |        1.6 \[m\] |
+| Beam         | Robot Arm Beam |   robot_arm_beam_length   |        2.6 \[m\] |
+| Beam         | Robot Arm Beam |   robot_arm_beam_width    |        0.2 \[m\] |
+| Loose Object |   EUR-Pallet   |     EUR_pallet_length     |        1.2 \[m\] |
+| Loose Object |   EUR-Pallet   |     EUR_pallet_width      |        0.8 \[m\] |
+| Loose Object |   EUR-Pallet   |     EUR_pallet_height     |      0.144 \[m\] |
+| Loose Object |   EUR-Pallet   |     EUR_pallet_weight     |        25 \[kg\] |
+| Loose Object |   Steel Drum   |     steel_drum_radius     |        0.3 \[m\] |
+| Loose Object |   Steel Drum   |     steel_drum_height     |        0.9 \[m\] |
+| Loose Object |   Steel Drum   |  full_steel_drum_weight   |       188 \[kg\] |
+| Loose Object |   Steel Drum   |  empty_steel_drum_weight  |        15 \[kg\] |
+| Loose Object |  Traffic Cone  |    traffic_cone_radius    |       0.22 \[m\] |
+| Loose Object |  Traffic Cone  |    traffic_cone_angle     |  -10 \[degrees\] |
+| Loose Object |  Traffic Cone  | traffic_cone_total_height |          1 \[m\] |
+| Loose Object |  Traffic Cone  | traffic_cone_base_length  |       0.52 \[m\] |
+| Loose Object |  Traffic Cone  |  traffic_cone_base_width  |       0.52 \[m\] |
+| Loose Object |  Traffic Cone  | traffic_cone_base_height  |       0.03 \[m\] |
+| Loose Object |  Traffic Cone  |  traffic_cone_base_angle  |  -20 \[degrees\] |
+| Loose Object |  Traffic Cone  |    traffic_cone_weight    |       6.5 \[kg\] |
+| Loose Object |      Box       |        box_length         |     Varies \[m\] |
+| Loose Object |      Box       |         box_width         |     Varies \[m\] |
+| Loose Object |      Box       |        box_height         |     Varies \[m\] |
+| Loose Object |      Box       |        box_weight         |     Varies \[m\] |
+| Warehouse    |  Support Pole  |        pole_length        |        0.3 \[m\] |
+| Warehouse    |  Support Pole  |        pole_width         |        0.3 \[m\] |
+| Warehouse    |  Support Pole  |   pole_hole_side_length   |       0.27 \[m\] |
+| Warehouse    |  Support Pole  |   pole_hole_side_width    |       0.13 \[m\] |
+| Warehouse    |  Support Pole  |        pole_height        |          6 \[m\] |
+| Warehouse    |  Support Pole  |        pole_weight        | Undefined \[kg\] |
 
 | ![EUR-pallet](resources/eur-pall.gif) |
 | :-----------------------------------: |

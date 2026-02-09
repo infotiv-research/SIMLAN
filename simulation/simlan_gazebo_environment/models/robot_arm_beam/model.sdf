@@ -1,0 +1,37 @@
+<sdf version="1.6">
+  <model name="robot_arm_beam">
+    <static>true</static>
+    <link name="new_link">
+      <collision name="node0_collision">
+        <pose>0.00000 0.00000 1.60000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://robot_arm_beam/meshes/Body.dae</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <inertial>
+        <pose>1.30000 -0.10000 1.08519 0.00000 0.00000 0.00000</pose>
+        <mass>1000.00000</mass>
+        <inertia>
+          <ixx>206.20473</ixx>
+          <ixy>0.00000</ixy>
+          <ixz>0.00000</ixz>
+          <iyy>894.54412</iyy>
+          <iyz>0.00002</iyz>
+          <izz>693.04412</izz>
+        </inertia>
+      </inertial>
+      <visual name="node0">
+        <pose>0.00000 0.00000 1.60000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://robot_arm_beam/meshes/Body.dae</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

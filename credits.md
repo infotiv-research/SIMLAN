@@ -87,6 +87,12 @@ Jackal Robot: The Clearpath Jackal Robot code is forked by Dyno Robotics from Cl
 - To improve collaboration in development environment we use vscode and docker as explained in [this instruction](https://www.allisonthackston.com/articles/docker-development.html) using these [docker files](https://github.com/athackst/dockerfiles). For production environment follow installation procedure used in [.devcontainer/Dockerfile](.devcontainer/Dockerfile) to install dependencies.
 - The Docker setup is added by Christoffer Johanesson (Dyno Robotics), based on Dyno experience working with Docker.
 
+UR10 & Robotiq gripper:
+
+UR Description: https://github.com/UniversalRobots/Universal_Robots_ROS2_Description
+UR Moveit Config:https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/tree/main/ur_moveit_config
+Robotiq Description:https://github.com/PickNikRobotics/ros2_robotiq_gripper
+
 Panda Arm: links
 
 - https://github.com/cpezzato/panda_simulation

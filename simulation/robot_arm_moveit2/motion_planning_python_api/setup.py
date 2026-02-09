@@ -27,6 +27,7 @@ setup(
             "motion_planning_python_api_tutorial = scripts.motion_planning_python_api_tutorial:main",
             "motion_planning_python_api_planning_scene = scripts.motion_planning_python_api_planning_scene:main",
             "demo_pick_and_place = scripts.demo_pick_and_place:main",
+            "ur10_pick_and_place = scripts.ur10_pick_and_place:main",
         ],
     },
 )

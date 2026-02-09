@@ -8,6 +8,14 @@ It is possible to adjust the level of fidelity for a world in `config.sh`; there
 - `simulation/simlan_gazebo_environment/launch/simlan_factory.launch.py` (for world generation)
 - `simulation/simlan_gazebo_environment/launch/generate_world_file.py` (both `original_world` and the `world_setup`)
 
+## Real time factor
+
+inside of `config.sh` you can can modify the scalar variable `real_time_factor` (RTF) to control the speed of the simulator. Reasonable ranges are 0 \< RTF \<= 1.0.
+
+inside the world config file "[simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro](simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro)" you can specify the real time factor that sets how slow time passes in the simulator. Per default the value is 1.0 meaning that 1:1 ratio. 1 second in sim correspond to 1 second in real-time. For more computational tasks it is preferred to have a lower RTF.
+
+Example, setting real_time_factor=0.1, means 10 seconds pass in real-time for ever simulated second.
+
 ## Adding Aruco and camera (static agents)
 
 Aruco codes and cameras are all attached to the same link in Gazebo. To create new static agents, go to `simulation/static_agent_launcher/description/agents.urdf.xacro`. There you only need to add a new line on the form `<xacro:camera number="1" x="3" y="3" z="6" r="0" p="0" w="0"/>` for a new camera, or a new line on the form `<xacro:aruco number="1" x="3" y="3" z="0.1" r="0" p="0" w="0"/>` for a new aruco. The commands are identical apart from the name.

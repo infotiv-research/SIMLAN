@@ -9,6 +9,7 @@ GitHub Actions: [![Formatting (pre-commit))](https://github.com/ros-planning/mov
 - PR2
 - Fanuc M-10iA
 - Franka Emika Panda
+- UR10
 
 ## Notes
 

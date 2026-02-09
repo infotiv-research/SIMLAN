@@ -33,8 +33,10 @@ nav:
       - Humanoid internal: humanoid_utility/DEBUG.md
       - Humanoid motion planner : simulation/humanoid_motion_planner/README.md
       - Pose to Motion AutoGluon model: humanoid_utility/pose_to_motion/autogluon/README.md
-      - Panda MoveIt2: simulation/moveit2/README.md # Panda
+      - Panda MoveIt2: simulation/robot_arm_moveit2/README.md # Panda
       - Object Mover: simulation/object_mover/README.md
+      - Scenario Manager: simulation/scenario_manager/README.md
+      - Visualize Real Data Package: simulation/visualize_real_data/README.md
   - Credits: credits.md
   - Appendix:
       - Issues: ISSUES.md

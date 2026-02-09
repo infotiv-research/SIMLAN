@@ -1,0 +1,114 @@
+<sdf version="1.6">
+  <model name="flow_rack">
+    <static>true</static>
+    <link name="new_link">
+      <collision name="bottom_shelf">
+        <pose>1.04635 0.54924 0.58629 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://flow_rack/meshes/Cube.003.stl</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact/>
+          <friction>
+            <ode>
+              <mu>0.02</mu>
+              <mu2>0.05</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <collision name="left_wall">
+        <pose>-0.01057 0.53073 0.65905 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://flow_rack/meshes/Cube.001.stl</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <collision name="right_wall">
+        <pose>2.08398 0.51983 0.65905 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://flow_rack/meshes/Cube.002.stl</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <collision name="stop_bottom">
+        <pose>1.04635 -0.02510 0.50906 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://flow_rack/meshes/Cube.005.stl</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <collision name="stop_top">
+        <pose>1.04635 0.41234 0.93874 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://flow_rack/meshes/Cube.006.stl</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <collision name="top_shelf">
+        <pose>1.04635 0.76653 0.97885 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://flow_rack/meshes/Cube.004.stl</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact/>
+          <friction>
+            <ode>
+              <mu>0.02</mu>
+              <mu2>0.05</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <inertial>
+        <pose>1.04314 0.45893 0.72184 0.00000 0.00000 0.00000</pose>
+        <mass>48.00000</mass>
+        <inertia>
+          <ixx>4.90349</ixx>
+          <ixy>0.10156</ixy>
+          <ixz>-0.00969</ixz>
+          <iyy>13.97633</iyy>
+          <iyz>-1.21092</iyz>
+          <izz>14.67138</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="shelf_visual">
+        <pose>0.00000 0.00000 0.00000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://flow_rack/meshes/Flow_rack.stl</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.67843 0.70980 0.74118 1.00000</diffuse>
+          <specular>0.33725 0.35294 0.36863 0.49804</specular>
+          <emissive>0.00000 0.00000 0.00000 1.00000</emissive>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

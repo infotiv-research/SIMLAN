@@ -4,7 +4,7 @@
 #region GENERAL GAZEBO AND ROS2 CONFIG
 
 ## ROS_DOMAIN_ID is an auto generated value, modified by control.sh BUILD command
-ROS_DOMAIN_ID=11
+ROS_DOMAIN_ID=
 ## WORLD_SETUP can be set to either "default", "medium", "light", "empty"
 WORLD_SETUP=medium
 ## CAMERA_ENABLED_IDS can be set as a string of camera_ids separated by space ' '.
@@ -19,7 +19,8 @@ log_level="error"
 ## DEFAULT: False. So that gazebo window runs.
 headless_gazebo=False
 rviz_config="rviz_config.rviz"
-
+# Real time factor compared to real time. default 1.0 meaning a 1:1 time ratio. Using smaller values i.e. 0.1 will make sim take 10 times longer.
+real_time_factor=1.0
 #endregion
 #################################################################
 #         HUMANOID CONFIG                                       #

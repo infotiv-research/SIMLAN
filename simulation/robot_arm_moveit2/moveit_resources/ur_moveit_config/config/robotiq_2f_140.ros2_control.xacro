@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="robotiq_2f_140_ros2_control" params="name ros2_control_hardware_type">
+
+        <ros2_control name="${name}" type="system">
+            <hardware>
+                <xacro:if value="${ros2_control_hardware_type == 'mock_components'}">
+                    <plugin>mock_components/GenericSystem</plugin>
+                </xacro:if>
+                <xacro:if value="${ros2_control_hardware_type == 'gz'}">
+                    <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+                </xacro:if>
+            </hardware>
+
+            <!-- Primary actuated joint -->
+            <joint name="finger_joint">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="velocity">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+            </joint>
+
+            <!-- Mimic joints for mock_components mode: need explicit mimic
+                 params and command interfaces since GenericSystem doesn't
+                 read URDF <mimic> tags. -->
+            <xacro:if value="${ros2_control_hardware_type == 'mock_components'}">
+                <joint name="right_outer_knuckle_joint">
+                    <param name="mimic">finger_joint</param>
+                    <param name="multiplier">-1</param>
+                    <command_interface name="position"/>
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+                <joint name="left_inner_knuckle_joint">
+                    <param name="mimic">finger_joint</param>
+                    <param name="multiplier">-1</param>
+                    <command_interface name="position"/>
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+                <joint name="right_inner_knuckle_joint">
+                    <param name="mimic">finger_joint</param>
+                    <param name="multiplier">-1</param>
+                    <command_interface name="position"/>
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+                <joint name="left_inner_finger_joint">
+                    <param name="mimic">finger_joint</param>
+                    <param name="multiplier">1</param>
+                    <command_interface name="position"/>
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+                <joint name="right_inner_finger_joint">
+                    <param name="mimic">finger_joint</param>
+                    <param name="multiplier">1</param>
+                    <command_interface name="position"/>
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+            </xacro:if>
+
+            <!-- Mimic joints for gz mode: state interfaces only (no command
+                 interfaces, no mimic params). GazeboSimSystem reads the URDF
+                 <mimic> tags and drives these joints via its internal
+                 velocity-proportional controller. -->
+            <xacro:if value="${ros2_control_hardware_type == 'gz'}">
+                <joint name="right_outer_knuckle_joint">
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+                <joint name="left_inner_knuckle_joint">
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+                <joint name="right_inner_knuckle_joint">
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+                <joint name="left_inner_finger_joint">
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+                <joint name="right_inner_finger_joint">
+                    <state_interface name="position"/>
+                    <state_interface name="velocity"/>
+                </joint>
+            </xacro:if>
+        </ros2_control>
+    </xacro:macro>
+</robot>

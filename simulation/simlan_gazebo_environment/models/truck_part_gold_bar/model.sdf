@@ -1,0 +1,44 @@
+<sdf version="1.6">
+  <model name="truck_part_gold_bar">
+    <static>false</static>
+    <link name="new_link">
+      <collision name="Cube_collision">
+        <pose>0.00000 0.00000 0.02500 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <box>
+            <size>0.05000 0.15000 0.05000</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <inertial>
+        <pose>0.00000 0.00000 0.02500 0.00000 0.00000 0.00000</pose>
+        <mass>0.20000</mass>
+        <inertia>
+          <ixx>0.00042</ixx>
+          <ixy>0.00000</ixy>
+          <ixz>0.00000</ixz>
+          <iyy>0.00008</iyy>
+          <iyz>0.00000</iyz>
+          <izz>0.00042</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="Cube">
+        <pose>0.00000 0.00000 0.02500 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <box>
+            <size>0.05000 0.15000 0.05000</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.80000 0.66667 0.05490 1.00000</diffuse>
+          <specular>1.00000 1.00000 1.00000 0.51373</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

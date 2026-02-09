@@ -15,12 +15,12 @@ This simulation environment, based on the Ignition Gazebo simulator and ROS 2, r
 - Simple GPSS (Generic Photo-based Sensor System) navigation
 - Multi-Robot localization and navigation using Nav2
 - ArUco marker localization
-- Bird's-Eye view projection
-- Multi-Sensor Support (LiDAR, RGB camera, semantic segmentation, depth, etc.)
+- Inverse Perspective Mapping (Bird's-Eye view projection)
+- Multi-Sensor Support (LiDAR, RGB camera, semantic segmentation, depth)
 - Geofencing for safe zones and safe stop on collision
 - Humanoid worker model
 - Panda arm robotic arm
-- Deep-learning-based human pose capture and replay,
+- Deep-learning-based human pose capture and replay
 
 📹 Click the YouTube link below to view the SIMLAN demo video:
 
@@ -77,17 +77,18 @@ You can also use Nav2 to make a robot_agent (that can be either robot/pallet_tru
 ```bash
 ./control.sh gpss # spawn the simulation, robot_agents and GPSS ArUco detection
 ./control.sh nav ROBOTS  # spawn map server, and separate nav2 stack in a separate namespace for each robot_agent
-./control.sh send_goal robot_agent_1 2.0 1.0 # send navigation goal x=2.0 y=1.0 to nav2 stack for robot_agent_1
+./control.sh send_goal robot_agent_1 2.0 1.0 # send navigation goal to nav2 stack for robot_agent_1
 ```
 
 ![](resources/aruco_localisation.png)
 
-`camera_enabled_ids` in [`config.sh`](config.sh) specifies which cameras are enabled in the GPSS system for ArUco code detection and bird's-eye view.
-% HAMID_NOTE: I think this needs some clarification on how to get the image from birdeye in rviz and also maybe add what needs to be running for birdeye to work.
+`camera_enabled_ids` in [`config.sh`](config.sh) specifies which cameras are enabled in the GPSS system for ArUco code detection and bird's-eye view (Inverse Perspective Mapping).
 
 ```bash
 ./control.sh birdeye
 ```
+
+Running the command above, the system publishes projected camera images to `/static_agent/camera_X/image_projected` and the final stitched output to the `/projected_images_stitched` topic that you can inspect using Rviz.
 
 ![](resources/stitched.png)
 

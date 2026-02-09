@@ -21,8 +21,10 @@
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>ros2_control</exec_depend>
   <exec_depend>rviz2</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
   <exec_depend>xacro</exec_depend>
   <exec_depend>kinova_gen3_7dof_robotiq_2f_85_moveit_config</exec_depend>
+  <exec_depend>ur_moveit_config</exec_depend>
 
 
   <test_depend>ament_copyright</test_depend>
