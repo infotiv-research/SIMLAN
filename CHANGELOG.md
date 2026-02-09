@@ -1,5 +1,14 @@
 # Changelog
 
+## v5.1.5: ur10, refactor: Team/Tech Lead: Hamid Ebadi
+
+- add simulation real time factor to config : Hamid Ebadi
+- introducing UR10 & Robotiq gripper: Markus and Elias (experimental)
+- RITA models: Markus and Elias (experimental)
+- refactor control.sh : Hamid Ebadi
+- refactor build scripts : Hamid Ebadi
+- add dynorobotics documentation : Hamid Ebadi
+
 ### 5.1.4: Code cleanup (Feb 2026) - Sebastian Olsson (Dyno Robotics)
 
 - Remove SPAWN_JACKAL variable. Use `./control.sh jackal` to spawn the jackal instead.
