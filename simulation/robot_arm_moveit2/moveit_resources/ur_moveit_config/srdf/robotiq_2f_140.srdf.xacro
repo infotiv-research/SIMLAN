@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="robotiq_2f_140_srdf">
+
+    <!--GROUPS-->
+    <group name="gripper">
+      <link name="robotiq_base_link"/>
+      <link name="robotiq_140_base_link"/>
+      <link name="left_outer_knuckle"/>
+      <link name="left_outer_finger"/>
+      <link name="left_inner_knuckle"/>
+      <link name="left_inner_finger"/>
+      <link name="left_inner_finger_pad"/>
+      <link name="right_outer_knuckle"/>
+      <link name="right_outer_finger"/>
+      <link name="right_inner_knuckle"/>
+      <link name="right_inner_finger"/>
+      <link name="right_inner_finger_pad"/>
+      <joint name="finger_joint"/>
+      <passive_joint name="right_outer_knuckle_joint"/>
+      <passive_joint name="left_inner_knuckle_joint"/>
+      <passive_joint name="right_inner_knuckle_joint"/>
+      <passive_joint name="left_inner_finger_joint"/>
+      <passive_joint name="right_inner_finger_joint"/>
+    </group>
+
+    <!--GROUP STATES-->
+    <group_state name="open" group="gripper">
+      <joint name="finger_joint" value="0.0"/>
+    </group_state>
+    <group_state name="close" group="gripper">
+      <joint name="finger_joint" value="0.65"/>
+    </group_state>
+
+    <!--END EFFECTOR-->
+    <end_effector name="gripper" parent_link="tool0" group="gripper" parent_group="ur_manipulator"/>
+
+    <!--DISABLE COLLISIONS: gripper internal pairs-->
+    <disable_collisions link1="robotiq_base_link" link2="robotiq_140_base_link" reason="Adjacent"/>
+    <disable_collisions link1="robotiq_140_base_link" link2="left_outer_knuckle" reason="Adjacent"/>
+    <disable_collisions link1="robotiq_140_base_link" link2="right_outer_knuckle" reason="Adjacent"/>
+    <disable_collisions link1="robotiq_140_base_link" link2="left_inner_knuckle" reason="Adjacent"/>
+    <disable_collisions link1="robotiq_140_base_link" link2="right_inner_knuckle" reason="Adjacent"/>
+    <disable_collisions link1="left_outer_knuckle" link2="left_outer_finger" reason="Adjacent"/>
+    <disable_collisions link1="left_outer_finger" link2="left_inner_finger" reason="Adjacent"/>
+    <disable_collisions link1="left_inner_finger" link2="left_inner_finger_pad" reason="Adjacent"/>
+    <disable_collisions link1="left_inner_knuckle" link2="left_inner_finger" reason="Never"/>
+    <disable_collisions link1="left_inner_knuckle" link2="left_outer_finger" reason="Never"/>
+    <disable_collisions link1="left_inner_knuckle" link2="left_outer_knuckle" reason="Never"/>
+    <disable_collisions link1="left_inner_knuckle" link2="left_inner_finger_pad" reason="Never"/>
+    <disable_collisions link1="left_outer_knuckle" link2="left_inner_finger" reason="Never"/>
+    <disable_collisions link1="left_outer_knuckle" link2="left_inner_finger_pad" reason="Never"/>
+    <disable_collisions link1="left_outer_finger" link2="left_inner_finger_pad" reason="Never"/>
+    <disable_collisions link1="right_outer_knuckle" link2="right_outer_finger" reason="Adjacent"/>
+    <disable_collisions link1="right_outer_finger" link2="right_inner_finger" reason="Adjacent"/>
+    <disable_collisions link1="right_inner_finger" link2="right_inner_finger_pad" reason="Adjacent"/>
+    <disable_collisions link1="right_inner_knuckle" link2="right_inner_finger" reason="Never"/>
+    <disable_collisions link1="right_inner_knuckle" link2="right_outer_finger" reason="Never"/>
+    <disable_collisions link1="right_inner_knuckle" link2="right_outer_knuckle" reason="Never"/>
+    <disable_collisions link1="right_inner_knuckle" link2="right_inner_finger_pad" reason="Never"/>
+    <disable_collisions link1="right_outer_knuckle" link2="right_inner_finger" reason="Never"/>
+    <disable_collisions link1="right_outer_knuckle" link2="right_inner_finger_pad" reason="Never"/>
+    <disable_collisions link1="right_outer_finger" link2="right_inner_finger_pad" reason="Never"/>
+    <!-- Cross-side pairs that may come close -->
+    <disable_collisions link1="left_inner_finger_pad" link2="right_inner_finger_pad" reason="Never"/>
+    <disable_collisions link1="left_inner_finger" link2="right_inner_finger" reason="Never"/>
+    <disable_collisions link1="left_outer_finger" link2="right_outer_finger" reason="Never"/>
+    <disable_collisions link1="left_outer_knuckle" link2="right_outer_knuckle" reason="Never"/>
+    <disable_collisions link1="left_inner_knuckle" link2="right_inner_knuckle" reason="Never"/>
+
+    <!--DISABLE COLLISIONS: gripper-to-arm-tip links-->
+    <disable_collisions link1="robotiq_base_link" link2="tool0" reason="Adjacent"/>
+    <disable_collisions link1="robotiq_base_link" link2="wrist_3_link" reason="Never"/>
+    <disable_collisions link1="robotiq_base_link" link2="wrist_2_link" reason="Never"/>
+    <disable_collisions link1="robotiq_140_base_link" link2="tool0" reason="Never"/>
+    <disable_collisions link1="robotiq_140_base_link" link2="wrist_3_link" reason="Never"/>
+    <disable_collisions link1="robotiq_140_base_link" link2="wrist_2_link" reason="Never"/>
+    <disable_collisions link1="left_outer_knuckle" link2="wrist_3_link" reason="Never"/>
+    <disable_collisions link1="right_outer_knuckle" link2="wrist_3_link" reason="Never"/>
+    <disable_collisions link1="left_inner_knuckle" link2="wrist_3_link" reason="Never"/>
+    <disable_collisions link1="right_inner_knuckle" link2="wrist_3_link" reason="Never"/>
+    <disable_collisions link1="left_outer_knuckle" link2="tool0" reason="Never"/>
+    <disable_collisions link1="right_outer_knuckle" link2="tool0" reason="Never"/>
+    <disable_collisions link1="left_inner_knuckle" link2="tool0" reason="Never"/>
+    <disable_collisions link1="right_inner_knuckle" link2="tool0" reason="Never"/>
+
+  </xacro:macro>
+</robot>

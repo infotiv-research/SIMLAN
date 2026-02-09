@@ -59,8 +59,6 @@ Some things to note:
 
 - Just be sure to update the corresponding fields (`images_folder`, `json_file_name`) in `params.yaml`.
 
-______________________________________________________________________
-
 ## Config file
 
 When your data is in place, you may want to review the config parameters in `params.yaml`. This step is often optional, as default settings typically work well. There is currently an example trajectory file that will show an image of a dog and a cat (these would be your stitched images in practice) and with the positions from the trajectories as visualization markers. These are mostly there to check that things still work as intended without the need of external data.
@@ -117,8 +115,6 @@ When your data is in place, you may want to review the config parameters in `par
 | `frame_position`        | `x`,`y`,`z` coordinates for visualization frame.                                       | `x: 15.35, y: 5.7, z: -0.2` |
 | `extracted_fps`         | FPS of the extracted data for playback.                                                | `10.0`                      |
 | `processing_time_limit` | Max time allowed per frame for consistent playback. If exceeded, a warning appears.    | `0.8`                       |
-
-______________________________________________________________________
 
 ### Launching the Processing Step
 
@@ -192,8 +188,6 @@ You can modify the `playback_rate` parameter in `params.yaml` to control how qui
   The intended `QOS settings` can be found in the `recorder_qos.yaml` file in the `config` folder together with the `params.yaml` file.
   These are the settings that the rosbag player uses, and the easiest fix is to make sure that RViz mirrors these settings for the respective displays.
 
-______________________________________________________________________
-
 ## Summary
 
 1. Build package using `CTRL + SHIFT + B` VS Code task.
@@ -207,8 +201,6 @@ ______________________________________________________________________
 1. Subscribe to the relevant topics (as defined in `params.yaml`) in RViz2
 
 Now the data should be visualized.
-
-______________________________________________________________________
 
 ### Warnings and Errors from the node
 

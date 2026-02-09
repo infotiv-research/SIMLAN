@@ -1,4 +1,7 @@
 #!/bin/bash
+
+ORIGINAL_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+
 HOST_DIR=$(dirname $(dirname "$(pwd)"))
 CONTAINER_DIR="/docvolume/"
 DOCKER_IMAGE="pandoc/extra:latest"
@@ -28,7 +31,7 @@ run_command_docker() {
         --entrypoint /bin/sh \
         -v "$HOST_DIR/resources/build-documentation/mkdocs.yml:/mkdocs.yml" \
         -v "$HOST_DIR:$CONTAINER_DIR" \
-        -v "$HOME/.ssh:/tmp/ssh_mount:ro" \
+        -v "$ORIGINAL_HOME/.ssh:/tmp/ssh_mount:ro" \
         -v "$(pwd)/output:/output" \
         -p 8000:8000 \
         "$DOCKER_IMAGE" \
@@ -36,9 +39,12 @@ run_command_docker() {
         mkdir -p /root/.ssh && \
         cp -r /tmp/ssh_mount/* /root/.ssh/ && \
         chmod 700 /root/.ssh && \
-        chmod 600 /root/.ssh/config 2>/dev/null || true && \
-        chmod 600 /root/.ssh/id_rsa 2>/dev/null || true && \
-        chmod 644 /root/.ssh/id_rsa.pub 2>/dev/null || true && \
+        find /root/.ssh -type d -exec chmod 700 {} + &&  \
+        chmod 600 /root/.ssh/* 2>/dev/null || true && \
+        chmod 644 /root/.ssh/config 2>/dev/null || true && \
+        chmod 644 /root/.ssh/known_hosts  2>/dev/null || true && \
+        chmod 644 /root/.ssh/*.pub 2>/dev/null || true && \
+        ssh-keyscan github.com >> /root/.ssh/known_hosts && \
         chown -R root:root /root/.ssh && \
         cd $CONTAINER_DIR && \
         $COMMAND
@@ -62,11 +68,11 @@ run_command_docker "pandoc \
         -o $CONTAINER_DIR/resources/build-documentation/tmp.pdf"
 
 run_command_docker "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$CONTAINER_DIR/SIMLAN.pdf  $CONTAINER_DIR/resources/build-documentation/tmp.pdf"
-
+#
+#
+run_command_docker "ls -al /root/.ssh/"
 run_command_docker "mkdocs build --config-file /mkdocs.yml --site-dir /output --verbose"
 run_command_docker "mkdocs serve --config-file /mkdocs.yml --dev-addr=0.0.0.0:8000"
 
 # THIS HAS TO BE EXECUTED IN THE GITHUB REPO (NOT INTERNAL GITLAB)
 # run_command_docker "git config --global --add safe.directory /docvolume ; mkdocs  gh-deploy --config-file /mkdocs.yml --site-dir /output --verbose"
-
-

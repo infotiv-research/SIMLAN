@@ -1,0 +1,85 @@
+<sdf version="1.6">
+  <model name="truck_part_hose">
+    <static>false</static>
+    <link name="new_link">
+      <collision name="Cylinder">
+        <pose>0.02790 0.00712 -0.00098 -0.25526 1.57080 0.00000</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01499</radius>
+            <length>0.06576</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <collision name="Cylinder.001">
+        <pose>0.06353 -0.01540 -0.00001 1.09756 1.57080 0.00000</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01499</radius>
+            <length>0.07226</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <collision name="Cylinder.002">
+        <pose>0.05760 -0.09992 -0.00001 1.88680 1.57080 0.00000</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01499</radius>
+            <length>0.11823</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <collision name="Cylinder.003">
+        <pose>0.06222 -0.17575 -0.00001 0.44248 1.57080 0.00000</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01499</radius>
+            <length>0.07233</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <inertial>
+        <pose>0.05281 -0.07099 -0.00026 0.00000 0.00000 0.00000</pose>
+        <mass>0.22000</mass>
+        <inertia>
+          <ixx>0.00024</ixx>
+          <ixy>0.00011</ixy>
+          <ixz>-0.00000</ixz>
+          <iyy>0.00019</iyy>
+          <iyz>0.00000</iyz>
+          <izz>0.00029</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="node0">
+        <pose>0.00000 0.00000 0.00000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://truck_part_hose/meshes/Body.dae</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.00784 0.00784 0.00784 1.00000</diffuse>
+          <specular>1.00000 1.00000 1.00000 0.32941</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

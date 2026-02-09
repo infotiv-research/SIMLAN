@@ -1,4 +1,15 @@
 #!/bin/bash
+
+
+# The purpose of ./control.sh
+# - Lightweight plumbing, basically sequential execution of commands
+# - Managing parameters and environment variables
+# - Simple/unified interface for non-robotic experts (AI/ML)
+# - Avoid mistakes and hassle running long ROS 2 commands (and parameters, environment variables)
+# - Streamline the process of building, running, and testing the project
+# - Avoid documenting the processes (docs like run step 1, run command 1, then step 2, command 2, then command 3, etc.)
+# - Avoid running several terminals (max 2 terminals)
+
 #################################################################
 #          SOURCING AND SETTING ENVIRONMENT VARIABLES           #
 #################################################################
@@ -63,28 +74,59 @@ kill (){
     pkill -9 -f gzserver
     pkill -9 -f gzclient
     pkill -9 -f gazebo
-    pkill -9 -f rviz
-    pkill -9 -f jazzy
-    pkill -9 -f object_mover
     pkill -9 -f ign
+    pkill -9 -f ignition
     pkill -9 -f gz
-    pkill -9 -f humanoid_camera_system
-    pkill -9 -f humanoid_motion_planner
-    pkill -9 -f humble
-    pkill -9 -f move_
     pkill -9 -f ros2
-    pkill -9 -f ruby
+    pkill -9 -f ros2-daemon
+    pkill -9 -f humble
+    pkill -9 -f jazzy
+    pkill -9 -f rviz
+    pkill -9 -f object_mover
+    pkill -9 -f move_
     pkill -9 -f eog
     pkill -9 -f update_map_node
-    pkill -9 -f aruco_detection_node
     pkill -9 -f humanoid_odom_pub
+    pkill -9 -f humanoid_camera_system
+    pkill -9 -f humanoid_motion_planner
+    pkill -9 -f aruco_detection_node
     pkill -9 -f aruco_pose_pub_node
+    pkill -9 -f ruby
+    # More aggressive kill to drop all ros2 node
+    # Names of lingering Gazebo processes
+    local processes=("gzserver" "gzclient" "gz" "gazebo" "ignition")
+
+    for name in "${processes[@]}"; do
+        # Check if process exists
+        while pgrep "$name" > /dev/null; do
+            echo "shutting down $name..."
+            pkill -9 "$name"
+            sleep 1
+        done
+    done
+
+    # Find the PID for ros2-daemon
+    local pid=$(ps aux | grep -i ros2-daemon | grep -v grep | awk '{print $2}')
+
+    if [ -n "$pid" ]; then
+        echo "killing daemon with pid: $pid"
+        kill -9 $pid
+        sleep 1
+    fi
+
+    # Find PIDs with ros-args
+    local pids=$(ps aux | grep -i ros-args | grep -v grep | awk '{print $2}')
+
+    if [ -n "$pids" ]; then
+        for pid in $pids; do
+            echo "shutting down ros process with pid: $pid"
+            kill -9 "$pid"
+            sleep 1
+        done
+        sleep 3
+    fi
 }
-drop_nuke () {
-    # More aggressive kill to drop all ros2 nodes
-    # Not the happiest with the placement of the script, but oh well
-    python3 ./drop_nuke.py
-}
+
 clean () {
     echo "---[ removing build files ]---"
     kill
@@ -115,7 +157,7 @@ build () {
 }
 sim () {
     echo "---[ launching gazebo ]---"
-    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo" "rviz_config:=${rviz_config}"
+    ros2 launch simlan_bringup sim.launch.py "world_setup:=${WORLD_SETUP}" "real_time_factor:=$real_time_factor"  "log_level:=${log_level}" "headless_gazebo:=$headless_gazebo" "rviz_config:=${rviz_config}"
 }
 static_agent() {
     echo "---[ launching cameras (static agents) ]---"
@@ -212,7 +254,6 @@ then
 elif [[ "$1" == "kill" ]]
 then
     kill
-    drop_nuke
 elif [[ "$1" == "build" ]]
 then
     build
@@ -327,6 +368,10 @@ then
 elif [[ "$1" == "plan_panda_motion" ]]
 then
     ros2 launch motion_planning_python_api motion_planning_python_api_tutorial.launch.py "log_level:=${log_level}"
+
+elif [[ "$1" == "ur10" ]]
+then
+    ros2 launch ur_moveit_config demo.launch.py "log_level:=${log_level}"
 #endregion
 ######################## HUMANOID ##############################
 #region humanoid

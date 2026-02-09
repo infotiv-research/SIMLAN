@@ -30,14 +30,13 @@ There are three predefined collision types:
 
 Below are images illustrating the different collision types:
 
-<p align="center">
-  <img src="images/head_on_collision.png" alt="Head-On Collision" width="30%">
-  <img src="images/pallet_truck_side_collision.png" alt="Pallet Truck Side Collision" width="30%">
-  <img src="images/jackal_side_collision.png" alt="Jackal Side Collision" width="30%">
-</p>
-<p align="center">
-  <b>Left: Head-On Collision | Middle: Pallet Truck Side Collision | Right: Jackal Side Collision</b>
-</p>
+| Head-On Collision | Pallet Truck Side Collision | Jackal Side Collision |
+|------------------|----------------------------|-----------------------|
+| ![Head-On Collision](images/head_on_collision.png) | ![Pallet Truck Side Collision](images/pallet_truck_side_collision.png) | ![Jackal Side Collision](images/jackal_side_collision.png) |
+
+
+
+
 
 ## Running a Scenario
 To execute a scenario, use the following command:

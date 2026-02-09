@@ -1,0 +1,101 @@
+<sdf version="1.6">
+  <model name="stacking_crate">
+    <static>false</static>
+    <link name="new_link">
+      <collision name="Cube">
+        <pose>0.00000 -0.00550 0.00600 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <box>
+            <size>0.60100 0.40100 0.01206</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact/>
+          <friction>
+            <ode>
+              <mu>0.05</mu>
+              <mu2>0.05</mu2>
+              <slip1>0.05</slip1>
+              <slip2>0.05</slip2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <collision name="Cube.001">
+        <pose>0.00000 -0.19600 0.10000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <box>
+            <size>0.60100 0.02109 0.20000</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <collision name="Cube.002">
+        <pose>0.00000 0.18460 0.10000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <box>
+            <size>0.60100 0.02109 0.20000</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <collision name="Cube.003">
+        <pose>-0.29007 -0.00556 0.10000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <box>
+            <size>0.02109 0.40200 0.20000</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <collision name="Cube.004">
+        <pose>0.29012 -0.00556 0.10000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <box>
+            <size>0.02109 0.40200 0.20000</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+      </collision>
+
+      <inertial>
+        <pose>0.00001 -0.00560 0.08120 0.00000 0.00000 0.00000</pose>
+        <mass>1.00000</mass>
+        <inertia>
+          <ixx>0.01075</ixx>
+          <ixy>0.00000</ixy>
+          <ixz>0.00000</ixz>
+          <iyy>0.02074</iyy>
+          <iyz>0.00000</iyz>
+          <izz>0.02616</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="node0">
+        <pose>-0.48920 -0.29311 0.00000 0.00000 0.00000 0.00000</pose>
+        <geometry>
+          <mesh>
+            <uri>model://stacking_crate/meshes/Body.dae</uri>
+            <scale>1.00000 1.00000 1.00000</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.03137 0.05098 0.35294 1.00000</diffuse>
+          <specular>1.00000 1.00000 1.00000 0.20392</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

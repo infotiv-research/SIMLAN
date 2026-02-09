@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="robotiq_gripper_ros2_control" params="
+        name prefix
+        sim_ignition:=false sim_isaac:=false
+        isaac_joint_commands:=/isaac_joint_commands isaac_joint_states:=/isaac_joint_states
+        use_fake_hardware:=false mock_sensor_commands:=false
+        com_port:=/dev/ttyUSB0
+        gripper_speed_multiplier:=1.0 gripper_force_multiplier:=0.5
+        gripper_max_speed:=0.250 gripper_max_force:=125.0
+        gripper_closed_position:=0.695">
+        <!-- intentionally empty: ros2_control is managed by ur_moveit_config -->
+    </xacro:macro>
+</robot>

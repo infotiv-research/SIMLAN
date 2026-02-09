@@ -23,15 +23,30 @@
             <size>0.05 0.05 0.05</size> <!-- 5 cm cube -->
           </box>
         </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e6</kp>
+              <kd>100</kd>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
       </collision>
 
       <!-- Physics properties -->
       <inertial>
-        <mass>0.01</mass> <!-- 100 grams -->
+        <mass>0.1</mass> <!-- 100 grams -->
         <inertia>
-          <ixx>1e-5</ixx>
-          <iyy>1e-5</iyy>
-          <izz>1e-5</izz>
+          <ixx>4.167e-5</ixx>
+          <iyy>4.167e-5</iyy>
+          <izz>4.167e-5</izz>
           <ixy>0</ixy>
           <ixz>0</ixz>
           <iyz>0</iyz>

@@ -36,11 +36,13 @@ def launch_setup(context, *args, **kwargs):
 
     log_level = LaunchConfiguration("log_level").perform(context)
     world_setup = LaunchConfiguration("world_setup").perform(context)
+    real_time_factor = LaunchConfiguration("real_time_factor").perform(context)
     headless_gazebo = (
         LaunchConfiguration("headless_gazebo").perform(context).lower() == "true"
     )
     use_sim_time = LaunchConfiguration("use_sim_time", default="true")
     print(f"[DEBUG] world_setup={world_setup}")
+    print(f"[DEBUG] real_time_factor={real_time_factor}")
 
     pkg_ros_gz_sim = get_package_share_directory("ros_gz_sim")
     original_world = os.path.join(
@@ -53,7 +55,11 @@ def launch_setup(context, *args, **kwargs):
         "worlds",
         f"{world_setup}_world.world",
     )
-    doc = xacro.process_file(original_world, mappings={"world_setup": world_setup})
+    doc = xacro.process_file(
+        original_world,
+        mappings={"world_setup": world_setup, "real_time_factor": real_time_factor},
+    )
+
     with open(world_sdf_path, "w") as f:
         f.write(doc.toprettyxml(indent="  "))
 
