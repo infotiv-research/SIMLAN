@@ -103,11 +103,19 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Panda MoveIt2</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#ur10-resources">UR10 resources</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ur10-quickstart">UR10 quickstart</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#moveit-motion-planner-using-python-api">Moveit motion planner using Python API</a>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../scenario_manager/">Scenario Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../visualize_real_data/">Visualize Real Data Package</a>
                   </li>
               </ul>
               <ul>
@@ -159,6 +167,41 @@ Inside <code>config/</code> there are several <code>*.yaml</code> files which ac
 <li>Start the <code>move_group_node</code>, which handles all planning and executing of motions.</li>
 <li>Load all controllers for panda so that it can be controlled in Gazebo.</li>
 </ul>
+<h2 id="ur10-resources">UR10 resources</h2>
+<p>The UR10 setup lives under <code>moveit_resources/</code></p>
+<ul>
+<li><code>ur_description/</code>: UR family URDFs, meshes, and parameter YAMLs.</li>
+<li><code>ur_description/urdf/ur.urdf.xacro</code> and <code>ur_description/urdf/ur_macro.xacro</code> are the main description entry points.</li>
+<li><code>ur_description/config/ur10/*.yaml</code> holds UR10-specific kinematics, limits, and visuals.</li>
+<li><code>ur_moveit_config/</code>: MoveIt2 configuration, controllers, and launch files for UR10.</li>
+<li><code>ur_moveit_config/config/ur10.urdf.xacro</code> is the MoveIt/Gazebo description (includes Robotiq).</li>
+<li><code>ur_moveit_config/config/ros2_controllers.yaml</code> and <code>ur_moveit_config/config/gazebo_moveit_controllers.yaml</code> define controllers.</li>
+<li><code>ur_moveit_config/srdf/ur.srdf.xacro</code> contains the SRDF groups and gripper setup.</li>
+<li><code>ur_moveit_config/launch/demo.launch.py</code> is the main entry point for spawning + MoveIt.</li>
+<li><code>robotiq_description/</code>: Robotiq 2F-140 gripper description and meshes.</li>
+<li><code>robotiq_description/urdf/robotiq_2f_140_macro.urdf.xacro</code> is the main gripper macro used by UR10.</li>
+</ul>
+<h2 id="ur10-quickstart">UR10 quickstart</h2>
+<ol>
+<li>
+<p>Start Gazebo in a separate terminal:</p>
+</li>
+<li>
+<p><code>./control.sh sim</code></p>
+</li>
+<li>
+<p>Spawn the UR10 + MoveIt stack (after Gazebo is already running):</p>
+</li>
+<li>
+<p><code>./control.sh ur10</code></p>
+</li>
+<li>
+<p>Launch the UR10 pick-and-place script (after the UR10 stack is up):</p>
+</li>
+<li>
+<p><code>ros2 launch motion_planning_python_api ur10_pick_and_place.launch.py</code></p>
+</li>
+</ol>
 <h2 id="moveit-motion-planner-using-python-api">Moveit motion planner using Python API</h2>
 <p>The folder <a href="https://moveit.picknik.ai/main/doc/examples/motion_planning_python_api/motion_planning_python_api_tutorial.html"><code>custom_motion_planning_python_api</code></a> has scripting files that plan and execute motions for a panda robot. It uses the official MoveIt2 Python API to achieve this.
 In this package's <code>scripts/</code> folder exist these Python files. Look at the demo scripts for inspiration. To run any of the scripts, you run the launch file:</p>

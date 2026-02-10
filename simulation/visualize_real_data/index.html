@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/visualize_real_data/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Index - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <title>Visualize Real Data Package - SIMLAN, Simulation for Multi-Camera Robotics</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Index";
+        var mkdocs_page_name = "Visualize Real Data Package";
         var mkdocs_page_input_path = "simulation/visualize_real_data/README.md";
         var mkdocs_page_url = "/SIMLAN/simulation/visualize_real_data/";
       </script>
@@ -58,7 +58,7 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../">Simulation</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
@@ -105,6 +105,52 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../scenario_manager/">Scenario Manager</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Visualize Real Data Package</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#preparing-data">Preparing Data</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#build-the-package">Build the package</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#add-the-data">Add the data</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#config-file">Config file</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#paramsyaml-overview">params.yaml Overview</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#prepare_data-section">prepare_data section:</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#send_data-section">send_data section:</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#scenario_replayer-section">scenario_replayer section:</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#shared-section">shared section:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#launching-the-processing-step">Launching the Processing Step</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sending-data">Sending Data</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#adjusting-playback-speed">Adjusting Playback Speed</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fixing-rviz">Fixing RViz</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#warnings-and-errors-from-the-node">Warnings and Errors from the node</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../../credits/">Credits</a>
@@ -133,7 +179,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Index</li>
+          <li class="breadcrumb-item">Simulation</li>
+      <li class="breadcrumb-item active">Visualize Real Data Package</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/visualize_real_data/README.md">Edit on infotiv-research/SIMLAN</a>
     </li>
@@ -143,38 +190,44 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="preparing-data">Preparing Data</h2>
-<h3 id="first-build-the-package">First build the package</h3>
-<p>For example with:</p>
-<pre><code class="language-bash">colcon build --merge-install --symlink-install --packages-select visualize_real_data
+                <h1 id="visualize-real-data-package">Visualize Real Data Package</h1>
+<p>The <code>visualize_real_data</code> package is designed to replay and visualize real-world trajectory data within RViz and Gazebo. This package takes recorded trajectory data (in JSON format) and corresponding images, processes them into ROS-compatible formats, and enables visualization and simulation replay in Gazebo.</p>
+<h2 id="preparing-data">Preparing Data</h2>
+<p>Before replaying any data, it has to be recorded. This is done by performing the steps below.</p>
+<h3 id="build-the-package">Build the package</h3>
+<p>First the package needs to be built, if this is not already done run:</p>
+<pre><code class="language-bash">./control.sh build
 </code></pre>
-<p>After that, you can add the required data into the <code>share/</code> folder that is created during the build process.</p>
-<p>If everything has been built correctly, you should find the following folder-structure:</p>
-<pre><code class="language-bash">install/
-└── share/
-    └── visualize_real_data/
-        └── data/
-            ├── images/
-            │   └── images
-            └── data
+<h3 id="add-the-data">Add the data</h3>
+<p>Add your data files beneath the <code>simulation/replay_data</code> directory. Your structure should look like this:</p>
+<pre><code class="language-bash">replay_data/
+|── images/
+|   |── images
+|   |── 1770030000000.jpg #Example image 1
+|   |── 1770030000100.jpg #Example image 2
+|── example_trajectory.json # Example using image 1 and 2.
+|── README.md
 </code></pre>
-<p>The empty <code>data</code> and <code>images</code> placeholder files ensure that ROS 2 recognizes and preserves the folder structure during the build, and should <strong>not</strong> be removed.</p>
-<p>If you have already built the package before, there might be another directory inside the <code>data/</code> folder called <code>rosbags</code>.
-More on that folder later.</p>
-<h3 id="add-the-data-after-building">Add the data after building</h3>
-<p>After the build completes, you can add your data files to the generated <code>share/</code> folder inside your package.</p>
-<p>By default, the package expects to find the trajectory data inside the <code>data/</code> folder as <code>.json</code>, and the images inside the <code>images/</code> folder as <code>.jpg</code>. Like this:</p>
-<pre><code class="language-bash">install/
-└── share/
-    └── visualize_real_data/
-        └── data/
-            ├── images/
-            │   ├── image1.jpg
-            │   └── image2.jpg
-            └── window_2012_1746008869618_1746008890118.json
+<p>By default, the package expects to find the trajectory data inside the <code>replay_data/</code> folder as <code>.json</code>, and the images inside the <code>images/</code> folder as <code>.jpg</code>. The .json trajectories are expected on this form:</p>
+<pre><code class="language-json">{
+  &quot;time_stamp&quot;: 1770030000000, // Unix timestamp in milliseconds
+  &quot;object_list&quot;: [
+    [
+      0, // Tracking ID
+      1, // X
+      2, // Y
+      3, // Z (most often 0)
+      4 // Orientation (does not have to be included, this is what is generated by orientation_faker)
+    ],
+    //...
+  ]
+}
 </code></pre>
-<p>Notes:</p>
+<p>Some things to note:</p>
 <ul>
+<li>
+<p>The <code>replay_data</code> folder is gitignored, so you can safely save images there without uploading to git.</p>
+</li>
 <li>
 <p>The <strong>folder-names are configurable</strong>, as long as the settings in <code>params.yaml</code> match.</p>
 </li>
@@ -191,18 +244,12 @@ More on that folder later.</p>
 <p>Just be sure to update the corresponding fields (<code>images_folder</code>, <code>json_file_name</code>) in <code>params.yaml</code>.</p>
 </li>
 </ul>
-<hr />
-<h3 id="important-notes">Important Notes</h3>
-<ul>
-<li>You do <em>not</em> need to rebuild the package after adding or modifying data in <code>share/</code>.</li>
-<li>In fact, <strong>rebuilding the package could overwrite or remove any manually added files</strong> in the <code>share/</code> folder, so avoid rebuilding once your data is in place.</li>
-</ul>
 <h2 id="config-file">Config file</h2>
-<p>When your data is in place, you may want to review the config parameters in <code>params.yaml</code>. This step is often optional, as default settings typically work well.</p>
+<p>When your data is in place, you may want to review the config parameters in <code>params.yaml</code>. This step is often optional, as default settings typically work well. There is currently an example trajectory file that will show an image of a dog and a cat (these would be your stitched images in practice) and with the positions from the trajectories as visualization markers. These are mostly there to check that things still work as intended without the need of external data.</p>
 <h3 id="paramsyaml-overview"><code>params.yaml</code> Overview</h3>
 <h4 id="prepare_data-section"><code>prepare_data</code> section:</h4>
 <ul>
-<li>The Parameters here have to be set before <code>prepare.launch.py</code> is run. Changes made afterwards will not affect the preparation process (image-&gt;PointCloud2).</li>
+<li>The parameters here have to be set before <code>prepare.launch.py</code> is run. Changes made afterwards will not affect the preparation process (image-&gt;PointCloud2).</li>
 </ul>
 <table>
 <thead>
@@ -248,6 +295,11 @@ More on that folder later.</p>
 <td>If <code>true</code>, automatically fakes object orientations during data preparation (used by the scenario replayer).</td>
 <td><code>true</code></td>
 </tr>
+<tr>
+<td><code>list_json_files</code></td>
+<td>If <code>true</code>, lists available JSON files in the replay_data directory during preparation.</td>
+<td><code>false</code></td>
+</tr>
 </tbody>
 </table>
 <h4 id="send_data-section"><code>send_data</code> section:</h4>
@@ -268,11 +320,6 @@ More on that folder later.</p>
 <td><code>playback_rate</code></td>
 <td>Controls playback speed. Default is <code>1</code> (real-time based on <code>extracted_fps</code>).</td>
 <td><code>1</code></td>
-</tr>
-<tr>
-<td><code>frame_position</code></td>
-<td><code>x</code>,<code>y</code>,<code>z</code> coordinates for visualization frame.</td>
-<td><code>x: 15.35, y: 6.5, z: -0.2</code></td>
 </tr>
 <tr>
 <td><code>bag_name</code></td>
@@ -304,7 +351,12 @@ More on that folder later.</p>
 <tr>
 <td><code>use_cmd_vel</code></td>
 <td>If <code>true</code>, robots are driven with velocity commands; otherwise, teleportation is used to reenact the scenario. When set to <code>true</code>, it is important the simulation runs close to 100% real-time.</td>
-<td><code>true</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>ignore_orientation</code></td>
+<td>If <code>true</code>, robot orientation is reset to identity (no rotation) regardless of source data. Using with <code>cmd_vel</code> may cause unexpected movement behavior.</td>
+<td><code>false</code></td>
 </tr>
 </tbody>
 </table>
@@ -339,7 +391,27 @@ More on that folder later.</p>
 <tr>
 <td><code>json_file_name</code></td>
 <td>Name of the file containing trajectory data.</td>
-<td>(empty)</td>
+<td><code>example_trajectory.json</code></td>
+</tr>
+<tr>
+<td><code>start_time</code></td>
+<td>Start time for data processing (optional filter).</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>end_time</code></td>
+<td>End time for data processing (optional filter).</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>initial_heading</code></td>
+<td>Initial heading/orientation in degrees (0 = pointing left). Used by orientation_faker.</td>
+<td><code>0.0</code></td>
+</tr>
+<tr>
+<td><code>frame_position</code></td>
+<td><code>x</code>,<code>y</code>,<code>z</code> coordinates for visualization frame.</td>
+<td><code>x: 15.35, y: 5.7, z: -0.2</code></td>
 </tr>
 <tr>
 <td><code>extracted_fps</code></td>
@@ -353,14 +425,20 @@ More on that folder later.</p>
 </tr>
 </tbody>
 </table>
-<hr />
 <h3 id="launching-the-processing-step">Launching the Processing Step</h3>
-<p>Once configured, run:</p>
+<p>Once configured, first run:</p>
+<pre><code class="language-bash">./control.sh replay_sim
+</code></pre>
+<p>This starts the simulation with the correct rviz config.</p>
+<p>Then run either:</p>
 <pre><code class="language-bash">ros2 launch visualize_real_data prepare.launch.py
 </code></pre>
-<p>This will first start the <code>orientation_fixer</code> node, which adds an orientation to the data based on the angle between points in the trajectory. Afterwards, the data processing is started and generates a rosbag file stored in a <code>rosbags/</code> folder inside the package's <code>share/</code> directory.</p>
+<p>or</p>
+<pre><code class="language-bash">./control.sh prepare
+</code></pre>
+<p>This will first start the <code>orientation_faker</code> node, which adds an orientation to the data based on the angle between points in the trajectory (this step can be ignored by changing the <code>fake_orientation</code> parameter). Afterwards, the data processing is started and generates a rosbag file stored in a <code>rosbags/</code> folder inside the <code>replay_data</code> directory.</p>
 <blockquote>
-<p><strong>NOTE:</strong> If orientation is already given, change:</p>
+<p><strong>NOTE:</strong> If orientation is already given, change the <code>fake_orientation</code> parameter inside the config to prevent it from overwriting the data.</p>
 </blockquote>
 <ul>
 <li>Rosbags are named using the name of the JSON file used and timestamps (e.g., <code>my_recording_20250722_153045</code> if the JSON file is named <code>my_recording.json</code>).</li>
@@ -384,6 +462,9 @@ More on that folder later.</p>
 </li>
 </ol>
 <pre><code class="language-bash">ros2 launch visualize_real_data send.launch.py
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">./control.sh replay_rviz
 </code></pre>
 <p>This command sends the most <strong>recently created rosbag</strong> to the topics defined in <code>params.yaml</code>.</p>
 <ul>
@@ -409,11 +490,10 @@ More on that folder later.</p>
   These are the settings that the rosbag player uses, and the easiest fix is to make sure that RViz mirrors these settings for the respective displays.</p>
 </li>
 </ul>
-<hr />
 <h2 id="summary">Summary</h2>
 <ol>
 <li>Build package using <code>CTRL + SHIFT + B</code> VS Code task.</li>
-<li>Add the data you want to show in RViz in the package's <code>share/</code> folder</li>
+<li>Add the data you want to show in RViz in the <code>replay_data</code> folder</li>
 <li>Configure parameters under 'prepare_data', 'shared', and/or 'scenario_replayer' <em>(optional)</em></li>
 <li>Run <code>prepare.launch.py</code></li>
 <li>Open RViz2 and add the displays <code>PointCloud2</code> and <code>MarkerArray</code></li>
@@ -423,13 +503,16 @@ More on that folder later.</p>
 <li>Subscribe to the relevant topics (as defined in <code>params.yaml</code>) in RViz2</li>
 </ol>
 <p>Now the data should be visualized.</p>
-<hr />
 <h3 id="warnings-and-errors-from-the-node">Warnings and Errors from the node</h3>
 <p>Warnings and Errors thrown by this package are intended to inform you when something unexpected occurs during execution. In most cases, the process can continue without interruption, although the output may be affected.</p>
 <p>It is strongly recommended to resolve the underlying issue based on the warning/error message and then <strong>re-run the process</strong> to ensure reliable and consistent output.</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../scenario_manager/" class="btn btn-neutral float-left" title="Scenario Manager"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../credits/" class="btn btn-neutral float-right" title="Credits">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -451,6 +534,10 @@ More on that folder later.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../scenario_manager/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../credits/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

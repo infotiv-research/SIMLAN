@@ -63,6 +63,8 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#world-fidelity">World Fidelity</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#real-time-factor">Real time factor</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#adding-aruco-and-camera-static-agents">Adding Aruco and camera (static agents)</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#using-actors-in-gazebo">Using actors in Gazebo</a>
@@ -129,6 +131,10 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="object_mover/">Object Mover</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="scenario_manager/">Scenario Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="visualize_real_data/">Visualize Real Data Package</a>
+                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../credits/">Credits</a>
@@ -176,6 +182,10 @@
 <li><code>simulation/simlan_gazebo_environment/launch/simlan_factory.launch.py</code> (for world generation)</li>
 <li><code>simulation/simlan_gazebo_environment/launch/generate_world_file.py</code> (both <code>original_world</code> and the <code>world_setup</code>)</li>
 </ul>
+<h2 id="real-time-factor">Real time factor</h2>
+<p>inside of <code>config.sh</code> you can can modify the scalar variable <code>real_time_factor</code> (RTF) to control the speed of the simulator. Reasonable ranges are 0 \&lt; RTF \&lt;= 1.0.</p>
+<p>inside the world config file "<a href="simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro">simulation/simlan_gazebo_environment/worlds/ign_simlan_factory.world.xacro</a>" you can specify the real time factor that sets how slow time passes in the simulator. Per default the value is 1.0 meaning that 1:1 ratio. 1 second in sim correspond to 1 second in real-time. For more computational tasks it is preferred to have a lower RTF.</p>
+<p>Example, setting real_time_factor=0.1, means 10 seconds pass in real-time for ever simulated second.</p>
 <h2 id="adding-aruco-and-camera-static-agents">Adding Aruco and camera (static agents)</h2>
 <p>Aruco codes and cameras are all attached to the same link in Gazebo. To create new static agents, go to <code>simulation/static_agent_launcher/description/agents.urdf.xacro</code>. There you only need to add a new line on the form <code>&lt;xacro:camera number="1" x="3" y="3" z="6" r="0" p="0" w="0"/&gt;</code> for a new camera, or a new line on the form <code>&lt;xacro:aruco number="1" x="3" y="3" z="0.1" r="0" p="0" w="0"/&gt;</code> for a new aruco. The commands are identical apart from the name.</p>
 <ul>

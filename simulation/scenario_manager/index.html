@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi" /><link rel="canonical" href="https://infotiv-research.github.io/SIMLAN/simulation/scenario_manager/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>🚀 Scenario Manager - SIMLAN, Simulation for Multi-Camera Robotics</title>
+    <title>Scenario Manager - SIMLAN, Simulation for Multi-Camera Robotics</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\ud83d\ude80 Scenario Manager";
+        var mkdocs_page_name = "Scenario Manager";
         var mkdocs_page_input_path = "simulation/scenario_manager/README.md";
         var mkdocs_page_url = "/SIMLAN/simulation/scenario_manager/";
       </script>
@@ -58,7 +58,7 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Simulation</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../">Simulation</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../simlan_gazebo_environment/worlds/">Gazebo Worlds</a>
@@ -105,6 +105,28 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../object_mover/">Object Mover</a>
                   </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Scenario Manager</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#launching-the-scenario-manager">Launching the Scenario Manager</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#collision-action-server">Collision Action Server</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#collision-types">Collision Types</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running-a-scenario">Running a Scenario</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#time-to-collision-ttc-calculation">Time to Collision (TTC) Calculation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#running-the-ttc-node">Running the TTC Node</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../visualize_real_data/">Visualize Real Data Package</a>
+                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../../credits/">Credits</a>
@@ -133,7 +155,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">🚀 Scenario Manager</li>
+          <li class="breadcrumb-item">Simulation</li>
+      <li class="breadcrumb-item active">Scenario Manager</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/infotiv-research/SIMLAN/edit/master/docs/simulation/scenario_manager/README.md">Edit on infotiv-research/SIMLAN</a>
     </li>
@@ -143,23 +166,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="scenario-manager">🚀 Scenario Manager</h1>
-<h2 id="overview">📌 Overview</h2>
+                <h1 id="scenario-manager">Scenario Manager</h1>
 <p>The <code>scenario_manager</code> package is a ROS2 package designed to manage and execute various robot scenarios involving teleportation, speed setting, and collision simulations. It provides action servers to control robot behavior and a tool for calculating Time to Collision (TTC).</p>
-<h2 id="launching-the-scenario-manager">🚦 Launching the Scenario Manager</h2>
+<h2 id="launching-the-scenario-manager">Launching the Scenario Manager</h2>
 <p>To start the <code>scenario_manager</code>, launch it using the following command:</p>
 <pre><code class="language-bash">ros2 launch scenario_manager scenario_manager.launch.py
 </code></pre>
 <p>This initializes three action servers:
-- <strong>🚀 teleport_action_server</strong>: Handles teleportation of robots.
-- <strong>⚡ set_speed_action_server</strong>: Controls robot speed.
-- <strong>💥 collision_action_server</strong>: Configures scenarios where robots collide (only applicable to <code>jackal</code> and <code>pallet_truck</code>).</p>
-<h2 id="collision-action-server">🔄 Collision Action Server</h2>
+- <strong>teleport_action_server</strong>: Handles teleportation of robots.
+- <strong>set_speed_action_server</strong>: Controls robot speed.
+- <strong>collision_action_server</strong>: Configures scenarios where robots collide (only applicable to <code>jackal</code> and <code>pallet_truck</code>).</p>
+<h2 id="collision-action-server">Collision Action Server</h2>
 <p>The <strong>collision_action_server</strong> configures collisions by setting speeds and initial positions for two robots to ensure a collision occurs. It requires:
-- <strong>📐 Angle</strong>: The approach angle.
-- <strong>🏎️ Speed of pallet_truck</strong>: The movement speed of the pallet truck.
-- <strong>💠 Collision Type</strong>: An enum from the <code>simlan_custom_msg</code> package specifying the type of collision.</p>
-<h3 id="collision-types">💥 Collision Types</h3>
+- <strong>Angle</strong>: The approach angle.
+- <strong>Speed of pallet_truck</strong>: The movement speed of the pallet truck.
+- <strong>Collision Type</strong>: An enum from the <code>simlan_custom_msg</code> package specifying the type of collision.</p>
+<h3 id="collision-types">Collision Types</h3>
 <p>There are three predefined collision types:</p>
 <table>
 <thead>
@@ -188,35 +210,51 @@
 </tbody>
 </table>
 <p>Below are images illustrating the different collision types:</p>
-<p align="center">
-  <img src="images/head_on_collision.png" alt="Head-On Collision" width="30%">
-  <img src="images/pallet_truck_side_collision.png" alt="Pallet Truck Side Collision" width="30%">
-  <img src="images/jackal_side_collision.png" alt="Jackal Side Collision" width="30%">
-</p>
-<p align="center">
-  <b>Left: Head-On Collision | Middle: Pallet Truck Side Collision | Right: Jackal Side Collision</b>
-</p>
-
-<h2 id="running-a-scenario">🎬 Running a Scenario</h2>
+<table>
+<thead>
+<tr>
+<th>Head-On Collision</th>
+<th>Pallet Truck Side Collision</th>
+<th>Jackal Side Collision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Head-On Collision" src="images/head_on_collision.png" /></td>
+<td><img alt="Pallet Truck Side Collision" src="images/pallet_truck_side_collision.png" /></td>
+<td><img alt="Jackal Side Collision" src="images/jackal_side_collision.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="running-a-scenario">Running a Scenario</h2>
 <p>To execute a scenario, use the following command:</p>
 <pre><code class="language-bash">ros2 launch scenario_execution_ros scenario_launch.py scenario:=&lt;scenario_file&gt;
 </code></pre>
 <p>Replace <code>&lt;scenario_file&gt;</code> with a specific scenario file, such as:</p>
 <pre><code class="language-bash">ros2 launch scenario_execution_ros scenario_launch.py scenario:=simulation/scenario_manager/scenarios/case1.osc
 </code></pre>
+<p>or scenario 6 can be run from the scenarios.sh file like so:</p>
+<pre><code class="language-bash">./scenarios.sh 6
+</code></pre>
 <p>This runs a collision action client, executing multiple collision simulations with varying angles and speeds.</p>
-<h2 id="time-to-collision-ttc-calculation">⏳ Time to Collision (TTC) Calculation</h2>
-<p>The package includes a <strong>TTC node</strong> that logs the <strong>Time to Collision (TTC)</strong> and <strong>Closest Point of Arrival (CPA)</strong> for two robots, assuming constant speed and direction.</p>
-<h3 id="running-the-ttc-node">▶️ Running the TTC Node</h3>
+<blockquote>
+<p>Note: If the robots are not moving or something feels like it is not working, there can be ghost processes from an earlier run. Stop the program and run <code>./control.sh kill</code> and try running again.</p>
+</blockquote>
+<h2 id="time-to-collision-ttc-calculation">Time to Collision (TTC) Calculation</h2>
+<p>The package includes a <strong>TTC node</strong> that logs the <strong>Time to Collision (TTC)</strong> and <strong>Closest Point of Arrival (CPA)</strong> for two robots using the Minkowski-Difference, assuming constant speed and direction.</p>
+<h3 id="running-the-ttc-node">Running the TTC Node</h3>
 <pre><code class="language-bash">ros2 run scenario_manager ttc
 </code></pre>
 <p>This node calculates and logs:
 - <strong>⏱️ TTC</strong>: The time at which the closest approach occurs.
 - <strong>📍 CPA</strong>: The closest distance between the two robots, assuming constant speed and trajectory.</p>
-<p>📌 <em>Note:</em> As of version <strong>1.0.6 (February 2025)</strong>, the TTC node logs data but does not publish it elsewhere.</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../object_mover/" class="btn btn-neutral float-left" title="Object Mover"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../visualize_real_data/" class="btn btn-neutral float-right" title="Visualize Real Data Package">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -238,6 +276,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../object_mover/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../visualize_real_data/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
