@@ -100,7 +100,7 @@ kill (){
         # Check if process exists
         while pgrep "$name" > /dev/null; do
             echo "shutting down $name..."
-            pkill -9 "$name"
+            kill -9 "$name"
             sleep 1
         done
     done

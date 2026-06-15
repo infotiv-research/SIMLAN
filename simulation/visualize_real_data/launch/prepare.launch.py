@@ -86,37 +86,44 @@ def generate_launch_description():
         ],
     )
 
-    orientation_faker = Node(
-        name="orientation_faker",
-        namespace=parameters["namespace"],
+    safety_node = Node(
+        name="safety_node",
         package="visualize_real_data",
-        executable="orientation_faker",
-        parameters=[parameters],
+        executable="safety_node",
         output="screen",
-        condition=IfCondition(fake_orientation),
     )
+    # orientation_faker = Node(
+    #     name="orientation_faker",
+    #     namespace=parameters["namespace"],
+    #     package="visualize_real_data",
+    #     executable="orientation_faker",
+    #     parameters=[parameters],
+    #     output="screen",
+    #     condition=IfCondition(fake_orientation),
+    # )
 
     kill_rosbag = RegisterEventHandler(
         OnProcessExit(target_action=prepare_data, on_exit=[EmitEvent(event=Shutdown())])
     )
 
     ld = LaunchDescription()
-    ld.add_action(orientation_faker)
+    # ld.add_action(orientation_faker)
     ld.add_action(
         DynoWaitFor(
             name="wait_for_json_orientation",
             message_on_topics=[
-                (
-                    parameters["namespace"] + "/orientation_done",
-                    std_msgs.msg.Empty,
-                    rclpy.qos.QoSProfile(
-                        depth=10, durability=rclpy.qos.DurabilityPolicy.TRANSIENT_LOCAL
-                    ),
-                ),
+                # (
+                #     parameters["namespace"] + "/orientation_done",
+                #     std_msgs.msg.Empty,
+                #     rclpy.qos.QoSProfile(
+                #         depth=10, durability=rclpy.qos.DurabilityPolicy.TRANSIENT_LOCAL
+                #     ),
+                # ),
             ],
             actions=[rosbag, prepare_data, static_tf_map_images, kill_rosbag],
         )
     )
+    ld.add_action(safety_node)
     return ld
 
 

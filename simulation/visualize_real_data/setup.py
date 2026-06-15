@@ -17,7 +17,9 @@ setup(
         # Config files
         ("share/" + package_name + "/config", glob("config/**")),
     ],
-    install_requires=["setuptools"],
+    install_requires=[
+        "setuptools",
+        "ruamel.yaml"],
     zip_safe=True,
     maintainer="Sebastian Olsson",
     maintainer_email="sebastian@dynorobotics.se",
@@ -33,6 +35,7 @@ setup(
             "scenario_replayer = visualize_real_data.scenario_replayer:main",
             "scenario_replay_cmd_vel = visualize_real_data.scenario_replay_cmd_vel:main",
             "orientation_faker = visualize_real_data.orientation_faker:main",
+            "safety_node = visualize_real_data.safety_node:main",
         ],
     },
 )

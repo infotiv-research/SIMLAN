@@ -7,10 +7,10 @@ import math
 from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 from sensor_msgs_py import point_cloud2
 from sensor_msgs.msg import PointCloud2, PointField
-from std_msgs.msg import Header
+from std_msgs.msg import Header, String
 from pathlib import Path
 import cv2
-from ruamel.yaml import YAML
+import yaml
 from datetime import datetime
 
 
@@ -25,6 +25,7 @@ class PrepareRealData(Node):
         self.declare_parameter("pointcloud_topic", "factory_pointcloud")
         self.declare_parameter("images_folder", "bev_img")
         self.declare_parameter("entity_topic", "entity_marker")
+        self.declare_parameter("odd_topic", "odd_detections")
         self.declare_parameter("json_file_name", "trajectories.json")
         self.declare_parameter("set_frames", True)
         self.declare_parameter("frames_to_process", 1)
@@ -57,6 +58,9 @@ class PrepareRealData(Node):
         entity_topic = (
             self.get_parameter("entity_topic").get_parameter_value().string_value
         )
+        odd_topic = (
+            self.get_parameter("odd_topic").get_parameter_value().string_value
+        )
         self.json_file_path = (
             self.get_parameter("json_file_name").get_parameter_value().string_value
         )
@@ -87,6 +91,8 @@ class PrepareRealData(Node):
         self.end_time = (
             self.get_parameter("end_time").get_parameter_value().string_value
         )
+
+        self.track_id_yaw_history = {}
 
         # Convert start/end times to milliseconds if provided
         self.start_timestamp_ms = None
@@ -122,6 +128,9 @@ class PrepareRealData(Node):
         self.ent_publisher_ = self.create_publisher(
             MarkerArray, entity_topic, qos_profile
         )
+        self.odd_publisher_ = self.create_publisher(
+            String, odd_topic, qos_profile
+        )
 
         self._wait_for_subscriber()
 
@@ -144,6 +153,19 @@ class PrepareRealData(Node):
         # # )
 
         self._check_timestamps(data_dict)
+
+        # Check for ODD detections within the filtered timestamp range if timestamps are given
+        if self.start_timestamp_ms or self.end_timestamp_ms:
+            found_odd = False
+            for frame in data_dict:
+                odd_detections = frame.get("odd_detections", [])
+                if odd_detections:
+                    found_odd = True
+                    break
+            if not found_odd:
+                self.get_logger().warn("No ODD detections found in the selected timestamp range!")
+            else:
+                self.get_logger().info("ODD detections present in the selected timestamp range.")
 
         num_frames = len(data_dict)  # num_frames = len(sorted_images)
 
@@ -170,6 +192,7 @@ class PrepareRealData(Node):
             )
             preprocessed_clouds = []
             preprocessed_markers = []
+            preprocessed_odd = []
 
         for frame in range(num_frames):
             start = time.time()
@@ -182,13 +205,38 @@ class PrepareRealData(Node):
             marker_array = MarkerArray()
             frame_info = data_dict[frame]
             for object_info in frame_info["object_list"]:
-                # Create and save marker message
-                entity_msg, text_msg = self._create_marker_message(
-                    object_info[0], object_info[1:]
-                )
+                # Handle both old array format and new dictionary format
+                if isinstance(object_info, dict):
+                    # New dictionary format with track_id
+                    object_id = object_info.get("track_id")
+                    position_3d = object_info.get("position_3d", {})
+                    x = position_3d.get("x", 0.0)
+                    y = position_3d.get("y", 0.0)
+                    z = position_3d.get("z", 0.0)
+                    heading = object_info.get("heading", {}).get("rad", None)
 
-                marker_array.markers.append(entity_msg)
-                marker_array.markers.append(text_msg)
+                    if (heading is not None):
+                        # Store yaw history for track_id
+                        self.track_id_yaw_history[object_id] = heading
+                    yaw = self.track_id_yaw_history.get(object_id, 0.0)  # or could be from route/orientation data
+                    object_pos = [x, y, z, yaw]
+                else:
+                    # Fallback to old array format
+                    object_id = object_info[0]
+                    object_pos = object_info[1:]
+
+                if object_id is not None:
+                    # Create and save marker message
+                    entity_msg, text_msg = self._create_marker_message(
+                        object_id, object_pos, display_label=object_info.get("display_label", "")
+                    )
+
+                    marker_array.markers.append(entity_msg)
+                    marker_array.markers.append(text_msg)
+
+
+            # ODD detections
+            odd_detections = frame_info.get("odd_detections", [])
 
             # Only have a wait if publishing is being done in real-time while processing
             if not self.preprocess_all_data:
@@ -203,10 +251,12 @@ class PrepareRealData(Node):
             if self.preprocess_all_data:
                 preprocessed_clouds.append(cloud_msg)
                 preprocessed_markers.append(marker_array)
+                preprocessed_odd.append(odd_detections)
             else:
                 # Publish messages
                 self.pc_publisher_.publish(cloud_msg)
                 self.ent_publisher_.publish(marker_array)
+                self.odd_publisher_.publish(String(data=json.dumps(odd_detections)))
 
             self.get_logger().info(f"Processed {frame+1}/{num_frames} messages")
 
@@ -228,7 +278,7 @@ class PrepareRealData(Node):
                 # Publish messages
                 self.pc_publisher_.publish(preprocessed_clouds[frame])
                 self.ent_publisher_.publish(preprocessed_markers[frame])
-
+                self.odd_publisher_.publish(String(data=json.dumps(preprocessed_odd[frame])))
                 # Use the actual time interval from the original data
                 frame_interval = self.dt_intervals[
                     frame
@@ -256,10 +306,16 @@ class PrepareRealData(Node):
 
         self.pc_publisher_.wait_for_all_acked()
         self.ent_publisher_.wait_for_all_acked()
+        self.odd_publisher_.wait_for_all_acked()
 
         self.get_logger().info(
             "All frames published. Rosbag will complete the recording, then shut down."
         )
+
+        # Log the name of the file/bag where data is saved (if known)
+        # If using rosbag, the bag file name is typically set in the launch/recording process.
+        # Here, log the JSON file used and suggest to check rosbag output for bag file name.
+        self.get_logger().info(f"Trajectory JSON file used: {self.json_file_path}")
 
     def parse_time_input(self, time_input, param_name):
         """Parse time input that can be either Unix timestamp (ms) or datetime string format"""
@@ -405,18 +461,14 @@ class PrepareRealData(Node):
             )
 
         # Write average fps to file
-        yaml = YAML()
-        yaml.preserve_quotes = True
-        yaml.width = 4096  # Prevent line wrapping
-
         with open(self.config_path, "r") as file:
-            doc = yaml.load(file)
+            doc = yaml.safe_load(file)
 
         if doc["shared"]["extracted_fps"] != self.dt_fps:
             doc["shared"]["extracted_fps"] = self.dt_fps
 
             with open(self.config_path, "w") as file:
-                yaml.dump(doc, file)
+                yaml.safe_dump(doc, file, default_flow_style=False)
 
             self.get_logger().info(
                 (
@@ -475,7 +527,7 @@ class PrepareRealData(Node):
         """Convert yaw angle (radians) to quaternion"""
         return {"x": 0.0, "y": 0.0, "z": math.sin(yaw / 2.0), "w": math.cos(yaw / 2.0)}
 
-    def _create_marker_message(self, object_id, object_pos):
+    def _create_marker_message(self, object_id, object_pos, display_label=""):
         """_Explanation_:
         Creates a marker message for one entity and its id-badge as
         a separate marker message
@@ -507,11 +559,11 @@ class PrepareRealData(Node):
         text_msg = Marker()
         text_msg.type = Marker.TEXT_VIEW_FACING
         text_msg.action = Marker.ADD
-        text_msg.text = "id:" + str(object_id)
+        text_msg.text = f"id:{object_id}\n{display_label}"  # Display ID and optional label on separate lines
 
         text_msg.pose.position.x = object_pos[0] + x_coef
         text_msg.pose.position.y = -object_pos[1] + y_coef + (-0.5)
-        text_msg.pose.position.z = 0.5
+        text_msg.pose.position.z = 1.0
 
         # Arbitrary number 1000, but enough so that entity-id isn't overridden
         text_msg.id = 1000 + object_id

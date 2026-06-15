@@ -9,13 +9,13 @@ prepare_data:
   image_scale: 0.04
   set_frames: false
   frames_to_process: 1
-  preprocess_all_data: true
-  fake_orientation: true
+  preprocess_all_data: false
+  fake_orientation: false
   list_json_files: false
 
 send_data:
   playback_rate: 1
-  bag_name:
+  bag_name: odd_right_turn
 
 scenario_replayer:
   gazebo_teleport_service: /world/default/set_pose
@@ -27,10 +27,21 @@ shared:
   frame_id: real_data
   namespace: visualize_real_data
   entity_topic: entity_topic
+  odd_topic: odd_detections
   #json_file_name has to be set to an existing file in replay_data folder
-  json_file_name: example_trajectory.json
-  start_time: ""
-  end_time: ""
+  json_file_name: predictions_2026_02_27_with_odd.json
+
+  # Right turn
+  # start_time: "2025-04-30 12:12:16"
+  # end_time: "2025-04-30 12:12:28"
+
+  # Left turn
+  start_time: "2025-04-30 12:14:02"
+  end_time: "2025-04-30 12:14:14"
+  
+  # Should have OOD detection VV
+  # start_time: "2025-04-30 12:07:15"
+  # end_time: "2025-04-30 12:07:45"
   initial_heading: 0.0  # Initial heading/orientation in degrees (0 = pointing left). Positive heading is counter-clockwise, i.e. 90 deg = DOWN. Used by orientation_faker.py
 
   # Can be changed to move the frame
