@@ -1,6 +1,10 @@
 #!/bin/bash
 
-ORIGINAL_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+
+SSH_PATH="/home/research/"
+echo "$SSH_PATH"
+sleep 2
+
 
 HOST_DIR=$(dirname $(dirname "$(pwd)"))
 CONTAINER_DIR="/docvolume/"
@@ -24,15 +28,15 @@ run_command_docker() {
         return 1
     fi
 
-    echo "Running command inside Docker: $COMMAND"
-    # Execute the docker run command
     docker run --rm \
         --name mkdoccontainer \
         --entrypoint /bin/sh \
         -v "$HOST_DIR/resources/build-documentation/mkdocs.yml:/mkdocs.yml" \
         -v "$HOST_DIR:$CONTAINER_DIR" \
-        -v "$ORIGINAL_HOME/.ssh:/tmp/ssh_mount:ro" \
+        -v "$SSH_PATH/.ssh:/tmp/ssh_mount:ro" \
         -v "$(pwd)/output:/output" \
+        -v "$SSH_AUTH_SOCK:/run/ssh-agent" \
+    	-e SSH_AUTH_SOCK=/run/ssh-agent \
         -p 8000:8000 \
         "$DOCKER_IMAGE" \
         -c "
@@ -46,6 +50,11 @@ run_command_docker() {
         chmod 644 /root/.ssh/*.pub 2>/dev/null || true && \
         ssh-keyscan github.com >> /root/.ssh/known_hosts && \
         chown -R root:root /root/.ssh && \
+	    git config --global --add safe.directory /docvolume && \
+        if [ -z \"\$SSH_AUTH_SOCK\" ]; then
+            eval \$(ssh-agent -s)
+            ssh-add /root/.ssh/id_rsa
+        fi && \
         cd $CONTAINER_DIR && \
         $COMMAND
         "
@@ -55,7 +64,7 @@ run_command_docker() {
 run_command_docker "pandoc \
         --lua-filter=$CONTAINER_DIR/resources/build-documentation/strip-abs-path.lua \
         --verbose --log=pandoc-log.txt -f markdown-implicit_figures \
-        --resource-path=.:$CONTAINER_DIR:$CONTAINER_DIR/resources/:$CONTAINER_DIR/humanoid_utility/:$CONTAINER_DIR/resources/diagrams/:$CONTAINER_DIR/resources/build-documentation/:$CONTAINER_DIR/resources/build-documentation/diagrams/:$CONTAINER_DIR/simulation/raw_models/warehouse/resources/:$CONTAINER_DIR/simulation/raw_models/objects/resources/ \
+        --resource-path=.:$CONTAINER_DIR:$CONTAINER_DIR/resources/:$CONTAINER_DIR/humanoid_utility/:$CONTAINER_DIR/resources/diagrams/:$CONTAINER_DIR/resources/build-documentation/:$CONTAINER_DIR/resources/build-documentation/diagrams/:$CONTAINER_DIR/simulation/raw_models/warehouse/resources/:$CONTAINER_DIR/simulation/raw_models/objects/resources/:$CONTAINER_DIR/simulation/scenario_manager/images/resources/ \
         -V mainfont=\"DejaVu Serif\" \
         -V sansfont=\"DejaVu Sans\" \
         -V monofont=\"DejaVu Sans Mono\" \
@@ -75,4 +84,4 @@ run_command_docker "mkdocs build --config-file /mkdocs.yml --site-dir /output --
 run_command_docker "mkdocs serve --config-file /mkdocs.yml --dev-addr=0.0.0.0:8000"
 
 # THIS HAS TO BE EXECUTED IN THE GITHUB REPO (NOT INTERNAL GITLAB)
-# run_command_docker "git config --global --add safe.directory /docvolume ; mkdocs  gh-deploy --config-file /mkdocs.yml --site-dir /output --verbose"
+# run_command_docker "mkdocs  gh-deploy --config-file /mkdocs.yml --site-dir /output --verbose"

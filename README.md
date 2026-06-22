@@ -4,7 +4,8 @@ This simulation environment, based on the Ignition Gazebo simulator and ROS 2, r
 \[[📹 GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)\]
 
 - 🔗 [Online Documentation](https://infotiv-research.github.io/SIMLAN/)
-- 📃 [PDF Documentation](https://infotiv-research.github.io/SIMLAN/SIMLAN.pdf)
+- 📃 [PDF Documentation](https://infotiv-research.github.io/SIMLAN/SIMLAN.pdf) 
+- 📃 [Vision-Based Multi-Camera Robotics Simulation](resources/SIMLAN_Vision_Based_Multi_Camera_Robotics_Simulation.pdf)
 
 ## SIMLAN Features
 
@@ -92,6 +93,8 @@ Running the command above, the system publishes projected camera images to `/sta
 
 ![](resources/stitched.png)
 
+![](resources/volvo_stitched_cropped.jpg)
+
 ## RITA controls (humanoid, robotic arm) \[[📹 Demo](https://www.youtube.com/watch?v=EiCNiPeifPk)\]
 
 To spawn a human worker run the following command
@@ -173,9 +176,26 @@ You can build the online documentation page or a PDF file by running scripts in 
   - [Aruco Localization Documentation](simulation/aruco_localization/README.md)
   - [Geofencing and Collision safe stop](simulation/bt_failsafe/README.md)
   - [Visualize Real Data](simulation/visualize_real_data/README.md) **requires data from Volvo**
+  - [Scenario Manager](simulation/scenario_manager/README.md)
   - [Humanoid bringup](simulation/humanoid_robot/README.md)
   - [humanoid_robot simulation](simulation/humanoid_robot/)
   - [Humanoid Control](simulation/humanoid_support_moveit_config/README.md)
+
+
+If you use SIMLAN in your research, please cite our [PETRA 2026 paper](resources/SIMLAN_Vision_Based_Multi_Camera_Robotics_Simulation.pdf) using the BibTeX entry below:
+
+```
+@inproceedings{ebadi2026simlan,
+  title={Vision-Based Multi-Camera Robotics Simulation: The SIMLAN Open-Source Framework for Industrial Environments},
+  author={Ebadi, Hamid and Aronsson, P{\"a}r},
+  booktitle={Proceedings of the 19th PErvasive Technologies Related to Assistive Environments Conference (PETRA 2026)},
+  year={2026}, organization={Infotiv Research}
+}
+```
+
+
+To learn more about the pose estimation component, check out this master's thesis: [Human Motion Replay on a Simulated Humanoid Robot Using Pose Estimation](resources/Human_Motion_Replay_on_a_Simulated_Humanoid_Robot_Using_Pose_Estimation.pdf).
+
 
 ## Research Funding
 

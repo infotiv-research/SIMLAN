@@ -79,6 +79,13 @@ Its important to know how the cameras are located. This is the camera setup for 
 
 When selecting what cameras to use in "dataset_cameras" in `config.sh` it is important that the order remains the same. To avoid confusion always use the cameras in order: "500 501 502 503" meaning "Back Right Front Left".
 
+In case you want to use **one camera** for training, evaluation and prediction update `config.sh` as:
+
+```
+dataset_cameras='500'
+model_instance="pytorch_demo_single_cam_500"
+```
+
 ## Models
 
 ### PyTorch
@@ -142,6 +149,7 @@ Run the command below to predict on different types of datasets:
 ./control.sh predict JSON/ # This has the same "EVAL/", "TRAIN/" directories.
 ./control.sh predict VIDEOS/ # As in input/VIDEOS/
 ./control.sh predict IMAGES/ # As in input/IMAGES/
+./control.sh predict fit3d_burpees/ # fi3d sample images
 ```
 
 The input for prediction needs to be structured as the template below.

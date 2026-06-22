@@ -1,5 +1,13 @@
 # Changelog
 
+
+## v5.1.6: Improve human mocap model: Team/Tech Lead: Hamid Ebadi
+- Implement and reintroduce optuna optimizer : Marwa Naili
+- Improve PyTorch NN: applied regularization, added data augmentation and fixed architecture issues for improved performance : Marwa Naili
+- Experiment and validate Pytorch model on fit3d data : Marwa Naili
+- Exploring RNN-based architectures to model sequential and temporal dynamics of human motion : Marwa Naili
+- 
+
 ## v5.1.5: ur10, refactor: Team/Tech Lead: Hamid Ebadi
 
 - add simulation real time factor to config : Hamid Ebadi

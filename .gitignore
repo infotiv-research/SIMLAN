@@ -39,7 +39,6 @@ rcl/
 wireless/
 rosbag*
 ROS_DOMAIN_ID.txt
-*.pdf
 *.gv
 #### HUMANOID
 .vscode-server/src/ros2_numpy/
@@ -53,7 +52,6 @@ output/
 *.csv
 *.zip
 *.log
-*.png
 autogluon_models*
 *.bkp
 pandoc-log.txt

@@ -67,6 +67,15 @@ Otherwise you get the following error message in VS Code: `Error response from d
 
 On a **host** machine's terminal (**not** inside Visual Studio Code terminal): `xhost +local:docker`.
 
+Run the commands below to check that the prerequisites (e.g docker and ocker-compose) and drivers (NVIDIA drivers and Docker GPU access) are installed correctly.
+```
+docker --version
+docker-compose --version
+
+nvidia-smi
+docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+```
+
 ### No Nvidia GPU
 
 To start the project **without NVIDIA GPU**, please comment out these lines in `docker-compose.yaml` as shown below:

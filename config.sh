@@ -4,7 +4,7 @@
 #region GENERAL GAZEBO AND ROS2 CONFIG
 
 ## ROS_DOMAIN_ID is an auto generated value, modified by control.sh BUILD command
-ROS_DOMAIN_ID=
+ROS_DOMAIN_ID=11
 ## WORLD_SETUP can be set to either "default", "medium", "light", "empty"
 WORLD_SETUP=medium
 ## CAMERA_ENABLED_IDS can be set as a string of camera_ids separated by space ' '.
@@ -34,7 +34,7 @@ humanoid_dataset="$humanoid_utility_dir/DATASET"
 
 save_prediction_output="true" # default "true", whether to save predicted data. Stored in the output/ folder.
 # The cameras you want to train, eval and predict on. This can be a list of cameras i.e. "500 501 502 503". For single training set this to one  ""
-dataset_cameras='500 501 502 503'
+dataset_cameras='500'
 # Possible selections: pytorch, autogluon
 model_type="pytorch"
 # If you want to reuse a model, specify its name here. Keep blank if you dont want to save.
@@ -49,7 +49,7 @@ HUMANOIDS='[
         {
             "namespace": "humanoid_2",
             "initial_pose_x":5,
-            "initial_pose_y":1.0
+            "initial_pose_y":0.0
         }
     ]'
 #endregion
