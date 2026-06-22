@@ -323,8 +323,25 @@ then
 
 ##################### SCENARIO EXECUTION ########################
 #region collision scenario execution related operations
+elif [[ "$1" == "scenario_sim" ]]
+then
+    # Run this to start the simulation setup for collision scenario. Then either run the prepare or replay command
+    rviz_config="visualize_real_data.rviz"
+    WORLD_SETUP="warehouse_corrected"
+    ROBOTS='[
+        {
+            "namespace": "robot_agent_1",
+            "initial_pose_x":"10.0",
+            "initial_pose_y":"1.0",
+            "robot_type":"pallet_truck",
+            "aruco_id":"1"
+        }
+        ]'
+    sim &
+    spawn_jackal &
+    sleep 5; multi_robot_spawn
 # Example usage: ./control.sh scenario_execution case1.osc
-# Requires "./control.sh gpss" to be run beforehand
+# Requires "./control.sh gpss" and "./control.sh jackal" to be run beforehand
 elif [[ "$1" == "scenario_execution" ]]
 then
     scenario_manager &
