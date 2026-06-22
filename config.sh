@@ -4,8 +4,8 @@
 #region GENERAL GAZEBO AND ROS2 CONFIG
 
 ## ROS_DOMAIN_ID is an auto generated value, modified by control.sh BUILD command
-ROS_DOMAIN_ID=11
-## WORLD_SETUP can be set to either "default", "medium", "light", "empty"
+ROS_DOMAIN_ID=19
+## WORLD_SETUP can be set to "default", "medium", "light", "empty", or "warehouse_corrected"
 WORLD_SETUP=medium
 ## CAMERA_ENABLED_IDS can be set as a string of camera_ids separated by space ' '.
 # valid camera ids for GPSS are 160 161 162 163 164 165 166 167 168 169 170

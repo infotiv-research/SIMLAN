@@ -28,7 +28,46 @@ replay_data/
 |── README.md
 ```
 
-By default, the package expects to find the trajectory data inside the `replay_data/` folder as `.json`, and the images inside the `images/` folder as `.jpg`. The .json trajectories are expected on this form:
+By default, the package expects to find the trajectory data inside the `replay_data/` folder as `.json`, and the images inside the `images/` folder as `.jpg`. The .json trajectories are expected on this newer form now after 2026-06-15:
+
+```json
+{
+  "time_stamp": 1746006991518,
+  "object_list": [
+    {
+      "track_id": 0,
+      "position_3d": {
+        "x": -14.650000000000002,
+        "y": -0.5749999999999993
+      },
+      "velocity_3d": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "acceleration_3d": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "bbox_moving_avg": {
+        "width": 68.0,
+        "length": 23.0
+      },
+      "heading": {
+        "rad": null,
+        "deg": null,
+        "confidence": null,
+        "source": null,
+        "locked": false
+      }
+    },
+  ],
+  "odd_detections": [
+    {"cam": "160"},
+  ]
+}
+```
+
+DEPRECATED VERSION (MAY WORK):
 
 ```json
 {
@@ -59,6 +98,16 @@ Some things to note:
 
 - Just be sure to update the corresponding fields (`images_folder`, `json_file_name`) in `params.yaml`.
 
+### Creating the new JSON
+
+To get the new .json file a few steps need to be taken.
+
+1. Download the folder containing all the folders of ODD data for the different cameras and the `extract_json.py` script. Run this script and you will get a `image_labels.json` file in each directory.
+1. Change the name of the `image_labels.json` files to their respective camera and copy them into the [simulation/visualize_real_data/visualize_real_data/trajectory_merging/odd_scores](./visualize_real_data/json_compare/odd_scores/) folder.
+1. Download the `2026_02_27_final.json` file containing additional data about the trajectories. If the file contains large fields that are not listed above, then you can run the `json_cleaner.py` script to remove those fields and save space and memory when the file is read.
+1. Run the `combine_json.py` script on the old `trajectories.json` and the new `2026_02_27_final.json` file.
+1. Finally run the add_odd_detections.py on the combined .json file and then copy-paste it into the `replay_data/` folder.
+
 ## Config file
 
 When your data is in place, you may want to review the config parameters in `params.yaml`. This step is often optional, as default settings typically work well. There is currently an example trajectory file that will show an image of a dog and a cat (these would be your stitched images in practice) and with the positions from the trajectories as visualization markers. These are mostly there to check that things still work as intended without the need of external data.
@@ -73,11 +122,11 @@ When your data is in place, you may want to review the config parameters in `par
 | --------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------ |
 | `pointcloud_topic`    | Topic to publish the `PointCloud2` (image data).                                                                | `pointcloud_topic` |
 | `images_folder`       | Name of the folder containing images.                                                                           | `images`           |
-| `image_scale`         | Resize factor for `.jpg` images (useful for RViz display).                                                      | `0.04`             |
+| `image_scale`         | Resize factor for `.jpg` images (useful for RViz display).                                                      | `0.05`             |
 | `set_frames`          | If `true`, limits processing to `frames_to_process`; otherwise, all available images will be used.              | `false`            |
 | `frames_to_process`   | Number of frames to process if `set_frames` is `true`.                                                          | `1`                |
 | `preprocess_all_data` | If `true`, preprocesses all available data before playback. May not work for extremely large recording windows. | `true`             |
-| `fake_orientation`    | If `true`, automatically fakes object orientations during data preparation (used by the scenario replayer).     | `true`             |
+| `fake_orientation`    | If `true`, automatically fakes object orientations during data preparation (used by the scenario replayer).     | `false`            |
 | `list_json_files`     | If `true`, lists available JSON files in the replay_data directory during preparation.                          | `false`            |
 
 #### `send_data` section:
@@ -99,22 +148,33 @@ When your data is in place, you may want to review the config parameters in `par
 | `use_cmd_vel`             | If `true`, robots are driven with velocity commands; otherwise, teleportation is used to reenact the scenario. When set to `true`, it is important the simulation runs close to 100% real-time. | `false`                   |
 | `ignore_orientation`      | If `true`, robot orientation is reset to identity (no rotation) regardless of source data. Using with `cmd_vel` may cause unexpected movement behavior.                                         | `false`                   |
 
+The scenario replayer also consumes pointcloud messages for loop detection. If needed, set `pointcloud_topic` in this section to override the default (`/visualize_real_data/pointcloud_topic`).
+
 #### `shared` section:
 
 - Parameters here have to be set at the prepare-stage and can't be changed afterwards.
 
-| Parameter               | Description                                                                            | Default Value               |
-| ----------------------- | -------------------------------------------------------------------------------------- | --------------------------- |
-| `frame_id`              | Name of the frame in which all data is displayed.                                      | `real_data`                 |
-| `namespace`             | Namespace used for the node.                                                           | `visualize_real_data`       |
-| `entity_topic`          | Topic to publish the `MarkerArray` (trajectory data).                                  | `entity_topic`              |
-| `json_file_name`        | Name of the file containing trajectory data.                                           | `example_trajectory.json`   |
-| `start_time`            | Start time for data processing (optional filter).                                      | `""`                        |
-| `end_time`              | End time for data processing (optional filter).                                        | `""`                        |
-| `initial_heading`       | Initial heading/orientation in degrees (0 = pointing left). Used by orientation_faker. | `0.0`                       |
-| `frame_position`        | `x`,`y`,`z` coordinates for visualization frame.                                       | `x: 15.35, y: 5.7, z: -0.2` |
-| `extracted_fps`         | FPS of the extracted data for playback.                                                | `10.0`                      |
-| `processing_time_limit` | Max time allowed per frame for consistent playback. If exceeded, a warning appears.    | `0.8`                       |
+| Parameter                     | Description                                                                            | Default Value               |
+| ----------------------------- | -------------------------------------------------------------------------------------- | --------------------------- |
+| `frame_id`                    | Name of the frame in which all data is displayed.                                      | `real_data`                 |
+| `namespace`                   | Namespace used for the node.                                                           | `visualize_real_data`       |
+| `entity_topic`                | Topic to publish the `MarkerArray` (trajectory data).                                  | `entity_topic`              |
+| `odd_topic`                   | Topic name for odd detections used by the safety logic and camera coloring.            | `odd_detections`            |
+| `loop_topic`                  | Topic published when replay loops are detected (used for loop synchronization).        | `/visualize_real_data/loop` |
+| `loop_jump_threshold_seconds` | Timestamp jump threshold used to classify a bag wrap/loop event.                       | `0.5`                       |
+| `lookahead_constant_speed`    | Constant speed used by safety lookahead trajectory prediction.                         | `3.0`                       |
+| `teleport_on_start`           | If `true`, trigger startup teleport behavior for the configured robot entity.          | `true`                      |
+| `teleport_service`            | Gazebo service used for startup teleporting.                                           | `/world/default/set_pose`   |
+| `teleport_entity_name`        | Name of the entity to teleport on startup/loop sync events.                            | `jackal`                    |
+| `start_pose`                  | Startup teleport pose as `[x, y, z, yaw]`.                                             | `[33.4, 0.3, 0.1, 3.14159]` |
+| `allowed_ids`                 | Optional allow-list of forklift marker IDs. Empty list means all IDs are allowed.      | `[]`                        |
+| `json_file_name`              | Name of the file containing trajectory data.                                           | `example_trajectory.json`   |
+| `start_time`                  | Start time for data processing (optional filter).                                      | `""`                        |
+| `end_time`                    | End time for data processing (optional filter).                                        | `""`                        |
+| `initial_heading`             | Initial heading/orientation in degrees (0 = pointing left). Used by orientation_faker. | `0.0`                       |
+| `frame_position`              | `x`,`y`,`z` coordinates for visualization frame.                                       | `x: 14.5, y: -0.3, z: -0.2` |
+| `extracted_fps`               | FPS of the extracted data for playback.                                                | `10.0`                      |
+| `processing_time_limit`       | Max time allowed per frame for consistent playback. If exceeded, a warning appears.    | `0.8`                       |
 
 ### Launching the Processing Step
 

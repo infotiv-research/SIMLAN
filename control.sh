@@ -345,6 +345,7 @@ elif [[ "$1" == "replay_sim" ]]
 then
     # Run this to start the simulation setup for replaying data. Then either run the prepare or replay command
     rviz_config="visualize_real_data.rviz"
+    WORLD_SETUP="warehouse_corrected"
     sim &
     spawn_jackal &
     sleep 5; multi_robot_spawn

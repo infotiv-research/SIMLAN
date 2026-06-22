@@ -45,23 +45,33 @@ def launch_setup(context, *args, **kwargs):
     print(f"[DEBUG] real_time_factor={real_time_factor}")
 
     pkg_ros_gz_sim = get_package_share_directory("ros_gz_sim")
-    original_world = os.path.join(
-        get_package_share_directory("simlan_gazebo_environment"),
-        "worlds",
-        "ign_simlan_factory.world.xacro",
-    )
-    world_sdf_path = os.path.join(
-        get_package_share_directory("simlan_gazebo_environment"),
-        "worlds",
-        f"{world_setup}_world.world",
-    )
-    doc = xacro.process_file(
-        original_world,
-        mappings={"world_setup": world_setup, "real_time_factor": real_time_factor},
-    )
+    simlan_pkg = get_package_share_directory("simlan_gazebo_environment")
+    if world_setup == "warehouse_corrected":
+        # Use the full authored warehouse world, which already contains all clutter objects.
+        world_sdf_path = os.path.join(
+            simlan_pkg,
+            "models",
+            "warehouse_corrected",
+            "model.sdf",
+        )
+    else:
+        original_world = os.path.join(
+            simlan_pkg,
+            "worlds",
+            "ign_simlan_factory.world.xacro",
+        )
+        world_sdf_path = os.path.join(
+            simlan_pkg,
+            "worlds",
+            f"{world_setup}_world.world",
+        )
+        doc = xacro.process_file(
+            original_world,
+            mappings={"world_setup": world_setup, "real_time_factor": real_time_factor},
+        )
 
-    with open(world_sdf_path, "w") as f:
-        f.write(doc.toprettyxml(indent="  "))
+        with open(world_sdf_path, "w") as f:
+            f.write(doc.toprettyxml(indent="  "))
 
     # Setting the headless flag. If true then gazebo window won't turn on.
     headless_flag = ""
@@ -133,7 +143,7 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 "world_setup",
                 default_value="empty",
-                description="Select world setup: empty, light, medium, regular",
+                description="Select world setup: empty, light, medium, regular, warehouse_corrected",
             ),
             OpaqueFunction(function=launch_setup),
         ]

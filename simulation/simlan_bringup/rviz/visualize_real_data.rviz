@@ -196,7 +196,7 @@ Visualization Manager:
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.03999999910593033
+      Size (m): 0.05000000074505806
       Style: Flat Squares
       Topic:
         Depth: 5
@@ -211,13 +211,49 @@ Visualization Manager:
       Enabled: true
       Name: Visualize data MarkerArray
       Namespaces:
-        "": true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /visualize_real_data/entity_topic
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: CameraPolygons
+      Namespaces:
+        {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualize_real_data/camera_polygons
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: CorridorPolygons
+      Namespaces:
+        {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualize_real_data/corridor_polygons
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: LookAheadPoints
+      Namespaces:
+        {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualize_real_data/lookahead_points
       Value: true
   Enabled: true
   Global Options:
@@ -257,25 +293,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 27.122398376464844
+      Distance: 53.5051383972168
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 5.922989368438721
-        Y: 8.523505210876465
-        Z: 9.252556800842285
+        X: 14.052848815917969
+        Y: 2.9868662357330322
+        Z: 9.489707946777344
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.1592261791229248
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 1.4528470039367676
+      Yaw: 1.5778471231460571
     Saved: ~
 Window Geometry:
   Displays:

@@ -6,16 +6,17 @@ prepare_data:
   images_folder: images
 
   # Runtime variables
-  image_scale: 0.04
+  image_scale: 0.05
   set_frames: false
   frames_to_process: 1
-  preprocess_all_data: false
+  preprocess_all_data: true
   fake_orientation: false
   list_json_files: false
 
 send_data:
   playback_rate: 1
-  bag_name: odd_right_turn
+  bag_name: odd_fake
+  # bag_name: predictions_2026_02_27_with_odd__20260518_152555
 
 scenario_replayer:
   gazebo_teleport_service: /world/default/set_pose
@@ -27,18 +28,52 @@ shared:
   frame_id: real_data
   namespace: visualize_real_data
   entity_topic: entity_topic
+  loop_topic: /visualize_real_data/loop
+  loop_jump_threshold_seconds: 0.5
   odd_topic: odd_detections
+  lookahead_constant_speed: 3.0
+  teleport_on_start: true
+  teleport_service: /world/default/set_pose
+  teleport_entity_name: jackal
+  # start_pose order: [x, y, z, yaw]
+  start_pose: [33.4, 0.3, 0.1, 3.14159]
+  # Restrict processing to specific forklift marker IDs. Empty list means allow all IDs.
+  # allowed_ids: [] # Straight
+  allowed_ids: [] # Fake ODD
+  # allowed_ids: [46] # Left
+  # allowed_ids: [] # Right
   #json_file_name has to be set to an existing file in replay_data folder
-  json_file_name: predictions_2026_02_27_with_odd.json
+  json_file_name: predictions_2026_02_27_with_odd_FAKED.json # Use the Fake ODD time window for this.
 
   # Right turn
+  # start_time: "2025-04-30 12:48:15"
+  # end_time: "2025-04-30 12:48:27"
+
+  # Right turn (LONGER)
+  # start_time: "2025-04-30 12:48:13"
+  # end_time: "2025-04-30 12:48:33"
+
+  # Left turn
   # start_time: "2025-04-30 12:12:16"
   # end_time: "2025-04-30 12:12:28"
 
-  # Left turn
-  start_time: "2025-04-30 12:14:02"
-  end_time: "2025-04-30 12:14:14"
-  
+  # Left turn (LONGER)
+  # start_time: "2025-04-30 12:12:16"
+  # end_time: "2025-04-30 12:12:36"
+
+  # Straight
+  # start_time: "2025-04-30 12:14:02"
+  # end_time: "2025-04-30 12:14:14"
+
+  # Straight (LONGER)
+  # start_time: "2025-04-30 12:14:02"
+  # end_time: "2025-04-30 12:14:22"
+
+
+  # Fake ODD
+  start_time: "2025-04-30 12:13:30"
+  end_time: "2025-04-30 12:13:50"
+
   # Should have OOD detection VV
   # start_time: "2025-04-30 12:07:15"
   # end_time: "2025-04-30 12:07:45"
@@ -46,8 +81,8 @@ shared:
 
   # Can be changed to move the frame
   frame_position:
-    x: 15.35
-    y: 5.7
+    x: 14.5
+    y: -0.3
     z: -0.2
 
   # Calculated during preparation

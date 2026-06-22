@@ -44,6 +44,7 @@ def generate_launch_description():
             "--topics",
             f"{parameters['namespace']}/{parameters['pointcloud_topic']}",
             f"{parameters['namespace']}/{parameters['entity_topic']}",
+            f"{parameters['namespace']}/{parameters['odd_topic']}",
             "--include-hidden-topics",
             "--output",
             output_folder_path
@@ -162,6 +163,12 @@ def _read_config_file():
 
     if shared_params.get("end_time") is None:
         shared_params["end_time"] = ""
+
+    # Launch can normalize empty YAML arrays to (), which is invalid here.
+    # If allowed_ids is empty, let node use declared INTEGER_ARRAY default.
+    allowed_ids = shared_params.get("allowed_ids", None)
+    if isinstance(allowed_ids, list) and len(allowed_ids) == 0:
+        shared_params.pop("allowed_ids", None)
 
     try:
         shared_params["json_file_name"] = str(
