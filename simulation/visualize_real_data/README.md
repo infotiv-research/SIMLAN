@@ -103,10 +103,12 @@ Some things to note:
 To get the new .json file a few steps need to be taken.
 
 1. Download the folder containing all the folders of ODD data for the different cameras and the `extract_json.py` script. Run this script and you will get a `image_labels.json` file in each directory.
-1. Change the name of the `image_labels.json` files to their respective camera and copy them into the [simulation/visualize_real_data/visualize_real_data/trajectory_merging/odd_scores](./visualize_real_data/json_compare/odd_scores/) folder.
+1. Change the name of the `image_labels.json` files to their respective camera and copy them into the [simulation/visualize_real_data/visualize_real_data/trajectory_merging/odd_scores](./visualize_real_data/json_compare/odd_scores/) folder (160, 161, 162, etc.).
 1. Download the `2026_02_27_final.json` file containing additional data about the trajectories. If the file contains large fields that are not listed above, then you can run the `json_cleaner.py` script to remove those fields and save space and memory when the file is read.
 1. Run the `combine_json.py` script on the old `trajectories.json` and the new `2026_02_27_final.json` file.
 1. Finally run the add_odd_detections.py on the combined .json file and then copy-paste it into the `replay_data/` folder.
+
+(These files can also be found in the SMILE_MVP repository already merged and ready to use in the `trajectories_final_demo` folder)
 
 ## Config file
 
@@ -229,7 +231,7 @@ or
 
 This command sends the most **recently created rosbag** to the topics defined in `params.yaml`.
 
-- To play an earlier dataset, you must manually delete newer rosbags as the latest one (by timestamp) is always selected automatically.
+- To play an earlier dataset, change the `bag_name` parameter inside the `params.yaml` file to the name of any of your saved rosbags.
 
 ### Adjusting Playback Speed
 
@@ -247,6 +249,30 @@ You can modify the `playback_rate` parameter in `params.yaml` to control how qui
 - If the images aren't showing up, sometimes the `QOS (Quality of Service)` settings might be mismatched between the `rosbag player` and `RViz`.
   The intended `QOS settings` can be found in the `recorder_qos.yaml` file in the `config` folder together with the `params.yaml` file.
   These are the settings that the rosbag player uses, and the easiest fix is to make sure that RViz mirrors these settings for the respective displays.
+
+## Running the final demo
+
+Once all the data has been placed in the right places according to the instructions mentioned above, it can all be started by running the command:
+
+```bash
+./control.sh replay_sim
+```
+
+and once the gazebo simulator is fully up and running run the command:
+
+```bash
+./control.sh replay
+```
+
+This will use your settings in the params.yaml to replay the scenario specified within the timestamps in the same file.
+
+### Visualization
+
+The jackal has a lookahead horizon for collisions, this is visualized with the 5 blue->purple points ahead of it, these are used to check if they are inside any of the polygons that will be mentioned below.
+
+All the cameras polygons have been visualized which can be seen in rviz. They are green normally but turn red when there is a OOD (ODD?) detected inside of it. To see this in action use the \*\_faked.json trajectory file.
+
+Then there are the corridor polygons which are blue if non-occupied by a forklift. But if a forklift is determined that it will travel through these then they turn orange. If they are orange and the jackal is going to travel through it (via the look ahead points) it turns red and the safety_node tells the jackal to stop.
 
 ## Summary
 

@@ -264,14 +264,6 @@ class ScenarioReplayTeleport(Node):
             self.teleport_robot_direct(robot_name, parking_pose)
             self.get_logger().info(f"Parked robot {robot_name} in corner")
 
-        # Keep non-active robots parked and never assign them.
-        for j, robot_name in enumerate(
-            self.parked_only_robots, start=len(self.available_robots)
-        ):
-            parking_pose = self.get_parking_pose(j)
-            self.teleport_robot_direct(robot_name, parking_pose)
-            self.get_logger().info(f"Parked robot {robot_name} in corner (inactive)")
-
     def get_parking_pose(self, index: int) -> Pose:
         """Get parking pose for robot at given index (already in target frame coordinates)"""
         pose = Pose()

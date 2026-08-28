@@ -364,7 +364,7 @@ then
     rviz_config="visualize_real_data.rviz"
     WORLD_SETUP="warehouse_corrected"
     sim &
-    spawn_jackal &
+    sleep 3; spawn_jackal &
     sleep 5; multi_robot_spawn
 elif [[ "$1" == "prepare" ]]
 then
