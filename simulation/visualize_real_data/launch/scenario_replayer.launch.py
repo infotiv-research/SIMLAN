@@ -14,61 +14,84 @@ from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch.conditions import IfCondition, UnlessCondition
 
+
 def generate_launch_description():
 
     use_sim_time_arg = DeclareLaunchArgument(
-        'use_sim_time',
-        default_value='true',
-        description='Use simulation time'
+        "use_sim_time", default_value="true", description="Use simulation time"
     )
 
-    use_sim_time = LaunchConfiguration('use_sim_time')
+    use_sim_time = LaunchConfiguration("use_sim_time")
 
     params = _read_config_file()
 
     scenario_replayer = Node(
-        package='visualize_real_data',
-        executable='scenario_replayer',
-        name='scenario_replayer',
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time}, params]
+        package="visualize_real_data",
+        executable="scenario_replayer",
+        name="scenario_replayer",
+        output="screen",
+        parameters=[{"use_sim_time": use_sim_time}, params],
     )
 
     send_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare('visualize_real_data'),
-                'launch',
-                'send.launch.py'
-            ])
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
+        PythonLaunchDescriptionSource(
+            [
+                PathJoinSubstitution(
+                    [
+                        FindPackageShare("visualize_real_data"),
+                        "launch",
+                        "send.launch.py",
+                    ]
+                )
+            ]
+        ),
+        launch_arguments={"use_sim_time": use_sim_time}.items(),
     )
 
+    safety_node = Node(
+        name="safety_node",
+        package="visualize_real_data",
+        executable="safety_node",
+        output="screen",
+        parameters=[{"use_sim_time": use_sim_time}, params],
+    )
 
-    return LaunchDescription([
-        use_sim_time_arg,
-        scenario_replayer,
-        send_launch,
-    ])
+    return LaunchDescription(
+        [
+            use_sim_time_arg,
+            scenario_replayer,
+            send_launch,
+            safety_node,
+        ]
+    )
+
 
 def _read_config_file():
     """__Explanation__:
     Read a YAML file and return its content.
     """
     yaml_file_path = Path(
-        get_package_share_directory('visualize_real_data'),
-        'config',
-        'params.yaml'
+        get_package_share_directory("visualize_real_data"), "config", "params.yaml"
     )
 
-    with open(yaml_file_path, 'r') as file:
+    with open(yaml_file_path, "r") as file:
         data = yaml.safe_load(file)
-    
-    # Merge pointcloud and entity parameters
-    replayer_params = data.get('scenario_replayer', {})
-    shared_params = data.get('shared', {})
 
-    shared_params['entity_topic'] = shared_params['namespace'] + '/' + shared_params['entity_topic']
+    # Merge pointcloud and entity parameters
+    replayer_params = data.get("scenario_replayer", {})
+    shared_params = data.get("shared", {})
+
+    shared_params["entity_topic"] = (
+        shared_params["namespace"] + "/" + shared_params["entity_topic"]
+    )
+    shared_params["odd_topic"] = (
+        shared_params["namespace"] + "/" + shared_params["odd_topic"]
+    )
+
+    # Launch can normalize empty YAML arrays to (), which is invalid here.
+    # If allowed_ids is empty, let nodes use their declared INTEGER_ARRAY default.
+    allowed_ids = shared_params.get("allowed_ids", None)
+    if isinstance(allowed_ids, list) and len(allowed_ids) == 0:
+        shared_params.pop("allowed_ids", None)
 
     return replayer_params | shared_params

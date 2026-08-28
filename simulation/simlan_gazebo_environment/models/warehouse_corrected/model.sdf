@@ -1,0 +1,725 @@
+<sdf version='1.10'>
+  <world name='default'>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <physics type='ode'>
+      <max_step_size>0.01</max_step_size>
+      <real_time_update_rate>100</real_time_update_rate>
+      <real_time_factor>1</real_time_factor>
+      <max_contacts>10</max_contacts>
+    </physics>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Sensors' filename='gz-sim-sensors-system'>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin name='gz::sim::systems::Imu' filename='gz-sim-imu-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    <plugin name='gz::sim::systems::TriggeredPublisher' filename='gz-sim-triggered-publisher-system'/>
+    <scene>
+      <ambient>1 1 1 1</ambient>
+      <background>0.300000012 0.699999988 0.899999976 1</background>
+      <shadows>false</shadows>
+      <grid>false</grid>
+    </scene>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <include>
+      <static>1</static>
+      <uri>model://ground_collision</uri>
+      <name>ground_collision</name>
+      <pose>1.3 -1.3999999999999999 0 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://ground_visual_updated</uri>
+      <name>ground_visual_updated</name>
+      <pose>1.3 -1.3999999999999999 0 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://concrete_ground</uri>
+      <name>concrete_ground</name>
+      <pose>8.8000000000000007 -14.4 0.00050000000000000001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://factory</uri>
+      <name>factory</name>
+      <pose>1.3 -1.3999999999999999 0 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://truck</uri>
+      <name>truck</name>
+      <pose>17.999969186101893 16.00000775625416 -0.000881750627404712 0.00032820040054843037 -1.2499797855094612e-05 -7.3331716213789717e-06</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines_striped</uri>
+      <name>hazard_line_1</name>
+      <pose>-26.399999999999999 0.10000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines_striped</uri>
+      <name>hazard_line_2_rotated</name>
+      <pose>-7.5 -0.16 0.001 0 0 0.73000000000000009</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines_striped</uri>
+      <name>hazard_line_3_rotated</name>
+      <pose>11.199999999999999 0.10000000000000001 0.001 0 0 -0.20000000000000009</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines</uri>
+      <name>hazard_line_4</name>
+      <pose>16.199999999999999 -2 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines</uri>
+      <name>hazard_line_5</name>
+      <pose>23 -2 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines</uri>
+      <name>hazard_line_6</name>
+      <pose>14.68 9.8100000000000005 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines</uri>
+      <name>hazard_line_7</name>
+      <pose>21.469999999999999 9.1400000000000006 0.001 0 0 1.3799999999999994</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines_striped_scaled</uri>
+      <name>hazard_line_8_rotated_scaled</name>
+      <pose>27.07 8.5099999999999998 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines</uri>
+      <name>hazard_line_9</name>
+      <pose>32.909999999999997 8.5099999999999998 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://hazard_lines</uri>
+      <name>hazard_line_10</name>
+      <pose>39.689999999999998 8.5099999999999998 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_1</name>
+      <pose>19.93 2.5299999999999998 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_2</name>
+      <pose>22.390000000000001 -2.9500000000000002 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_3</name>
+      <pose>22.390000000000001 -5.46 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_4</name>
+      <pose>28.73 4.9500000000000002 0 0 0 -2.3599999999999999</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_5</name>
+      <pose>28.73 4.9500000000000002 0.14999999999999999 0 0 -2.3599999999999999</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_6</name>
+      <pose>28.73 4.9500000000000002 0.29999999999999999 0 0 -2.3599999999999999</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_9</name>
+      <pose>29.699999999999999 5.3499999999999996 0.001 0 0 -3.1415000000000002</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_10</name>
+      <pose>30.899999999999999 5.3499999999999996 0.001 0 0 -3.1415000000000002</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_11</name>
+      <pose>32.100000000000001 5.3499999999999996 0.001 0 0 -3.1415000000000002</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_12</name>
+      <pose>32.729999999999997 4.7199999999999998 0.001 0 0 1.5707500000000003</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://railing</uri>
+      <name>railing_13</name>
+      <pose>19.93 7.0700000000000003 0.001 0 0 3.1415000000000002</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://electrical_box</uri>
+      <name>electrical_box</name>
+      <pose>31 4 0 0 0 3.1400000000000001</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://blue_cabinet</uri>
+      <name>blue_cabinet</name>
+      <pose>29 4.2599999999999998 0 0 0 -1.96</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://table</uri>
+      <name>table</name>
+      <pose>40.299999999999997 0.34999999999999998 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://robot_arm_beam</uri>
+      <name>robot_arm_beam</name>
+      <pose>20 -20 0 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://flow_rack</uri>
+      <name>flow_rack</name>
+      <pose>22.34 -19.109999999999999 0 0 0 3.1400000000000001</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_upper_0</name>
+      <pose>22.112626784598419 -19.828069334628033 1.0001812537103176 6.0075067297176468e-06 0.18671051425465357 1.5692322984012177</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_upper_1</name>
+      <pose>21.70077981241268 -19.827376736079867 1.0001746638130782 3.0654089026588906e-06 0.1867115780914419 1.5692180543214496</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_upper_2</name>
+      <pose>21.289771739787643 -19.826808516007464 1.0001910114310983 -2.1912774523105132e-07 0.18671352182060266 1.5692046132106083</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_upper_3</name>
+      <pose>20.883006905294184 -19.826149228650262 1.0001884944273423 -3.1051055563382643e-06 0.1867148313601911 1.5691915295038767</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_upper_4</name>
+      <pose>20.48045177874172 -19.82547461297802 1.0001818687827007 -2.0489716288076446e-05 0.18671516000418531 1.5691015461960314</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_lower_0</name>
+      <pose>22.103811938533521 -19.391199631897432 0.56710919941638827 -1.0009496474086157e-05 0.18431398433207985 1.5691436268049748</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_lower_1</name>
+      <pose>21.700245881477425 -19.390529102988534 0.56710388869397954 -7.8979323338104891e-06 0.18431579328358783 1.5691596875767864</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_lower_2</name>
+      <pose>21.289839905584913 -19.390012474393782 0.5671295192602227 -6.086497920332872e-07 0.18431725512336172 1.5692059277491714</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_lower_3</name>
+      <pose>20.883219288832496 -19.389317126726866 0.56712001633481846 -8.1843170341808935e-06 0.18431412219733265 1.5691580824502438</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://stacking_crate</uri>
+      <name>stacking_crate_lower_4</name>
+      <pose>20.481172812892321 -19.388647752539377 0.56711459505501494 -1.1909993160078531e-05 0.18431402341388078 1.5691371500966103</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://truck_part_hose</uri>
+      <name>truck_part_0</name>
+      <pose>21.865705683315095 -19.116168885604562 0.54438579196635961 0.03479121172655511 -0.18065198569504407 -1.7383844952956169</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://truck_part_gold_bar</uri>
+      <name>truck_part_1</name>
+      <pose>21.239904216788357 -19.182036464115903 0.5660372718614991 -1.570791556062122 1.3864783828400566 -1.5723818945111263</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_0_17</name>
+      <pose>19.300000000000001 -5.9000000000000004 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_2</name>
+      <pose>-25.699999999999999 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_3</name>
+      <pose>-22.699999999999999 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_4</name>
+      <pose>-19.699999999999999 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_5</name>
+      <pose>-16.699999999999999 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_6</name>
+      <pose>-13.699999999999999 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_7</name>
+      <pose>-10.699999999999999 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_8</name>
+      <pose>-7.7000000000000002 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_9</name>
+      <pose>-4.7000000000000002 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_10</name>
+      <pose>-1.7 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_11</name>
+      <pose>1.3 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_12</name>
+      <pose>4.2999999999999998 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_13</name>
+      <pose>7.2999999999999998 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_14</name>
+      <pose>10.300000000000001 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_15</name>
+      <pose>13.300000000000001 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_16</name>
+      <pose>16.300000000000001 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_17</name>
+      <pose>19.300000000000001 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_21</name>
+      <pose>31.300000000000001 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_22</name>
+      <pose>34.299999999999997 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_23</name>
+      <pose>37.299999999999997 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_1_24</name>
+      <pose>40.299999999999997 -3.3999999999999999 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_2</name>
+      <pose>-25.699999999999999 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_3</name>
+      <pose>-22.699999999999999 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_4</name>
+      <pose>-19.699999999999999 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_5</name>
+      <pose>-16.699999999999999 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_7</name>
+      <pose>-10.699999999999999 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_8</name>
+      <pose>-7.7000000000000002 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_9</name>
+      <pose>-4.7000000000000002 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_10</name>
+      <pose>-1.7 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_11</name>
+      <pose>1.3 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_12</name>
+      <pose>4.2999999999999998 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_13</name>
+      <pose>7.2999999999999998 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_14</name>
+      <pose>10.300000000000001 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_15</name>
+      <pose>13.300000000000001 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_16</name>
+      <pose>16.300000000000001 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_20</name>
+      <pose>28.300000000000001 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_21</name>
+      <pose>31.300000000000001 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_22</name>
+      <pose>34.299999999999997 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_23</name>
+      <pose>37.299999999999997 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_2_24</name>
+      <pose>40.299999999999997 2.6000000000000001 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_2</name>
+      <pose>-25.699999999999999 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_3</name>
+      <pose>-22.699999999999999 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_4</name>
+      <pose>-19.699999999999999 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_5</name>
+      <pose>-16.699999999999999 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_6</name>
+      <pose>-13.699999999999999 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_7</name>
+      <pose>-10.699999999999999 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_8</name>
+      <pose>-7.7000000000000002 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_9</name>
+      <pose>-4.7000000000000002 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_10</name>
+      <pose>-1.7 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_11</name>
+      <pose>1.3 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_12</name>
+      <pose>4.2999999999999998 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_13</name>
+      <pose>7.2999999999999998 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_14</name>
+      <pose>10.300000000000001 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_15</name>
+      <pose>13.300000000000001 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_16</name>
+      <pose>16.300000000000001 6.0999999999999996 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_22</name>
+      <pose>34.299999999999997 4.4000000000000004 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_23</name>
+      <pose>37.299999999999997 4.4000000000000004 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://shelf</uri>
+      <name>shelf_wall_3_24</name>
+      <pose>40.299999999999997 4.4000000000000004 0.001 0 0 0</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_group_pickup</name>
+      <pose>-13.700000000000172 2.6000000000024257 -4.3715116473615661e-07 4.152909349755708e-08 2.958699848366306e-09 2.9219857872360464e-17</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_group_dropoff</name>
+      <pose>32.999999999999829 4.5000000000024256 -4.3715116469401709e-07 4.1529093391264352e-08 2.9586998560490375e-09 2.9114820965909643e-17</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n1</name>
+      <pose>36.300000000000033 24.599999999999746 -3.6706068590536973e-06 4.1576641099852704e-07 2.9608989262484152e-08 6.5556212340355986e-16</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n2</name>
+      <pose>36.300000004167991 24.5999999407865 0.14399041984560573 1.1648864492255313e-06 8.2993615811757163e-08 -6.0493878031625912e-11</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n3</name>
+      <pose>36.300000015856746 24.59999977677268 0.28798544264464615 1.8281327184696251e-06 1.3023645235723331e-07 -5.1851002659399237e-11</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n4</name>
+      <pose>36.300000033982933 24.59999952239902 0.43198018936065968 2.4130336791193994e-06 1.7190497546592542e-07 -4.3210224442971398e-11</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n5</name>
+      <pose>36.300000057464835 24.599999192865855 0.57597624906531331 2.911325281084246e-06 2.0740315759753532e-07 -3.1400832557916565e-11</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n6</name>
+      <pose>36.300000085191719 24.599998803807075 0.71997334672944946 3.3246275415267877e-06 2.3684749416394073e-07 -1.0319362736580056e-11</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n7</name>
+      <pose>36.30000011604465 24.599998370843366 0.86397072005531539 3.6567051958537219e-06 2.6050533721739928e-07 7.9995338883992933e-12</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n8</name>
+      <pose>36.300000148817993 24.599997910878887 1.0079690288686509 3.9046641297745717e-06 2.7817074753029887e-07 2.056759309082002e-11</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n9</name>
+      <pose>36.300000182308196 24.599997440706929 1.1519674367542334 4.0714364742810299e-06 2.9005223052507442e-07 1.3840240703987145e-11</pose>
+    </include>
+    <include>
+      <static>1</static>
+      <uri>model://eur_pallet</uri>
+      <name>pallet_stack2_n10</name>
+      <pose>36.300000215257057 24.59999697800081 1.295966398199037 4.1547314714904098e-06 2.9598656179255095e-07 -9.9941771409685691e-12</pose>
+    </include>
+    <light name='sun' type='directional'>
+      <pose>0 0.10000000000000001 10 0 0 0</pose>
+      <cast_shadows>false</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0.10000000000000001 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>

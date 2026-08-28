@@ -3,9 +3,12 @@ from rclpy.node import Node
 import rclpy
 from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 from geometry_msgs.msg import Pose, PoseStamped, Twist
+from sensor_msgs.msg import PointCloud2
 from ros_gz_interfaces.srv import SetEntityPose
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
+from rclpy.parameter import Parameter
+from std_msgs.msg import Empty
 import rclpy.time
 import rclpy.duration
 import tf2_ros
@@ -31,6 +34,12 @@ class ScenarioReplayTeleport(Node):
             "extracted_fps", 10.0
         )  # FPS of the extracted data for cmd_vel calculation
         self.declare_parameter("use_cmd_vel", False)
+        self.declare_parameter("loop_topic", "/visualize_real_data/loop")
+        self.declare_parameter(
+            "pointcloud_topic", "/visualize_real_data/pointcloud_topic"
+        )
+        self.declare_parameter("loop_jump_threshold_seconds", 0.5)
+        self.declare_parameter("allowed_ids", Parameter.Type.INTEGER_ARRAY)
         self.declare_parameter(
             "ignore_orientation", False
         )  # When True, robot orientation is reset to identity (no rotation). Using with cmd_vel may cause unexpected movement behavior.
@@ -53,13 +62,27 @@ class ScenarioReplayTeleport(Node):
         self.use_cmd_vel = (
             self.get_parameter("use_cmd_vel").get_parameter_value().bool_value
         )
+        self.loop_topic = (
+            self.get_parameter("loop_topic").get_parameter_value().string_value
+        )
+        self.pointcloud_topic = (
+            self.get_parameter("pointcloud_topic").get_parameter_value().string_value
+        )
+        self.loop_jump_threshold_seconds = (
+            self.get_parameter("loop_jump_threshold_seconds")
+            .get_parameter_value()
+            .double_value
+        )
+        allowed_ids_param = self.get_parameter_or(
+            "allowed_ids",
+            Parameter("allowed_ids", type_=Parameter.Type.INTEGER_ARRAY, value=[]),
+        )
+        self.ALLOWED_MARKER_IDS = set(
+            allowed_ids_param.get_parameter_value().integer_array_value
+        )
         self.ignore_orientation = (
             self.get_parameter("ignore_orientation").get_parameter_value().bool_value
         )
-
-        # Use these to only allow certain marker IDs to be assigned to robots
-        # For example if a robot gets teleported into a wall or shelf use this to exclude that robot, since it will absolutely kill the FPS of the simulation.
-        self.ALLOWED_MARKER_IDS = {}  # Empty set means allow all IDs
 
         self.parking_corner_x = -20.0
         self.parking_corner_y = -20.0
@@ -68,8 +91,13 @@ class ScenarioReplayTeleport(Node):
         self.transform_timeout = 1.0
         self.max_linear_velocity = 2.0
         self.max_angular_velocity = 2.0
+        self.timestamp_jump_threshold = float(self.loop_jump_threshold_seconds)
 
         self.time_step = 1.0 / self.extracted_fps if self.extracted_fps > 0 else 0.1
+
+        # Always initialize so loop reset is safe in teleport mode too.
+        self.robot_previous_positions = {}  # robot_name -> Pose
+        self.robot_current_positions = {}  # robot_name -> Pose
 
         # TF2 setup
         self.tf_buffer = tf2_ros.Buffer()
@@ -100,10 +128,6 @@ class ScenarioReplayTeleport(Node):
             )
 
         if self.use_cmd_vel:
-            # Store previous positions for each robot to calculate cmd_vel
-            self.robot_previous_positions = {}  # robot_name -> Pose
-            self.robot_current_positions = {}  # robot_name -> Pose
-
             self.get_logger().info(f"Extracted FPS: {self.extracted_fps:.2f} Hz")
             self.get_logger().info(f"Time step: {self.time_step:.3f}s")
             self.get_logger().info(
@@ -128,6 +152,14 @@ class ScenarioReplayTeleport(Node):
             qos_profile,
             callback_group=self.callback_group,
         )
+        self.pointcloud_subscriber = self.create_subscription(
+            PointCloud2,
+            self.pointcloud_topic,
+            self.pointcloud_callback,
+            qos_profile,
+            callback_group=self.callback_group,
+        )
+        self.loop_pub = self.create_publisher(Empty, self.loop_topic, qos_profile)
 
         # Service client for Gazebo teleportation
         self.teleport_client = self.create_client(
@@ -145,11 +177,11 @@ class ScenarioReplayTeleport(Node):
                     f"Created cmd_vel publisher for {robot_name} on {topic_name}"
                 )
 
-            # Used to detect when a rosbag loops so the robots can be teleported back to their starting positions
-            self.timestamp_jump_threshold = 5.0  # Seconds
-            self.get_logger().info(
-                f"Timestamp jump threshold: {self.timestamp_jump_threshold:.1f}s"
-            )
+        self.get_logger().info(
+            f"Timestamp jump threshold: {self.timestamp_jump_threshold:.1f}s"
+        )
+        self.get_logger().info(f"Loop events will be published on {self.loop_topic}")
+        self.get_logger().info(f"Loop detection source topic: {self.pointcloud_topic}")
 
         # Wait for service to be available
         self.get_logger().info("Waiting for Gazebo teleport service...")
@@ -258,7 +290,7 @@ class ScenarioReplayTeleport(Node):
 
     def is_marker_id_allowed(self, marker_id: int) -> bool:
         """Check if a marker ID is allowed to be assigned to robots"""
-        if self.ALLOWED_MARKER_IDS == {}:
+        if not self.ALLOWED_MARKER_IDS:
             return True  # No filter, allow all
         return marker_id in self.ALLOWED_MARKER_IDS
 
@@ -307,21 +339,23 @@ class ScenarioReplayTeleport(Node):
             f"Reset complete. {len(self.available_robots)} robots available for assignment."
         )
 
+    def publish_loop_event(self):
+        self.loop_pub.publish(Empty())
+        self.get_logger().info(f"Published loop event on {self.loop_topic}")
+
+    def pointcloud_callback(self, msg: PointCloud2):
+        """Use pointcloud timestamps for robust loop detection."""
+        message_timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
+
+        if self.detect_bag_loop(message_timestamp):
+            self.get_logger().info(
+                "Loop detected from pointcloud timestamps, resetting robots to start..."
+            )
+            self.publish_loop_event()
+            self.reset_robots_to_start()
+
     def entity_callback(self, msg: MarkerArray):
         """Process MarkerArray messages and update robot positions in Gazebo"""
-        # Extract timestamp from message header (only relevant if using cmd_vel)
-        if self.use_cmd_vel and msg.markers:
-            # Use timestamp from first marker (they should all have same timestamp)
-            message_timestamp = (
-                msg.markers[0].header.stamp.sec
-                + msg.markers[0].header.stamp.nanosec * 1e-9
-            )
-
-            # Check for bag loop
-            if self.detect_bag_loop(message_timestamp):
-                self.reset_robots_to_start()
-                return  # Skip processing this frame to allow reset to complete
-
         current_marker_ids = set()
 
         # Process all markers in the array, but skip text markers
@@ -335,9 +369,9 @@ class ScenarioReplayTeleport(Node):
 
             # Check if this marker ID is allowed
             if not self.is_marker_id_allowed(marker_id):
-                self.get_logger().info(
-                    f"Skipping marker ID {marker_id} - not in allowed list"
-                )
+                # self.get_logger().info(
+                #     f"Skipping marker ID {marker_id} - not in allowed list"
+                # )
                 continue
 
             current_marker_ids.add(marker_id)

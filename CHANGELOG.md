@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.1.7: SMILE IV final demo code - Sebastian Olsson (Dyno Robotics)
+
+- Final demo of system running with visualized real world data together with camera and corridor polygons used by the safety_node to determine if the jackal needs to stop or not to avoid collisions.
+- See explanations of how to run in the README.md inside `visualize_real_data` package.
 
 ## v5.1.6: Improve human mocap model: Team/Tech Lead: Hamid Ebadi
 - Implement and reintroduce optuna optimizer : Marwa Naili

@@ -44,6 +44,7 @@ def generate_launch_description():
             "--topics",
             f"{parameters['namespace']}/{parameters['pointcloud_topic']}",
             f"{parameters['namespace']}/{parameters['entity_topic']}",
+            f"{parameters['namespace']}/{parameters['odd_topic']}",
             "--include-hidden-topics",
             "--output",
             output_folder_path
@@ -86,37 +87,44 @@ def generate_launch_description():
         ],
     )
 
-    orientation_faker = Node(
-        name="orientation_faker",
-        namespace=parameters["namespace"],
+    safety_node = Node(
+        name="safety_node",
         package="visualize_real_data",
-        executable="orientation_faker",
-        parameters=[parameters],
+        executable="safety_node",
         output="screen",
-        condition=IfCondition(fake_orientation),
     )
+    # orientation_faker = Node(
+    #     name="orientation_faker",
+    #     namespace=parameters["namespace"],
+    #     package="visualize_real_data",
+    #     executable="orientation_faker",
+    #     parameters=[parameters],
+    #     output="screen",
+    #     condition=IfCondition(fake_orientation),
+    # )
 
     kill_rosbag = RegisterEventHandler(
         OnProcessExit(target_action=prepare_data, on_exit=[EmitEvent(event=Shutdown())])
     )
 
     ld = LaunchDescription()
-    ld.add_action(orientation_faker)
+    # ld.add_action(orientation_faker)
     ld.add_action(
         DynoWaitFor(
             name="wait_for_json_orientation",
             message_on_topics=[
-                (
-                    parameters["namespace"] + "/orientation_done",
-                    std_msgs.msg.Empty,
-                    rclpy.qos.QoSProfile(
-                        depth=10, durability=rclpy.qos.DurabilityPolicy.TRANSIENT_LOCAL
-                    ),
-                ),
+                # (
+                #     parameters["namespace"] + "/orientation_done",
+                #     std_msgs.msg.Empty,
+                #     rclpy.qos.QoSProfile(
+                #         depth=10, durability=rclpy.qos.DurabilityPolicy.TRANSIENT_LOCAL
+                #     ),
+                # ),
             ],
             actions=[rosbag, prepare_data, static_tf_map_images, kill_rosbag],
         )
     )
+    ld.add_action(safety_node)
     return ld
 
 
@@ -155,6 +163,12 @@ def _read_config_file():
 
     if shared_params.get("end_time") is None:
         shared_params["end_time"] = ""
+
+    # Launch can normalize empty YAML arrays to (), which is invalid here.
+    # If allowed_ids is empty, let node use declared INTEGER_ARRAY default.
+    allowed_ids = shared_params.get("allowed_ids", None)
+    if isinstance(allowed_ids, list) and len(allowed_ids) == 0:
+        shared_params.pop("allowed_ids", None)
 
     try:
         shared_params["json_file_name"] = str(

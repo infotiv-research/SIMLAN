@@ -16,10 +16,10 @@ repositories:
     url: https://github.com/ros-controls/gz_ros2_control.git
     version: jazzy
 
-  jackal:
-    type: git
-    url: https://github.com/DynoRobotics/jackal
-    version: dyno_jazzy
+  #jackal:
+  #  type: git
+  #  url: https://github.com/DynoRobotics/jackal
+  #  version: dyno_jazzy
 
   # pytrees
   py_trees:

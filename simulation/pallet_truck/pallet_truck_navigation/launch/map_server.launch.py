@@ -17,7 +17,7 @@ def launch_setup(context, *args, **kwargs):
     map_file = os.path.join(
         get_package_share_directory("pallet_truck_navigation"),
         "maps",
-        "warehouse.yaml",
+        "warehouse_corrected.yaml",
     )
 
     actions=[]
