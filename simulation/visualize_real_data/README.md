@@ -103,12 +103,14 @@ Some things to note:
 To get the new .json file a few steps need to be taken.
 
 1. Download the folder containing all the folders of ODD data for the different cameras and the `extract_json.py` script. Run this script and you will get a `image_labels.json` file in each directory.
-1. Change the name of the `image_labels.json` files to their respective camera and copy them into the [simulation/visualize_real_data/visualize_real_data/trajectory_merging/odd_scores](./visualize_real_data/json_compare/odd_scores/) folder (160, 161, 162, etc.).
+1. Change the name of the `image_labels.json` files to their respective camera and copy them into an `odd_scores/` folder (create it if missing) inside [simulation/visualize_real_data/visualize_real_data/trajectory_merging](./visualize_real_data/trajectory_merging/) (160, 161, 162, etc.).
 1. Download the `2026_02_27_final.json` file containing additional data about the trajectories. If the file contains large fields that are not listed above, then you can run the `json_cleaner.py` script to remove those fields and save space and memory when the file is read.
 1. Run the `combine_json.py` script on the old `trajectories.json` and the new `2026_02_27_final.json` file.
 1. Finally run the add_odd_detections.py on the combined .json file and then copy-paste it into the `replay_data/` folder.
 
-(These files can also be found in the SMILE_MVP repository already merged and ready to use in the `trajectories_final_demo` folder)
+The [SMILE-MVP](https://github.com/infotiv-research/SMILE-MVP) repository contains the scripts that produce `2026_02_27_final.json`, but not the data itself. The input dataset is confidential and lives on the project share (`WP6 - PrototypesDemonstrators (Volvo)\datasets`). SMILE-MVP is not used by SIMLAN at build or run time, so it can be cloned anywhere outside this repository.
+
+Already merged files are included in \[\]`simulation_demo.zip`\](https://risecloud.sharepoint.com/:f:/r/sites/3ea50843686040a3a11d5d43668e100e/Delade%20dokument/General/WP6%20-%20PrototypesDemonstrators%20(Volvo)/simulation_demo?d=wc687b183d4474ff78450d6bf8c653d78&csf=1&web=1&e=SBdWuj)
 
 ## Config file
 
@@ -136,10 +138,10 @@ When your data is in place, you may want to review the config parameters in `par
 - Parameters here can be changed after the prepare-stage to alter the playback.
   *You do not need to rebuild the package or re-run prepare.launch.py* if you change something here.
 
-| Parameter       | Description                                                                   | Default Value |
-| --------------- | ----------------------------------------------------------------------------- | ------------- |
-| `playback_rate` | Controls playback speed. Default is `1` (real-time based on `extracted_fps`). | `1`           |
-| `bag_name`      | Name of the rosbag to play. If empty, the most recent one is used.            | *(empty)*     |
+| Parameter       | Description                                                                                         | Default Value |
+| --------------- | --------------------------------------------------------------------------------------------------- | ------------- |
+| `playback_rate` | Controls playback speed. Default is `1` (real-time based on `extracted_fps`).                       | `1`           |
+| `bag_name`      | Name of the rosbag folder in `replay_data/rosbags/` to play. If empty, the most recent one is used. | `odd_fake`    |
 
 #### `scenario_replayer` section:
 
@@ -250,9 +252,21 @@ You can modify the `playback_rate` parameter in `params.yaml` to control how qui
   The intended `QOS settings` can be found in the `recorder_qos.yaml` file in the `config` folder together with the `params.yaml` file.
   These are the settings that the rosbag player uses, and the easiest fix is to make sure that RViz mirrors these settings for the respective displays.
 
+## Pre-recorded demo data (`simulation_demo.zip`)
+
+Ready-made rosbags for the final demo are in `simulation_demo.zip` (not in git), so `prepare` is not needed. From the repository root:
+
+```bash
+unzip simulation_demo.zip simulation_demo/smile_rosbags.zip -d /tmp
+unzip /tmp/simulation_demo/smile_rosbags.zip -d /tmp
+mkdir -p simulation/replay_data/rosbags && mv /tmp/smile_rosbags/* simulation/replay_data/rosbags/
+```
+
+Select a scenario in `params.yaml` with `send_data.bag_name` (a folder in `rosbags/`: `odd_fake`, `odd_straight*`, `odd_left*`, `odd_right*`) and `shared.allowed_ids` (the forklift IDs in the bag name, e.g. `odd_left_46` → `[46]`; `[]` for all). No rebuild is needed, just restart `./control.sh replay`. The `videos/` folder in the zip shows the expected result.
+
 ## Running the final demo
 
-Once all the data has been placed in the right places according to the instructions mentioned above, it can all be started by running the command:
+Make sure the rosbag set in `send_data.bag_name` exists in `simulation/replay_data/rosbags/`, then run:
 
 ```bash
 ./control.sh replay_sim

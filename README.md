@@ -4,7 +4,7 @@ This simulation environment, based on the Ignition Gazebo simulator and ROS 2, r
 \[[📹 GPSS demo](https://www.youtube.com/watch?v=DA7lKiCdkCc)\]
 
 - 🔗 [Online Documentation](https://infotiv-research.github.io/SIMLAN/)
-- 📃 [PDF Documentation](https://infotiv-research.github.io/SIMLAN/SIMLAN.pdf) 
+- 📃 [PDF Documentation](https://infotiv-research.github.io/SIMLAN/SIMLAN.pdf)
 - 📃 [Vision-Based Multi-Camera Robotics Simulation](resources/SIMLAN_Vision_Based_Multi_Camera_Robotics_Simulation.pdf)
 
 ## SIMLAN Features
@@ -181,21 +181,24 @@ You can build the online documentation page or a PDF file by running scripts in 
   - [humanoid_robot simulation](simulation/humanoid_robot/)
   - [Humanoid Control](simulation/humanoid_support_moveit_config/README.md)
 
-
 If you use SIMLAN in your research, please cite our [PETRA 2026 paper](resources/SIMLAN_Vision_Based_Multi_Camera_Robotics_Simulation.pdf) using the BibTeX entry below:
 
 ```
 @inproceedings{ebadi2026simlan,
-  title={Vision-Based Multi-Camera Robotics Simulation: The SIMLAN Open-Source Framework for Industrial Environments},
+  title     = {Vision-Based Multi-camera Robotics Simulation: The {SIMLAN}
+               Open-Source Framework for Industrial Environments},
   author={Ebadi, Hamid and Aronsson, P{\"a}r},
-  booktitle={Proceedings of the 19th PErvasive Technologies Related to Assistive Environments Conference (PETRA 2026)},
-  year={2026}, organization={Infotiv Research}
-}
+  booktitle = {Pervasive Technologies Related to Assistive Environments
+               (PETRA 2026), Part I},
+  series    = {Communications in Computer and Information Science},
+  volume    = {3073},
+  publisher = {Springer},
+  isbn      = {978-3-032-38038-8},
+  doi       = {10.1007/978-3-032-38039-5_17},
+  year={2027}
 ```
 
-
 To learn more about the pose estimation component, check out this master's thesis: [Human Motion Replay on a Simulated Humanoid Robot Using Pose Estimation](resources/Human_Motion_Replay_on_a_Simulated_Humanoid_Robot_Using_Pose_Estimation.pdf).
-
 
 ## Research Funding
 
